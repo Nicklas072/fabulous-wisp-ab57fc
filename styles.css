@@ -966,7 +966,7 @@ a {
 .dial-needle {
     position: absolute;
     width: 4px;
-    height: 76px;
+    height: 55px;
     background-color: #D81B1B;
     bottom: 50%;
     left: calc(50% - 2px);
