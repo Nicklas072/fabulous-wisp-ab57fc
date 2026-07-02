@@ -1,0 +1,9 @@
+{
+  "name": "baskula-tienda",
+  "version": "1.0.0",
+  "description": "Landing page for BasKula — Cerámica por Kilo",
+  "scripts": {
+    "dev": "npx http-server -p 3000"
+  },
+  "dependencies": {}
+}

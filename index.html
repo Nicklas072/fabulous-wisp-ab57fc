@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BasKula — Cerámica por Kilo</title>
+    <meta name="description"
+        content="BasKula - Un espacio donde la cerámica, el diseño y la calidez conectan emocionalmente. Elegí. Pesá. Llevate lo que te enamora. Vajilla portuguesa por kilo.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- CSS Striped Awning Accent at Top of Window -->
+    <div class="awning-border"></div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="logo-area">
+                <span class="logo-text">BasKula</span>
+                <span class="logo-subtext">cerámica por Kilo</span>
+            </a>
+            <nav class="main-nav">
+                <a href="#concepto" class="nav-link">El Concepto</a>
+                <a href="#simulador" class="nav-link">Catálogo</a>
+                <a href="#galeria" class="nav-link">La Tienda</a>
+                <a href="#contacto" class="btn-cta btn-header">Contacto</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Abrir menú">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav">
+        <button class="mobile-close-btn" aria-label="Cerrar menú">
+            <i data-lucide="x"></i>
+        </button>
+        <a href="#concepto" class="mobile-link">El Concepto</a>
+        <a href="#simulador" class="mobile-link">Comprá</a>
+        <a href="#galeria" class="mobile-link">La Tienda</a>
+        <a href="#contacto" class="btn-cta">Contacto</a>
+    </div>
+
+    <!-- Hero Section: Storefront Facade -->
+    <section class="hero-section">
+        <div class="hero-bg-overlay"></div>
+        <div class="hero-container">
+            <!-- Simulated Store Window Frame -->
+            <div class="storefront-window">
+                <!-- Striped Awning -->
+                <div class="storefront-awning">
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                    <div class="awning-stripe"></div>
+                </div>
+                <div class="storefront-content">
+                    <div class="badge-store">PORTUGAL EN TU MESA</div>
+                    <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
+                    <p class="hero-desc">
+                        Vajilla portuguesa única por kilo. Estamos creamos una experiencia de compra libre, orgánica y
+                        emocional, en un espacio que te abraza con plantas, luz cálida y muebles con alma.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#simulador" class="btn-cta">Catálogo <i data-lucide="scale"></i></a>
+                        <a href="#concepto" class="btn-secondary">Conocer Más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hanging Ivy Animation in Corners -->
+        <div class="hanging-plant left-plant"></div>
+        <div class="hanging-plant right-plant"></div>
+    </section>
+
+    <!-- Banner Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>• Vajilla Portuguesa por Kilo •</span>
+            <span>• Piezas Únicas de Cerámica •</span>
+            <span>• Diseña tu propia mesa •</span>
+            <span>• Muebles con Personalidad •</span>
+            <span>• Espacio Inspirador •</span>
+            <span>• Vajilla Portuguesa por Kilo •</span>
+            <span>• Piezas Únicas de Cerámica •</span>
+            <span>• Diseña tu propia mesa •</span>
+            <span>• Muebles con Personalidad •</span>
+            <span>• Espacio Inspirador •</span>
+        </div>
+    </div>
+
+    <!-- Concept Section -->
+    <section id="concepto" class="section-container concept-section">
+        <div class="section-header text-center">
+            <span class="section-tag">Una experiencia diferente</span>
+            <h2>Cómo funciona BasKula</h2>
+            <p class="section-subtitle">Elegí. Pesá. Llevate lo que te enamora.</p>
+        </div>
+
+        <div class="concept-grid">
+            <!-- Step 1 -->
+            <div class="concept-card" data-aos="fade-up">
+                <div class="concept-icon-wrapper">
+                    <i data-lucide="sparkles" class="concept-icon"></i>
+                </div>
+                <h3>1. Elegí con Libertad</h3>
+                <p>No te limites a juegos cerrados de vajilla. Mezclá colores, texturas, platos hondos y tazas como
+                    sientas.</p>
+                </p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="concept-card" data-aos="fade-up" data-delay="100">
+                <div class="concept-icon-wrapper">
+                    <i data-lucide="scale" class="concept-icon"></i>
+                </div>
+                <h3>2. Pesá en la Báscula</h3>
+                <p>Colocá tus elecciones en nuestras básculas repartidas por la tienda.</p>
+                </p>Pagá solo lo que pesa tu vajilla.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="concept-card" data-aos="fade-up" data-delay="200">
+                <div class="concept-icon-wrapper">
+                    <i data-lucide="heart" class="concept-icon"></i>
+                </div>
+                <h3>3. Llevate el Amor</h3>
+                <p>Te llevás lo que te gusta para decorar tu mesa o tu jardín.</p>
+                </p>Arte de Portual a tu mesa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atmosphere & Gallery Section -->
+    <section id="galeria" class="section-container gallery-section-wrapper">
+        <div class="section-header text-center">
+            <span class="section-tag">Nuestra casa</span>
+            <h2>Calidez y encanto</h2>
+            </p class="section-subtitle">Cada rincón está diseñado desde el
+            amor, estilo y naturaleza viva.</p>
+        </div>
+
+        <!-- Dynamic Grid/Carousel of Atmosphere Elements -->
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <div class="gallery-img-wrapper">
+                    <img src="hero.png" alt="Interior de la tienda BasKula con estantes de madera y luz cálida">
+                    <div class="gallery-info-overlay">
+                        <h3>Luz Cálida y Madera</h3>
+                        <p>Iluminación de época y madera recuperada crean un ambiente hogareño y acogedor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img-wrapper">
+                    <img src="ceramics.png" alt="Mesa servida con platos y bowls de cerámica hechos a mano">
+                    <div class="gallery-info-overlay">
+                        <h3>Vajilla con Alma</h3>
+                        <p>Diseños orgánicos portugueses que transforman una comida diaria en un ritual.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <div class="gallery-img-wrapper">
+                    <img src="plate.png" alt="Plato con diseño floral artesanal envuelto en papel kraft">
+                    <div class="gallery-info-overlay">
+                        <h3>Diseños Únicos</h3>
+                        <p>Piezas exclusivas con estampados y texturas inspiradas en la naturaleza para vestir tu mesa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Scale Simulator Section -->
+    <section id="simulador" class="section-container simulator-section-wrapper">
+        <div class="section-header">
+            <span class="section-tag">Te invitamos a jugar</span>
+            <h2>Probá, elegí y pesá</h2>
+            </p class="section-subtitle">Experimentá con nuestra Baskula en tiempo real y si te gusta, te lo llevás!</p>
+        </div>
+
+        <div class="simulator-layout">
+            <!-- Left Side: Interactive Cabinet Shelf -->
+            <div class="shelf-cabinet-container">
+                <div class="shelf-header">
+                    <div class="shelf-awning"></div>
+                    <div class="shelf-wood-top">Estante de Selección</div>
+                </div>
+                <div class="shelf-rack">
+                    <!-- Shelf Row 1: Plates -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.65" data-name="Plato Playo Terracota"
+                                data-price="618">
+                                <div class="ceramic-image-placeholder plate-terracotta">
+                                    <div class="plate-inner"></div>
+                                </div>
+                                <span class="item-name">Plato Playo Terracota</span>
+                                <span class="item-meta">0.65 kg • $U 618</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                            <div class="ceramic-item-card" data-weight="0.55" data-name="Plato Hondo Verde Oliva"
+                                data-price="523">
+                                <div class="ceramic-image-placeholder plate-olive">
+                                    <div class="plate-inner"></div>
+                                </div>
+                                <span class="item-name">Plato Hondo Oliva</span>
+                                <span class="item-meta">0.55 kg • $U 523</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 2: Bowls & Cups -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.40" data-name="Tazón Rústico Avena"
+                                data-price="380">
+                                <div class="ceramic-image-placeholder bowl-beige">
+                                    <div class="bowl-inner"></div>
+                                </div>
+                                <span class="item-name">Tazón Avena</span>
+                                <span class="item-meta">0.40 kg • $U 380</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                            <div class="ceramic-item-card" data-weight="0.25" data-name="Taza Espresso Mostaza"
+                                data-price="238">
+                                <div class="ceramic-image-placeholder mug-mustard">
+                                    <div class="mug-handle"></div>
+                                    <div class="mug-inner"></div>
+                                </div>
+                                <span class="item-name">Taza Mostaza</span>
+                                <span class="item-meta">0.25 kg • $U 238</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 3: Jugs & Special Items -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.90" data-name="Jarra de Mesa Glaseada"
+                                data-price="855">
+                                <div class="ceramic-image-placeholder jug-speckled">
+                                    <div class="jug-handle"></div>
+                                    <div class="jug-spout"></div>
+                                </div>
+                                <span class="item-name">Jarra Glaseada</span>
+                                <span class="item-meta">0.90 kg • $U 855</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: The Analog Scale & Basket -->
+            <div class="scale-dashboard-container">
+                <!-- The Scale Visual -->
+                <div class="analog-scale">
+                    <div class="scale-top-tray">
+                        <div class="tray-plate"></div>
+                        <div class="tray-supports"></div>
+                    </div>
+                    <div class="scale-body">
+                        <!-- Dial Face -->
+                        <div class="scale-dial">
+                            <div class="dial-ticks">
+                                <span class="tick tick-0">0</span>
+                                <span class="tick tick-1">1</span>
+                                <span class="tick tick-2">2</span>
+                                <span class="tick tick-3">3</span>
+                                <span class="tick tick-4">4</span>
+                                <span class="tick tick-5">5</span>
+                            </div>
+                            <div class="dial-needle" id="scale-needle"></div>
+                            <div class="dial-center"></div>
+                        </div>
+                        <!-- Brand Label on Scale -->
+                        <div class="scale-brand">BasKula</div>
+                    </div>
+                    <div class="scale-base"></div>
+                </div>
+
+                <!-- Digital Readout & Basket Bill -->
+                <div class="basket-receipt-card">
+                    <div class="receipt-header">
+                        <h3>Tu Balanza</h3>
+                        <span class="price-per-kilo">Precio por Kilo: <strong>$U 950</strong></span>
+                    </div>
+
+                    <div class="receipt-body">
+                        <ul class="basket-items-list" id="basket-items-list">
+                            <li class="empty-basket-message">La balanza está vacía. Elegí cerámicas del estante para
+                                pesarlas.</li>
+                        </ul>
+                    </div>
+
+                    <div class="receipt-footer">
+                        <div class="receipt-row">
+                            <span>Peso Acumulado:</span>
+                            <span class="total-weight-val" id="total-weight-display">0.00 kg</span>
+                        </div>
+                        <div class="receipt-row highlight">
+                            <span>Total Estimado:</span>
+                            <span class="total-price-val" id="total-price-display">$0</span>
+                        </div>
+                        <div class="receipt-actions">
+                            <button class="btn-reset-scale" id="btn-reset"><i data-lucide="rotate-ccw"></i>
+                                Vaciar</button>
+                            <button class="btn-cta btn-checkout" id="btn-checkout" disabled>¡Me lo llevo! <i
+                                    data-lucide="shopping-bag"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Quote (Emotional Connection) -->
+    <section class="testimonial-quote-section">
+        <div class="quote-container">
+            <i data-lucide="quote" class="quote-icon"></i>
+            <blockquote>
+                " Sentí la libertad de elegir y llevar lo que te gusta para decorar el hogar. "
+            </blockquote>
+            <cite>-- Filosofía BasKula --</cite>
+        </div>
+    </section>
+
+    <!-- Franchise / Contact Postcard Section -->
+    <section id="contacto" class="section-container contact-section-wrapper">
+        <div class="postcard-container">
+            <!-- Left Column: Story & Info -->
+            <div class="postcard-info">
+                <div class="logo-area">
+                    <span class="logo-text">BasKula</span>
+                    <span class="logo-subtext">cerámica por Kilo</span>
+                </div>
+                <h3>¿Te enamoraste de la idea?</h3>
+                <p>
+                    Estamos dando forma a este proyecto y nos encantaría saber qué opinas, recibir tus sugerencias o
+                    conversar.
+                </p>
+                <div class="contact-details">
+                    <div class="detail-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>El chorro - Uruguay </span>
+                    </div>
+                    <div class="detail-item">
+                        <i data-lucide="mail"></i>
+                        <span>info@baskula.com</span>
+                    </div>
+                    <div class="detail-item">
+                        <i data-lucide="instagram"></i>
+                        <span>@baskulaUruguay</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: The Postcard Form -->
+            <div class="postcard-form-wrapper">
+                <form class="postcard-form" id="contact-form">
+                    <div class="form-stamp">
+                        <div class="stamp-zig-zag"></div>
+                        <i data-lucide="heart" class="stamp-icon"></i>
+                    </div>
+                    <div class="form-row">
+                        <label for="name">Hola! Mi nombre es</label>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre..." required>
+                    </div>
+                    <div class="form-row">
+                        <label for="email">Correo</label>
+                        <input type="email" id="email" name="email" placeholder="Tu correo..." required>
+                    </div>
+                    <div class="form-row message-row">
+                        <label for="message">Dejanos tu mensaje</label>
+                        <textarea id="message" name="message"
+                            placeholder="Me encantó el simulador / Quisiera saber sobre la tienda..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta btn-postcard">Enviar Mensaje <i
+                            data-lucide="send"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <span class="logo-text">BasKula</span>
+                    <span class="logo-subtext">cerámica por Kilo</span>
+                </div>
+                <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+            </div>
+            <div class="footer-copy">
+                &copy; BasKula. Todos los derechos reservados. Diseñado con ❤️ para conectar.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Selection Success Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="modal-close"><i data-lucide="x"></i></button>
+            <div class="modal-icon-wrapper">
+                <i data-lucide="heart" class="modal-heart"></i>
+            </div>
+            <h2>¡Tu mesa va a quedar hermosa!</h2>
+            <p>Has seleccionado un total de <strong id="modal-weight">0.00 kg</strong> de cerámica única portuguesa.</p>
+            <div class="modal-receipt-summary">
+                <div class="modal-receipt-title">Detalle de tu Pesaje</div>
+                <div class="modal-items-list" id="modal-items-list">
+                    <!-- Dynamic -->
+                </div>
+                <div class="modal-total-row">
+                    <span>Total Estimado:</span>
+                    <span id="modal-price">$0</span>
+                </div>
+            </div>
+            <p class="modal-closing-text">Esta selección demuestra cómo combinando piezas únicas podés armar una vajilla
+                con verdadera personalidad.</p>
+            <button class="btn-cta btn-modal-done" id="modal-done-btn">Volver a la tienda</button>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="app.js"></script>
+</body>
+
+</html>
