@@ -1828,4 +1828,9 @@ a {
     .basket-receipt-card {
         padding: 20px 15px;
     }
+    
+    .analog-scale {
+        transform: scale(0.85);
+        transform-origin: top center;
+    }
 }
