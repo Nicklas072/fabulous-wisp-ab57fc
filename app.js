@@ -1,6 +1,12 @@
 // Initialize Lucide Icons
+const refreshIcons = () => {
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
+    refreshIcons();
 });
 
 // --- State Variables ---
@@ -68,14 +74,14 @@ addButtons.forEach(btn => {
         btn.style.backgroundColor = 'var(--color-olive)';
         btn.style.color = '#fff';
         btn.style.borderColor = 'var(--color-olive)';
-        lucide.createIcons();
+        refreshIcons();
 
         setTimeout(() => {
             btn.innerHTML = originalText;
             btn.style.backgroundColor = 'transparent';
             btn.style.color = 'var(--color-mustard-dark)';
             btn.style.borderColor = 'var(--color-mustard-dark)';
-            lucide.createIcons();
+            refreshIcons();
         }, 1000);
 
         updateScale();
@@ -158,7 +164,7 @@ const updateScale = () => {
             });
         });
         
-        lucide.createIcons();
+        refreshIcons();
     }
 
     // Update displays
@@ -224,7 +230,7 @@ contactForm.addEventListener('submit', (e) => {
     btnSubmit.innerHTML = `<i data-lucide="check"></i> ¡Enviado!`;
     btnSubmit.style.backgroundColor = 'var(--color-olive)';
     btnSubmit.style.boxShadow = 'none';
-    lucide.createIcons();
+    refreshIcons();
     
     alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
     
@@ -233,6 +239,6 @@ contactForm.addEventListener('submit', (e) => {
         btnSubmit.innerHTML = originalContent;
         btnSubmit.style.backgroundColor = 'var(--color-mustard)';
         btnSubmit.style.boxShadow = '0 4px 15px rgba(226, 167, 39, 0.3)';
-        lucide.createIcons();
+        refreshIcons();
     }, 2000);
 });
