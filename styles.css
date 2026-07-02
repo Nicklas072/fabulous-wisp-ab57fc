@@ -923,12 +923,12 @@ a {
     color: #444;
 }
 
-.tick-0 { left: 80px; top: 18px; }
-.tick-1 { left: 132px; top: 48px; }
-.tick-2 { left: 132px; top: 108px; }
-.tick-3 { left: 80px; top: 138px; }
-.tick-4 { left: 28px; top: 108px; }
-.tick-5 { left: 28px; top: 48px; }
+.tick-0 { left: 80px; top: 21px; }
+.tick-1 { left: 128px; top: 49px; }
+.tick-2 { left: 128px; top: 104px; }
+.tick-3 { left: 80px; top: 131px; }
+.tick-4 { left: 32px; top: 104px; }
+.tick-5 { left: 32px; top: 49px; }
 
 /* The Scale Needle */
 .dial-needle {
