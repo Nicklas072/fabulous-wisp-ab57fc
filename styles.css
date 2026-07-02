@@ -918,17 +918,35 @@ a {
 
 .tick {
     position: absolute;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
     font-size: 0.95rem;
     font-weight: 700;
     color: #444;
 }
 
-.tick-0 { left: 80px; top: 21px; }
-.tick-1 { left: 128px; top: 49px; }
-.tick-2 { left: 128px; top: 104px; }
-.tick-3 { left: 80px; top: 131px; }
-.tick-4 { left: 32px; top: 104px; }
-.tick-5 { left: 32px; top: 49px; }
+.tick-half {
+    position: absolute;
+    width: 2px;
+    height: 8px;
+    background-color: #B0B0B0;
+    transform-origin: center center;
+}
+
+.tick-0 { left: 75px; top: 20px; }
+.tick-1 { left: 123px; top: 48px; }
+.tick-2 { left: 123px; top: 103px; }
+.tick-3 { left: 75px; top: 130px; }
+.tick-4 { left: 27px; top: 103px; }
+.tick-5 { left: 27px; top: 48px; }
+
+.tick-half-05 { left: 115px; top: 27px; transform: rotate(30deg); }
+.tick-half-15 { left: 146px; top: 81px; transform: rotate(90deg); }
+.tick-half-25 { left: 115px; top: 135px; transform: rotate(150deg); }
+.tick-half-35 { left: 53px; top: 135px; transform: rotate(210deg); }
+.tick-half-45 { left: 22px; top: 81px; transform: rotate(270deg); }
 
 /* The Scale Needle */
 .dial-needle {
