@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    text { font-family: "Georgia", "Times New Roman", serif; font-weight: bold; }
+  </style>
+  
+  <!-- La letra K -->
+  <text x="15" y="85" font-size="95" fill="#222222">K</text>
+  
+  <!-- La barra horizontal que se extiende desde la parte superior -->
+  <line x1="48" y1="20" x2="85" y2="20" stroke="#222222" stroke-width="4"/>
+  
+  <!-- La línea vertical que cuelga -->
+  <line x1="83" y1="20" x2="83" y2="45" stroke="#222222" stroke-width="2"/>
+  
+  <!-- El nudo/eje de la balanza -->
+  <circle cx="83" cy="45" r="3" fill="#222222"/>
+  
+  <!-- Los hilos de la balanza -->
+  <line x1="83" y1="45" x2="71" y2="68" stroke="#222222" stroke-width="1.5"/>
+  <line x1="83" y1="45" x2="95" y2="68" stroke="#222222" stroke-width="1.5"/>
+  
+  <!-- El cuenco de la balanza -->
+  <path d="M 70 68 C 70 76, 96 76, 96 68 Z" fill="#222222"/>
+</svg>

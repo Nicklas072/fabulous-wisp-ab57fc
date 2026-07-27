@@ -1,28 +1,69 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-UY">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BasKula — Cerámica por Kilo</title>
+
+    <!-- Título y descripción -->
+    <title>BasKula — Cerámica por Kilo en Manantiales, Uruguay</title>
     <meta name="description"
-        content="BasKula - Un espacio donde la cerámica, el diseño y la calidez conectan emocionalmente. Elegí. Pesá. Llevate lo que te enamora. Vajilla portuguesa por kilo.">
-    <!-- Google Fonts -->
+        content="BasKula - Cerámica portuguesa vendida por kilo en Manantiales, Uruguay. Un espacio donde la cerámica, el diseño y la calidez conectan. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta name="author" content="BasKula">
+    <meta name="theme-color" content="#E2A727">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://baskula.netlify.app/">
+
+    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BasKula">
+    <meta property="og:title" content="BasKula — Cerámica por Kilo">
+    <meta property="og:description"
+        content="Cerámica portuguesa por kilo en Manantiales, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta property="og:url" content="https://baskula.netlify.app/">
+    <meta property="og:image" content="https://baskula.netlify.app/hero.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_UY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BasKula — Cerámica por Kilo">
+    <meta name="twitter:description"
+        content="Cerámica portuguesa por kilo en Manantiales, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta name="twitter:image" content="https://baskula.netlify.app/hero.jpg">
+
+    <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.min.css">
+
+    <!-- Lucide Icons (versión fijada + defer para no bloquear render) -->
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js" defer></script>
 </head>
 
 <body>
 
     <!-- CSS Striped Awning Accent at Top of Window -->
-    <div class="awning-border"></div>
+    <div class="awning-border">
+        <!-- Promo Banner (Silk Ribbon) -->
+        <div class="opening-banner">
+            ¡ Próximamente apertura !
+        </div>
+    </div>
 
     <!-- Header Navigation -->
     <header class="main-header">
@@ -79,10 +120,10 @@
                     <div class="awning-stripe"></div>
                 </div>
                 <div class="storefront-content">
-                    <div class="badge-store">PORTUGAL EN TU MESA</div>
+                    <div class="badge-store">CERÁMICA POR KILO</div>
                     <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
                     <p class="hero-desc">
-                        Vajilla portuguesa única por kilo. Somos BasKula. Buscamos crear una experiencia de compra que
+                        Bienvenido a BasKula! Buscamos crear una experiencia de compra que
                         sea orgánica en un espacio que te permita expresarte libremente.
                     </p>
                     <div class="hero-actions">
@@ -100,14 +141,14 @@
     <!-- Banner Marquee -->
     <div class="marquee-container">
         <div class="marquee-content">
-            <span>• Vajilla Portuguesa por Kilo •</span>
-            <span>• Piezas Únicas de Cerámica •</span>
-            <span>• Diseña tu propia mesa •</span>
+            <span>• Cerámica por Kilo •</span>
+            <span>• Piezas Únicas •</span>
+            <span>• Diseñá tu mesa •</span>
             <span>• Muebles con Personalidad •</span>
             <span>• Espacio Inspirador •</span>
-            <span>• Vajilla Portuguesa por Kilo •</span>
-            <span>• Piezas Únicas de Cerámica •</span>
-            <span>• Diseña tu propia mesa •</span>
+            <span>• Cerámica por Kilo •</span>
+            <span>• Piezas Únicas •</span>
+            <span>• Diseñá tu mesa •</span>
             <span>• Muebles con Personalidad •</span>
             <span>• Espacio Inspirador •</span>
         </div>
@@ -126,7 +167,7 @@
             <!-- Step 1 -->
             <div class="concept-card" data-aos="fade-up">
                 <div class="concept-icon-wrapper"
-                    style="background: url('cup-icon.jpg') no-repeat center center; background-size: cover; box-shadow: none;">
+                    style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
                 </div>
                 <h3>1. Elegí lo que te guste.</h3>
                 <p>Podes elegir juegos completos y tambien podés mezclar colores, texturas, platos y tazas creando tus
@@ -168,7 +209,7 @@
         <div class="gallery-grid">
             <div class="gallery-card">
                 <div class="gallery-img-wrapper">
-                    <img src="hero.png" alt="Interior de la tienda BasKula con estantes de madera y luz cálida">
+                    <img src="galeria-sol.webp" alt="Interior de la tienda bañada por el sol del atardecer con vista al jardín">
                     <div class="gallery-info-overlay">
                         <h3>Luz Cálida y Madera</h3>
                         <p>Usamos la iluminacion y la madera para crear un ambiente cálido y único.</p>
@@ -177,7 +218,7 @@
             </div>
             <div class="gallery-card">
                 <div class="gallery-img-wrapper">
-                    <img src="ceramics.png" alt="Mesa servida con platos y bowls de cerámica hechos a mano">
+                    <img src="imagenSets.webp" alt="Sets de vajilla de cerámica portuguesa combinando platos y bowls">
                     <div class="gallery-info-overlay">
                         <h3>Vajilla con Alma</h3>
                         <p>Diseños portugueses que transforman una comida diaria en un ritual.</p>
@@ -186,7 +227,7 @@
             </div>
             <div class="gallery-card">
                 <div class="gallery-img-wrapper">
-                    <img src="plate.png" alt="Plato con diseño floral artesanal envuelto en papel kraft">
+                    <img src="plate.webp" alt="Plato con diseño floral artesanal envuelto en papel kraft">
                     <div class="gallery-info-overlay">
                         <h3>Diseños Únicos</h3>
                         <p>Piezas exclusivas con estampados y texturas inspiradas en la naturaleza para vestir tu mesa.
@@ -217,22 +258,28 @@
                     <div class="shelf-row">
                         <div class="shelf-wood-plank"></div>
                         <div class="shelf-items">
-                            <div class="ceramic-item-card" data-weight="0.65" data-name="Plato Playo Terracota"
-                                data-price="618">
-                                <div class="ceramic-image-placeholder plate-terracotta">
-                                    <div class="plate-inner"></div>
+                            <div class="ceramic-item-card" data-weight="0.72" data-name="Plato Llano con Bordes"
+                                data-price="11.88">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="plate-terracotta css-shape">
+                                        <div class="plate-inner"></div>
+                                    </div>
+                                    <img src="Plato llano con bordes.webp" alt="Plato Llano con Bordes" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                                 </div>
-                                <span class="item-name">Plato Playo Terracota</span>
-                                <span class="item-meta">0.65 kg • $U 618</span>
+                                <span class="item-name">Plato Llano con Bordes</span>
+                                <span class="item-meta">0.72 kg • $11.88 USD</span>
                                 <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
                             </div>
-                            <div class="ceramic-item-card" data-weight="0.55" data-name="Plato Hondo Verde Oliva"
-                                data-price="523">
-                                <div class="ceramic-image-placeholder plate-olive">
-                                    <div class="plate-inner"></div>
+                            <div class="ceramic-item-card" data-weight="0.58" data-name="Plato Hondo Esmaltado"
+                                data-price="9.57">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="plate-olive css-shape">
+                                        <div class="plate-inner"></div>
+                                    </div>
+                                    <img src="Plato hondo esmaltado.webp" alt="Plato Hondo Esmaltado" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                                 </div>
-                                <span class="item-name">Plato Hondo Oliva</span>
-                                <span class="item-meta">0.55 kg • $U 523</span>
+                                <span class="item-name">Plato Hondo Esmaltado</span>
+                                <span class="item-meta">0.58 kg • $9.57 USD</span>
                                 <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
                             </div>
                         </div>
@@ -242,23 +289,29 @@
                     <div class="shelf-row">
                         <div class="shelf-wood-plank"></div>
                         <div class="shelf-items">
-                            <div class="ceramic-item-card" data-weight="0.40" data-name="Tazón Rústico Avena"
-                                data-price="380">
-                                <div class="ceramic-image-placeholder bowl-beige">
-                                    <div class="bowl-inner"></div>
+                            <div class="ceramic-item-card" data-weight="0.33" data-name="Plato Postre Esmaltado"
+                                data-price="5.45">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="bowl-beige css-shape">
+                                        <div class="bowl-inner"></div>
+                                    </div>
+                                    <img src="Plato postre Esmaltado.webp" alt="Plato Postre Esmaltado" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                                 </div>
-                                <span class="item-name">Tazón Avena</span>
-                                <span class="item-meta">0.40 kg • $U 380</span>
+                                <span class="item-name">Plato Postre Esmaltado</span>
+                                <span class="item-meta">0.33 kg • $5.45 USD</span>
                                 <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
                             </div>
-                            <div class="ceramic-item-card" data-weight="0.25" data-name="Taza Espresso Mostaza"
-                                data-price="238">
-                                <div class="ceramic-image-placeholder mug-mustard">
-                                    <div class="mug-handle"></div>
-                                    <div class="mug-inner"></div>
+                            <div class="ceramic-item-card" data-weight="0.25" data-name="Vaso Degradado Gris"
+                                data-price="4.13">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="mug-mustard css-shape">
+                                        <div class="mug-handle"></div>
+                                        <div class="mug-inner"></div>
+                                    </div>
+                                    <img src="Vaso degradado Gris Esmaltado.webp" alt="Vaso Degradado Gris" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                                 </div>
-                                <span class="item-name">Taza Mostaza</span>
-                                <span class="item-meta">0.25 kg • $U 238</span>
+                                <span class="item-name">Vaso Degradado Gris</span>
+                                <span class="item-meta">0.25 kg • $4.13 USD</span>
                                 <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
                             </div>
                         </div>
@@ -268,14 +321,17 @@
                     <div class="shelf-row">
                         <div class="shelf-wood-plank"></div>
                         <div class="shelf-items">
-                            <div class="ceramic-item-card" data-weight="0.90" data-name="Jarra de Mesa Glaseada"
-                                data-price="855">
-                                <div class="ceramic-image-placeholder jug-speckled">
-                                    <div class="jug-handle"></div>
-                                    <div class="jug-spout"></div>
+                            <div class="ceramic-item-card" data-weight="0.53" data-name="Plato Postre Borde Irregular"
+                                data-price="8.75">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="jug-speckled css-shape">
+                                        <div class="jug-handle"></div>
+                                        <div class="jug-spout"></div>
+                                    </div>
+                                    <img src="Plato postre borde irregular Esmaltado.webp" alt="Plato Postre Borde Irregular" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
                                 </div>
-                                <span class="item-name">Jarra Glaseada</span>
-                                <span class="item-meta">0.90 kg • $U 855</span>
+                                <span class="item-name">Plato Postre Irregular</span>
+                                <span class="item-meta">0.53 kg • $8.75 USD</span>
                                 <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
                             </div>
                         </div>
@@ -320,7 +376,7 @@
                 <div class="basket-receipt-card">
                     <div class="receipt-header">
                         <h3>Tu Balanza</h3>
-                        <span class="price-per-kilo">Precio por Kilo: <strong>$U 950</strong></span>
+                        <span class="price-per-kilo">Precio por Kilo: <strong>USD 16.50</strong></span>
                     </div>
 
                     <div class="receipt-body">
@@ -379,33 +435,48 @@
                 <div class="contact-details">
                     <div class="detail-item">
                         <i data-lucide="map-pin"></i>
-                        <span>El chorro - Uruguay </span>
+                        <span>Manantiales - Uruguay</span>
                     </div>
                     <div class="detail-item">
                         <i data-lucide="mail"></i>
-                        <span>info@baskula.com</span>
+                        <a href="mailto:info@baskula.com">info@baskula.com</a>
                     </div>
                     <div class="detail-item">
-                        <i data-lucide="instagram"></i>
-                        <span>@baskulaUruguay</span>
+                        <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                            <defs>
+                                <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#FEDA75"/>
+                                    <stop offset="25%" stop-color="#FA7E1E"/>
+                                    <stop offset="50%" stop-color="#D62976"/>
+                                    <stop offset="75%" stop-color="#962FBF"/>
+                                    <stop offset="100%" stop-color="#4F5BD5"/>
+                                </linearGradient>
+                            </defs>
+                            <path fill="url(#ig-grad)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                        </svg>
+                        <a href="https://www.instagram.com/cakus_uruguay/" target="_blank" rel="noopener">@cakus_uruguay</a>
                     </div>
                 </div>
             </div>
 
             <!-- Right Column: The Postcard Form -->
             <div class="postcard-form-wrapper">
-                <form class="postcard-form" id="contact-form">
+                <form class="postcard-form" id="contact-form" name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <div class="form-stamp">
                         <div class="stamp-zig-zag"></div>
                         <i data-lucide="heart" class="stamp-icon"></i>
                     </div>
+                    <input type="hidden" name="form-name" value="contacto">
+                    <p class="hidden-honeypot">
+                        <label>No llenar este campo: <input name="bot-field"></label>
+                    </p>
                     <div class="form-row">
                         <label for="name">Hola! Mi nombre es</label>
-                        <input type="text" id="name" name="name" placeholder="Tu nombre..." required>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre..." required autocomplete="name">
                     </div>
                     <div class="form-row">
                         <label for="email">Correo</label>
-                        <input type="email" id="email" name="email" placeholder="Tu correo..." required>
+                        <input type="email" id="email" name="email" placeholder="Tu correo..." required autocomplete="email">
                     </div>
                     <div class="form-row message-row">
                         <label for="message">Dejanos tu mensaje</label>
@@ -457,12 +528,18 @@
             </div>
             <p class="modal-closing-text">Esta selección demuestra cómo combinando piezas únicas podés armar una vajilla
                 con verdadera personalidad.</p>
+            <a href="#" id="whatsapp-link" class="btn-whatsapp" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Comprar por WhatsApp
+            </a>
             <button class="btn-cta btn-modal-done" id="modal-done-btn">Volver a la tienda</button>
         </div>
     </div>
 
     <!-- JS Scripts -->
-    <script src="app.js"></script>
+    <script src="app.min.js" defer></script>
 </body>
 
 </html>

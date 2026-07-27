@@ -5,5 +5,8 @@
   "scripts": {
     "dev": "npx http-server -p 3000"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "cssnano-cli": "^1.0.5",
+    "uglify-js": "^3.19.3"
+  }
 }

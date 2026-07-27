@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://baskula.netlify.app/sitemap.xml

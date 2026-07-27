@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- State Variables ---
 let basket = [];
-const PRICE_PER_KG = 950; // $U 950 UYU per Kg
+const PRICE_PER_KG = 16.50; // USD 16.50 per Kg
 
 // --- DOM Elements ---
 const scaleNeedle = document.getElementById('scale-needle');
@@ -22,6 +22,10 @@ const modalDoneBtn = document.getElementById('modal-done-btn');
 const modalWeight = document.getElementById('modal-weight');
 const modalPrice = document.getElementById('modal-price');
 const modalItemsList = document.getElementById('modal-items-list');
+const whatsappLink = document.getElementById('whatsapp-link');
+
+// WhatsApp business config
+const WHATSAPP_NUMBER = '59893658477';
 
 // Mobile Menu Elements
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -52,7 +56,7 @@ addButtons.forEach(btn => {
         const card = e.target.closest('.ceramic-item-card');
         const name = card.getAttribute('data-name');
         const weight = parseFloat(card.getAttribute('data-weight'));
-        const price = parseInt(card.getAttribute('data-price'));
+        const price = parseFloat(card.getAttribute('data-price'));
 
         // Check if item already in basket
         const existingItem = basket.find(item => item.name === name);
@@ -105,11 +109,11 @@ btnReset.addEventListener('click', resetScale);
 
 // Format currency helper
 const formatCurrency = (val) => {
-    return new Intl.NumberFormat('es-UY', {
+    return new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'UYU',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
     }).format(val);
 };
 
@@ -165,8 +169,9 @@ const updateScale = () => {
     totalWeightDisplay.textContent = `${totalWeight.toFixed(2)} kg`;
     totalPriceDisplay.textContent = formatCurrency(totalPrice);
 
-    // Rotate Scale Needle (5kg = 300deg rotation, leaving a 60deg gap at the top)
-    const rotationAngle = (totalWeight / 5) * 300;
+    // Rotate Scale Needle (5kg = 300deg rotation, capped at 5.2kg so it doesn't spin infinitely)
+    const cappedWeight = Math.min(totalWeight, 5.2);
+    const rotationAngle = (cappedWeight / 5) * 300;
     scaleNeedle.style.transform = `rotate(${rotationAngle}deg)`;
 };
 
@@ -195,6 +200,20 @@ btnCheckout.addEventListener('click', () => {
     modalWeight.textContent = `${totalWeight.toFixed(2)} kg`;
     modalPrice.textContent = formatCurrency(totalPrice);
 
+    // Build WhatsApp message with order details
+    let messageLines = ['¡Hola BasKula! 🌿', 'Quiero hacer este pedido:', ''];
+    basket.forEach(item => {
+        const itemTotalWeight = item.weight * item.qty;
+        const itemTotalPrice = item.price * item.qty;
+        messageLines.push(`• ${item.name} (x${item.qty}) - ${itemTotalWeight.toFixed(2)} kg - ${formatCurrency(itemTotalPrice)}`);
+    });
+    messageLines.push('');
+    messageLines.push(`*Peso total:* ${totalWeight.toFixed(2)} kg`);
+    messageLines.push(`*Total estimado:* ${formatCurrency(totalPrice)}`);
+
+    const whatsappMessage = encodeURIComponent(messageLines.join('\n'));
+    whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
     // Open Modal
     checkoutModal.classList.add('open');
 });
@@ -212,27 +231,49 @@ checkoutModal.addEventListener('click', (e) => {
     }
 });
 
-// --- Postcard Form Logic ---
+// --- Postcard Form Logic (Netlify Forms via AJAX) ---
 const contactForm = document.getElementById('contact-form');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    // Animate Submit Button
+
     const btnSubmit = contactForm.querySelector('.btn-postcard');
     const originalContent = btnSubmit.innerHTML;
-    
-    btnSubmit.innerHTML = `<i data-lucide="check"></i> ¡Enviado!`;
-    btnSubmit.style.backgroundColor = 'var(--color-olive)';
-    btnSubmit.style.boxShadow = 'none';
+
+    // Sending state
+    btnSubmit.innerHTML = `<i data-lucide="loader"></i> Enviando...`;
+    btnSubmit.disabled = true;
     lucide.createIcons();
-    
-    alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
-    
-    setTimeout(() => {
-        contactForm.reset();
-        btnSubmit.innerHTML = originalContent;
-        btnSubmit.style.backgroundColor = 'var(--color-mustard)';
-        btnSubmit.style.boxShadow = '0 4px 15px rgba(226, 167, 39, 0.3)';
+
+    // Serialize form data (encodes "form-name" + honeypot + fields)
+    const formData = new FormData(contactForm);
+
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+    })
+    .then(() => {
+        btnSubmit.innerHTML = `<i data-lucide="check"></i> ¡Enviado!`;
+        btnSubmit.style.backgroundColor = 'var(--color-olive)';
+        btnSubmit.style.boxShadow = 'none';
         lucide.createIcons();
-    }, 2000);
+
+        alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
+
+        setTimeout(() => {
+            contactForm.reset();
+            btnSubmit.innerHTML = originalContent;
+            btnSubmit.style.backgroundColor = 'var(--color-mustard)';
+            btnSubmit.style.boxShadow = '0 4px 15px rgba(226, 167, 39, 0.3)';
+            btnSubmit.disabled = false;
+            lucide.createIcons();
+        }, 2000);
+    })
+    .catch((error) => {
+        btnSubmit.innerHTML = originalContent;
+        btnSubmit.disabled = false;
+        lucide.createIcons();
+        alert('Hubo un problema al enviar el mensaje. Por favor, intentá de nuevo o escribinos a info@baskula.com');
+        console.error('Form submit error:', error);
+    });
 });
