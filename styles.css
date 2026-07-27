@@ -1990,9 +1990,19 @@ a {
     }
 }
 
-/* --- Banner Proximamente: hide on mobile to prevent overlap --- */
+/* --- Banner Proximamente: mobile adjustments to prevent overlap --- */
 @media (max-width: 768px) {
     .opening-banner {
-        display: none;
+        top: 65px; /* 30px awning + 35px threads, sits higher up */
+        padding: 8px 18px 10px 18px;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        transform-origin: center -35px;
+    }
+
+    .opening-banner::before,
+    .opening-banner::after {
+        height: 35px;
+        top: -35px;
     }
 }
