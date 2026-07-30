@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100" height="120">
+  <!-- Stamp border (dashed outline) -->
+  <rect x="5" y="5" width="90" height="110" fill="#FAF6F0" stroke="#C28B17" stroke-width="3" stroke-dasharray="6,4"/>
+  
+  <!-- Inner stamp border line (solid) -->
+  <rect x="12" y="12" width="76" height="96" fill="none" stroke="#E2A727" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Heart in center (Terracotta) -->
+  <path d="M 50 42 C 40 30, 20 35, 20 55 C 20 75, 45 92, 50 95 C 55 92, 80 75, 80 55 C 80 35, 60 30, 50 42 Z" fill="#C66B4E"/>
+</svg>

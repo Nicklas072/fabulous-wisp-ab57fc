@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Wood gradient -->
+    <linearGradient id="wood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d4985c" />
+      <stop offset="100%" stop-color="#a67341" />
+    </linearGradient>
+    <!-- Dark wood frame gradient -->
+    <linearGradient id="frameWood" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a2e1a" />
+      <stop offset="50%" stop-color="#6b4320" />
+      <stop offset="100%" stop-color="#4a2e1a" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Inner backing: Wood beadboard -->
+  <rect x="15" y="15" width="370" height="470" fill="#8B5A2B"/>
+  <!-- Vertical beadboard lines -->
+  <g stroke="#5e3814" stroke-width="1" opacity="0.4">
+    <line x1="45" y1="15" x2="45" y2="485"/>
+    <line x1="75" y1="15" x2="75" y2="485"/>
+    <line x1="105" y1="15" x2="105" y2="485"/>
+    <line x1="135" y1="15" x2="135" y2="485"/>
+    <line x1="165" y1="15" x2="165" y2="485"/>
+    <line x1="195" y1="15" x2="195" y2="485"/>
+    <line x1="225" y1="15" x2="225" y2="485"/>
+    <line x1="255" y1="15" x2="255" y2="485"/>
+    <line x1="285" y1="15" x2="285" y2="485"/>
+    <line x1="315" y1="15" x2="315" y2="485"/>
+    <line x1="345" y1="15" x2="345" y2="485"/>
+  </g>
+  
+  <!-- 3 Wood Planks (Shelves) -->
+  <!-- Shelf 1 (y = 150) -->
+  <rect x="15" y="145" width="370" height="15" fill="url(#wood)"/>
+  <rect x="15" y="160" width="370" height="6" fill="#5e3814"/>
+  <line x1="15" y1="145" x2="385" y2="145" stroke="#e8b688" stroke-width="1"/>
+  
+  <!-- Shelf 2 (y = 290) -->
+  <rect x="15" y="285" width="370" height="15" fill="url(#wood)"/>
+  <rect x="15" y="300" width="370" height="6" fill="#5e3814"/>
+  <line x1="15" y1="285" x2="385" y2="285" stroke="#e8b688" stroke-width="1"/>
+  
+  <!-- Shelf 3 (y = 430) -->
+  <rect x="15" y="425" width="370" height="15" fill="url(#wood)"/>
+  <rect x="15" y="440" width="370" height="6" fill="#5e3814"/>
+  <line x1="15" y1="425" x2="385" y2="425" stroke="#e8b688" stroke-width="1"/>
+
+  <!-- Cabinet Inner shadows/depth -->
+  <rect x="15" y="15" width="370" height="470" fill="none" stroke="#222" stroke-width="8" opacity="0.3"/>
+
+  <!-- Outer Wood Frame -->
+  <rect x="5" y="5" width="390" height="490" fill="none" stroke="url(#frameWood)" stroke-width="10" filter="drop-shadow(0px 10px 15px rgba(0,0,0,0.4))"/>
+  <!-- Mustard Outline trim -->
+  <rect x="9" y="9" width="382" height="482" fill="none" stroke="#E2A727" stroke-width="2"/>
+</svg>
