@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 70" width="800" height="70">
+  <defs>
+    <!-- Shadow for the awning to look 3D -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  
+  <g filter="url(#shadow)">
+    <!-- Stripe 1 (Dark) -->
+    <rect x="0" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="26.66" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 2 (Cream) -->
+    <rect x="53.33" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="80" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 3 (Dark) -->
+    <rect x="106.66" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="133.33" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 4 (Cream) -->
+    <rect x="160" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="186.66" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 5 (Dark) -->
+    <rect x="213.33" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="240" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 6 (Cream) -->
+    <rect x="266.66" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="293.33" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 7 (Dark) -->
+    <rect x="320" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="346.66" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 8 (Cream) -->
+    <rect x="373.33" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="400" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 9 (Dark) -->
+    <rect x="426.66" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="453.33" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 10 (Cream) -->
+    <rect x="480" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="506.66" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 11 (Dark) -->
+    <rect x="533.33" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="560" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 12 (Cream) -->
+    <rect x="586.66" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="613.33" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 13 (Dark) -->
+    <rect x="640" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="666.66" cy="50" rx="26.66" ry="10" fill="#222222"/>
+
+    <!-- Stripe 14 (Cream) -->
+    <rect x="693.33" y="0" width="53.33" height="50" fill="#FAF8F5"/>
+    <ellipse cx="720" cy="50" rx="26.66" ry="10" fill="#FAF8F5"/>
+
+    <!-- Stripe 15 (Dark) -->
+    <rect x="746.66" y="0" width="53.33" height="50" fill="#222222"/>
+    <ellipse cx="773.33" cy="50" rx="26.66" ry="10" fill="#222222"/>
+  </g>
+</svg>
