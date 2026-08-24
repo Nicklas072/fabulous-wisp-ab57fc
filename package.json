@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Landing page for BasKula — Cerámica por Kilo",
   "scripts": {
-    "dev": "npx http-server -p 3000"
+    "dev": "npx http-server -p 3000 -c-1",
+    "build": "cssnano styles.css styles.min.css && uglifyjs app.js -o app.min.js"
   },
   "devDependencies": {
     "cssnano-cli": "^1.0.5",

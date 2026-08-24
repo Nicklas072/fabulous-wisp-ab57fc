@@ -1,6 +1,13 @@
-// Initialize Lucide Icons
+// Initialize Lucide Icons and AOS
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50
+        });
+    }
 });
 
 // --- State Variables ---
@@ -27,25 +34,35 @@ const whatsappLink = document.getElementById('whatsapp-link');
 // WhatsApp business config
 const WHATSAPP_NUMBER = '59893658477';
 
-// Mobile Menu Elements
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const mobileNav = document.querySelector('.mobile-nav');
-const mobileCloseBtn = document.querySelector('.mobile-close-btn');
-const mobileLinks = document.querySelectorAll('.mobile-link');
+// Drawer Menu Elements
+const menuToggle = document.getElementById('menu-toggle');
+const drawerClose = document.getElementById('drawerClose');
+const drawerOverlay = document.getElementById('drawerOverlay');
+const sidebarDrawer = document.getElementById('sidebarDrawer');
 
-// --- Mobile Navigation Logic ---
-mobileMenuBtn.addEventListener('click', () => {
-    mobileNav.classList.add('open');
-});
+// --- Drawer Navigation Logic ---
+if (menuToggle && sidebarDrawer && drawerOverlay) {
+    const openDrawer = () => {
+        sidebarDrawer.classList.add('open');
+        drawerOverlay.classList.add('open');
+        document.body.classList.add('drawer-open');
+    };
 
-const closeMobileMenu = () => {
-    mobileNav.classList.remove('open');
-};
+    const closeDrawer = () => {
+        sidebarDrawer.classList.remove('open');
+        drawerOverlay.classList.remove('open');
+        document.body.classList.remove('drawer-open');
+    };
 
-mobileCloseBtn.addEventListener('click', closeMobileMenu);
-mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-});
+    menuToggle.addEventListener('click', openDrawer);
+    if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    const drawerLinks = sidebarDrawer.querySelectorAll('.drawer-link, .drawer-link-secondary');
+    drawerLinks.forEach(link => {
+        link.addEventListener('click', closeDrawer);
+    });
+}
 
 // --- Scale & Basket Simulation Logic ---
 
@@ -56,7 +73,9 @@ addButtons.forEach(btn => {
         const card = e.target.closest('.ceramic-item-card');
         const name = card.getAttribute('data-name');
         const weight = parseFloat(card.getAttribute('data-weight'));
-        const price = parseFloat(card.getAttribute('data-price'));
+        // Price is derived from weight × PRICE_PER_KG so the per-kilo rate
+        // is the single source of truth (no manual data-price to keep in sync).
+        const price = weight * PRICE_PER_KG;
 
         // Check if item already in basket
         const existingItem = basket.find(item => item.name === name);
@@ -105,7 +124,7 @@ const resetScale = () => {
     updateScale();
 };
 
-btnReset.addEventListener('click', resetScale);
+if (btnReset) btnReset.addEventListener('click', resetScale);
 
 // Format currency helper
 const formatCurrency = (val) => {
@@ -119,6 +138,7 @@ const formatCurrency = (val) => {
 
 // Calculate and render updates
 const updateScale = () => {
+    if (!basketItemsList) return;
     let totalWeight = 0;
     let totalPrice = 0;
 
@@ -133,7 +153,7 @@ const updateScale = () => {
         
         basket.forEach(item => {
             const itemTotalWeight = item.weight * item.qty;
-            const itemTotalPrice = item.price * item.qty;
+            const itemTotalPrice = item.weight * item.qty * PRICE_PER_KG;
             totalWeight += itemTotalWeight;
             totalPrice += itemTotalPrice;
 
@@ -176,104 +196,158 @@ const updateScale = () => {
 };
 
 // --- Checkout Modal Logic ---
-btnCheckout.addEventListener('click', () => {
-    let totalWeight = 0;
-    let totalPrice = 0;
+if (btnCheckout) {
+    btnCheckout.addEventListener('click', () => {
+        let totalWeight = 0;
+        let totalPrice = 0;
 
-    modalItemsList.innerHTML = '';
+        if (modalItemsList) modalItemsList.innerHTML = '';
 
-    basket.forEach(item => {
-        const itemTotalWeight = item.weight * item.qty;
-        const itemTotalPrice = item.price * item.qty;
-        totalWeight += itemTotalWeight;
-        totalPrice += itemTotalPrice;
+        basket.forEach(item => {
+            const itemTotalWeight = item.weight * item.qty;
+            const itemTotalPrice = item.weight * item.qty * PRICE_PER_KG;
+            totalWeight += itemTotalWeight;
+            totalPrice += itemTotalPrice;
 
-        const row = document.createElement('div');
-        row.className = 'modal-item-row';
-        row.innerHTML = `
-            <span>${item.name} (x${item.qty})</span>
-            <span>${formatCurrency(itemTotalPrice)}</span>
-        `;
-        modalItemsList.appendChild(row);
+            const row = document.createElement('div');
+            row.className = 'modal-item-row';
+            row.innerHTML = `
+                <span>${item.name} (x${item.qty})</span>
+                <span>${formatCurrency(itemTotalPrice)}</span>
+            `;
+            if (modalItemsList) modalItemsList.appendChild(row);
+        });
+
+        if (modalWeight) modalWeight.textContent = `${totalWeight.toFixed(2)} kg`;
+        if (modalPrice) modalPrice.textContent = formatCurrency(totalPrice);
+
+        // Build WhatsApp message with order details
+        let messageLines = ['¡Hola BasKula! 🌿', 'Quiero hacer este pedido:', ''];
+        basket.forEach(item => {
+            const itemTotalWeight = item.weight * item.qty;
+            const itemTotalPrice = item.weight * item.qty * PRICE_PER_KG;
+            messageLines.push(`• ${item.name} (x${item.qty}) - ${itemTotalWeight.toFixed(2)} kg - ${formatCurrency(itemTotalPrice)}`);
+        });
+        messageLines.push('');
+        messageLines.push(`*Peso total:* ${totalWeight.toFixed(2)} kg`);
+        messageLines.push(`*Total estimado:* ${formatCurrency(totalPrice)}`);
+
+        const whatsappMessage = encodeURIComponent(messageLines.join('\n'));
+        if (whatsappLink) whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+        // Open Modal
+        if (checkoutModal) checkoutModal.classList.add('open');
     });
-
-    modalWeight.textContent = `${totalWeight.toFixed(2)} kg`;
-    modalPrice.textContent = formatCurrency(totalPrice);
-
-    // Build WhatsApp message with order details
-    let messageLines = ['¡Hola BasKula! 🌿', 'Quiero hacer este pedido:', ''];
-    basket.forEach(item => {
-        const itemTotalWeight = item.weight * item.qty;
-        const itemTotalPrice = item.price * item.qty;
-        messageLines.push(`• ${item.name} (x${item.qty}) - ${itemTotalWeight.toFixed(2)} kg - ${formatCurrency(itemTotalPrice)}`);
-    });
-    messageLines.push('');
-    messageLines.push(`*Peso total:* ${totalWeight.toFixed(2)} kg`);
-    messageLines.push(`*Total estimado:* ${formatCurrency(totalPrice)}`);
-
-    const whatsappMessage = encodeURIComponent(messageLines.join('\n'));
-    whatsappLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
-
-    // Open Modal
-    checkoutModal.classList.add('open');
-});
+}
 
 const closeModal = () => {
     checkoutModal.classList.remove('open');
     resetScale(); // empty scale after checkout completion
 };
 
-modalClose.addEventListener('click', closeModal);
-modalDoneBtn.addEventListener('click', closeModal);
-checkoutModal.addEventListener('click', (e) => {
-    if (e.target === checkoutModal) {
-        closeModal();
-    }
-});
+if (modalClose) modalClose.addEventListener('click', closeModal);
+if (modalDoneBtn) modalDoneBtn.addEventListener('click', closeModal);
+if (checkoutModal) {
+    checkoutModal.addEventListener('click', (e) => {
+        if (e.target === checkoutModal) {
+            closeModal();
+        }
+    });
+}
 
 // --- Postcard Form Logic (Netlify Forms via AJAX) ---
 const contactForm = document.getElementById('contact-form');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-    const btnSubmit = contactForm.querySelector('.btn-postcard');
-    const originalContent = btnSubmit.innerHTML;
+        const btnSubmit = contactForm.querySelector('.btn-postcard');
+        const originalContent = btnSubmit.innerHTML;
 
-    // Sending state
-    btnSubmit.innerHTML = `<i data-lucide="loader"></i> Enviando...`;
-    btnSubmit.disabled = true;
-    lucide.createIcons();
-
-    // Serialize form data (encodes "form-name" + honeypot + fields)
-    const formData = new FormData(contactForm);
-
-    fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString()
-    })
-    .then(() => {
-        btnSubmit.innerHTML = `<i data-lucide="check"></i> ¡Enviado!`;
-        btnSubmit.style.backgroundColor = 'var(--color-olive)';
-        btnSubmit.style.boxShadow = 'none';
+        // Sending state
+        btnSubmit.innerHTML = `<i data-lucide="loader"></i> Enviando...`;
+        btnSubmit.disabled = true;
         lucide.createIcons();
 
-        alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
+        // Serialize form data (encodes "form-name" + honeypot + fields)
+        const formData = new FormData(contactForm);
 
-        setTimeout(() => {
-            contactForm.reset();
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            btnSubmit.innerHTML = `<i data-lucide="check"></i> ¡Enviado!`;
+            btnSubmit.style.backgroundColor = 'var(--color-olive)';
+            btnSubmit.style.boxShadow = 'none';
+            lucide.createIcons();
+
+            alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
+
+            setTimeout(() => {
+                contactForm.reset();
+                btnSubmit.innerHTML = originalContent;
+                btnSubmit.style.backgroundColor = 'var(--color-mustard)';
+                btnSubmit.style.boxShadow = '0 4px 15px rgba(226, 167, 39, 0.3)';
+                btnSubmit.disabled = false;
+                lucide.createIcons();
+            }, 2000);
+        })
+        .catch((error) => {
             btnSubmit.innerHTML = originalContent;
-            btnSubmit.style.backgroundColor = 'var(--color-mustard)';
-            btnSubmit.style.boxShadow = '0 4px 15px rgba(226, 167, 39, 0.3)';
             btnSubmit.disabled = false;
             lucide.createIcons();
-        }, 2000);
-    })
-    .catch((error) => {
-        btnSubmit.innerHTML = originalContent;
-        btnSubmit.disabled = false;
-        lucide.createIcons();
-        alert('Hubo un problema al enviar el mensaje. Por favor, intentá de nuevo o escribinos a info@baskula.com');
-        console.error('Form submit error:', error);
+            alert('Hubo un problema al enviar el mensaje. Por favor, intentá de nuevo o escribinos a info@baskula.com');
+            console.error('Form submit error:', error);
+        });
+    });
+}
+
+// --- Hero Slider Logic (Costa Nova style) ---
+const slides = document.querySelectorAll('.hero-slider .slide');
+const dashes = document.querySelectorAll('.hero-slider .pagination-dash');
+let currentSlideIndex = 0;
+let slideInterval = null;
+
+const showSlide = (index) => {
+    if (slides.length === 0) return;
+    
+    // Deactivate current slide and dash
+    slides[currentSlideIndex].classList.remove('active');
+    if (dashes[currentSlideIndex]) dashes[currentSlideIndex].classList.remove('active');
+    
+    // Set new slide index
+    currentSlideIndex = index;
+    
+    // Activate new slide and dash
+    slides[currentSlideIndex].classList.add('active');
+    if (dashes[currentSlideIndex]) dashes[currentSlideIndex].classList.add('active');
+};
+
+const nextSlide = () => {
+    let nextIndex = (currentSlideIndex + 1) % slides.length;
+    showSlide(nextIndex);
+};
+
+const startSlideShow = () => {
+    stopSlideShow();
+    slideInterval = setInterval(nextSlide, 6000); // rotates slides every 6 seconds
+};
+
+const stopSlideShow = () => {
+    if (slideInterval) clearInterval(slideInterval);
+};
+
+// Add click listeners to paginating dashes
+dashes.forEach((dash, idx) => {
+    dash.addEventListener('click', () => {
+        showSlide(idx);
+        startSlideShow(); // restart interval on manual change
     });
 });
+
+// Start slideshow if components exist on the page
+if (slides.length > 0) {
+    startSlideShow();
+}

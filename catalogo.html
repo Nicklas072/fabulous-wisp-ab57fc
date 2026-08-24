@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título y descripción -->
+    <title>Balanza Interactiva — BasKula Cerámica por Kilo</title>
+    <meta name="description"
+        content="Simulá tu pesaje en tiempo real con la Báscula interactiva de BasKula. Elegí tus platos, tazas y bowls de cerámica portuguesa y calcula el precio por peso.">
+    <meta name="author" content="BasKula">
+    <meta name="theme-color" content="#E2A727">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://baskula.netlify.app/catalogo.html">
+
+    <!-- Robots & Indexación -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BasKula">
+    <meta property="og:title" content="Balanza Interactiva — BasKula Cerámica por Kilo">
+    <meta property="og:description"
+        content="Simulá tu pesaje en tiempo real con la Báscula de BasKula. Elegí tus platos de cerámica portuguesa y calcula el precio.">
+    <meta property="og:url" content="https://baskula.netlify.app/catalogo.html">
+    <meta property="og:image" content="https://baskula.netlify.app/hero.jpg">
+    <meta property="og:locale" content="es_UY">
+
+    <!-- Preconnect a orígenes externos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"
+        integrity="sha384-hJnF5AwidE18GSWTAGHv3ByzzvfNZ1Tcx5y1UUV3WkauuMCEzBJBMSwSt/PUPXnM"
+        crossorigin="anonymous" defer></script>
+</head>
+
+<body>
+
+    <!-- CSS Striped Awning Accent at Top of Window -->
+    <div class="awning-border"></div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Left: Menu Button -->
+            <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <!-- Center: Logo -->
+            <a href="index.html" class="logo-area">
+                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+            </a>
+
+            <!-- Right: Actions -->
+            <div class="header-actions">
+                <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link" aria-label="Contacto WhatsApp">
+                    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z"/></svg>
+                </a>
+                <a href="index.html#servicios" class="action-icon-link" aria-label="Servicios Especiales">
+                    <i data-lucide="concierge-bell"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Drawer Overlay and Container (Bone & White Style) -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="sidebar-drawer" id="sidebarDrawer">
+        <div class="drawer-awning"></div>
+        <div class="drawer-plant"></div>
+        <div class="drawer-header">
+            <a href="index.html" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo" style="height: 36px; max-height: 36px;"></a>
+            <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="drawer-body">
+            <nav class="drawer-nav">
+                <a href="catalogo.html" class="drawer-link">La Tienda</a>
+                <a href="index.html#concepto" class="drawer-link">Concepto</a>
+                <a href="index.html#coleccion" class="drawer-link">Catálogo</a>
+                <a href="index.html#contacto" class="drawer-link">Contacto</a>
+                <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
+                <a href="index.html#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
+            </nav>
+            <div class="drawer-footer">
+                <div class="drawer-contact-info">
+                    <p><strong>Ubicación:</strong> Manantiales, Uruguay</p>
+                    <p><strong>Email:</strong> info@baskula.com</p>
+                </div>
+                <div class="drawer-socials">
+                    <a href="https://www.instagram.com/baskula_/" target="_blank" rel="noopener" class="drawer-social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/baskula" target="_blank" rel="noopener" class="drawer-social-icon" aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Scale Simulator Section -->
+    <section id="simulador" class="section-container simulator-section-wrapper" style="padding-top: 40px; min-height: 80vh;">
+        <div class="section-header">
+            <span class="section-tag">Te invitamos a jugar</span>
+            <h2>Probá, elegí y pesá</h2>
+            <p class="section-subtitle">Experimentá con nuestra Baskula en tiempo real y si te gusta, te lo llevás!</p>
+        </div>
+
+        <div class="simulator-layout">
+            <!-- Left Side: Interactive Cabinet Shelf -->
+            <div class="shelf-cabinet-container">
+                <div class="shelf-header">
+                    <div class="shelf-awning"></div>
+                    <div class="shelf-wood-top">Estante de Selección</div>
+                </div>
+                <div class="shelf-rack">
+                    <!-- Shelf Row 1: Plates -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.72" data-name="Plato Llano con Bordes">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="plate-terracotta css-shape">
+                                        <div class="plate-inner"></div>
+                                    </div>
+                                    <img src="Plato llano con bordes.webp" alt="Plato Llano con Bordes" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
+                                </div>
+                                <span class="item-name">Plato Llano con Bordes</span>
+                                <span class="item-meta">0.72 kg • $11.88 USD</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                            <div class="ceramic-item-card" data-weight="0.58" data-name="Plato Hondo Esmaltado">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="plate-olive css-shape">
+                                        <div class="plate-inner"></div>
+                                    </div>
+                                    <img src="Plato hondo esmaltado.webp" alt="Plato Hondo Esmaltado" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
+                                </div>
+                                <span class="item-name">Plato Hondo Esmaltado</span>
+                                <span class="item-meta">0.58 kg • $9.57 USD</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 2: Bowls & Cups -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.33" data-name="Plato Postre Esmaltado">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="bowl-beige css-shape">
+                                        <div class="bowl-inner"></div>
+                                    </div>
+                                    <img src="Plato postre Esmaltado.webp" alt="Plato Postre Esmaltado" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
+                                </div>
+                                <span class="item-name">Plato Postre Esmaltado</span>
+                                <span class="item-meta">0.33 kg • $5.45 USD</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                            <div class="ceramic-item-card" data-weight="0.25" data-name="Vaso Degradado Gris">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="mug-mustard css-shape">
+                                        <div class="mug-handle"></div>
+                                        <div class="mug-inner"></div>
+                                    </div>
+                                    <img src="Vaso degradado Gris Esmaltado.webp" alt="Vaso Degradado Gris" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
+                                </div>
+                                <span class="item-name">Vaso Degradado Gris</span>
+                                <span class="item-meta">0.25 kg • $4.13 USD</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 3: Jugs & Special Items -->
+                    <div class="shelf-row">
+                        <div class="shelf-wood-plank"></div>
+                        <div class="shelf-items">
+                            <div class="ceramic-item-card" data-weight="0.53" data-name="Plato Postre Borde Irregular">
+                                <div class="ceramic-image-placeholder">
+                                    <div class="jug-speckled css-shape">
+                                        <div class="jug-handle"></div>
+                                        <div class="jug-spout"></div>
+                                    </div>
+                                    <img src="Plato postre borde irregular Esmaltado.webp" alt="Plato Postre Borde Irregular" class="ceramic-item-img" onload="this.previousElementSibling.style.display='none'; this.style.display='block';">
+                                </div>
+                                <span class="item-name">Plato Postre Irregular</span>
+                                <span class="item-meta">0.53 kg • $8.75 USD</span>
+                                <button class="btn-add-item"><i data-lucide="plus"></i> Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: The Analog Scale & Basket -->
+            <div class="scale-dashboard-container">
+                <!-- The Scale Visual -->
+                <div class="analog-scale">
+                    <div class="scale-top-tray">
+                        <div class="tray-plate"></div>
+                        <div class="tray-supports"></div>
+                    </div>
+                    <div class="scale-body">
+                        <!-- Dial Face -->
+                        <div class="scale-dial">
+                            <div class="dial-ticks">
+                                <span class="tick tick-0">0</span>
+                                <span class="tick-half tick-half-05"></span>
+                                <span class="tick tick-1">1</span>
+                                <span class="tick-half tick-half-15"></span>
+                                <span class="tick tick-2">2</span>
+                                <span class="tick-half tick-half-25"></span>
+                                <span class="tick tick-3">3</span>
+                                <span class="tick-half tick-half-35"></span>
+                                <span class="tick tick-4">4</span>
+                                <span class="tick-half tick-half-45"></span>
+                                <span class="tick tick-5">5</span>
+                            </div>
+                            <div class="dial-needle" id="scale-needle"></div>
+                            <div class="dial-center"></div>
+                        </div>
+                        <!-- Brand Label on Scale -->
+                        <div class="scale-brand">BasKula</div>
+                    </div>
+                    <div class="scale-base"></div>
+                </div>
+
+                <!-- Digital Readout & Basket Bill -->
+                <div class="basket-receipt-card">
+                    <div class="receipt-header">
+                        <h3>Tu Balanza</h3>
+                        <span class="price-per-kilo">Precio por Kilo: <strong>USD 16.50</strong></span>
+                    </div>
+
+                    <div class="receipt-body">
+                        <ul class="basket-items-list" id="basket-items-list">
+                            <li class="empty-basket-message">La balanza está vacía. Elegí cerámicas del estante para pesarlas.</li>
+                        </ul>
+                    </div>
+
+                    <div class="receipt-footer">
+                        <div class="receipt-row">
+                            <span>Peso Acumulado:</span>
+                            <span class="total-weight-val" id="total-weight-display">0.00 kg</span>
+                        </div>
+                        <div class="receipt-row highlight">
+                            <span>Total Estimado:</span>
+                            <span class="total-price-val" id="total-price-display">$0</span>
+                        </div>
+                        <div class="receipt-actions">
+                            <button class="btn-reset-scale" id="btn-reset"><i data-lucide="rotate-ccw"></i> Vaciar</button>
+                            <button class="btn-cta btn-checkout" id="btn-checkout" disabled>¡Me lo llevo! <i data-lucide="shopping-bag"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo">
+                </div>
+                <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="#">Catálogo</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="index.html#contacto">Contacto</a>
+            </div>
+            <div class="footer-copy">
+                &copy; BasKula. Todos los derechos reservados. Diseñado con ❤️ para conectar.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Selection Success Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="modal-close"><i data-lucide="x"></i></button>
+            <div class="modal-icon-wrapper">
+                <i data-lucide="heart" class="modal-heart"></i>
+            </div>
+            <h2>¡Tu mesa va a quedar hermosa!</h2>
+            <p>Has seleccionado un total de <strong id="modal-weight">0.00 kg</strong> de cerámica única portuguesa.</p>
+            <p class="modal-info-prep" style="margin: 12px 0; font-weight: 500; font-size: 0.95rem; color: var(--color-charcoal-light); display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <i data-lucide="info" style="width: 18px; height: 18px; color: var(--color-mustard);"></i>
+                Las compras online directas están en preparación.
+            </p>
+            <div class="modal-receipt-summary">
+                <div class="modal-receipt-title">Detalle de tu Pesaje</div>
+                <div class="modal-items-list" id="modal-items-list">
+                    <!-- Dynamic -->
+                </div>
+                <div class="modal-total-row">
+                    <span>Total Estimado:</span>
+                    <span id="modal-price">$0</span>
+                </div>
+            </div>
+            <p class="modal-closing-text" style="font-size: 0.9rem; margin-top: 16px; color: var(--color-charcoal-light);">
+                Para coordinar el retiro en nuestro local y finalizar tu compra, envianos el detalle de tu pesaje por WhatsApp:
+            </p>
+            <a href="#" id="whatsapp-link" class="btn-whatsapp" target="_blank" rel="noopener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Comprar por WhatsApp
+            </a>
+            <button class="btn-cta btn-modal-done" id="modal-done-btn">Volver a la tienda</button>
+        </div>
+    </div>
+
+    <!-- JS Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="app.min.js" defer></script>
+</body>
+
+</html>
