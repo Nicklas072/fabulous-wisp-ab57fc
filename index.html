@@ -52,7 +52,7 @@
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- CSS -->
@@ -137,17 +137,25 @@
     <!-- Header Navigation -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Left: Menu Button -->
+            <!-- Left: Menu Button (Mobile) -->
             <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
                 <i data-lucide="menu"></i>
             </button>
 
-            <!-- Center: Logo -->
-            <a href="#" class="logo-area">
-                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
-            </a>
+            <!-- Navigation Menu (Desktop & Centered) -->
+            <nav class="nav-menu">
+                <a href="catalogo.html" class="nav-item">La Tienda</a>
+                <a href="#concepto" class="nav-item">Concepto</a>
+                
+                <a href="#" class="logo-area">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                </a>
+                
+                <a href="catalogo.html" class="nav-item">Catálogo</a>
+                <a href="#contacto" class="nav-item">Contacto</a>
+            </nav>
 
-            <!-- Right: Actions -->
+            <!-- Right: Actions (Mobile) -->
             <div class="header-actions">
                 <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link"
                     aria-label="Contacto WhatsApp">
@@ -305,7 +313,7 @@
             <!-- Image 5: Standard -->
             <div class="gallery-card" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria5.jpg" alt="Cocina moderna y minimalista con estantes y vajilla de BasKula"
+                    <img src="images/galeria5.png" alt="Mesa con mantel a cuadros azul y vajilla artesanal a rayas de BasKula"
                         loading="lazy" decoding="async" />
                 </div>
             </div>
@@ -325,8 +333,13 @@
     <section class="philosophy-banner-section" data-aos="fade-up">
         <div class="philosophy-banner-container">
             <img src="images/filosofia-banner.jpg"
-                alt="Filosofía BasKula: Creemos que los pequeños detalles ayudan a construir grandes recuerdos. Y una mesa bonita invita a quedarse."
-                class="philosophy-banner-img">
+                alt="Filosofía BasKula: En Uruguay los encuentros van mas allá de solo reunirse. Significa disfrutar el momento presente con los quienes amamos"
+                class="philosophy-banner-img" loading="lazy" decoding="async">
+            <div class="philosophy-banner-content">
+                <p class="philosophy-quote">En Uruguay los encuentros van mas allá de solo reunirse.</p>
+                <span class="philosophy-divider" aria-hidden="true"></span>
+                <p class="philosophy-subquote">Significa disfrutar el momento presente con los quienes amamos</p>
+            </div>
         </div>
     </section>
 
@@ -408,10 +421,10 @@
             <!-- Card 2 -->
             <div class="trend-card">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend2.jpg" alt="Colores - Tendencias próxima temporada BasKula" loading="lazy"
+                    <img src="images/trend2.jpg" alt="Sol - Tendencias próxima temporada BasKula" loading="lazy"
                         decoding="async" />
                 </div>
-                <h3 class="trend-title">Colores</h3>
+                <h3 class="trend-title">Sol</h3>
             </div>
             <!-- Card 3 -->
             <div class="trend-card">
@@ -424,7 +437,7 @@
             <!-- Card 4 -->
             <div class="trend-card">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend4.jpg" alt="Diseño - Tendencias próxima temporada BasKula" loading="lazy"
+                    <img src="images/trend4.png" alt="Diseño - Tendencias próxima temporada BasKula" loading="lazy"
                         decoding="async" />
                 </div>
                 <h3 class="trend-title">Diseño</h3>
@@ -458,7 +471,7 @@
             <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20me%20gustar%C3%ADa%20consultar%20por%20el%20servicio%20de%20Chefs%20Privados."
                 target="_blank" rel="noopener" class="b2b-card">
                 <div class="b2b-img-wrapper">
-                    <img src="images/b2b-chefs.jpg" alt="Chefs Privados">
+                    <img src="images/b2b-chefs.jpg" alt="Chefs Privados" loading="lazy" decoding="async">
                 </div>
                 <div class="b2b-content">
                     <h3>Chefs Privados</h3>

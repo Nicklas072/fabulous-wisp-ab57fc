@@ -40,7 +40,7 @@
 
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- CSS -->
@@ -61,17 +61,25 @@
     <!-- Header Navigation -->
     <header class="main-header">
         <div class="header-container">
-            <!-- Left: Menu Button -->
+            <!-- Left: Menu Button (Mobile) -->
             <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
                 <i data-lucide="menu"></i>
             </button>
 
-            <!-- Center: Logo -->
-            <a href="index.html" class="logo-area">
-                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
-            </a>
+            <!-- Navigation Menu (Desktop & Centered) -->
+            <nav class="nav-menu">
+                <a href="catalogo.html" class="nav-item">La Tienda</a>
+                <a href="index.html#concepto" class="nav-item">Concepto</a>
+                
+                <a href="index.html" class="logo-area">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                </a>
+                
+                <a href="catalogo.html" class="nav-item">Catálogo</a>
+                <a href="index.html#contacto" class="nav-item">Contacto</a>
+            </nav>
 
-            <!-- Right: Actions -->
+            <!-- Right: Actions (Mobile) -->
             <div class="header-actions">
                 <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link" aria-label="Contacto WhatsApp">
                     <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z"/></svg>

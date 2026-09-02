@@ -1,3 +1,26 @@
+// --- Scroll handler with requestAnimationFrame and passive listener ---
+let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+let ticking = false;
+
+const updateScrollState = () => {
+    if (lastScrollY > 50) {
+        document.body.classList.add('scrolled');
+    } else {
+        document.body.classList.remove('scrolled');
+    }
+    ticking = false;
+};
+
+const onScroll = () => {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+        window.requestAnimationFrame(updateScrollState);
+        ticking = true;
+    }
+};
+
+window.addEventListener('scroll', onScroll, { passive: true });
+
 // Initialize Lucide Icons and AOS
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
@@ -8,6 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
             offset: 50
         });
     }
+
+    // Add ready class to body to trigger rollout animation
+    setTimeout(() => {
+        document.body.classList.add('ready');
+    }, 50);
+
+    // Initial check for scroll state on load
+    lastScrollY = window.scrollY;
+    updateScrollState();
 });
 
 // --- State Variables ---
