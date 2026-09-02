@@ -2936,11 +2936,10 @@ body.drawer-open {
     transform: translate(-50%, -50%);
     width: 41%;
     max-width: 540px;
-    height: 56%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
     padding: 10px 4px;
     box-sizing: border-box;
@@ -2959,9 +2958,8 @@ body.drawer-open {
     font-weight: 600;
     color: #201009;
     line-height: 1.32;
-    margin: 0;
+    margin: 0 0 clamp(10px, 1.8vw, 22px) 0;
     letter-spacing: -0.005em;
-    text-wrap: balance;
 }
 
 .philosophy-divider {
@@ -2969,7 +2967,7 @@ body.drawer-open {
     width: clamp(32px, 4.8vw, 68px);
     height: 2px;
     background-color: #8C5535;
-    margin: clamp(6px, 1.2vw, 16px) auto;
+    margin: 0 auto;
     opacity: 0.85;
     border-radius: 1px;
     flex-shrink: 0;
@@ -2982,9 +2980,8 @@ body.drawer-open {
     font-weight: 500;
     color: #341A0E;
     line-height: 1.32;
-    margin: 0;
+    margin: clamp(10px, 1.8vw, 22px) 0 0 0;
     letter-spacing: -0.005em;
-    text-wrap: balance;
 }
 
 @media (max-width: 768px) {
@@ -2995,39 +2992,41 @@ body.drawer-open {
 
     .philosophy-banner-content {
         width: 43%;
-        height: 58%;
         padding: 4px 2px;
     }
 
     .philosophy-quote {
         font-size: clamp(13px, 3.2vw, 24px);
         line-height: 1.28;
+        margin-bottom: clamp(6px, 1.5vw, 14px);
     }
 
     .philosophy-divider {
         width: clamp(24px, 4vw, 42px);
         height: 1.5px;
-        margin: 4px auto;
+        margin: 0 auto;
     }
 
     .philosophy-subquote {
         font-size: clamp(12.5px, 3.1vw, 22px);
         line-height: 1.28;
+        margin-top: clamp(6px, 1.5vw, 14px);
     }
 }
 
 @media (max-width: 480px) {
     .philosophy-banner-content {
         width: 44%;
-        height: 60%;
     }
 
     .philosophy-quote {
         font-size: clamp(12px, 3.8vw, 18px);
+        margin-bottom: 6px;
     }
 
     .philosophy-subquote {
         font-size: clamp(11.5px, 3.6vw, 17px);
+        margin-top: 6px;
     }
 }
 
