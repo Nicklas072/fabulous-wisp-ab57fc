@@ -1,3 +1,11 @@
+// Ensure page always starts at top (0, 0) upon opening/reloading if no section hash is in URL
+if (typeof window !== 'undefined' && !window.location.hash) {
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+}
+
 // --- Scroll handler with requestAnimationFrame and passive listener ---
 let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
 let ticking = false;
@@ -23,6 +31,9 @@ window.addEventListener('scroll', onScroll, { passive: true });
 
 // Initialize Lucide Icons and AOS
 document.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.hash) {
+        window.scrollTo(0, 0);
+    }
     lucide.createIcons();
     if (typeof AOS !== 'undefined') {
         AOS.init({
