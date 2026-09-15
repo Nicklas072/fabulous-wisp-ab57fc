@@ -57,6 +57,136 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="styles.min.css">
+    <style>
+        .mobile-nav-divider,
+        .mobile-subnav {
+            display: none;
+        }
+
+        /* Color Crema Lino Artesanal (#f4eee2) para el header / nav */
+        .main-header {
+            background-color: rgba(244, 238, 226, 0.94) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-bottom: 1px solid rgba(194, 139, 23, 0.15) !important;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.scrolled .main-header {
+            background-color: rgba(244, 238, 226, 0.92) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 4px 20px rgba(34, 34, 34, 0.05);
+        }
+        @media (max-width: 768px) {
+            .header-actions {
+                display: none !important;
+            }
+            .header-actions-placeholder {
+                display: block;
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Separador gráfico fino y moderno entre logo y botones */
+            .mobile-nav-divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 280px;
+                margin: 2px auto 6px;
+                padding: 0 16px;
+                gap: 10px;
+            }
+            .divider-line {
+                flex: 1;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(226, 167, 39, 0.45), transparent);
+            }
+            .divider-diamond {
+                font-size: 7px;
+                color: #c28b17;
+                opacity: 0.85;
+                line-height: 1;
+            }
+
+            /* Barra de navegación móvil: solo texto puro con efecto y barritas */
+            .mobile-subnav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0;
+                padding: 0 12px 10px;
+                width: 100%;
+            }
+
+            .mobile-subnav-link {
+                position: relative;
+                font-family: var(--font-body, system-ui, sans-serif);
+                font-size: 0.72rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1.1px;
+                color: var(--color-charcoal, #222);
+                text-decoration: none;
+                background: none;
+                border: none;
+                padding: 4px 8px;
+                white-space: nowrap;
+                transition: color 0.25s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Subrayado fino animado al interactuar */
+            .mobile-subnav-link::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 1.5px;
+                background-color: #c28b17;
+                border-radius: 1px;
+                transition: width 0.25s ease, left 0.25s ease;
+            }
+
+            .mobile-subnav-link:hover::after,
+            .mobile-subnav-link:active::after {
+                width: calc(100% - 16px);
+                left: 8px;
+            }
+
+            .mobile-subnav-link:hover,
+            .mobile-subnav-link:active {
+                color: #c28b17;
+            }
+
+            /* Destacado sutil de 'Catálogo Restaurantes' */
+            .mobile-subnav-featured {
+                color: #c28b17;
+                font-weight: 600;
+            }
+
+            .mobile-subnav-featured::after {
+                width: calc(100% - 16px);
+                left: 8px;
+                background-color: #c28b17;
+            }
+
+            /* Barrita vertical tenue estilo nórdico */
+            .subnav-separator {
+                display: inline-block;
+                width: 1px;
+                height: 11px;
+                background-color: rgba(34, 34, 34, 0.18);
+                margin: 0 3px;
+                flex-shrink: 0;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -151,25 +281,29 @@
                     <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
                 </a>
                 
-                <a href="catalogo.html" class="nav-item">Catálogo</a>
+                <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="nav-item text-xs font-medium text-[#E2A727] border border-[#E2A727]/60 px-3.5 py-1 rounded-full hover:bg-[#E2A727] hover:text-white transition-all">Catálogo B2B</a>
                 <a href="#contacto" class="nav-item">Contacto</a>
             </nav>
 
-            <!-- Right: Actions (Mobile) -->
-            <div class="header-actions">
-                <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link"
-                    aria-label="Contacto WhatsApp">
-                    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        fill="currentColor">
-                        <path
-                            d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z" />
-                    </svg>
-                </a>
-                <a href="#servicios" class="action-icon-link" aria-label="Servicios Especiales">
-                    <i data-lucide="concierge-bell"></i>
-                </a>
-            </div>
+            <!-- Right: Spacer on Mobile to keep logo centered -->
+            <div class="header-actions-placeholder" aria-hidden="true"></div>
         </div>
+
+        <!-- Separador gráfico fino: línea degradé con micro-rombo central -->
+        <div class="mobile-nav-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-diamond">◆</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Subnavegación móvil: solo texto puro con efecto y barritas tenues -->
+        <nav class="mobile-subnav" aria-label="Navegación principal móvil">
+            <a href="#concepto" class="mobile-subnav-link">Quiénes somos</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="mobile-subnav-link mobile-subnav-featured">Catálogo Restaurantes</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="mobile-subnav-link">Contacto</a>
+        </nav>
     </header>
 
     <!-- Sidebar Drawer Overlay and Container (Bone & White Style) -->
@@ -186,11 +320,11 @@
         </div>
         <div class="drawer-body">
             <nav class="drawer-nav">
-                <a href="catalogo.html" class="drawer-link">La Tienda</a>
-                <a href="#concepto" class="drawer-link">Concepto</a>
-                <a href="#coleccion" class="drawer-link">Catálogo</a>
-                <a href="#contacto" class="drawer-link">Contacto</a>
+                <a href="#concepto" class="drawer-link" onclick="document.getElementById('drawerClose').click()">Quiénes somos</a>
+                <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="drawer-link font-medium text-[#E2A727]">Catálogo Restaurantes</a>
+                <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
+                <a href="catalogo.html" class="drawer-link-secondary">La Tienda</a>
                 <a href="#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
             </nav>
             <div class="drawer-footer">

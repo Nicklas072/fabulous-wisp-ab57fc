@@ -1,0 +1,173 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============ CATÁLOGO ============
+model Product {
+  id               String    @id // productId de VTEX
+  slug             String    @unique
+  nameEs           String
+  namePt           String?
+  reference        String?
+  categoryId       String?
+  collection       String? // Coleção (AVANT GARDE, ESSENCIAS, HYGGE...)
+  line             String? // Línea (ORGÂNICO, BIO, COUP...)
+  material         String? // Stoneware / Faiança → Loza
+  materialEs       String?
+  colorDecor       String? // Colorido / Estampado / Branco
+  colorBase        String? // Color base ES (Blanco, Azul...)
+  colorGroup       String? // Grupo familia (blanco, azul...)
+  tone             String? // Tono fino para búsqueda (blanco, crudo, azul-claro, estampado...)
+  pieceGroup       String? // Grupo home (platos, bowls, tecafe, vajillas, complementos)
+  productType      String? // Tipo pieza ES (plato-llano, bowl, taza-cafe...)
+  productTypeLabel String?
+  diameter         Float?
+  height           Float?
+  capacity         Int?
+  pieces           Int?
+  available        Boolean   @default(false)
+  // Publicación en la página principal: SOLO el admin decide qué piezas
+  // son públicas. false = oculta (solo visible en el panel de admin).
+  published        Boolean   @default(false)
+  releaseDate      String?
+  manufacturerCode String?
+  boxComposition   String?
+  packWeight       String?
+  packDim          String?
+  packType         String?
+  descriptionEs    String?
+  careEs           String?
+  infoEs           String?
+  images           String? // JSON [{url, isMood}]
+  moodImages       String? // JSON [url]
+  createdAt        DateTime  @default(now())
+
+  favorites  Favorite[]
+  curated    CuratedItem[]
+  listItems  ListItem[]
+}
+
+// ============ CLIENTES ============
+model Client {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  name        String
+  contactName String?
+  phone       String?
+  notes       String?
+  active      Boolean   @default(true)
+  visitCount  Int       @default(0)
+  lastVisit   DateTime?
+  adminLastSeen DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  favorites   Favorite[]
+  sharedLists SharedList[]
+  visits      Visit[]
+  curated     CuratedItem[]
+  clientNotes ClientNote[]
+}
+
+// ============ NOTAS DEL CLIENTE AL ASESOR ============
+// Mensajes que el cliente deja desde su panel «Mi lista» para lo que
+// necesite decirle al dueño (consultas, pedidos, contextos). El admin
+// las lee y las elimina desde el detalle del cliente.
+model ClientNote {
+  id        String   @id @default(cuid())
+  clientId  String
+  message   String
+  createdAt DateTime @default(now())
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+}
+
+// ============ FAVORITOS ============
+model Favorite {
+  id        String   @id @default(cuid())
+  clientId  String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  client  Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([clientId, productId])
+}
+
+// ============ LISTAS COMPARTIDAS ============
+model SharedList {
+  id        String   @id @default(cuid())
+  clientId  String
+  message   String?
+  createdAt DateTime @default(now())
+
+  client    Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  items     ListItem[]
+
+  @@index([clientId])
+}
+
+model ListItem {
+  id          String  @id @default(cuid())
+  listId      String
+  productId   String
+  quantity    Int     @default(1)
+  note        String?
+
+  list    SharedList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  product Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([listId])
+}
+
+// ============ VISITAS / ACTIVIDAD ============
+// Registro de actividad de cada cliente para el panel del admin.
+// type: login (ingresó con su código) | fav_add | fav_remove |
+//       note (envió una nota) | download (descargó su lista en PDF)
+// detail: texto descriptivo (nombre de la pieza, extracto de la nota…)
+// path: legacy (enlace antiguo /c/CODE que originó el ingreso)
+model Visit {
+  id        String   @id @default(cuid())
+  clientId  String
+  path      String?
+  type      String   @default("login")
+  detail    String?
+  createdAt DateTime @default(now())
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([clientId, createdAt])
+  @@index([type, createdAt])
+}
+
+// ============ SELECCIÓN CURADA POR CLIENTE ============
+model CuratedItem {
+  id        String   @id @default(cuid())
+  clientId  String
+  productId String
+  sort      Int      @default(0)
+  note      String?
+  createdAt DateTime @default(now())
+
+  client  Client  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([clientId, productId])
+}
+
+// ============ CONFIGURACIÓN ============
+model Setting {
+  key   String @id
+  value String
+}

@@ -1,0 +1,42 @@
+BASKULA — HERRAMIENTA COMPLETA (sitio web + documentación)
+==========================================================
+Punta Piedras, Uruguay · Septiembre 2026
+
+QUÉ CONTIENE ESTA CARPETA
+-------------------------
+  manual/          El Manual completo en PDF (con capturas del sitio).
+                   Empezá por acá: manual/Manual-BasKula.pdf
+  documentacion/   La misma documentación capítulo por capítulo, en
+                   Markdown (la idea, guía del cliente, guía del dueño,
+                   arquitectura técnica, datos, instalación).
+  sitio/           LA HERRAMIENTA: el proyecto web completo (Next.js)
+                   con la base de datos SQLite incluida y todo listo
+                   para correr. No incluye node_modules (se regenera
+                   con "npm install" usando el package-lock incluido).
+
+CÓMO CORRER EL SITIO EN 3 COMANDOS
+-----------------------------------
+  cd sitio
+  npm install
+  npm run dev
+  → abrir http://localhost:3000
+
+DATOS DE ACCESO DE ENTREGA
+--------------------------
+  Clave del panel del dueño:  BASKULA2272
+  Cliente de demostración:    DEMO
+  WhatsApp configurado:       +598 93 658 477
+
+  (La clave se cambia desde el panel: pestaña Configuración.)
+
+ESTADO DE LOS DATOS
+-------------------
+  1.510 piezas en la base · 60 publicadas en la página pública ·
+  717 disponibles · 16 colecciones · cliente DEMO con historial.
+
+  Backup = copiar el archivo sitio/db/custom.db
+
+MÁS DETALLE
+-----------
+  Instalación completa, personalización y despliegue:
+  documentacion/06-instalacion-y-despliegue.md (o el capítulo 9 del manual).

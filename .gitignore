@@ -1,3 +1,57 @@
+# ===============================================
+# BasKula — Git Ignore Rules (Buenas Prácticas)
+# ===============================================
+
+# Dependencias
 node_modules/
+/.pnp
+.pnp.*
+
+# Builds y compilación
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Recursos en bruto, borradores y backups locales
+_assets_raw/
 _originals_backup/
-*.py
+
+# Logs y depuración
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev.log
+dev.out.log
+server.log
+
+# Archivos del sistema operativo y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backups y temporales de base de datos
+*.db
+*.db.bak
+*.bak
+*.db-wal
+*.db-shm
+*.db-journal
+
+# Variables de entorno locales (preservando .env.example)
+.env
+.env*.local
+.env.production.local
+!.env.example
+
+# Utilidades Python locales (si aplica)
+__pycache__/
+*.py[cod]
+*$py.class

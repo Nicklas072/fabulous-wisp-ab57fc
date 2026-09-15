@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manual completo BasKula</title>
+<script>
+// Fuentes locales del manual (mismas definiciones que fonts/fonts.css).
+// Se inyectan por script para que Paged.js las procese sin fetch externo.
+(function () {
+  var css = [
+    "@font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/lora-400-italic.woff2') format('woff2')}",
+    "@font-face{font-family:'Lora';font-style:italic;font-weight:500;font-display:swap;src:url('fonts/lora-500-italic.woff2') format('woff2')}",
+    "@font-face{font-family:'Lora';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/lora-400.woff2') format('woff2')}",
+    "@font-face{font-family:'Lora';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/lora-600.woff2') format('woff2')}",
+    "@font-face{font-family:'Lora';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/lora-700.woff2') format('woff2')}",
+    "@font-face{font-family:'Lexend Deca';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/lexenddeca-300.woff2') format('woff2')}",
+    "@font-face{font-family:'Lexend Deca';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/lexenddeca-400.woff2') format('woff2')}",
+    "@font-face{font-family:'Lexend Deca';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/lexenddeca-500.woff2') format('woff2')}",
+    "@font-face{font-family:'Lexend Deca';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/lexenddeca-600.woff2') format('woff2')}",
+    "@font-face{font-family:'Lexend Deca';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/lexenddeca-700.woff2') format('woff2')}"
+  ].join("");
+  var s = document.createElement("style");
+  s.textContent = css;
+  document.head.appendChild(s);
+})();
+</script>
+<style>
+/* ============ BasKula · Manual completo — Creative Flow ============ */
+@page { size: 720px 1020px; margin: 0; }
+
+:root {
+  --crema: #FAF8F5;
+  --carbon: #222222;
+  --gris: #55504a;
+  --mostaza: #C28B17;
+  --mostaza-claro: #F6E9C8;
+  --tinte: #F3EDE1;
+  --borde: #E8E1D2;
+  --verde: #6E8058;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 720px;
+  background: var(--crema);
+  color: var(--carbon);
+  font-family: 'Lexend Deca', 'Liberation Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media screen {
+  html { display: flex; justify-content: center; background: #e7e1d8; height: auto; }
+  body { margin: 24px auto; box-shadow: 0 6px 36px rgba(34,34,34,.18); }
+}
+@media screen and (max-width: 760px) {
+  body { zoom: 0.5; margin: 12px auto; }
+}
+
+p, td, li { text-align: justify; hyphens: auto; }
+img { max-width: 100%; height: auto; }
+
+h1, h2, h3, h4 { font-family: 'Lora', 'Liberation Serif', serif; }
+
+/* ============ Portada ============ */
+.portada {
+  width: 720px;
+  height: 1020px;
+  box-sizing: border-box;
+  break-after: page;
+  overflow: hidden;           /* solo en la portada (recorta decoración) */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 64px;
+}
+.portada-bg {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(circle 1300px at 650px 1070px, rgba(34,34,34,0.035) 0 1299px, transparent 1300px),
+    radial-gradient(circle 1120px at 630px 1070px, rgba(194,139,23,0.03) 0 1119px, transparent 1120px);
+}
+.portada-content { position: relative; z-index: 3; }
+.portada-logo img { height: 58px; width: auto; display: block; margin-bottom: 54px; }
+.portada-tag {
+  font-size: 12px; font-weight: 500; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--mostaza); margin-bottom: 18px;
+}
+.portada-title {
+  font-size: 68px; font-weight: 700; line-height: 1.05;
+  margin: 0 0 14px 0; letter-spacing: -0.5px;
+}
+.portada-subtitle {
+  font-family: 'Lora', 'Liberation Serif', serif;
+  font-style: italic; font-size: 22px; font-weight: 500;
+  color: var(--gris); margin-bottom: 40px;
+}
+.portada-summary {
+  font-size: 15px; line-height: 1.7; max-width: 430px;
+  color: var(--carbon); opacity: 0.85; margin-bottom: 42px;
+}
+.portada-meta { font-size: 14px; color: var(--gris); }
+.portada-meta b { color: var(--carbon); font-weight: 600; }
+.portada-edition {
+  position: absolute; left: 64px; right: 64px; bottom: 52px; z-index: 3;
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--carbon); opacity: 0.55;
+  display: flex; justify-content: space-between;
+}
+
+/* ============ Contenido que fluye ============ */
+.main-content { padding: 60px 65px 40px 65px; }
+
+.chapter-header { break-after: avoid; break-inside: avoid; margin-top: 28px; }
+.chapter-header:first-child { margin-top: 0; }
+.kicker {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--mostaza); margin-bottom: 8px;
+}
+.section-title { font-size: 26px; font-weight: 700; line-height: 1.2; margin: 0 0 10px 0; }
+.divider { height: 3px; width: 56px; background: var(--mostaza); border-radius: 2px; margin-bottom: 6px; }
+.chapter-intro {
+  font-family: 'Lora', 'Liberation Serif', serif; font-style: italic;
+  font-size: 15.5px; color: var(--gris); margin: 10px 0 14px 0;
+}
+
+h3.sub {
+  font-size: 18px; font-weight: 700; margin: 24px 0 8px 0;
+  break-after: avoid; page-break-after: avoid;
+}
+.body-text { margin: 0 0 12px 0; }
+.body-text b { font-weight: 600; }
+
+.card {
+  background: #ffffff; border: 1px solid var(--borde); border-radius: 10px;
+  padding: 15px 18px; margin: 0 0 14px 0;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.card h4 { font-size: 15.5px; font-weight: 700; margin: 0 0 6px 0; break-after: avoid; }
+.card p { margin: 0 0 8px 0; font-size: 13.5px; line-height: 1.6; }
+.card p:last-child { margin-bottom: 0; }
+
+.callout {
+  border-left: 3px solid var(--mostaza); background: #ffffff;
+  border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 4px 0 14px 0;
+  font-size: 13.5px; color: var(--gris);
+  break-inside: avoid; page-break-inside: avoid;
+}
+.callout b { color: var(--carbon); }
+
+ol.steps { margin: 6px 0 14px 0; padding-left: 22px; }
+ol.steps li { margin-bottom: 8px; break-inside: avoid; }
+ol.steps li::marker { color: var(--mostaza); font-weight: 700; }
+
+ul.dash { margin: 6px 0 14px 0; padding-left: 18px; list-style: none; }
+ul.dash li { margin-bottom: 8px; padding-left: 14px; position: relative; break-inside: avoid; }
+ul.dash li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 11px; height: 2px; background: var(--mostaza); border-radius: 1px; }
+
+/* ============ Tablas ============ */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 6px 0 16px 0; }
+.tbl thead { display: table-header-group; }
+.tbl tr { break-inside: avoid; page-break-inside: avoid; }
+.tbl th {
+  background: var(--tinte); text-align: left; padding: 7px 9px;
+  font-weight: 600; font-size: 11.5px; letter-spacing: 0.3px;
+  border-bottom: 2px solid var(--borde);
+}
+.tbl td { padding: 6px 9px; border-bottom: 1px solid var(--borde); vertical-align: top; text-align: left; }
+.tbl td.route, .tbl td.mono { font-family: 'Liberation Mono', 'DejaVu Sans Mono', monospace; font-size: 11px; }
+.tbl td b { font-weight: 600; }
+.tbl .num { text-align: right; }
+
+/* ============ Figuras ============ */
+figure.shot { break-inside: avoid; page-break-inside: avoid; margin: 10px 0 16px 0; text-align: center; }
+figure.shot img {
+  width: 100%; border: 1px solid var(--borde); border-radius: 8px;
+  max-height: 400px; object-fit: contain; background: #ffffff;
+}
+figure.shot.tall img { max-height: 330px; width: auto; }
+figure.shot figcaption { font-size: 11.5px; color: var(--gris); margin-top: 7px; text-align: center; }
+figure.shot figcaption b { color: var(--carbon); }
+
+/* ============ Preguntas frecuentes ============ */
+.faq { margin: 4px 0 12px 0; }
+.faq .q { font-weight: 600; font-size: 14px; margin-bottom: 3px; break-after: avoid; }
+.faq .q::before { content: "¿"; color: var(--mostaza); }
+.faq .a { font-size: 13.5px; color: var(--carbon); margin-bottom: 12px; }
+
+/* ============ Índice ============ */
+.toc-list { margin: 10px 0 18px 0; }
+.toc-item {
+  display: flex; gap: 14px; align-items: baseline;
+  background: #ffffff; border: 1px solid var(--borde); border-radius: 10px;
+  padding: 11px 16px; margin-bottom: 8px;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.toc-item .n {
+  font-family: 'Lora', 'Liberation Serif', serif; font-size: 19px; font-weight: 700;
+  color: var(--mostaza); min-width: 24px;
+}
+.toc-item .t { font-size: 14px; font-weight: 600; }
+.toc-item .d { font-size: 12px; color: var(--gris); margin-top: 1px; }
+
+/* ============ Contraportada ============ */
+.ending {
+  width: 720px; height: 1020px; box-sizing: border-box;
+  break-before: page; overflow: hidden; position: relative;
+}
+.ending .panel {
+  position: absolute; inset: 42px; background: var(--carbon);
+  border-radius: 16px; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+  padding: 60px 70px;
+}
+.ending .panel img { height: 52px; width: auto; margin-bottom: 40px; }
+.ending .filete { width: 56px; height: 3px; background: var(--mostaza); border-radius: 2px; margin-bottom: 34px; }
+.ending .linea { color: #FAF8F5; font-size: 17px; font-family: 'Lora', 'Liberation Serif', serif; font-style: italic; margin-bottom: 10px; }
+.ending .linea2 { color: rgba(250,248,245,0.75); font-size: 13px; margin-top: 26px; }
+.ending .linea2 b { color: var(--mostaza); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<!-- ================= PORTADA ================= -->
+<div class="portada">
+  <div class="portada-bg"></div>
+  <div class="portada-content">
+    <div class="portada-logo"><img src="images/logo-baskula.png" alt="BasKula"></div>
+    <div class="portada-tag">Manual completo · Sitio + Documentación</div>
+    <h1 class="portada-title">BasKula</h1>
+    <div class="portada-subtitle">Catálogo privado B2B para gastronomía</div>
+    <div class="portada-summary">
+      Todo sobre la herramienta en un solo documento: la idea de negocio, lo que ve
+      y hace cada cliente, el panel de administración del dueño, el funcionamiento
+      técnico por dentro, los datos incluidos y la instalación paso a paso.
+    </div>
+    <div class="portada-meta">
+      <b>Versión 1.0</b> · Septiembre de 2026<br>
+      Punta Piedras, Uruguay
+    </div>
+  </div>
+  <div class="portada-edition">
+    <span>Herramienta completa</span>
+    <span>Sitio web · Base de datos · Documentación</span>
+  </div>
+</div>
+
+<!-- ================= CONTENIDO ================= -->
+<div class="main-content">
+
+<div class="chapter-header">
+  <div class="kicker">Manual completo BasKula</div>
+  <h2 class="section-title">Contenido</h2>
+  <div class="divider"></div>
+</div>
+
+<div class="toc-list">
+  <div class="toc-item"><div class="n">1</div><div><div class="t">La idea</div><div class="d">Qué es, a quién sirve, el problema que resuelve y los cuatro pilares de diseño.</div></div></div>
+  <div class="toc-item"><div class="n">2</div><div><div class="t">Vista general: cómo funciona de punta a punta</div><div class="d">Los dos roles, el flujo completo y la regla de oro de lo público y lo oculto.</div></div></div>
+  <div class="toc-item"><div class="n">3</div><div><div class="t">Guía del cliente</div><div class="d">Código, catálogo, corazones, Mi lista, descarga del PDF y notas al asesor.</div></div></div>
+  <div class="toc-item"><div class="n">4</div><div><div class="t">Guía del dueño: el panel de administración</div><div class="d">Clientes, publicación del catálogo, notas, actividad y configuración.</div></div></div>
+  <div class="toc-item"><div class="n">5</div><div><div class="t">Cómo funciona por dentro</div><div class="d">Stack, modelo de datos, rutas API, identificación, caché, sugerencias y PDF.</div></div></div>
+  <div class="toc-item"><div class="n">6</div><div><div class="t">Los datos incluidos y el estado actual</div><div class="d">Origen del catálogo y cifras exactas del estado de entrega.</div></div></div>
+  <div class="toc-item"><div class="n">7</div><div><div class="t">Instalación y puesta en marcha</div><div class="d">Requisitos, pasos, scripts útiles, personalización y despliegue.</div></div></div>
+  <div class="toc-item"><div class="n">8</div><div><div class="t">Preguntas frecuentes</div><div class="d">Las diez dudas más probables, respondidas en una línea cada una.</div></div></div>
+</div>
+
+<div class="card">
+  <h4>Qué contiene este paquete</h4>
+  <p><b>manual/</b> — este manual en PDF y su versión HTML editable.</p>
+  <p><b>documentacion/</b> — la misma documentación, capítulo por capítulo, en Markdown.</p>
+  <p><b>sitio/</b> — la herramienta completa: proyecto Next.js con la base de datos SQLite incluida y lista para correr (solo falta ejecutar <span class="mono">npm install</span>).</p>
+</div>
+
+<!-- ================= CAPÍTULO 1 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 1</div>
+  <h2 class="section-title">La idea</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Un catálogo privado por código, sin precios para el cliente y con toda la actividad visible para el dueño.</div>
+</div>
+
+<p class="body-text"><b>BasKula — Catálogo privado B2B</b> es la herramienta web del catálogo de vajillas de cerámica de BasKula (Punta Piedras, Uruguay). No es una tienda online: no hay precios, no hay carrito y no hay compras. Es un catálogo de consulta y armado de listas, pensado para la relación comercial entre el dueño y sus clientes gastronómicos: restaurantes, cafeterías, hoteles, casas de banquetes y tiendas del rubro Horeca.</p>
+
+<p class="body-text">El catálogo contiene <b>1.510 piezas</b> de vajilla de cerámica (stoneware y loza) organizadas en 16 colecciones, con fichas completas en español: fotografías, dimensiones, capacidad, composición de los sets, descripción, cuidados, datos de empaque y disponibilidad. Sobre ese catálogo funciona un sistema de acceso privado con código por cliente, y un panel de administración para el dueño.</p>
+
+<h3 class="sub">El problema que resuelve</h3>
+
+<p class="body-text">Antes de esta herramienta, el catálogo viajaba como PDFs sueltos por WhatsApp o correo, con planillas desactualizadas y fotos por aquí y por allá. Esa forma de trabajar genera cuatro problemas concretos, y cada uno tiene su respuesta acá.</p>
+
+<div class="card">
+  <h4>Falta de control sobre qué ve cada cliente</h4>
+  <p>Cuando todos reciben el mismo PDF, todos ven todo: líneas que aún no se quieren mostrar, piezas discontinuas, códigos del fabricante que exponen el canal de abastecimiento. En la herramienta, la página pública solo muestra lo que el dueño publica, y cada cliente entra con su propio código. Publicar u ocultar una pieza toma un clic y aplica al instante.</p>
+</div>
+
+<div class="card">
+  <h4>Cero seguimiento del interés del cliente</h4>
+  <p>Con un PDF enviado por chat no hay forma de saber si se abrió, qué piezas interesaron ni qué se está pensando pedir. Acá cada acción deja registro: ingresos, piezas guardadas o quitadas, notas enviadas y descargas del PDF de la lista. La próxima conversación comercial arranca informada.</p>
+</div>
+
+<div class="card">
+  <h4>Consultas desordenadas</h4>
+  <p>El catálogo tiene búsqueda instantánea y filtros por categoría, color (19 tonos), diámetro, colección y disponibilidad, con contadores honestos que reflejan el resultado real de cada combinación. El cliente encuentra solo y el asesor responde menos preguntas repetidas.</p>
+</div>
+
+<div class="card">
+  <h4>La lista del cliente era efímera</h4>
+  <p>Quien hojeaba el PDF y anotaba "quiero esto y esto" perdía el hilo al día siguiente. Con la herramienta, el cliente marca piezas con un corazón, ajusta cantidades y su lista queda guardada: la descarga como PDF prolijo o la envía por WhatsApp cuando quiera.</p>
+</div>
+
+<h3 class="sub">Los cuatro pilares de diseño</h3>
+
+<ol class="steps">
+  <li><b>Privado por código.</b> No hay registro público. Cada cliente entra con un código personal que el dueño le entrega (por ejemplo <span class="mono">DEMO</span>). El código es la identidad: no necesita contraseña, y el dueño lo crea, edita o desactiva desde el panel.</li>
+  <li><b>Sin precios y sin códigos para el cliente.</b> El cliente nunca ve precios, referencias ni códigos de fabricante: ni en fichas, ni en su lista, ni en el PDF, ni en WhatsApp. La cotización queda en el canal comercial. El dueño sí ve todos los códigos en su panel.</li>
+  <li><b>La lista es del cliente.</b> "Mi lista" junta sus piezas guardadas con cantidades, la selección "Preparado para ti" del asesor y cinco sugerencias automáticas según sus gustos. Se descarga como PDF A4 con la marca y se comparte por WhatsApp en un toque.</li>
+  <li><b>El dueño lo ve todo.</b> Cada acción relevante queda registrada (quién ingresó, qué guardó, qué quitó, qué nota mandó, si descargó su lista). El detalle de cada evento lo construye el servidor, así el registro no se puede falsificar desde el navegador.</li>
+</ol>
+
+<h3 class="sub">Breve historia del proyecto</h3>
+
+<p class="body-text">El catálogo partió de la estructura de productos del proveedor (seis departamentos: platos, stoneware, complementos, conjuntos de té y café, colecciones y vajillas). Durante el desarrollo se estructuraron las 1.510 piezas con especificaciones y fotografías, y se tradujo todo al español: nombres, 1.508 descripciones y 1.507 textos de cuidados. Sobre esos datos se construyó la aplicación, se le aplicó la identidad de marca BasKula (paleta crema, carbón y mostaza; tipografías Lora, Lexend Deca y Cormorant Garamond; logo propio) y se verificó cada flujo con pruebas automatizadas de punta a punta en navegador real, en escritorio y en móvil.</p>
+
+<p class="body-text">La herramienta se entrega con <b>60 piezas ya publicadas</b> en la página pública —variadas, disponibles y repartidas entre todas las categorías— para que el sitio se vea vivo desde el primer día, y con el resto del catálogo listo para publicarse desde el panel con un clic.</p>
+
+<!-- ================= CAPÍTULO 2 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 2</div>
+  <h2 class="section-title">Vista general: cómo funciona de punta a punta</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Dos roles, un flujo y una regla de oro. Entender esto es entender la herramienta.</div>
+</div>
+
+<h3 class="sub">Los dos roles</h3>
+
+<div class="card">
+  <h4>El cliente (restaurante, cafetería, hotel, tienda)</h4>
+  <p>Entra con su código por el botón "Inicia sesión", explora el catálogo público, marca piezas con corazones, arma su lista con cantidades, la descarga en PDF o la envía por WhatsApp, y le deja notas al asesor. No ve precios ni códigos, y no puede ver nada que el dueño no haya publicado.</p>
+</div>
+
+<div class="card">
+  <h4>El dueño / asesor (panel de administración)</h4>
+  <p>Entra con la clave del panel (<span class="mono">BASKULA2272</span> de entrega). Decide qué piezas son públicas en la página principal, arma la selección "Preparado para ti" de cada cliente, gestiona cuentas y códigos, lee las notas, y consulta la actividad completa de cada cliente. Ve el catálogo total de 1.510 piezas con referencias y códigos.</p>
+</div>
+
+<h3 class="sub">El flujo completo, de punta a punta</h3>
+
+<ol class="steps">
+  <li><b>El dueño publica.</b> Del total de 1.510 piezas, publica las que quiere mostrar (60 en la entrega). Publicar u ocultar es un clic y se refleja al recargar la página pública.</li>
+  <li><b>El dueño crea al cliente</b> con nombre y un código de acceso simple, y le prepara una selección personal ("Preparado para ti") si corresponde.</li>
+  <li><b>El cliente entra</b> con su código. Su sesión persiste entre visitas.</li>
+  <li><b>El cliente explora:</b> búsqueda, filtros, fichas completas con fotos, medidas, descripción y cuidados.</li>
+  <li><b>El cliente marca corazones</b> y ajusta cantidades: su "Mi lista" se arma sola, junto a las recomendaciones del asesor y cinco sugerencias automáticas según sus gustos.</li>
+  <li><b>El cliente actúa:</b> descarga su lista en PDF (sin precios ni códigos), la envía por WhatsApp, o deja una nota al asesor.</li>
+  <li><b>El dueño observa:</b> la pestaña Actividad registra ingresos, corazones guardados y quitados, notas y descargas de cada cliente. Las notas se atienden desde su pestaña. Las listas compartidas quedan copiadas para cotizar.</li>
+</ol>
+
+<h3 class="sub">La regla de oro: público y oculto</h3>
+
+<p class="body-text">Cada pieza tiene dos estados independientes que gobiernan todo el sistema, y conviene tenerlos claros desde el primer día:</p>
+
+<div class="card">
+  <h4>Pública u oculta (la decide el dueño)</h4>
+  <p>Una pieza <b>oculta</b> no existe para el mundo: no aparece en el catálogo, su ficha responde "no encontrada", y desaparece del "Preparado para ti" y de la "Mi lista" de cada cliente. Sin embargo, nada se pierde: los corazones guardados siguen en la base, y al publicar la pieza de nuevo reaparece en todo, incluidas las listas de los clientes que la tenían guardada.</p>
+</div>
+
+<div class="card">
+  <h4>Disponible o "consultar" (dato operativo)</h4>
+  <p>Independiente de su visibilidad, cada pieza puede estar <b>disponible</b> (etiqueta verde) o figurar <b>"Consultar disponibilidad"</b> (etiqueta marrón). La pieza se muestra igual; el estado solo comunica al cliente que conviene confirmar stock antes de decidir. El panel filtra por esta dimensión y avisa antes de añadir una pieza no disponible a un cliente.</p>
+</div>
+
+<h3 class="sub">Cómo está protegido todo</h3>
+
+<p class="body-text">La seguridad del sistema es simple y efectiva, pensada para este uso comercial. Cada cliente es un código alfanumérico único que el dueño controla (crear, editar, desactivar, eliminar); un cliente desactivado no puede entrar. El panel del dueño se abre con su propia clave alfanumérica (se cambia desde Configuración, no distingue mayúsculas). Las sesiones se mantienen en el propio navegador del usuario (almacenamiento local y cookies de un año para clientes, de siete días para el panel), de modo que nadie más las ve. Y todos los datos viven en la propia base SQLite del sitio: no hay servicios de terceros ni cuentas externas involucradas.</p>
+
+<p class="body-text">Detalle de robustez que se nota en el uso diario: la identificación funciona incluso en contextos donde el navegador bloquea cookies, porque el código viaja también como cabecera interna en cada petición. Por eso el sitio funciona igual dentro de ventanas embebidas o vistas previas, donde otros sistemas romperían la sesión.</p>
+
+<!-- ================= CAPÍTULO 3 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 3</div>
+  <h2 class="section-title">Guía del cliente</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Todo lo que un cliente puede ver y hacer. Solo necesita su código y un navegador.</div>
+</div>
+
+<figure class="shot">
+  <img src="images/home-publica.png" alt="Página pública del catálogo">
+  <figcaption><b>La página pública.</b> Búsqueda protagonista, botones de categoría y chips de color; la sesión de cliente se abre con "Inicia sesión".</figcaption>
+</figure>
+
+<h3 class="sub">1. Entrar con el código</h3>
+
+<p class="body-text">Al abrir el sitio, el cliente toca el botón <b>"Inicia sesión"</b> y escribe su código personal — por ejemplo <span class="mono">DEMO</span>. El código no distingue mayúsculas y perdona los errores de tipeo comunes: espacios, tildes y guiones se normalizan automáticamente. Si es válido, la ventana se cierra y el cliente queda identificado: su nombre aparece junto al botón y el sitio le muestra su contenido personalizado.</p>
+
+<p class="body-text">La sesión <b>persiste</b>: al recargar o volver otro día con el mismo navegador sigue identificado. Para salir, toca su nombre y elige cerrar sesión. Si el código no se reconoce, el aviso es claro ("Código no reconocido. Verificálo o contactá a tu asesor") con acceso directo a WhatsApp. Los clientes que recibieron en su momento un enlace del tipo <span class="mono">sitio.com/c/SU-CODIGO</span> siguen entrando por ese enlace: funciona igual que antes.</p>
+
+<h3 class="sub">2. Explorar el catálogo</h3>
+
+<p class="body-text">La página de inicio tiene una <b>barra de búsqueda protagonista</b>: se escribe lo que se busca ("plato hondo", "bowl", "terracota") y el sitio responde al instante, entendiendo también términos de color y de categoría. Debajo hay botones de categoría (Platos, Bowls, Cafetería, Complementos, Vajillas) y chips de color con muestra visual y cantidad de piezas por tono (19 tonos).</p>
+
+<p class="body-text">En el catálogo aparece el panel de filtros: categoría, color y acabado agrupados por familias, diámetro, colección, material y "solo disponibles". Cada opción muestra su <b>contador honesto</b>: el número que se ve es exactamente el número de resultados al tocarla, incluso con otros filtros ya activos. La grilla pagina de a 24 piezas y cada tarjeta lleva su etiqueta de disponibilidad: "Disponible" (verde) o "Consultar disponibilidad" (marrón).</p>
+
+<figure class="shot">
+  <img src="images/catalogo-filtros.png" alt="Catálogo con filtros aplicados">
+  <figcaption><b>El catálogo con filtros activos</b> (tono terracota): grilla de tarjetas con corazones siempre visibles y etiquetas de disponibilidad.</figcaption>
+</figure>
+
+<h3 class="sub">3. La ficha de la pieza</h3>
+
+<p class="body-text">Tocando una pieza se abre la <b>ficha completa</b> a pantalla casi total: galería de fotos de la pieza e imágenes de ambiente, nombre y tipo, colección, y especificaciones — diámetro, altura, capacidad, piezas del set, color base y acabado. Abajo, la descripción en español, la sección de cuidados (lavar, microondas, horno, congeladora) y los datos técnicos de empaque. El corazón permite guardarla desde la propia ficha, y al final hay piezas similares sugeridas para seguir explorando sin volver a la grilla.</p>
+
+<div class="callout"><b>Lo que la ficha no muestra, deliberadamente:</b> precios, referencias y códigos de fabricante. Esa información existe en el sistema, pero es exclusiva del panel del dueño.</div>
+
+<figure class="shot">
+  <img src="images/ficha-producto.png" alt="Ficha completa de producto">
+  <figcaption><b>La ficha completa:</b> galería, especificaciones, descripción, cuidados y sugerencias. Sin precios ni códigos.</figcaption>
+</figure>
+
+<h3 class="sub">4. Marcar piezas: los corazones</h3>
+
+<p class="body-text">El corazón está <b>siempre visible</b> en la esquina de cada tarjeta y en cada ficha — no aparece solo al pasar el mouse, porque en celulares y tablets no hay mouse. Tocarlo agrega la pieza a "Mi lista" con cantidad 1; el contador del botón "Mi lista" se actualiza al instante y el corazón queda relleno. Tocarlo de nuevo la quita.</p>
+
+<h3 class="sub">5. Mi lista: el panel del cliente</h3>
+
+<figure class="shot">
+  <img src="images/mi-lista-cliente.png" alt="Mi lista del cliente">
+  <figcaption><b>"Mi lista"</b> del cliente: su lista de interés arriba, "Los recomendados para ti" y las sugerencias automáticas debajo.</figcaption>
+</figure>
+
+<p class="body-text">"Mi lista" tiene tres secciones. Arriba, <b>la lista de interés</b>: las piezas guardadas con cantidad ajustable, disponibilidad y botón para quitar. En el medio, <b>"Los recomendados para ti"</b>: la selección que el asesor preparó para ese cliente; tocar el corazón de una recomendada la suma a la lista al instante, sin recargar. Abajo, <b>"También te puede gustar"</b>: cinco sugerencias automáticas calculadas a partir de los gustos del cliente (colecciones, colores y tipos de las piezas que marcó); mientras no haya marcado ninguna, las sugerencias se apoyan en lo que el asesor le preparó.</p>
+
+<h3 class="sub">6. Descargar el PDF de la lista</h3>
+
+<p class="body-text">El botón <b>"Descargar"</b> genera en el navegador un PDF A4 prolijo: encabezado BasKula con filete mostaza; nombre del cliente, código y fecha; las piezas numeradas con nombre, especificaciones (diámetro, piezas del set, colección), cantidad y disponibilidad; pie con el total de piezas y el aviso "precios por canal comercial"; y paginación si la lista es larga. El archivo se llama <span class="mono">mi-lista-baskula-CODIGO-FECHA.pdf</span>. Sin precios y sin códigos de artículo: listo para que el cliente lo use internamente o lo reenvíe a quien necesite. El botón verde de WhatsApp, por su parte, abre la conversación con el asesor con un mensaje ya redactado que incluye la lista completa con cantidades.</p>
+
+<h3 class="sub">7. Notas al asesor</h3>
+
+<p class="body-text">Al final de "Mi lista" hay una tarjeta: <b>"¿Querés decirle algo a tu asesor?"</b>. Es texto libre (hasta 2.000 caracteres) para consultar disponibilidad, pedir cotización o comentar plazos y contexto del negocio. Al enviar, la nota queda registrada con fecha y aparece en el historial "Tus notas enviadas". El dueño la lee en su panel y la atiende.</p>
+
+<h3 class="sub">8. Qué no puede ver el cliente</h3>
+
+<ul class="dash">
+  <li>Precios, códigos de artículo y referencias del fabricante (en ningún lado: ficha, lista, PDF ni WhatsApp).</li>
+  <li>Piezas ocultas por el dueño — si se oculta una pieza guardada, desaparece de su lista sin perderse; al publicarse de nuevo, reaparece.</li>
+  <li>El catálogo completo de 1.510 piezas: solo lo publicado (60 en la entrega).</li>
+  <li>Datos internos de su cuenta: notas privadas del asesor y contadores de actividad.</li>
+</ul>
+
+<!-- ================= CAPÍTULO 4 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 4</div>
+  <h2 class="section-title">Guía del dueño: el panel de administración</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">La cabina de mando: qué se publica, qué se prepara para cada cliente y qué está pasando.</div>
+</div>
+
+<figure class="shot">
+  <img src="images/panel-admin.png" alt="Panel de administración">
+  <figcaption><b>El panel del dueño:</b> tarjeta del catálogo con contador en vivo y pestañas Clientes, Notas, Actividad y Configuración.</figcaption>
+</figure>
+
+<h3 class="sub">1. Entrar al panel</h3>
+
+<p class="body-text">Hay dos caminos. Desde el catálogo: botón "Inicia sesión" → escribir la clave del panel (<span class="mono">BASKULA2272</span> de entrega, no distingue mayúsculas) → el sistema detecta que es la clave del dueño y abre directamente el panel. O directo a la dirección <span class="mono">/admin</span> del sitio, con el candado de acceso. La sesión sobrevive a la navegación: mientras el dueño tenga sesión activa, el catálogo muestra el botón <b>"Mi panel"</b> en el encabezado para alternar entre panel y catálogo sin volver a ingresar la clave. Para cerrar, botón "Salir" del panel.</p>
+
+<h3 class="sub">2. La pestaña Clientes</h3>
+
+<p class="body-text">La lista de clientes con sus métricas de un vistazo: visitas, favoritos, piezas preparadas, notas pendientes (chip "N notas") y estado activo. Las operaciones disponibles son:</p>
+
+<ul class="dash">
+  <li><b>Crear:</b> nombre (obligatorio), código de acceso (si se deja vacío se genera del nombre), contacto, teléfono y notas internas. El código se normaliza solo: escribir "caf 22" crea el código <span class="mono">CAF22</span>.</li>
+  <li><b>Armar "Preparado para ti":</b> buscador de piezas con filtros por categoría y tono, y el interruptor "Solo disponibles". Al añadir una pieza no disponible, un aviso claro ofrece "Agregarlo al cliente de todas formas" o cancelar. Se quita con el tacho y confirmación.</li>
+  <li><b>Ver favoritos del cliente</b> con chips "No pública" si alguna pieza dejó de estar publicada.</li>
+  <li><b>Editar todo, incluido el código</b> (con validación de unicidad y aviso de que la clave anterior deja de funcionar), <b>activar/desactivar</b> y <b>eliminar</b> (borra en cascada favoritos, notas y registros).</li>
+</ul>
+
+<h3 class="sub">3. El catálogo completo y la publicación</h3>
+
+<p class="body-text">El botón "Ver catálogo completo (1.510)" abre la vista de gestión del catálogo total, en dos modos: grilla de tarjetas (24 por página) o tabla compacta (48 por página). Arriba hay pestañas Todas / Públicas / Ocultas, buscador por nombre, chips de categoría, tono y disponibilidad, filtro por colección y cuatro órdenes. Cada pieza muestra su referencia de artículo, dato que solo existe en el panel, nunca del lado del cliente.</p>
+
+<p class="body-text">Publicar u ocultar se hace de tres maneras: <b>por selección</b> (casillas individuales o "seleccionar página" → barra flotante inferior → Publicar u Ocultar), <b>por pieza</b> (el icono del ojo alterna el estado), o <b>desde la ficha</b> de una pieza oculta, que el dueño siempre puede abrir y que muestra el rótulo "Oculta" y el botón "Publicar ahora". El contador del panel se actualiza al instante y la página pública refleja el cambio en la próxima recarga, sin esperas ni reconstrucciones.</p>
+
+<figure class="shot">
+  <img src="images/catalogo-admin.png" alt="Catálogo completo en el panel">
+  <figcaption><b>El catálogo completo:</b> grilla o tabla sobre las 1.510 piezas, con selección múltiple y barra flotante de publicación.</figcaption>
+</figure>
+
+<h3 class="sub">4. La pestaña Notas</h3>
+
+<p class="body-text">Todas las notas de todos los clientes en una sola lista, las más recientes primero, con nombre, código, fecha y mensaje completo. El botón <b>"Ya la atendí"</b> elimina la nota una vez leída y respondida. Es la bandeja de entrada de la relación con los clientes; también pueden atenderse desde el detalle de cada cliente, y el chip "N notas" en la lista de clientes indica cuántas hay pendientes.</p>
+
+<h3 class="sub">5. La pestaña Actividad</h3>
+
+<figure class="shot">
+  <img src="images/actividad-admin.png" alt="Pestaña Actividad">
+  <figcaption><b>Actividad:</b> resumen por cliente, línea de tiempo de eventos recientes y listas compartidas para cotizar.</figcaption>
+</figure>
+
+<p class="body-text">La vista del conocimiento comercial. Arranca con cuatro tarjetas de resumen: clientes, ingresos totales, corazones guardados y descargas de PDF. Debajo, la tabla <b>"Actividad de cada cliente"</b> — ingresos, piezas guardadas (+) y quitadas (−), notas, descargas, favoritos actuales y última actividad — donde tocar una fila filtra todo lo demás a ese cliente. Luego, la línea de tiempo <b>"Actividad reciente"</b> con los últimos 150 eventos, con icono y descripción por tipo: ingresó con su código, guardó pieza (con nombre), quitó pieza, envió nota (extracto) o descargó su lista en PDF (con cantidad de referencias). Arriba hay un selector para filtrar por cliente.</p>
+
+<p class="body-text">Al final permanecen las <b>listas compartidas</b>: cada vez que un cliente comparte su lista por WhatsApp, el panel conserva una copia con las piezas y cantidades de ese momento — la referencia exacta para cotizar lo que el cliente tenía en mente.</p>
+
+<h3 class="sub">6. La pestaña Configuración</h3>
+
+<ul class="dash">
+  <li><b>WhatsApp de contacto:</b> el número al que salen los mensajes de los clientes (y un mensaje predeterminado opcional).</li>
+  <li><b>Cambiar la clave del panel:</b> alfanumérica de 4 a 16 caracteres. Recomendación: cambiarla apenas recibir el paquete si la computadora se comparte.</li>
+</ul>
+
+<!-- ================= CAPÍTULO 5 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 5</div>
+  <h2 class="section-title">Cómo funciona por dentro</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Arquitectura técnica completa, para instalar, mantener o extender la herramienta.</div>
+</div>
+
+<h3 class="sub">El stack</h3>
+
+<table class="tbl">
+  <thead><tr><th style="width:26%">Capa</th><th style="width:38%">Tecnología</th><th>Notas</th></tr></thead>
+  <tbody>
+    <tr><td><b>Framework</b></td><td>Next.js 16 (App Router) + React 19</td><td>Páginas y API en un solo proyecto</td></tr>
+    <tr><td><b>Lenguaje</b></td><td>TypeScript estricto</td><td>0 errores de compilación en la entrega</td></tr>
+    <tr><td><b>Interfaz</b></td><td>Tailwind CSS 4 + shadcn/ui (Radix)</td><td>Dialog, AlertDialog, Tabs, Select… accesibles</td></tr>
+    <tr><td><b>Datos</b></td><td>Prisma 6 + SQLite</td><td>Base única <span class="mono">db/custom.db</span> (~22 MB), sin motor externo</td></tr>
+    <tr><td><b>PDF</b></td><td>jspdf 4.2 (import dinámico)</td><td>El PDF de la lista se genera en el navegador</td></tr>
+    <tr><td><b>Fuentes</b></td><td>Lora, Lexend Deca, Cormorant Garamond</td><td>Identidad BasKula vía next/font</td></tr>
+  </tbody>
+</table>
+
+<p class="body-text">La home renderiza en el servidor un shell mínimo y el índice del catálogo se carga por API desde el navegador (arquitectura SPA deliberada): así la búsqueda y los filtros corren en memoria sobre los datos ya descargados, con respuesta instantánea y sin recargas.</p>
+
+<h3 class="sub">El modelo de datos</h3>
+
+<table class="tbl">
+  <thead><tr><th style="width:22%">Modelo</th><th style="width:30%">Qué representa</th><th>Puntos clave</th></tr></thead>
+  <tbody>
+    <tr><td><b>Product</b></td><td>Una pieza (1.510)</td><td>~35 campos: identidad, clasificación (colección, línea, material, tipo, color, tono), medidas, <span class="mono">available</span>, <span class="mono">published</span>, empaques, textos ES, imágenes JSON</td></tr>
+    <tr><td><b>Client</b></td><td>Un cliente</td><td><span class="mono">code</span> único normalizado, contacto, notas internas, <span class="mono">active</span>, visitas</td></tr>
+    <tr><td><b>Favorite</b></td><td>Un corazón</td><td>Par único cliente+pieza, con cantidad</td></tr>
+    <tr><td><b>ClientNote</b></td><td>Nota al asesor</td><td>Texto libre ≤ 2.000 caracteres, con fecha</td></tr>
+    <tr><td><b>SharedList</b> + ListItem</td><td>Lista compartida</td><td>Copia del momento de compartir, para cotizar</td></tr>
+    <tr><td><b>Visit</b></td><td>Evento de actividad</td><td><span class="mono">login · fav_add · fav_remove · note · download</span> + detalle</td></tr>
+    <tr><td><b>CuratedItem</b></td><td>"Preparado para ti"</td><td>Por cliente, con orden y nota opcional</td></tr>
+    <tr><td><b>Setting</b></td><td>Configuración</td><td><span class="mono">adminPin · whatsapp · whatsappMessage</span></td></tr>
+  </tbody>
+</table>
+
+<p class="body-text">Las relaciones usan borrado en cascada: eliminar un cliente quita sus favoritos, notas, selecciones y eventos. El esquema completo vive en <span class="mono">prisma/schema.prisma</span>, comentado en español campo por campo.</p>
+
+<h3 class="sub">Las rutas API</h3>
+
+<p class="body-text">Diecisiete endpoints organizan toda la lógica de servidor. Las rutas de administración validan la clave del panel en cada pedido (cabecera <span class="mono">x-admin-pin</span> o cookie de sesión) y responden 401 sin ella.</p>
+
+<table class="tbl">
+  <thead><tr><th style="width:42%">Ruta</th><th>Función</th></tr></thead>
+  <tbody>
+    <tr><td class="route">GET /api/catalog</td><td>Índice compacto de piezas <b>públicas</b> (sin caché de navegador: publicar se ve al recargar)</td></tr>
+    <tr><td class="route">GET /api/products/[slug]</td><td>Ficha completa + 8 sugerencias; pieza oculta → 404 (salvo admin)</td></tr>
+    <tr><td class="route">GET /c/[code]</td><td>Enlace legacy: cookie + redirect con bienvenida</td></tr>
+    <tr><td class="route">POST /api/shared-lists</td><td>Crea la lista compartible de los favoritos públicos</td></tr>
+    <tr><td class="route">GET /api/client/[code]</td><td>Valida el código y registra el ingreso (evento login)</td></tr>
+    <tr><td class="route">GET /api/client/home</td><td>Personalización: curados, 5 sugerencias, preview de favoritos</td></tr>
+    <tr><td class="route">GET·POST·DELETE /api/client/favorites</td><td>Listar, guardar (rechaza ocultas) y quitar; eventos de actividad</td></tr>
+    <tr><td class="route">GET·POST /api/client/notes</td><td>Historial y envío de notas al asesor</td></tr>
+    <tr><td class="route">POST /api/client/logout</td><td>Limpia la cookie de cliente</td></tr>
+    <tr><td class="route">POST /api/client/activity</td><td>Registra la descarga del PDF; el detalle lo arma el servidor</td></tr>
+    <tr><td class="route">POST·DELETE /api/admin/auth</td><td>Validar la clave + cookie de 7 días / cerrar sesión</td></tr>
+    <tr><td class="route">GET /api/admin/catalog</td><td>Índice completo de 1.510 con estado de publicación</td></tr>
+    <tr><td class="route">GET·POST·PATCH·DELETE /api/admin/clients</td><td>Gestión completa de clientes (crea, edita, desactiva, elimina)</td></tr>
+    <tr><td class="route">GET·POST·DELETE /api/admin/curated</td><td>Selección "Preparado para ti" de cada cliente</td></tr>
+    <tr><td class="route">DELETE /api/admin/notes</td><td>Elimina una nota atendida</td></tr>
+    <tr><td class="route">GET·POST /api/admin/publish</td><td>Publica/oculta por lote (≤ 2.000) e invalida la caché</td></tr>
+    <tr><td class="route">GET·POST /api/admin/settings</td><td>Lee y actualiza WhatsApp y la clave del panel</td></tr>
+    <tr><td class="route">GET /api/admin/activity</td><td>Actividad completa: eventos, resumen por cliente, listas compartidas</td></tr>
+  </tbody>
+</table>
+
+<h3 class="sub">Identificación robusta</h3>
+
+<p class="body-text">La herramienta está pensada para verse en contextos hostiles a las cookies (ventanas embebidas, vistas previas), así que cada identidad tiene doble vía. El cliente guarda su código en el almacenamiento local del navegador y este viaja como cabecera interna en cada petición; la cookie funciona como respaldo. El dueño hace lo mismo con la clave del panel. El servidor acepta cualquiera de las dos vías, y los códigos se normalizan igual en formulario y servidor ("caf 22", "Café 22" y <span class="mono">CAF22</span> son el mismo código).</p>
+
+<p class="body-text">Los eventos de actividad se blindan contra falsificación: el detalle de cada evento lo construye el servidor consultando la base (por ejemplo, la descarga del PDF cuenta los favoritos reales). Y el diseño es tolerante a fallos: si el registro de una visita o el cálculo de sugerencias falla, el login del cliente no se rompe — las métricas son best-effort por diseño.</p>
+
+<h3 class="sub">Rendimiento</h3>
+
+<ul class="dash">
+  <li><b>Caché de servidor de 5 minutos</b> para el índice público y el completo; se invalida al publicar u ocultar, así el cambio es inmediato.</li>
+  <li><b>Ficha de producto rápida:</b> caché en el navegador + precarga al pasar el mouse + esqueleto estructural. Primera apertura ~0,8 s; siguientes ~0,17 s.</li>
+  <li><b>Búsqueda y filtros en memoria:</b> cero llamadas extra al servidor por cada tecleo.</li>
+</ul>
+
+<h3 class="sub">El motor de sugerencias</h3>
+
+<p class="body-text">Dos motores complementarios. <b>"También te puede gustar"</b> parte de todos los corazones del cliente (hasta 60; si no hay, de su selección curada) y puntúa el catálogo público: misma colección +3, mismo grupo de color +2, mismo tipo +2, diámetro a ±2 cm +1; descarta lo ya guardado y lo que puntúa menos de 3; muestra 5. <b>"Piezas similares"</b> en la ficha puntúa igual más línea y grupo, con tope de 2 por combinación de colección y color para dar variedad, y muestra 8.</p>
+
+<h3 class="sub">Responsive</h3>
+
+<figure class="shot tall">
+  <img src="images/vista-movil.png" alt="Vista móvil del catálogo">
+  <figcaption><b>En el celular (390 px):</b> grillas adaptativas, ficha a pantalla completa y corazones siempre visibles y táctiles.</figcaption>
+</figure>
+
+<p class="body-text">La interfaz fue verificada en escritorio (1280×900) y móvil (390×844): filtros en panel deslizante, ficha al 97% del ancho, corazones y tachos siempre visibles con área táctil generosa, y etiquetas de accesibilidad en los controles de icono. El panel de administración también es operativo desde el celular.</p>
+
+<!-- ================= CAPÍTULO 6 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 6</div>
+  <h2 class="section-title">Los datos incluidos y el estado actual</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Qué hay dentro de la base de datos que acompaña al paquete.</div>
+</div>
+
+<h3 class="sub">Origen del catálogo</h3>
+
+<p class="body-text">Las 1.510 piezas provienen de la estructura de catálogo del proveedor de cerámica (plataforma VTEX, seis departamentos). Durante el desarrollo se ejecutó un pipeline propio: descarga estructurada vía API con imágenes redimensionadas y especificaciones extraídas de las tablas técnicas; traducción al español de nombres, 822 descripciones únicas y cuidados (resultado: 1.508 piezas con descripción y 1.507 con cuidados); taxonomía de 19 tonos de color con inferencia para piezas sin especificar; y rebranding completo de 2.528 textos a la voz BasKula. El dataset consolidado se incluye en el paquete (<span class="mono">sitio/scripts/dataset_final.json</span>) para poder re-sembrar la base cuando se quiera.</p>
+
+<h3 class="sub">Cifras de entrega</h3>
+
+<table class="tbl">
+  <thead><tr><th style="width:55%">Dato</th><th>Valor</th></tr></thead>
+  <tbody>
+    <tr><td>Piezas totales en la base</td><td class="num"><b>1.510</b> (todas con imágenes)</td></tr>
+    <tr><td>Piezas disponibles</td><td class="num">717 (793 "consultar disponibilidad")</td></tr>
+    <tr><td>Piezas publicadas en la web pública</td><td class="num"><b>60</b> — platos 27 · complementos 13 · té/café 10 · bowls 7 · vajillas 3</td></tr>
+    <tr><td>Colecciones / tonos de color</td><td class="num">16 / 19</td></tr>
+    <tr><td>Clientes</td><td class="num">1 — <b>DEMO</b> (Restaurante La Demo), 20 ingresos</td></tr>
+    <tr><td>Selección curada / listas compartidas</td><td class="num">1 / 1 (demostración)</td></tr>
+    <tr><td>Favoritos / notas</td><td class="num">0 / 0 (base limpia)</td></tr>
+    <tr><td>Clave del panel / WhatsApp</td><td class="num"><span class="mono">BASKULA2272</span> / +598 93 658 477</td></tr>
+  </tbody>
+</table>
+
+<p class="body-text">Las 60 piezas publicadas fueron elegidas con criterio curado: todas disponibles y con imagen, repartidas proporcionalmente entre los grupos y alternando colecciones dentro de cada uno, mediante el script <span class="mono">scripts/publish_batch.mjs</span>, que queda disponible para repetir la operatoria con otros lotes.</p>
+
+<h3 class="sub">La base de datos del paquete</h3>
+
+<p class="body-text">La entrega incluye <span class="mono">sitio/db/custom.db</span> (SQLite, ~22 MB) con el estado exacto descrito. Es un solo archivo: <b>copiarlo es un backup completo</b> — clientes, corazones, notas, actividad y configuración. No requiere motor externo, usuarios ni contraseñas de base: funciona con el archivo tal cual está. Para re-sembrar el catálogo desde el dataset: crear el esquema (<span class="mono">npx prisma db push</span>) y correr <span class="mono">scripts/seed.ts</span>; el seed es re-ejecutable (actualiza, no duplica).</p>
+
+<!-- ================= CAPÍTULO 7 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 7</div>
+  <h2 class="section-title">Instalación y puesta en marcha</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">De la carpeta comprimida al sitio funcionando, en minutos.</div>
+</div>
+
+<h3 class="sub">Requisitos</h3>
+
+<p class="body-text"><b>Node.js 20 o superior</b> (probado con Node 24) y unos 2 GB libres de disco para las dependencias. Internet solo hace falta para la primera instalación y para las fuentes tipográficas de Google, que el navegador cachea; el catálogo en sí funciona en la red local una vez instalado. Las fotografías de las piezas se sirven desde el CDN del proveedor, así que se benefician de conexión, igual que en el sitio en producción.</p>
+
+<h3 class="sub">Puesta en marcha local</h3>
+
+<ol class="steps">
+  <li>Abrir una terminal en la carpeta <span class="mono">sitio/</span> del paquete.</li>
+  <li><span class="mono">npm install</span> — descarga las dependencias (2 a 4 minutos la primera vez; regenera node_modules a partir del package-lock incluido).</li>
+  <li><span class="mono">npx prisma generate</span> — genera el cliente de base de datos (normalmente ya corre solo durante el install).</li>
+  <li><span class="mono">npm run dev</span> — abre el sitio en desarrollo, en <span class="mono">http://localhost:3000</span>.</li>
+</ol>
+
+<p class="body-text">Para modo producción local: <span class="mono">npm run build</span> y luego <span class="mono">npm start</span> (el comando sirve el build autónomo; usa bun en el paquete original — puede cambiarse la línea <span class="mono">"start"</span> del package.json a <span class="mono">node .next/standalone/server.js</span> para Node puro, o desplegarse en cualquier hosting Node). En desarrollo no hay que tocar nada.</p>
+
+<div class="callout"><b>Verificación inmediata:</b> la home muestra "60 piezas"; con "Inicia sesión", el código <span class="mono">DEMO</span> entra como cliente y la clave <span class="mono">BASKULA2272</span> abre el panel del dueño.</div>
+
+<h3 class="sub">La base de datos y el .env</h3>
+
+<p class="body-text">El archivo <span class="mono">.env</span> ya viene portátil: <span class="mono">DATABASE_URL="file:../db/custom.db"</span>, ruta relativa al esquema de Prisma, de modo que funciona en cualquier carpeta donde se descomprima el paquete. Para apuntar a otra base (por ejemplo una copia de prueba) se edita esa línea con la ruta que sea y se reinicia el servidor. El backup de todo el sistema es copiar <span class="mono">sitio/db/custom.db</span>.</p>
+
+<h3 class="sub">Scripts incluidos</h3>
+
+<table class="tbl">
+  <thead><tr><th style="width:34%">Script</th><th>Para qué sirve</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">scripts/seed.ts</td><td>Re-sembrar o actualizar el catálogo desde dataset_final.json (re-ejecutable)</td></tr>
+    <tr><td class="mono">scripts/publish_batch.mjs</td><td>Publicar un lote curado de ~60 piezas variadas, disponibles y con imagen</td></tr>
+    <tr><td class="mono">scripts/update_admin_pin.ts</td><td>Cambiar la clave del panel desde consola (o desde Configuración, lo recomendado)</td></tr>
+  </tbody>
+</table>
+
+<h3 class="sub">Personalización habitual</h3>
+
+<ul class="dash">
+  <li><b>Textos de la interfaz:</b> viven en los componentes de <span class="mono">src/components/</span>; editar y guardar, el servidor de desarrollo refleja el cambio al instante.</li>
+  <li><b>Marca y colores:</b> <span class="mono">src/app/globals.css</span> (variables de color) y los logos de <span class="mono">public/</span>.</li>
+  <li><b>WhatsApp y clave del panel:</b> pestaña Configuración del panel (se guardan en la base, no en el código).</li>
+  <li><b>Título y descripción del sitio:</b> <span class="mono">src/app/layout.tsx</span>.</li>
+</ul>
+
+<h3 class="sub">Ponerlo en internet</h3>
+
+<p class="body-text">La herramienta es una aplicación Node estándar con una base de archivo, así que el despliegue más simple es un VPS o hosting Node: subir la carpeta <span class="mono">sitio/</span> completa (incluida la base), instalar, compilar y servir el build detrás de un proxy con HTTPS (se incluye un Caddyfile de ejemplo; Caddy gestiona el certificado solo). El panel ya viene configurado para no aparecer en buscadores. Para dormir tranquilo, un copiado nocturno de la base con una tarea programada alcanza como estrategia de backup. Para este volumen de datos, SQLite es más que suficiente y evita el costo y la complejidad de bases externas; si el proyecto creciera mucho, el mismo esquema Prisma migra a PostgreSQL cambiando el proveedor y la URL de conexión.</p>
+
+<!-- ================= CAPÍTULO 8 ================= -->
+<div class="chapter-header">
+  <div class="kicker">Capítulo 8</div>
+  <h2 class="section-title">Preguntas frecuentes</h2>
+  <div class="divider"></div>
+  <div class="chapter-intro">Las diez dudas más probables, en una respuesta cada una.</div>
+</div>
+
+<div class="faq">
+  <div class="q">El cliente ve precios o códigos de artículo?</div>
+  <div class="a">No, en ningún lugar: ni en las fichas, ni en su lista, ni en el PDF que descarga, ni en el mensaje de WhatsApp. Los códigos solo existen en el panel del dueño.</div>
+
+  <div class="q">Qué pasa si oculto una pieza que clientes ya guardaron?</div>
+  <div class="a">Desaparece de todo el lado del cliente (catálogo, recomendados y su lista) sin borrar nada: al publicarse de nuevo, reaparece con sus corazones intactos.</div>
+
+  <div class="q">Cómo cambio la clave del panel?</div>
+  <div class="a">Desde el panel: pestaña Configuración → "Cambiar código de acceso del panel" (alfanumérica, 4 a 16 caracteres). También existe el script de consola update_admin_pin.ts.</div>
+
+  <div class="q">Por qué el dueño no tiene que reingresar la clave al navegar?</div>
+  <div class="a">La sesión del panel se guarda en el propio navegador y viaja en cada petición; el botón "Mi panel" del catálogo devuelve al panel en un clic.</div>
+
+  <div class="q">Cómo agrego productos nuevos al catálogo?</div>
+  <div class="a">Actualizando la base: con el seed (dataset_final.json) para cargar lotes completos, o insertando filas en la tabla Product con su imagen y textos. Luego se publican desde el panel.</div>
+
+  <div class="q">Funciona bien en el celular?</div>
+  <div class="a">Sí: toda la interfaz (catálogo, fichas, Mi lista y panel) fue verificada en pantallas de 390 px, con controles táctiles siempre visibles.</div>
+
+  <div class="q">La descarga del PDF queda registrada?</div>
+  <div class="a">Sí: aparece en la pestaña Actividad como "Descargó su lista de interés en PDF (N referencias)", con fecha y hora.</div>
+
+  <div class="q">Pueden estar varios clientes usando el sitio a la vez?</div>
+  <div class="a">Sí, sin límite práctico: cada uno con su código, su lista y sus recomendaciones, todos sobre la misma base.</div>
+
+  <div class="q">Cómo hago un backup de todo?</div>
+  <div class="a">Copiando el archivo sitio/db/custom.db. Contiene catálogo, clientes, corazones, notas, actividad y configuración.</div>
+
+  <div class="q">Puedo cambiar los textos y colores del sitio?</div>
+  <div class="a">Sí: los textos están en los componentes (src/components), los colores y la marca en globals.css y public/. El servidor de desarrollo muestra cada cambio al guardar.</div>
+</div>
+
+<h3 class="sub">Chequeo rápido de 2 minutos</h3>
+
+<p class="body-text">Después de instalar, esta secuencia cubre el sistema entero y confirma que todo quedó funcionando. Si cada paso da lo esperado, la herramienta está operativa de punta a punta.</p>
+
+<ol class="steps">
+  <li>En la home anónima, buscar "platos llanos" y ver aparecer los resultados al instante.</li>
+  <li>"Inicia sesión" con <span class="mono">DEMO</span>: el chip del cliente queda visible y aparece "Preparado para ti".</li>
+  <li>Marcar un corazón en cualquier pieza, entrar a "Mi lista" y descargar el PDF.</li>
+  <li>Entrar con <span class="mono">BASKULA2272</span>: el panel muestra "60 de 1.510 piezas publicadas".</li>
+  <li>En la pestaña Actividad, ver los eventos recientes de los pasos anteriores: ingreso, pieza guardada y descarga.</li>
+</ol>
+
+<div class="callout"><b>Si algo no cierra</b> en esta secuencia: revisar que <span class="mono">npm install</span> y <span class="mono">npx prisma generate</span> terminaron sin errores, y que el archivo <span class="mono">.env</span> apunta a la base incluida (<span class="mono">db/custom.db</span>). Para cualquier otra duda, los capítulos 5 y 7 de este manual describen el comportamiento esperado de cada pieza del sistema.</div>
+
+</div><!-- /main-content -->
+
+<!-- ================= CONTRAPORTADA ================= -->
+<div class="ending">
+  <div class="panel">
+    <img src="images/logo-baskula-light.png" alt="BasKula">
+    <div class="filete"></div>
+    <div class="linea">Catálogo privado B2B para gastronomía</div>
+    <div class="linea">Punta Piedras · Uruguay</div>
+    <div class="linea2"><b>Contacto</b><br>+598 93 658 477 (WhatsApp)</div>
+    <div class="linea2"><b>Manual completo · Versión 1.0</b><br>Septiembre de 2026</div>
+  </div>
+</div>
+
+</body>
+</html>

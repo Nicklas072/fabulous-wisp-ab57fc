@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título y descripción -->
+    <title>BasKula — Cerámica por Kilo en Punta Piedras, Uruguay</title>
+    <meta name="description"
+        content="BasKula - Cerámica portuguesa vendida por kilo en Punta Piedras, Uruguay. Un espacio donde la cerámica, el diseño y la calidez conectan. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta name="author" content="BasKula">
+    <meta name="theme-color" content="#E2A727">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://baskula.netlify.app/">
+
+    <!-- Robots & Indexación -->
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BasKula">
+    <meta property="og:title" content="BasKula — Cerámica por Kilo">
+    <meta property="og:description"
+        content="Cerámica portuguesa por kilo en Punta Piedras, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta property="og:url" content="https://baskula.netlify.app/">
+    <meta property="og:image" content="https://baskula.netlify.app/hero.jpg">
+    <meta property="og:image:secure_url" content="https://baskula.netlify.app/hero.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt"
+        content="Vajilla de cerámica portuguesa artesanal de BasKula expuesta en la tienda de Punta Piedras, Uruguay">
+    <meta property="og:locale" content="es_UY">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BasKula — Cerámica por Kilo">
+    <meta name="twitter:description"
+        content="Cerámica portuguesa por kilo en Punta Piedras, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
+    <meta name="twitter:image" content="https://baskula.netlify.app/hero.jpg">
+
+    <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://wa.me">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.min.css">
+    <style>
+        .mobile-nav-divider,
+        .mobile-subnav {
+            display: none;
+        }
+
+        /* Color Crema Lino Artesanal (#f4eee2) para el header / nav */
+        .main-header {
+            background-color: rgba(244, 238, 226, 0.94) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-bottom: 1px solid rgba(194, 139, 23, 0.15) !important;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.scrolled .main-header {
+            background-color: rgba(244, 238, 226, 0.92) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 4px 20px rgba(34, 34, 34, 0.05);
+        }
+        @media (max-width: 768px) {
+            .header-actions {
+                display: none !important;
+            }
+            .header-actions-placeholder {
+                display: block;
+                width: 36px;
+                height: 36px;
+            }
+
+            /* Separador gráfico fino y moderno entre logo y botones */
+            .mobile-nav-divider {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 280px;
+                margin: 2px auto 6px;
+                padding: 0 16px;
+                gap: 10px;
+            }
+            .divider-line {
+                flex: 1;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(226, 167, 39, 0.45), transparent);
+            }
+            .divider-diamond {
+                font-size: 7px;
+                color: #c28b17;
+                opacity: 0.85;
+                line-height: 1;
+            }
+
+            /* Barra de navegación móvil: solo texto puro con efecto y barritas */
+            .mobile-subnav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0;
+                padding: 0 12px 10px;
+                width: 100%;
+            }
+
+            .mobile-subnav-link {
+                position: relative;
+                font-family: var(--font-body, system-ui, sans-serif);
+                font-size: 0.72rem;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 1.1px;
+                color: var(--color-charcoal, #222);
+                text-decoration: none;
+                background: none;
+                border: none;
+                padding: 4px 8px;
+                white-space: nowrap;
+                transition: color 0.25s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Subrayado fino animado al interactuar */
+            .mobile-subnav-link::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 1.5px;
+                background-color: #c28b17;
+                border-radius: 1px;
+                transition: width 0.25s ease, left 0.25s ease;
+            }
+
+            .mobile-subnav-link:hover::after,
+            .mobile-subnav-link:active::after {
+                width: calc(100% - 16px);
+                left: 8px;
+            }
+
+            .mobile-subnav-link:hover,
+            .mobile-subnav-link:active {
+                color: #c28b17;
+            }
+
+            /* Destacado sutil de 'Catálogo Restaurantes' */
+            .mobile-subnav-featured {
+                color: #c28b17;
+                font-weight: 600;
+            }
+
+            .mobile-subnav-featured::after {
+                width: calc(100% - 16px);
+                left: 8px;
+                background-color: #c28b17;
+            }
+
+            /* Barrita vertical tenue estilo nórdico */
+            .subnav-separator {
+                display: inline-block;
+                width: 1px;
+                height: 11px;
+                background-color: rgba(34, 34, 34, 0.18);
+                margin: 0 3px;
+                flex-shrink: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"
+        integrity="sha384-hJnF5AwidE18GSWTAGHv3ByzzvfNZ1Tcx5y1UUV3WkauuMCEzBJBMSwSt/PUPXnM" crossorigin="anonymous"
+        defer></script>
+
+    <!-- Datos Estructurados (JSON-LD) para SEO local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://baskula.netlify.app/#business",
+          "name": "BasKula",
+          "description": "Cerámica portuguesa vendida por kilo en Punta Piedras, Uruguay. Elegí. Pesá. Llevate lo que te enamora.",
+          "image": "https://baskula.netlify.app/hero.jpg",
+          "url": "https://baskula.netlify.app/",
+          "telephone": "+598 93 658 477",
+          "email": "info@baskula.com",
+          "priceRange": "$$",
+          "currenciesAccepted": "USD",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Punta Piedras",
+            "addressRegion": "Maldonado",
+            "addressCountry": "UY"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -34.9072,
+            "longitude": -54.9350
+          },
+          "sameAs": [
+            "https://www.instagram.com/baskula.uy/"
+          ],
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "10:00",
+            "closes": "20:00"
+          }
+        },
+        {
+          "@type": "Product",
+          "@id": "https://baskula.netlify.app/#ceramica-por-kilo",
+          "name": "Cerámica portuguesa por kilo",
+          "description": "Piezas de cerámica portuguesa artesanal vendidas por peso. Mezclá colores, texturas, platos y tazas para armar tu propia vajilla.",
+          "image": "https://baskula.netlify.app/images/plato-hojas-verdes.jpg",
+          "brand": { "@type": "Brand", "name": "BasKula" },
+          "offers": {
+            "@type": "Offer",
+            "url": "https://baskula.netlify.app/#simulador",
+            "priceCurrency": "USD",
+            "price": "16.50",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "16.50",
+              "priceCurrency": "USD",
+              "unitText": "por kilogramo",
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "KGM" }
+            },
+            "availability": "https://schema.org/PreOrder",
+            "seller": { "@id": "https://baskula.netlify.app/#business" }
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+
+    <!-- CSS Striped Awning Accent at Top of Window -->
+    <div class="awning-border"></div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Left: Menu Button (Mobile) -->
+            <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <!-- Navigation Menu (Desktop & Centered) -->
+            <nav class="nav-menu">
+                <a href="catalogo.html" class="nav-item">La Tienda</a>
+                <a href="#concepto" class="nav-item">Concepto</a>
+                
+                <a href="#" class="logo-area">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                </a>
+                
+                <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="nav-item text-xs font-medium text-[#E2A727] border border-[#E2A727]/60 px-3.5 py-1 rounded-full hover:bg-[#E2A727] hover:text-white transition-all">Catálogo B2B</a>
+                <a href="#contacto" class="nav-item">Contacto</a>
+            </nav>
+
+            <!-- Right: Spacer on Mobile to keep logo centered -->
+            <div class="header-actions-placeholder" aria-hidden="true"></div>
+        </div>
+
+        <!-- Separador gráfico fino: línea degradé con micro-rombo central -->
+        <div class="mobile-nav-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-diamond">◆</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Subnavegación móvil: solo texto puro con efecto y barritas tenues -->
+        <nav class="mobile-subnav" aria-label="Navegación principal móvil">
+            <a href="#concepto" class="mobile-subnav-link">Quiénes somos</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="mobile-subnav-link mobile-subnav-featured">Catálogo Restaurantes</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="mobile-subnav-link">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Sidebar Drawer Overlay and Container (Bone & White Style) -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="sidebar-drawer" id="sidebarDrawer">
+        <div class="drawer-awning"></div>
+        <div class="drawer-plant"></div>
+        <div class="drawer-header">
+            <a href="#" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo"
+                    style="height: 36px; max-height: 36px;"></a>
+            <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="drawer-body">
+            <nav class="drawer-nav">
+                <a href="#concepto" class="drawer-link" onclick="document.getElementById('drawerClose').click()">Quiénes somos</a>
+                <a href="/" onclick="if(location.protocol==='file:'){event.preventDefault();window.location.href='http://localhost:3000/';}" class="drawer-link font-medium text-[#E2A727]">Catálogo Restaurantes</a>
+                <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="drawer-link">Contacto</a>
+                <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
+                <a href="catalogo.html" class="drawer-link-secondary">La Tienda</a>
+                <a href="#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
+            </nav>
+            <div class="drawer-footer">
+                <div class="drawer-contact-info">
+                    <p><strong>Ubicación:</strong> Punta Piedras, Uruguay</p>
+                    <p><strong>Email:</strong> info@baskula.com</p>
+                </div>
+                <div class="drawer-socials">
+                    <a href="https://www.instagram.com/baskula_/" target="_blank" rel="noopener"
+                        class="drawer-social-icon" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/baskula" target="_blank" rel="noopener" class="drawer-social-icon"
+                        aria-label="Facebook">
+                        <i data-lucide="facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Slider Section (Costa Nova style) -->
+    <section class="hero-section hero-slider">
+        <div class="slider-wrapper">
+            <!-- Slide 1: Split Screen -->
+            <div class="slide active" data-layout="split">
+                <div class="slide-images">
+                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-left.jpg');"></div>
+                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-right.jpg');"></div>
+                </div>
+            </div>
+            <!-- Slide 2: Full Width Storefront -->
+            <div class="slide" data-layout="full">
+                <div class="slide-images">
+                    <div class="slide-image-full" style="background-image: url('images/hero-slide2.jpg');"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-bg-overlay"></div>
+
+        <div class="hero-container">
+            <div class="storefront-content">
+                <div class="card-corners"></div>
+                <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
+                <div class="hero-actions">
+                    <a href="catalogo.html" class="btn-cta">Bascula online <i data-lucide="scale"></i></a>
+                    <a href="#concepto" class="btn-secondary">Conocer Más</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Pagination Indicators (dashes like Costa Nova) -->
+        <div class="slider-pagination">
+            <span class="pagination-dash active" data-slide="0"></span>
+            <span class="pagination-dash" data-slide="1"></span>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#marquee" class="scroll-indicator" aria-label="Desplazarse hacia abajo">
+            <i data-lucide="chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Banner Marquee -->
+    <div class="marquee-container" id="marquee">
+        <div class="marquee-content">
+            <span>• Cerámica por Kilo •</span>
+            <span>• Creá tu espacio •</span>
+            <span>• Mesas con alma •</span>
+            <span>• Muebles con Personalidad •</span>
+            <span>• Espacio Inspirador •</span>
+            <span>• Cerámica por Kilo •</span>
+            <span>• Piezas Únicas •</span>
+            <span>• Diseñá tu mesa •</span>
+            <span>• Historias únicas •</span>
+            <span>• Más que vajillas •</span>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Atmosphere & Gallery Section -->
+    <section id="galeria" class="gallery-section-wrapper">
+        <div class="section-header text-center">
+            <span class="section-tag">Nuestra casa</span>
+            <h2>Somos calidez y encanto</h2>
+            <p class="section-subtitle">Cada rincón está diseñado desde el
+                amor, estilo y naturaleza viva.</p>
+        </div>
+
+        <!-- Asymmetrical Masonry Grid of Earthenware (Option C) -->
+        <div class="gallery-grid">
+            <!-- Image 1: Wide -->
+            <div class="gallery-card wide" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria1.jpg"
+                        alt="Taza blanca con corazones rojos en mesa con mantel a cuadros de BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+            </div>
+            <!-- Image 2: Wide -->
+            <div class="gallery-card wide" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria2.jpg" alt="Dos platos de cerámica artesanales pintados a mano de BasKula"
+                        loading="lazy" decoding="async" />
+                </div>
+            </div>
+            <!-- Image 3: Standard -->
+            <div class="gallery-card" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria3.jpg"
+                        alt="Bowl de cerámica blanca con limones sobre azulejos turquesas de BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+            </div>
+            <!-- Image 4: Standard -->
+            <div class="gallery-card" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria4.jpg"
+                        alt="Vajilla de cerámica en tonos pastel con rodajas de cítricos de BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+            </div>
+            <!-- Image 5: Standard -->
+            <div class="gallery-card" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria5.png" alt="Mesa con mantel a cuadros azul y vajilla artesanal a rayas de BasKula"
+                        loading="lazy" decoding="async" />
+                </div>
+            </div>
+            <!-- Image 6: Wide -->
+            <div class="gallery-card wide" data-aos="fade-up">
+                <div class="gallery-img-wrapper">
+                    <img src="images/galeria6.jpg" alt="Nueva vajilla artesanal y mediterránea de BasKula"
+                        loading="lazy" decoding="async" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Philosophy Banner Section -->
+    <section class="philosophy-banner-section" data-aos="fade-up">
+        <div class="philosophy-banner-container">
+            <img src="images/filosofia-banner.jpg"
+                alt="Filosofía BasKula: En Uruguay los encuentros van más allá de solo reunirse. Significa disfrutar el momento presente con quienes amamos."
+                class="philosophy-banner-img" loading="lazy" decoding="async">
+            <div class="philosophy-banner-content">
+                <p class="philosophy-quote">En Uruguay los encuentros<br>van más allá de solo reunirse.</p>
+                <span class="philosophy-divider" aria-hidden="true"></span>
+                <p class="philosophy-subquote">Significa disfrutar el momento presente<br>con quienes amamos.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Concept Section -->
+    <section id="concepto" class="section-container concept-section">
+        <div class="section-header text-center">
+            <span class="section-tag">Una experiencia diferente</span>
+            <h2>¿Cómo funciona BasKula?</h2>
+            <p class="section-subtitle">Podes conocernos en nuestra tienda o tambien en nuestro catálogo online.</p>
+            <p class="concept-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+        </div>
+
+        <div class="concept-grid">
+            <!-- Step 1 -->
+            <div class="concept-card" data-aos="fade-up">
+                <div class="card-corners"></div>
+                <div class="concept-icon-wrapper"
+                    style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
+                </div>
+                <h3>1. Elegí lo que te guste.</h3>
+                <p>Podes elegir juegos completos y tambien podés mezclar colores, texturas, platos y tazas creando tus
+                    propios juegos.
+                </p>
+                <p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="concept-card" data-aos="fade-up" data-delay="100">
+                <div class="card-corners"></div>
+                <div class="concept-icon-wrapper">
+                    <i data-lucide="scale" class="concept-icon"></i>
+                </div>
+                <h3>2. Pesá en la Báscula.</h3>
+                <p>Pesá lo que te guste en alguna de las basculas disponibles en la tienda</p>
+                <p>Pagá solo por el peso de lo que elijas.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="concept-card" data-aos="fade-up" data-delay="200">
+                <div class="card-corners"></div>
+                <div class="concept-icon-wrapper">
+                    <i data-lucide="heart" class="concept-icon"></i>
+                </div>
+                <h3>3. Llevá tus favoritos.</h3>
+                <p>Te llevás lo que te gusta para ponerlo donde quieras.</p>
+                <p>Arte de Portual a tu mesa.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Collection Banner: full-screen photo + centered title + CTA -->
+    <section id="coleccion" class="collection-banner">
+        <div class="collection-content">
+            <h2>Nuestra colección</h2>
+            <a href="Catalogo Baskula.pdf" target="_blank" rel="noopener" class="btn-cta">Ver colección</a>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- New Season / Trends Section -->
+    <section id="tendencias" class="section-container trends-section" data-aos="fade-up">
+        <div class="section-header text-center">
+            <span class="section-tag">¡Próxima temporada!</span>
+            <h2>Septiembre nos trae...</h2>
+        </div>
+
+        <div class="trends-grid">
+            <!-- Card 1 -->
+            <div class="trend-card">
+                <div class="trend-img-wrapper">
+                    <img src="images/trend1.jpg" alt="Flores - Tendencias próxima temporada BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+                <h3 class="trend-title">Flores</h3>
+            </div>
+            <!-- Card 2 -->
+            <div class="trend-card">
+                <div class="trend-img-wrapper">
+                    <img src="images/trend2.jpg" alt="Sol - Tendencias próxima temporada BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+                <h3 class="trend-title">Sol</h3>
+            </div>
+            <!-- Card 3 -->
+            <div class="trend-card">
+                <div class="trend-img-wrapper">
+                    <img src="images/trend3.jpg" alt="Amor - Tendencias próxima temporada BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+                <h3 class="trend-title">Amor</h3>
+            </div>
+            <!-- Card 4 -->
+            <div class="trend-card">
+                <div class="trend-img-wrapper">
+                    <img src="images/trend4.png" alt="Diseño - Tendencias próxima temporada BasKula" loading="lazy"
+                        decoding="async" />
+                </div>
+                <h3 class="trend-title">Diseño</h3>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- B2B Services Section -->
+    <section id="servicios" class="section-container b2b-section" data-aos="fade-up">
+        <div class="section-header text-center">
+            <span class="section-tag">Servicios Especiales</span>
+            <h2>Explorá nuestros diferentes servicios</h2>
+        </div>
+
+        <div class="b2b-grid">
+            <!-- Card 1: Gastronomy -->
+            <a href="Programa_Hoteles_y_Restaurantes.pdf" target="_blank" rel="noopener" class="b2b-card">
+                <div class="b2b-img-wrapper">
+                    <img src="images/b2b-restaurantes.webp" alt="Restaurantes & Hoteles (Horeca)">
+                </div>
+                <div class="b2b-content">
+                    <h3>Restaurantes & Hoteles</h3>
+                    <span class="b2b-link">Ver presentación <i data-lucide="external-link"
+                            style="display: inline-block; width: 14px; height: 14px; vertical-align: middle; margin-left: 4px;"></i></span>
+                </div>
+            </a>
+
+            <!-- Card 2: Chefs Privados -->
+            <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20me%20gustar%C3%ADa%20consultar%20por%20el%20servicio%20de%20Chefs%20Privados."
+                target="_blank" rel="noopener" class="b2b-card">
+                <div class="b2b-img-wrapper">
+                    <img src="images/b2b-chefs.jpg" alt="Chefs Privados" loading="lazy" decoding="async">
+                </div>
+                <div class="b2b-content">
+                    <h3>Chefs Privados</h3>
+                    <span class="b2b-link">Consultar servicio <i data-lucide="external-link"
+                            style="display: inline-block; width: 14px; height: 14px; vertical-align: middle; margin-left: 4px;"></i></span>
+                </div>
+            </a>
+
+            <!-- Card 3: Home Staging -->
+            <a href="Programa_Inmobiliarias_y_HomeStaging.pdf" target="_blank" rel="noopener" class="b2b-card">
+                <div class="b2b-img-wrapper">
+                    <img src="images/b2b-inmobiliarias.jpg" alt="Inmobiliarias & Home Staging">
+                </div>
+                <div class="b2b-content">
+                    <h3>Inmobiliarias</h3>
+                    <span class="b2b-link">Ver presentación <i data-lucide="external-link"
+                            style="display: inline-block; width: 14px; height: 14px; vertical-align: middle; margin-left: 4px;"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Franchise / Contact Postcard Section -->
+    <section id="contacto" class="section-container contact-section-wrapper">
+        <div class="postcard-container">
+            <!-- Left Column: Story & Info -->
+            <div class="postcard-info">
+                <div class="logo-area">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                </div>
+                <h3>¿Te enamoraste de la idea?</h3>
+                <p>
+                    Estamos dando forma a este proyecto y nos encantaría saber qué opinas, recibir tus sugerencias o
+                    conversar.
+                </p>
+                <div class="contact-details">
+                    <div class="detail-item">
+                        <i data-lucide="map-pin"></i>
+                        <span>Punta Piedras - Uruguay</span>
+                    </div>
+                    <div class="detail-item">
+                        <i data-lucide="mail"></i>
+                        <a href="mailto:info@baskula.com">info@baskula.com</a>
+                    </div>
+                    <div class="detail-item">
+                        <i data-lucide="instagram"></i>
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener">@baskula.uy</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: The Postcard Form -->
+            <div class="postcard-form-wrapper">
+                <form class="postcard-form" id="contact-form" name="contacto" method="POST" data-netlify="true"
+                    netlify-honeypot="bot-field">
+                    <div class="form-stamp">
+                        <div class="stamp-zig-zag"></div>
+                        <i data-lucide="heart" class="stamp-icon"></i>
+                    </div>
+                    <input type="hidden" name="form-name" value="contacto">
+                    <p class="hidden-honeypot">
+                        <label>No llenar este campo: <input name="bot-field"></label>
+                    </p>
+                    <div class="form-row">
+                        <label for="name">Hola! Mi nombre es</label>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre..." required
+                            autocomplete="name">
+                    </div>
+                    <div class="form-row">
+                        <label for="email">Correo</label>
+                        <input type="email" id="email" name="email" placeholder="Tu correo..." required
+                            autocomplete="email">
+                    </div>
+                    <div class="form-row message-row">
+                        <label for="message">Dejanos tu mensaje</label>
+                        <textarea id="message" name="message"
+                            placeholder="Me encantó el simulador / Quisiera saber sobre la tienda..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn-cta btn-postcard">Enviar Mensaje <i
+                            data-lucide="send"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo">
+                </div>
+                <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#contacto">Contacto</a>
+            </div>
+            <div class="footer-copy">
+                &copy; BasKula. Todos los derechos reservados. Diseñado con ❤️ para conectar.
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- JS Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="app.min.js" defer></script>
+
+
+</body>
+
+</html>
