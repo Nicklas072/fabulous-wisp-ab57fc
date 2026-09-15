@@ -465,7 +465,7 @@ export default function CatalogApp({
             </button>
           )}
           <a
-            href="/index.html"
+            href="https://baskula.netlify.app"
             className="flex items-center gap-2 group shrink-0"
             title="Volver a la web principal de BasKula"
           >
@@ -891,7 +891,7 @@ export default function CatalogApp({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-center text-center md:text-left">
             {/* Columna 1: Brand, Logo y Slogan */}
             <div className="flex flex-col items-center md:items-start gap-1.5">
-              <a href="/index.html" className="inline-block hover:opacity-85 transition-opacity">
+              <a href="https://baskula.netlify.app" className="inline-block hover:opacity-85 transition-opacity">
                 <img
                   src="/images/logo-white.png"
                   alt="BasKula Logo"
@@ -905,15 +905,15 @@ export default function CatalogApp({
 
             {/* Columna 2: Links minimalistas limpios */}
             <div className="flex flex-wrap justify-center items-center gap-5 sm:gap-6 text-[11px] uppercase tracking-[1.5px] font-medium text-[#faf8f5]/65">
-              <a href="/index.html" className="hover:text-[#e2a727] transition-colors">Inicio</a>
+              <a href="https://baskula.netlify.app" className="hover:text-[#e2a727] transition-colors">Inicio</a>
               <button
                 onClick={() => goClean({ view: "catalogo" })}
                 className="hover:text-[#e2a727] transition-colors cursor-pointer uppercase tracking-[1.5px]"
               >
                 Catálogo B2B
               </button>
-              <a href="/index.html#servicios" className="hover:text-[#e2a727] transition-colors">Servicios</a>
-              <a href="/index.html#contacto" className="hover:text-[#e2a727] transition-colors">Contacto</a>
+              <a href="https://baskula.netlify.app/#servicios" className="hover:text-[#e2a727] transition-colors">Servicios</a>
+              <a href="https://baskula.netlify.app/#contacto" className="hover:text-[#e2a727] transition-colors">Contacto</a>
             </div>
 
             {/* Columna 3: Copyright prolijo */}
