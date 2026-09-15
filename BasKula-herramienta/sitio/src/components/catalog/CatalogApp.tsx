@@ -341,8 +341,9 @@ export default function CatalogApp({
     setFavPreview([]);
     setFavorites(new Set());
     setFavoritesCount(0);
+    goClean({ view: "home" });
     toast({ title: "Sesión cerrada", description: "Volverás al catálogo general." });
-  }, [toast]);
+  }, [goClean, toast]);
 
   // Sincronizar el corazón cuando el cliente quita una pieza desde su
   // «Mi lista» (la vista usa su propio flujo de borrado)
@@ -464,19 +465,33 @@ export default function CatalogApp({
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
-          <a
-            href="https://baskula.netlify.app"
-            className="flex items-center gap-2 group shrink-0"
-            title="Volver a la web principal de BasKula"
+          <button
+            onClick={() => goClean({ view: "home" })}
+            className="flex items-center gap-2 group shrink-0 cursor-pointer border-0 bg-transparent p-0"
+            title="Volver a la portada del catálogo"
           >
             <img
               src="/logo-baskula.png"
               alt="BasKula"
               className="h-8 sm:h-10 w-auto object-contain group-hover:opacity-80 transition-opacity"
             />
-          </a>
+          </button>
 
           <div className="flex-1 min-w-0" />
+
+          {whatsapp && (
+            <a
+              href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hola BasKula, quiero hacer una consulta sobre el catálogo.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 px-2.5 sm:px-3.5 h-8.5 sm:h-10 rounded-full bg-[#25D366] text-white hover:bg-[#20ba59] transition-all shadow-xs shrink-0 cursor-pointer text-xs sm:text-sm font-medium"
+              title="Hablar con un asesor por WhatsApp"
+            >
+              <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 fill-current" />
+              <span className="hidden md:inline">Hablar con un asesor</span>
+              <span className="hidden sm:inline md:hidden">Asesor</span>
+            </a>
+          )}
 
           {clientInfo && (
             <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f6e9c8] text-[#8b5a2b] text-xs font-medium border border-[#c28b17]/30 shrink-0">
@@ -487,10 +502,9 @@ export default function CatalogApp({
           <button
             onClick={() => goClean({ view: "catalogo" })}
             className="inline-flex items-center justify-center px-2.5 sm:px-5 h-8.5 sm:h-10 rounded-full bg-[#e2a727] text-white font-medium text-xs sm:text-sm hover:bg-[#c28b17] transition-all shadow-xs cursor-pointer shrink-0"
-            title="Abrir herramienta de Catálogo B2B Interactivo"
+            title="Abrir catálogo"
           >
-            <span className="sm:hidden">Catálogo</span>
-            <span className="hidden sm:inline">Catálogo B2B</span>
+            <span>Catálogo</span>
           </button>
 
           {!clientInfo && (
@@ -910,7 +924,7 @@ export default function CatalogApp({
                 onClick={() => goClean({ view: "catalogo" })}
                 className="hover:text-[#e2a727] transition-colors cursor-pointer uppercase tracking-[1.5px]"
               >
-                Catálogo B2B
+                Catálogo
               </button>
               <a href="https://baskula.netlify.app/#servicios" className="hover:text-[#e2a727] transition-colors">Servicios</a>
               <a href="https://baskula.netlify.app/#contacto" className="hover:text-[#e2a727] transition-colors">Contacto</a>

@@ -186,6 +186,7 @@ export default function AdminPanel() {
     clearAdminPin();
     await fetch("/api/admin/auth", { method: "DELETE" });
     setAuthed(false);
+    window.location.assign("/");
   };
 
   if (authed === null) {
