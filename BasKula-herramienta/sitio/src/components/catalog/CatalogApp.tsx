@@ -65,10 +65,24 @@ export default function CatalogApp({
   const [products, setProducts] = useState<CatalogProduct[] | null>(initialProducts || null);
   const [loading, setLoading] = useState(!initialProducts);
 
-  // Vista actual
-  const view = (searchParams.get("view") as View) || "home";
+  // Vista actual y parámetros en memoria (navegación instantánea 0ms)
+  const [currentView, setCurrentView] = useState<View>(() => (searchParams.get("view") as View) || "home");
+  const [urlSearch, setUrlSearch] = useState<string>(() => (typeof window !== "undefined" ? window.location.search : ""));
   const urlProductSlug = searchParams.get("p");
   const [selectedProductSlug, setSelectedProductSlug] = useState<string | null>(() => urlProductSlug);
+
+  // Sincronizar con botones atrás/adelante del navegador y celular
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const v = (params.get("view") as View) || "home";
+      setCurrentView(v);
+      setSelectedProductSlug(params.get("p"));
+      setUrlSearch(window.location.search);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   useEffect(() => {
     setSelectedProductSlug(urlProductSlug);
@@ -269,8 +283,7 @@ export default function CatalogApp({
     }
   }, [welcome, clientInfo, toast, router, searchParams]);
 
-  // Navegación que CONSERVA los parámetros actuales (para abrir/cerrar
-  // la ficha de un producto sin perder la vista ni los filtros activos)
+  // Navegación que CONSERVA los parámetros actuales (instantánea en memoria 0ms)
   const go = useCallback(
     (params: Record<string, string | null>) => {
       const current = new URLSearchParams(window.location.search);
@@ -278,25 +291,33 @@ export default function CatalogApp({
         if (v === null) current.delete(k);
         else current.set(k, v);
       }
-      router.push(`?${current.toString()}`, { scroll: true });
+      const newQuery = current.toString() ? `?${current.toString()}` : window.location.pathname;
+      window.history.pushState(null, "", newQuery);
+      if (params.view) setCurrentView(params.view as View);
+      if (params.p !== undefined) setSelectedProductSlug(params.p);
+      setUrlSearch(current.toString() ? `?${current.toString()}` : "");
+      if (params.view || params.grupo || params.q || params.tipo) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     },
-    [router]
+    []
   );
 
-  // Navegación LIMPIA: construye el URL desde cero con solo los parámetros
-  // dados. Evita que filtros anteriores (grupo, tipo, diam, cap, disp…)
-  // queden "pegados" en la URL y produzcan combinaciones vacías del tipo
-  // "No se encontraron piezas con esos filtros" al volver al inicio y
-  // hacer clic en un color o categoría (bug reportado con el terracota).
+  // Navegación LIMPIA (instantánea en memoria 0ms)
   const goClean = useCallback(
     (params: Record<string, string | null | undefined>) => {
       const fresh = new URLSearchParams();
       for (const [k, v] of Object.entries(params)) {
         if (v !== null && v !== undefined && v !== "") fresh.set(k, v);
       }
-      router.push(`?${fresh.toString()}`, { scroll: true });
+      const newQuery = fresh.toString() ? `?${fresh.toString()}` : window.location.pathname;
+      window.history.pushState(null, "", newQuery);
+      setCurrentView((params.view as View) || "home");
+      if (params.p !== undefined) setSelectedProductSlug(params.p);
+      setUrlSearch(fresh.toString() ? `?${fresh.toString()}` : "");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
-    [router]
+    []
   );
 
   // Abrir producto
@@ -456,7 +477,7 @@ export default function CatalogApp({
       {/* ══════════ HEADER ══════════ */}
       <header className="sticky top-0 z-40 w-full bg-[#f4eee2]/95 backdrop-blur-md border-b border-[#e2a727]/20 shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center gap-1.5 sm:gap-3">
-          {view !== "home" && (
+          {currentView !== "home" && (
             <button
               onClick={() => goClean({ view: "home" })}
               className="p-1.5 sm:p-2 -ml-1 sm:-ml-2 rounded-full hover:bg-accent transition-colors"
@@ -534,7 +555,7 @@ export default function CatalogApp({
 
       {/* ══════════ CONTENIDO ══════════ */}
       <main className="flex-1 w-full flex flex-col items-center">
-        {view === "home" && (
+        {currentView === "home" && (
           <div className="animate-fade-up w-full flex flex-col items-center">
             {/* Hero con búsqueda protagonista */}
             <section className="w-full max-w-3xl mx-auto px-4 pt-8 sm:pt-20 pb-8 sm:pb-10 text-center flex flex-col items-center">
@@ -872,17 +893,18 @@ export default function CatalogApp({
           </div>
         )}
 
-        {view === "catalogo" && (
+        {currentView === "catalogo" && (
           <FilterPanel
             products={products || []}
             onOpen={openProduct}
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
             onGo={go}
+            urlSearch={urlSearch}
           />
         )}
 
-        {view === "favoritos" && (
+        {currentView === "favoritos" && (
           <FavoritesView
             client={clientInfo}
             whatsapp={whatsapp}

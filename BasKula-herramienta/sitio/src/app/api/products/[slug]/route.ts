@@ -3,16 +3,29 @@ import { db } from "@/lib/db";
 import { getCatalogIndex, getSuggestionsFor } from "@/lib/catalog";
 import { isAdminRequest } from "@/lib/admin-auth";
 
+const detailCache = new Map<string, { data: any; exp: number }>();
+
+export function invalidateProductDetailCache(slug?: string) {
+  if (slug) {
+    detailCache.delete(slug);
+  } else {
+    detailCache.clear();
+  }
+}
+
 // GET /api/products/[slug] → ficha completa del producto + sugerencias
-// Piezas OCULTAS: 404 para cualquiera, EXCEPTO el admin (header
-// x-admin-pin / cookie pb_admin), que la ve con published:false para
-// mostrar el rótulo «Oculta» y el ojo para publicarla al instante.
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
   try {
     const { slug } = await params;
+    const now = Date.now();
+    const cached = detailCache.get(slug);
+    if (cached && cached.exp > now) {
+      return NextResponse.json(cached.data);
+    }
+
     const p = await db.product.findUnique({ where: { slug } });
     if (!p) {
       return NextResponse.json({ error: "Producto no encontrado" }, { status: 404 });
@@ -33,7 +46,7 @@ export async function GET(
       /* ignore */
     }
 
-    return NextResponse.json({
+    const responseData = {
       product: {
         id: p.id,
         slug: p.slug,
@@ -69,7 +82,10 @@ export async function GET(
         image: images[0]?.url || "",
       },
       suggestions,
-    });
+    };
+
+    detailCache.set(slug, { data: responseData, exp: now + 1000 * 60 * 5 });
+    return NextResponse.json(responseData);
   } catch (e) {
     console.error("product error:", e);
     return NextResponse.json({ error: "Error cargando producto" }, { status: 500 });

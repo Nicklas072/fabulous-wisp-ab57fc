@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { invalidateSettingsCache } from "@/lib/catalog";
 import { isAdminRequest, unauthorized } from "@/lib/admin-auth";
 
 // GET /api/admin/settings → configuración actual
@@ -53,6 +54,7 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    invalidateSettingsCache();
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("admin settings error:", e);

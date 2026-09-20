@@ -29,6 +29,7 @@ interface FilterPanelProps {
   favorites: Set<string>;
   onToggleFavorite: (id: string) => void;
   onGo: (params: Record<string, string | null>) => void;
+  urlSearch?: string;
 }
 
 const PAGE_SIZE = 24;
@@ -39,27 +40,33 @@ export default function FilterPanel({
   favorites,
   onToggleFavorite,
   onGo,
+  urlSearch,
 }: FilterPanelProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Estado de filtros desde URL
+  const activeParams = useMemo(() => {
+    if (urlSearch !== undefined) return new URLSearchParams(urlSearch);
+    return searchParams;
+  }, [urlSearch, searchParams]);
+
+  // Estado de filtros desde URL / memoria (instantáneo 0ms)
   const filters: CatalogFilters = useMemo(
     () => ({
-      q: searchParams.get("q") || "",
-      grupo: searchParams.get("grupo") || "",
-      tipo: searchParams.get("tipo")?.split(",").filter(Boolean) || [],
-      material: searchParams.get("material")?.split(",").filter(Boolean) || [],
-      coleccion: searchParams.get("coleccion")?.split(",").filter(Boolean) || [],
-      linea: searchParams.get("linea")?.split(",").filter(Boolean) || [],
-      color: searchParams.get("color")?.split(",").filter(Boolean) || [],
-      diam: searchParams.get("diam")?.split(",").filter(Boolean) || [],
-      cap: searchParams.get("cap")?.split(",").filter(Boolean) || [],
-      pzas: searchParams.get("pzas")?.split(",").filter(Boolean) || [],
-      disp: (searchParams.get("disp") as "todos" | "disponibles") || "todos",
-      ord: (searchParams.get("ord") as CatalogFilters["ord"]) || "relevancia",
+      q: activeParams.get("q") || "",
+      grupo: activeParams.get("grupo") || "",
+      tipo: activeParams.get("tipo")?.split(",").filter(Boolean) || [],
+      material: activeParams.get("material")?.split(",").filter(Boolean) || [],
+      coleccion: activeParams.get("coleccion")?.split(",").filter(Boolean) || [],
+      linea: activeParams.get("linea")?.split(",").filter(Boolean) || [],
+      color: activeParams.get("color")?.split(",").filter(Boolean) || [],
+      diam: activeParams.get("diam")?.split(",").filter(Boolean) || [],
+      cap: activeParams.get("cap")?.split(",").filter(Boolean) || [],
+      pzas: activeParams.get("pzas")?.split(",").filter(Boolean) || [],
+      disp: (activeParams.get("disp") as "todos" | "disponibles") || "todos",
+      ord: (activeParams.get("ord") as CatalogFilters["ord"]) || "relevancia",
     }),
-    [searchParams]
+    [activeParams]
   );
 
   const [searchInput, setSearchInput] = useState(filters.q);

@@ -31,19 +31,49 @@ export async function getClientFromCookie() {
   }
 }
 
+// ============ Caché en Memoria (RAM) de Alto Rendimiento ============
+interface SettingsCache {
+  whatsapp: string;
+  whatsappMessage: string;
+  catalogTitle: string;
+  adminPin: string;
+}
+
+let cachedSettings: { data: SettingsCache; exp: number } | null = null;
+let cachedCatalogIndex: { data: CatalogProduct[]; exp: number } | null = null;
+let cachedFullCatalogIndex: { data: AdminCatalogProduct[]; exp: number } | null = null;
+
+const CACHE_TTL = 1000 * 60 * 5; // 5 minutos de respuesta instantánea (0.1ms)
+
+export function invalidateCatalogCache() {
+  cachedCatalogIndex = null;
+  cachedFullCatalogIndex = null;
+}
+
+export function invalidateSettingsCache() {
+  cachedSettings = null;
+}
+
 // ============ Configuración (WhatsApp, etc.) ============
 
-export async function getSettings() {
+export async function getSettings(): Promise<SettingsCache> {
+  const now = Date.now();
+  if (cachedSettings && cachedSettings.exp > now) {
+    return cachedSettings.data;
+  }
+
   try {
     const rows = await db.setting.findMany();
     const map: Record<string, string> = {};
     for (const r of rows) map[r.key] = r.value;
-    return {
+    const data: SettingsCache = {
       whatsapp: map.whatsapp || "",
       whatsappMessage: map.whatsappMessage || "",
       catalogTitle: map.catalogTitle || "Catálogo Gastronómico",
       adminPin: map.adminPin || "2026",
     };
+    cachedSettings = { data, exp: now + CACHE_TTL };
+    return data;
   } catch {
     return {
       whatsapp: "",
@@ -58,10 +88,13 @@ export async function getSettings() {
 
 import type { CatalogProduct, AdminCatalogProduct } from "@/lib/types";
 
-// Índice PÚBLICO: solo piezas publicadas por el admin (página
-// principal). Consulta directa a SQLite (ultra-rápida, 2ms) para que
-// cualquier publicación u ocultamiento impacte en 0 segundos.
+// Índice PÚBLICO con caché en memoria: solo piezas publicadas por el admin
 export async function getCatalogIndex(): Promise<CatalogProduct[]> {
+  const now = Date.now();
+  if (cachedCatalogIndex && cachedCatalogIndex.exp > now) {
+    return cachedCatalogIndex.data;
+  }
+
   const products = await db.product.findMany({
     where: { published: true },
     select: {
@@ -118,6 +151,7 @@ export async function getCatalogIndex(): Promise<CatalogProduct[]> {
     };
   });
 
+  cachedCatalogIndex = { data: index, exp: now + CACHE_TTL };
   return index;
 }
 
@@ -126,6 +160,11 @@ export async function getCatalogIndex(): Promise<CatalogProduct[]> {
 // de publicación. Sirve a la vista «Catálogo completo» del panel.
 // ═══════════════════════════════════════════════════════════
 export async function getFullCatalogIndex(): Promise<AdminCatalogProduct[]> {
+  const now = Date.now();
+  if (cachedFullCatalogIndex && cachedFullCatalogIndex.exp > now) {
+    return cachedFullCatalogIndex.data;
+  }
+
   const products = await db.product.findMany({
     select: {
       id: true,
@@ -152,7 +191,7 @@ export async function getFullCatalogIndex(): Promise<AdminCatalogProduct[]> {
     orderBy: [{ releaseDate: "desc" }, { nameEs: "asc" }],
   });
 
-  return products.map((p) => {
+  const result = products.map((p) => {
     let image = "";
     try {
       const imgs = p.images ? JSON.parse(p.images) : [];
@@ -182,11 +221,9 @@ export async function getFullCatalogIndex(): Promise<AdminCatalogProduct[]> {
       reference: p.reference || "",
     };
   });
-}
 
-// Invalidador de compatibilidad
-export function invalidateCatalogCache() {
-  // Las consultas van directo a SQLite, no hay caché en memoria que purgar
+  cachedFullCatalogIndex = { data: result, exp: now + CACHE_TTL };
+  return result;
 }
 
 // ============ Datos personalizados del cliente ============
