@@ -1750,8 +1750,33 @@ function StatCard({
 function SettingsTab() {
   const [whatsapp, setWhatsapp] = useState("");
   const [pin, setPin] = useState("");
+  const [syncing, setSyncing] = useState(false);
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
+
+  const syncDailyCatalog = async () => {
+    if (!confirm("¿Deseas sincronizar la base de datos con las 31 piezas oficiales de Daily?")) return;
+    setSyncing(true);
+    try {
+      const res = await adminFetch("/api/admin/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "seed_daily", purgeOthers: true }),
+      });
+      const d = await res.json();
+      if (res.ok) {
+        toast({
+          title: "Catálogo sincronizado con éxito",
+          description: `${d.total} piezas en total (${d.published} publicadas).`,
+        });
+      } else {
+        toast({ title: "Error al sincronizar", description: d.error, variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Error de conexión", variant: "destructive" });
+    }
+    setSyncing(false);
+  };
 
   useEffect(() => {
     let active = true;
@@ -1825,6 +1850,24 @@ function SettingsTab() {
 
         <Button onClick={save} disabled={saving} className="gap-2">
           {saving ? "Guardando…" : "Guardar configuración"}
+        </Button>
+      </div>
+
+      <div className="space-y-3 rounded-2xl border border-[#c28b17]/30 bg-card p-5">
+        <div>
+          <h3 className="text-sm font-semibold text-foreground">Catálogo Daily oficial (31 piezas)</h3>
+          <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+            Sincroniza la base de datos con la selección oficial de 31 piezas Daily (25 publicadas en catálogo y 6 disponibles bajo consulta).
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          onClick={syncDailyCatalog}
+          disabled={syncing}
+          className="gap-2 text-xs border-[#c28b17]/40 hover:bg-[#f6e9c8]/30 cursor-pointer"
+        >
+          <RefreshCw className={`w-3.5 h-3.5 text-[#c28b17] ${syncing ? "animate-spin" : ""}`} />
+          <span>{syncing ? "Sincronizando piezas…" : "Sincronizar catálogo Daily ahora"}</span>
         </Button>
       </div>
     </div>
