@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Filter, X, ChevronDown, Search, RotateCcw, SlidersHorizontal, CircleAlert } from "lucide-react";
+import { Filter, X, ChevronDown, Search, RotateCcw, SlidersHorizontal, CircleAlert, MessageCircle, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -30,6 +30,7 @@ interface FilterPanelProps {
   onToggleFavorite: (id: string) => void;
   onGo: (params: Record<string, string | null>) => void;
   urlSearch?: string;
+  whatsapp?: string;
 }
 
 const PAGE_SIZE = 24;
@@ -41,6 +42,7 @@ export default function FilterPanel({
   onToggleFavorite,
   onGo,
   urlSearch,
+  whatsapp,
 }: FilterPanelProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -70,7 +72,10 @@ export default function FilterPanel({
   );
 
   const [searchInput, setSearchInput] = useState(filters.q);
-  const [showAllLines, setShowAllLines] = useState(false);
+
+  useEffect(() => {
+    setSearchInput(filters.q);
+  }, [filters.q]);
 
   // Firma de filtros → clave de remount del grid (resetea paginación y scroll)
   const filterSig = useMemo(() => JSON.stringify(filters), [filters]);
@@ -82,65 +87,87 @@ export default function FilterPanel({
   // color es exactamente el número de piezas que aparecerá al hacer
   // clic (faceta estándar: excluir la propia dimensión del conteo).
   const applyFilters = useCallback(
-    (list: CatalogProduct[], f: CatalogFilters, opts?: { skipColor?: boolean }) => {
+    (list: CatalogProduct[], f: CatalogFilters, opts?: { skipColor?: boolean; skipDiam?: boolean; skipTipo?: boolean }) => {
       let result = list;
 
+      const norm = (str: string) =>
+        (str || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase();
+
       if (f.q) {
-        const words = f.q.toLowerCase().split(/\s+/).filter(Boolean);
+        const words = norm(f.q).split(/\s+/).filter(Boolean);
         result = result.filter((p) => {
-          const hay = `${p.nameEs} ${p.collection} ${p.line} ${p.colorBase} ${p.productTypeLabel} ${p.material} ${
-            TONE_LABELS[p.tone] || ""
-          }`.toLowerCase();
+          const hay = norm(
+            `${p.nameEs} ${p.collection} ${p.line} ${p.colorBase} ${p.productTypeLabel} ${p.material} ${p.reference || ""} ${
+              TONE_LABELS[p.tone] || ""
+            }`
+          );
           return words.every((w) => hay.includes(w));
         });
       }
       if (f.grupo) {
         result = result.filter((p) => p.pieceGroup === f.grupo);
       }
-      if (f.tipo?.length) {
-        result = result.filter((p) => f.tipo!.includes(p.productType));
+      if (!opts?.skipTipo && f.tipo?.length) {
+        result = result.filter((p) => {
+          return f.tipo!.some((t) => {
+            if (t === "cafe") {
+              return p.productType === "taza-cafe" || p.productType === "taza-te" || p.pieceGroup === "tecafe";
+            }
+            return p.productType === t;
+          });
+        });
       }
       if (f.material?.length) {
         result = result.filter((p) => f.material!.includes(p.material));
       }
       if (f.coleccion?.length) {
-        result = result.filter((p) => f.coleccion!.includes(p.collection));
+        result = result.filter((p) =>
+          f.coleccion!.some(
+            (c) =>
+              p.collection === c ||
+              p.nameEs.toLowerCase().includes(c.toLowerCase()) ||
+              (p.namePt || "").toLowerCase().includes(c.toLowerCase())
+          )
+        );
       }
       if (f.linea?.length) {
         result = result.filter((p) => f.linea!.includes(p.line));
       }
       if (!opts?.skipColor && f.color?.length) {
-        // Taxonomía de tonos: cada valor del filtro es un tono fino
-        result = result.filter((p) => f.color!.includes(p.tone || p.colorGroup));
+        // Taxonomía de tonos y familias de color
+        result = result.filter((p) => {
+          const pTone = (p.tone || "").toLowerCase();
+          const pGroup = (p.colorGroup || "").toLowerCase();
+          const pBase = (p.colorBase || "").toLowerCase().replace(/\s+/g, "-");
+          return f.color!.some(
+            (c) =>
+              c === pTone ||
+              c === pGroup ||
+              c === pBase ||
+              (c === "gris" && (pTone.includes("gris") || pGroup.includes("gris") || pBase.includes("gris"))) ||
+              (c === "azul" && (pTone.includes("azul") || pGroup.includes("azul") || pBase.includes("azul"))) ||
+              (c === "blanco" &&
+                (pTone.includes("blanco") ||
+                  pGroup.includes("blanco") ||
+                  pTone.includes("crudo") ||
+                  pBase.includes("white") ||
+                  pBase.includes("blanco"))) ||
+              (c === "verde" && (pTone.includes("verde") || pGroup.includes("verde") || pBase.includes("verde")))
+          );
+        });
       }
-      if (f.diam?.length) {
+      if (!opts?.skipDiam && f.diam?.length) {
         result = result.filter((p) => {
           if (p.diameter === null || p.diameter === undefined) return false;
           return f.diam!.some((key) => {
+            const num = parseFloat(key);
+            if (!isNaN(num) && Math.abs(p.diameter! - num) < 0.05) return true;
             const r = DIAM_RANGES.find((x) => x.key === key);
             if (!r) return false;
             return p.diameter! >= r.min && p.diameter! < (r.max === 999 ? 9999 : r.max);
-          });
-        });
-      }
-      if (f.cap?.length) {
-        result = result.filter((p) => {
-          if (p.capacity === null || p.capacity === undefined) return false;
-          return f.cap!.some((key) => {
-            const r = CAP_RANGES.find((x) => x.key === key);
-            if (!r) return false;
-            return p.capacity! >= r.min && p.capacity! < (r.max === 99999 ? 999999 : r.max);
-          });
-        });
-      }
-      if (f.pzas?.length) {
-        result = result.filter((p) => {
-          const pieces = p.pieces || 1;
-          return f.pzas!.some((key) => {
-            const r = PIECES_RANGES.find((x) => x.key === key);
-            if (!r) return false;
-            if (key === "12") return pieces >= 12 && pieces < 18;
-            return pieces >= r.min && pieces <= r.max;
           });
         });
       }
@@ -184,6 +211,18 @@ export default function FilterPanel({
     [products, filters, applyFilters]
   );
 
+  // Resultados SIN el filtro de diámetro: base para los contadores de diámetro
+  const filteredNoDiam = useMemo(
+    () => applyFilters(products, filters, { skipDiam: true }),
+    [products, filters, applyFilters]
+  );
+
+  // Resultados SIN el filtro de tipo de vajilla: base para los contadores de tipo
+  const filteredNoTipo = useMemo(
+    () => applyFilters(products, filters, { skipTipo: true }),
+    [products, filters, applyFilters]
+  );
+
   // ===== Facetas dinámicas (contadores según filtros aplicados) =====
   const facets = useMemo(() => {
     const countBy = (fn: (p: CatalogProduct) => string) => {
@@ -221,33 +260,42 @@ export default function FilterPanel({
     return map;
   }, [products]);
 
-  // ===== Helpers de URL =====
+  // ===== Helpers de URL y Navegación en Memoria =====
   const setParam = useCallback(
     (key: string, value: string | null) => {
-      const params = new URLSearchParams(window.location.search);
-      if (value === null || value === "") params.delete(key);
-      else params.set(key, value);
-      router.push(`?${params.toString()}`, { scroll: false });
+      onGo({ [key]: value });
     },
-    [router]
+    [onGo]
   );
 
   const toggleArrayParam = useCallback(
     (key: string, value: string) => {
-      const current = searchParams.get(key)?.split(",").filter(Boolean) || [];
+      const current = activeParams.get(key)?.split(",").filter(Boolean) || [];
       const next = current.includes(value)
         ? current.filter((v) => v !== value)
         : [...current, value];
-      setParam(key, next.length ? next.join(",") : null);
+      onGo({ [key]: next.length ? next.join(",") : null });
     },
-    [searchParams, setParam]
+    [activeParams, onGo]
   );
 
   const clearAll = useCallback(() => {
-    const params = new URLSearchParams();
-    params.set("view", "catalogo");
-    router.push(`?${params.toString()}`, { scroll: false });
-  }, [router]);
+    onGo({
+      q: null,
+      grupo: null,
+      tipo: null,
+      material: null,
+      coleccion: null,
+      linea: null,
+      color: null,
+      diam: null,
+      cap: null,
+      pzas: null,
+      disp: null,
+      ord: null,
+      view: "catalogo",
+    });
+  }, [onGo]);
 
   // Búsqueda con debounce
   const onSearchChange = (value: string) => {
@@ -260,25 +308,20 @@ export default function FilterPanel({
 
   const activeFilterCount =
     (filters.tipo?.length || 0) +
-    (filters.material?.length || 0) +
-    (filters.coleccion?.length || 0) +
     (filters.color?.length || 0) +
     (filters.diam?.length || 0) +
-    (filters.cap?.length || 0) +
-    (filters.pzas?.length || 0) +
-    (filters.linea?.length || 0) +
-    (filters.grupo ? 1 : 0) +
     (filters.disp === "disponibles" ? 1 : 0);
 
-  const sortedColecciones = useMemo(
-    () => [...facets.colecciones.entries()].sort((a, b) => b[1] - a[1]),
-    [facets.colecciones]
-  );
-  const sortedLineas = useMemo(
-    () => [...facets.lineas.entries()].sort((a, b) => b[1] - a[1]),
-    [facets.lineas]
-  );
-  const shownLineas = showAllLines ? sortedLineas : sortedLineas.slice(0, 8);
+  // Lista de diámetros disponibles en el catálogo completo
+  const availableDiameters = useMemo(() => {
+    const set = new Set<number>();
+    for (const p of products) {
+      if (p.diameter !== null && p.diameter !== undefined) {
+        set.add(p.diameter);
+      }
+    }
+    return [...set].sort((a, b) => a - b);
+  }, [products]);
 
   // Conteos por tono sobre los resultados actuales SIN aplicar el
   // filtro de color (búsqueda + demás filtros): honestos respecto al clic
@@ -312,50 +355,50 @@ export default function FilterPanel({
         </div>
       </div>
 
-      {/* Grupo de pieza */}
-      <FilterSection title="Tipo de pieza" defaultOpen={true}>
-        <div className="flex flex-wrap gap-1.5 pt-0.5">
-          {Object.entries(PIECE_GROUP_INFO).map(([key, info]) => {
-            const count = products.filter((p) => p.pieceGroup === key).length;
-            if (count === 0) return null;
-            const active = filters.grupo === key;
-            return (
-              <button
-                key={key}
-                onClick={() => setParam("grupo", active ? null : key)}
-                className={`px-3 h-8 rounded-full text-xs font-medium border transition-all cursor-pointer flex items-center gap-1.5 ${
-                  active
-                    ? "bg-[#c28b17] text-white border-[#c28b17] shadow-xs"
-                    : "border-border/80 bg-card text-muted-foreground hover:border-[#c28b17] hover:text-foreground"
-                }`}
-              >
-                <span>{info.label}</span>
-                <span className={`text-[11px] ${active ? "text-white/90" : "text-muted-foreground/75"}`}>
-                  ({count})
-                </span>
-              </button>
-            );
-          })}
+      {/* Tipo de vajilla */}
+      <FilterSection title="Tipo de vajilla" defaultOpen={true}>
+        <div className="grid grid-cols-1 gap-0.5">
+          {[
+            {
+              key: "plato-llano",
+              label: "Platos llanos",
+              count: filteredNoTipo.filter((p) => p.productType === "plato-llano").length,
+            },
+            {
+              key: "plato-hondo",
+              label: "Platos Hondos",
+              count: filteredNoTipo.filter((p) => p.productType === "plato-hondo").length,
+            },
+            {
+              key: "cafe",
+              label: "Café",
+              count: filteredNoTipo.filter((p) => p.productType === "taza-cafe" || p.productType === "taza-te" || p.pieceGroup === "tecafe").length,
+            },
+          ].map((item) => (
+            <CheckboxRow
+              key={item.key}
+              checked={filters.tipo?.includes(item.key) || false}
+              onChange={() => toggleArrayParam("tipo", item.key)}
+              label={item.label}
+              count={item.count}
+            />
+          ))}
         </div>
       </FilterSection>
 
-      {/* Diámetro */}
-      <FilterSection title="Diámetro" defaultOpen={false}>
+      {/* Diámetro (todos los disponibles en el catálogo) */}
+      <FilterSection title="Diámetro" defaultOpen={true}>
         <div className="grid grid-cols-1 gap-0.5">
-          {DIAM_RANGES.map((r) => {
-            const count = filtered.filter(
-              (p) =>
-                p.diameter !== null &&
-                p.diameter >= r.min &&
-                p.diameter < (r.max === 999 ? 9999 : r.max)
-            ).length;
-            if (count === 0) return null;
+          {availableDiameters.map((d) => {
+            const count = filteredNoDiam.filter((p) => p.diameter === d).length;
+            const key = String(d);
+            const label = `Ø ${String(d).replace(".", ",")} cm`;
             return (
               <CheckboxRow
-                key={r.key}
-                checked={filters.diam?.includes(r.key) || false}
-                onChange={() => toggleArrayParam("diam", r.key)}
-                label={r.label}
+                key={key}
+                checked={filters.diam?.includes(key) || false}
+                onChange={() => toggleArrayParam("diam", key)}
+                label={label}
                 count={count}
               />
             );
@@ -363,8 +406,8 @@ export default function FilterPanel({
         </div>
       </FilterSection>
 
-      {/* Color y acabado (tonos, agrupados por familia) */}
-      <FilterSection title="Color y acabado" defaultOpen={false}>
+      {/* Color */}
+      <FilterSection title="Color" defaultOpen={true}>
         {TONE_FAMILIES.map((fam) => {
           const famTones = fam.tones.filter((t) => facets.tonos.has(t));
           if (famTones.length === 0) return null;
@@ -390,111 +433,35 @@ export default function FilterPanel({
         })}
       </FilterSection>
 
-      {/* Material */}
-      <FilterSection title="Material" defaultOpen={false}>
-        <div className="grid grid-cols-1 gap-0.5">
-          {[...facets.materiales.entries()].sort((a, b) => b[1] - a[1]).map(([mat, count]) => (
-            <CheckboxRow
-              key={mat}
-              checked={filters.material?.includes(mat) || false}
-              onChange={() => toggleArrayParam("material", mat)}
-              label={mat}
-              count={count}
-            />
-          ))}
-        </div>
-      </FilterSection>
-
-      {/* Colección */}
-      {sortedColecciones.length > 0 && (
-        <FilterSection title="Colección" defaultOpen={false}>
-          <div className="grid grid-cols-1 gap-0.5">
-            {sortedColecciones.map(([col, count]) => (
-              <CheckboxRow
-                key={col}
-                checked={filters.coleccion?.includes(col) || false}
-                onChange={() => toggleArrayParam("coleccion", col)}
-                label={COLLECTION_LABELS[col] || col}
-                count={count}
-              />
-            ))}
+      {/* Porcelana (Próximamente / Gastro) */}
+      <FilterSection title="Porcelana" defaultOpen={true}>
+        <div className="rounded-xl border border-[#e2a727]/35 bg-gradient-to-br from-[#fcf9f2] to-[#f7f0e1] p-3 text-center space-y-2 shadow-xs">
+          <div className="flex items-center justify-center gap-1.5 text-[#8b5a2b] font-medium text-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#c28b17]" />
+            <span>Línea Gastronómica</span>
           </div>
-        </FilterSection>
-      )}
-
-      {/* Capacidad */}
-      <FilterSection title="Capacidad" defaultOpen={false}>
-        <div className="grid grid-cols-1 gap-0.5">
-          {CAP_RANGES.map((r) => {
-            const count = filtered.filter(
-              (p) =>
-                p.capacity !== null &&
-                p.capacity >= r.min &&
-                p.capacity < (r.max === 99999 ? 999999 : r.max)
-            ).length;
-            if (count === 0) return null;
-            return (
-              <CheckboxRow
-                key={r.key}
-                checked={filters.cap?.includes(r.key) || false}
-                onChange={() => toggleArrayParam("cap", r.key)}
-                label={r.label}
-                count={count}
-              />
-            );
-          })}
+          <p className="text-[11px] text-muted-foreground leading-snug">
+            Piezas de porcelana profesional de alta resistencia. Próximamente disponible.
+          </p>
+          {whatsapp ? (
+            <a
+              href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(
+                "Hola BasKula! Quisiera consultar información y disponibilidad sobre la nueva Línea de Porcelana."
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 w-full h-8 rounded-full bg-[#25D366] text-white text-xs font-semibold hover:bg-[#20ba59] transition-all shadow-xs cursor-pointer"
+            >
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span>Consultar</span>
+            </a>
+          ) : (
+            <span className="inline-block text-[11px] font-semibold text-[#8b5a2b]">
+              Consultar por WhatsApp
+            </span>
+          )}
         </div>
       </FilterSection>
-
-      {/* Piezas por set */}
-      <FilterSection title="Piezas por juego" defaultOpen={false}>
-        <div className="grid grid-cols-1 gap-0.5">
-          {PIECES_RANGES.map((r) => {
-            const count = filtered.filter((p) => {
-              const pieces = p.pieces || 1;
-              if (r.key === "12") return pieces >= 12 && pieces < 18;
-              return pieces >= r.min && pieces <= r.max;
-            }).length;
-            if (count === 0) return null;
-            return (
-              <CheckboxRow
-                key={r.key}
-                checked={filters.pzas?.includes(r.key) || false}
-                onChange={() => toggleArrayParam("pzas", r.key)}
-                label={r.label}
-                count={count}
-              />
-            );
-          })}
-        </div>
-      </FilterSection>
-
-      {/* Línea (colapsable) */}
-      {sortedLineas.length > 0 && (
-        <FilterSection title="Línea de diseño" defaultOpen={false}>
-          <div className="grid grid-cols-1 gap-0.5">
-            {shownLineas.map(([lin, count]) => (
-              <CheckboxRow
-                key={lin}
-                checked={filters.linea?.includes(lin) || false}
-                onChange={() => toggleArrayParam("linea", lin)}
-                label={lin}
-                count={count}
-              />
-            ))}
-            {sortedLineas.length > 8 && (
-              <button
-                onClick={() => setShowAllLines(!showAllLines)}
-                className="text-[11px] text-[#c28b17] hover:underline mt-1 text-left px-2"
-              >
-                {showAllLines
-                  ? "Ver menos"
-                  : `Ver todas las líneas (${sortedLineas.length})`}
-              </button>
-            )}
-          </div>
-        </FilterSection>
-      )}
 
       {/* Disponibilidad */}
       <FilterSection title="Disponibilidad" defaultOpen={false}>
@@ -529,11 +496,8 @@ export default function FilterPanel({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
         <div className="flex items-center gap-2.5">
           <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-medium truncate">
-            {filters.q ? `“${filters.q}”` : "Catálogo"}
+            Catálogo
           </h1>
-          <Badge variant="secondary" className="text-xs h-5.5 px-2 font-normal shrink-0">
-            {filtered.length} piezas
-          </Badge>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">

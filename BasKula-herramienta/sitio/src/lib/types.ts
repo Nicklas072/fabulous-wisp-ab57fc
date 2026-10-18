@@ -19,6 +19,7 @@ export interface CatalogProduct {
   available: boolean;
   image: string; // primera imagen 425px
   reference: string;
+  namePt?: string;
 }
 
 export interface ProductImage {

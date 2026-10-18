@@ -71,7 +71,6 @@ export default function FavoritesView({
 
   const { toast } = useToast();
   const router = useRouter();
-  const firstName = client ? client.name.split(" ")[0] : "";
 
   // Cargar las notas ya enviadas (feedback para el cliente)
   useEffect(() => {
@@ -193,7 +192,7 @@ export default function FavoritesView({
     const lines: string[] = [];
     lines.push(`Hola BasKula! 👋`);
     if (client) {
-      lines.push(`Soy *${client.name}* (código: ${client.code}).`);
+      lines.push(`Soy *${client.name}*.`);
     } else {
       lines.push(`Les comparto mi lista de interés del catálogo:`);
     }
@@ -274,7 +273,7 @@ export default function FavoritesView({
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
       doc.setTextColor(90, 90, 90);
-      doc.text(`Cliente: ${client.name}  ·  Código: ${client.code}`, M, 38.5);
+      doc.text(`Cliente: ${client.name}`, M, 38.5);
 
       let y = 48;
       const ensureSpace = (needed: number) => {
@@ -394,7 +393,7 @@ export default function FavoritesView({
         <Heart className="w-14 h-14 mx-auto text-muted-foreground/40 mb-4" />
         <h1 className="font-display text-3xl font-medium mb-3">Tu lista de interés</h1>
         <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-          Para ver tu lista personalizada, recomendaciones de tu asesor y tus piezas guardadas, ingresá con tu código de cliente.
+          Para ver tu lista personalizada, recomendaciones de tu asesor y tus piezas guardadas, inicia sesión con tu cuenta.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
           {onOpenLogin && (
@@ -403,18 +402,18 @@ export default function FavoritesView({
               className="h-10 px-6 rounded-full bg-[#c28b17] hover:bg-[#b07b10] text-white text-[13px] font-medium gap-2 shadow-xs cursor-pointer"
             >
               <LogIn className="w-4 h-4" />
-              <span>Ingresar mi código de cliente</span>
+              <span>Iniciar sesión</span>
             </Button>
           )}
           {whatsapp && (
             <a
-              href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hola, quiero mi código de cliente para el catálogo.")}`}
+              href={`https://wa.me/${whatsapp}?text=${encodeURIComponent("Hola, quiero solicitar mi acceso para el catálogo.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 h-10 rounded-full bg-[#25D366] text-white text-[13px] font-medium hover:opacity-90 transition-opacity cursor-pointer"
             >
               <MessageCircle className="w-4 h-4" />
-              Solicitar código por WhatsApp
+              Solicitar acceso por WhatsApp
             </a>
           )}
         </div>
@@ -436,12 +435,12 @@ export default function FavoritesView({
       {/* Encabezado (siempre visible en print) */}
       <div className="mb-6 text-center flex flex-col items-center">
         <p className="text-xs uppercase tracking-[0.14em] text-[#c28b17] font-semibold mb-1 text-center inline-flex items-center justify-center gap-2">
-          <span>{client.name} · Código {client.code}</span>
+          <span>{client.name}</span>
           {onLogout && (
             <button
               onClick={onLogout}
               className="text-[11px] font-normal lowercase tracking-normal text-muted-foreground hover:text-destructive underline cursor-pointer ml-1"
-              title="Cerrar sesión de cliente"
+              title="Cerrar sesión"
             >
               (cerrar sesión)
             </button>
@@ -593,7 +592,7 @@ export default function FavoritesView({
               Los recomendados para ti
             </h2>
             <p className="text-sm text-muted-foreground mt-1 font-serif2 italic">
-              Una selección especial preparada para {firstName}
+              Una selección especial preparada para {client.name}
             </p>
           </div>
           <ProductGrid
@@ -634,17 +633,6 @@ export default function FavoritesView({
         </section>
       )}
 
-      {/* Nota informativa */}
-      <div className="mt-8 rounded-2xl border border-border bg-accent/40 p-4 sm:p-5 text-sm text-muted-foreground">
-        <p className="flex items-start gap-2">
-          <Share2 className="w-4 h-4 mt-0.5 shrink-0 text-primary" />
-          <span>
-            Al enviar tu lista por WhatsApp, tu asesor recibirá las referencias con tu código de
-            cliente <strong className="text-foreground">{client.code}</strong> y podrá prepararte una
-            cotización personalizada. Los precios se gestionan por canal comercial.
-          </span>
-        </p>
-      </div>
 
       {/* ═══ Dejar una nota al asesor ═══ */}
       <section className="mt-8 rounded-2xl border border-[#c28b17]/30 bg-[#fdf8ec] p-5 sm:p-6 no-print">

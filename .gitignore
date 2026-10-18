@@ -18,6 +18,7 @@ next-env.d.ts
 # Recursos en bruto, borradores y backups locales
 _assets_raw/
 _originals_backup/
+*.backup.*
 
 # Logs y depuración
 *.log

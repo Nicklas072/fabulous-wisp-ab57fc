@@ -102,28 +102,20 @@ export async function PATCH(
       data.reference = body.reference ? String(body.reference).trim() : null;
     }
     if (body.diameter !== undefined) {
-      data.diameter =
-        body.diameter === null || body.diameter === "" || isNaN(Number(body.diameter))
-          ? null
-          : Number(body.diameter);
+      const v = typeof body.diameter === "string" ? body.diameter.replace(",", ".") : body.diameter;
+      data.diameter = v === null || v === "" || isNaN(Number(v)) ? null : Number(v);
     }
     if (body.height !== undefined) {
-      data.height =
-        body.height === null || body.height === "" || isNaN(Number(body.height))
-          ? null
-          : Number(body.height);
+      const v = typeof body.height === "string" ? body.height.replace(",", ".") : body.height;
+      data.height = v === null || v === "" || isNaN(Number(v)) ? null : Number(v);
     }
     if (body.capacity !== undefined) {
-      data.capacity =
-        body.capacity === null || body.capacity === "" || isNaN(Number(body.capacity))
-          ? null
-          : Math.round(Number(body.capacity));
+      const v = typeof body.capacity === "string" ? body.capacity.replace(",", ".") : body.capacity;
+      data.capacity = v === null || v === "" || isNaN(Number(v)) ? null : Math.round(Number(v));
     }
     if (body.pieces !== undefined) {
-      data.pieces =
-        body.pieces === null || body.pieces === "" || isNaN(Number(body.pieces))
-          ? null
-          : Math.round(Number(body.pieces));
+      const v = typeof body.pieces === "string" ? body.pieces.replace(",", ".") : body.pieces;
+      data.pieces = v === null || v === "" || isNaN(Number(v)) ? null : Math.round(Number(v));
     }
     if (body.available !== undefined) {
       data.available = Boolean(body.available);

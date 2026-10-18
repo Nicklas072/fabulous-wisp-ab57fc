@@ -46,6 +46,7 @@ export function clearAdminPin() {
   try {
     localStorage.removeItem(ADMIN_PIN_KEY);
     sessionStorage.removeItem(ADMIN_PIN_KEY);
+    document.cookie = "pb_admin=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   } catch {
     /* ignore */
   }
@@ -92,6 +93,8 @@ export function getClientCode(): string {
 export function clearClientCode() {
   try {
     localStorage.removeItem(CLIENT_CODE_KEY);
+    sessionStorage.removeItem(CLIENT_CODE_KEY);
+    document.cookie = "pb_client=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT";
   } catch {
     /* ignore */
   }

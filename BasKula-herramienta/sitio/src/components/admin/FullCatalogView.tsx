@@ -244,6 +244,23 @@ export default function FullCatalogView({ onBack, onCountsChange }: FullCatalogV
   const handleManualSync = useCallback(async () => {
     setSyncing(true);
     try {
+      const res = await adminFetch("/api/admin/sync", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error al sincronizar");
+
+      // Refrescar catálogo del admin para asegurar paridad total
+      const catRes = await adminFetch("/api/admin/catalog");
+      if (catRes.ok) {
+        const catData = await catRes.json();
+        if (Array.isArray(catData.products)) {
+          setProducts(catData.products);
+          onCountsChange({
+            total: catData.products.length,
+            published: catData.products.filter((p: AdminCatalogProduct) => p.published).length,
+          });
+        }
+      }
+
       if (typeof window !== "undefined") {
         const syncPayload = { timestamp: Date.now(), manual: true };
         if ("BroadcastChannel" in window) {
@@ -253,20 +270,22 @@ export default function FullCatalogView({ onBack, onCountsChange }: FullCatalogV
         }
         localStorage.setItem("baskula_catalog_sync", JSON.stringify(syncPayload));
       }
-      await fetch("/api/catalog", { cache: "no-store" });
+
       toast({
-        title: "¡Catálogo sincronizado con la web!",
-        description: `Las ${publishedCount} piezas publicadas están actualizadas e impactadas en tiempo real.`,
+        title: "¡Catálogo guardado y sincronizado con éxito!",
+        description: `Se sincronizaron ${data.total ?? publishedCount} piezas en la base de datos y la web.`,
       });
-    } catch {
+    } catch (err: unknown) {
+      console.error(err);
       toast({
-        title: "Sincronizado",
-        description: "Se emitieron las actualizaciones a la web.",
+        title: "Error al sincronizar",
+        description: "No se pudo sincronizar con la base de datos. Verifica tu sesión.",
+        variant: "destructive",
       });
     } finally {
       setTimeout(() => setSyncing(false), 400);
     }
-  }, [publishedCount, toast]);
+  }, [adminFetch, publishedCount, onCountsChange, toast]);
 
   const toggleOne = useCallback(
     (p: AdminCatalogProduct) => {

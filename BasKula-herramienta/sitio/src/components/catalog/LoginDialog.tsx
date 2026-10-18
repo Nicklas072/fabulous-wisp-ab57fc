@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { setClientCode, setAdminPin, clearAdminPin, normalizeClientCode } from "@/lib/api-client";
+import { setClientCode, clearClientCode, setAdminPin, clearAdminPin, normalizeClientCode } from "@/lib/api-client";
 
 export interface LoginResult {
   client: { code: string; name: string };
@@ -40,7 +40,7 @@ export default function LoginDialog({
 
   const phone = (whatsapp || "59893658477").replace(/[^0-9]/g, "") || "59893658477";
   const waMsg = encodeURIComponent(
-    "¡Hola BasKula! 👋 Quisiera solicitar mi código personal de acceso para ver mi catálogo y lista personalizada."
+    "¡Hola BasKula! 👋 Quisiera solicitar acceso para ver mi catálogo y lista personalizada."
   );
   const waUrl = `https://wa.me/${phone}?text=${waMsg}`;
 
@@ -66,6 +66,8 @@ export default function LoginDialog({
             body: JSON.stringify({ pin: clean }),
           });
           if (adminRes.ok) {
+            clearClientCode();
+            fetch("/api/client/logout", { method: "POST" }).catch(() => {});
             setAdminPin(clean);
             setOpeningPanel(true);
             window.location.assign("/admin");
@@ -82,8 +84,11 @@ export default function LoginDialog({
 
       const identified = await res.json();
 
-      // 2) Persistir en localStorage y cookie (limpiando cualquier sesión admin residual)
+      // Al entrar como cliente, cerramos cualquier sesión de admin previa
       clearAdminPin();
+      fetch("/api/admin/auth", { method: "DELETE" }).catch(() => {});
+
+      // 2) Persistir en localStorage y cookie
       setClientCode(clean);
       try {
         document.cookie = `pb_client=${encodeURIComponent(clean)}; path=/; max-age=${
@@ -197,7 +202,7 @@ export default function LoginDialog({
           </form>
 
           <p className="text-[11px] text-muted-foreground text-center mt-3 leading-relaxed">
-            Código personal de acceso · se ignora mayúsculas/minúsculas
+            Ingresa tu código asignado · se ignoran mayúsculas y minúsculas
           </p>
 
           {/* Separador elegante */}
@@ -206,11 +211,11 @@ export default function LoginDialog({
               <div className="w-full border-t border-border/80"></div>
             </div>
             <div className="relative flex justify-center text-[11px]">
-              <span className="bg-card px-2.5 text-muted-foreground">¿No tienes clave?</span>
+              <span className="bg-card px-2.5 text-muted-foreground">¿No tienes cuenta?</span>
             </div>
           </div>
 
-          {/* Botón de WhatsApp para pedir clave */}
+          {/* Botón de WhatsApp para pedir acceso */}
           <a
             href={waUrl}
             target="_blank"
@@ -218,7 +223,7 @@ export default function LoginDialog({
             className="w-full h-10 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white text-[13px] font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs"
           >
             <MessageCircle className="w-4 h-4 text-white" />
-            <span>Pedir clave por WhatsApp</span>
+            <span>Solicitar acceso por WhatsApp</span>
           </a>
         </div>
       </DialogContent>

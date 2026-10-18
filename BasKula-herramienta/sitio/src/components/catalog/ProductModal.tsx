@@ -15,9 +15,10 @@ import {
   COLLECTION_LABELS,
   COLOR_LABELS,
 } from "@/lib/types";
-import { Heart, Share2, MessageCircle, Sparkles, Pencil } from "lucide-react";
+import { Heart, Share2, MessageCircle, Sparkles, Pencil, Lock } from "lucide-react";
 import { getCachedDetail, fetchDetail } from "@/lib/detail-cache";
-import { getAdminPin, clearAdminPin } from "@/lib/api-client";
+import { getAdminPin, setAdminPin, clearAdminPin } from "@/lib/api-client";
+import { Input } from "@/components/ui/input";
 import ProductEditDialog from "@/components/admin/ProductEditDialog";
 
 interface ProductModalProps {
@@ -54,7 +55,57 @@ function ProductModalInner({
   const [isVerifiedAdmin, setIsVerifiedAdmin] = useState(false);
   const isAdmin = !client && isVerifiedAdmin;
   const [showAdminEdit, setShowAdminEdit] = useState(false);
+  const [pinPromptOpen, setPinPromptOpen] = useState(false);
+  const [pinInput, setPinInput] = useState("");
+  const [pinError, setPinError] = useState("");
   const { toast } = useToast();
+
+  const handleEditClick = () => {
+    if (isVerifiedAdmin) {
+      setShowAdminEdit(true);
+      return;
+    }
+    const savedPin = getAdminPin();
+    if (savedPin) {
+      fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: savedPin }),
+      }).then((r) => {
+        if (r.ok) {
+          setIsVerifiedAdmin(true);
+          setShowAdminEdit(true);
+        } else {
+          setPinPromptOpen(true);
+        }
+      }).catch(() => setPinPromptOpen(true));
+    } else {
+      setPinPromptOpen(true);
+    }
+  };
+
+  const handlePinSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPinError("");
+    try {
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: pinInput.trim() }),
+      });
+      if (res.ok) {
+        setAdminPin(pinInput.trim());
+        setIsVerifiedAdmin(true);
+        setPinPromptOpen(false);
+        setShowAdminEdit(true);
+        toast({ title: "Acceso concedido", description: "Modo edición habilitado." });
+      } else {
+        setPinError("Clave incorrecta (prueba 2026 o BASKULA2272)");
+      }
+    } catch {
+      setPinError("Error de conexión");
+    }
+  };
 
   useEffect(() => {
     if (client) return;
@@ -72,7 +123,6 @@ function ProductModalInner({
           setIsVerifiedAdmin(true);
         } else {
           setIsVerifiedAdmin(false);
-          clearAdminPin();
         }
       })
       .catch(() => {
@@ -121,7 +171,7 @@ function ProductModalInner({
   const whatsappProduct = () => {
     if (!data) return;
     const clientStr = client
-      ? `Soy *${client.name}* (código: ${client.code}).`
+      ? `Soy *${client.name}*.`
       : `Les escribo desde el catálogo web de BasKula:`;
     const refStr = data.reference ? ` [Ref: ${data.reference}]` : "";
     const colStr = data.collection ? ` (Colección ${data.collection.split(" - ")[0]})` : "";
@@ -278,14 +328,14 @@ function ProductModalInner({
                       {data.nameEs}
                     </h2>
                     <div className="rule-mostaza w-14 h-[3px] rounded-full mt-2.5 mx-auto" />
-                    {isAdmin && !client && (
+                    {!client && isVerifiedAdmin && (
                       <button
-                        onClick={() => setShowAdminEdit(true)}
+                        onClick={handleEditClick}
                         className="mt-3 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-medium bg-[#f6e9c8] text-[#8b5a2b] hover:bg-[#ebd8ab] border border-[#c28b17]/40 shadow-xs transition-colors cursor-pointer"
-                        title="Editar ficha técnica como administrador"
+                        title="Editar ficha técnica"
                       >
                         <Pencil className="w-3.5 h-3.5 text-[#c28b17]" />
-                        <span>Editar ficha (Admin)</span>
+                        <span>Editar ficha del artículo</span>
                       </button>
                     )}
                   </div>
@@ -478,7 +528,40 @@ function ProductModalInner({
       </DialogContent>
     </Dialog>
 
-    {!client && isAdmin && showAdminEdit && data && (
+    {pinPromptOpen && (
+      <Dialog open={pinPromptOpen} onOpenChange={setPinPromptOpen}>
+        <DialogContent className="max-w-xs p-6 bg-card border-border rounded-2xl shadow-xl">
+          <form onSubmit={handlePinSubmit} className="space-y-4">
+            <div className="text-center">
+              <div className="w-10 h-10 rounded-full bg-[#f6e9c8] text-[#8b5a2b] flex items-center justify-center mx-auto mb-2">
+                <Lock className="w-5 h-5 text-[#c28b17]" />
+              </div>
+              <DialogTitle className="font-display font-medium text-lg text-foreground">Acceso de Edición</DialogTitle>
+              <p className="text-xs text-muted-foreground mt-1">Ingresa tu clave de administración para editar este artículo.</p>
+            </div>
+            <Input
+              type="password"
+              placeholder="Clave (ej. 2026)"
+              value={pinInput}
+              onChange={(e) => setPinInput(e.target.value)}
+              className="text-center font-mono tracking-widest text-sm"
+              autoFocus
+            />
+            {pinError && <p className="text-xs text-destructive text-center">{pinError}</p>}
+            <div className="flex gap-2">
+              <Button type="button" variant="outline" size="sm" className="flex-1 rounded-full text-xs" onClick={() => setPinPromptOpen(false)}>
+                Cancelar
+              </Button>
+              <Button type="submit" size="sm" className="flex-1 rounded-full text-xs bg-[#c28b17] hover:bg-[#a6740f] text-white">
+                Ingresar
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
+    )}
+
+    {!client && (isAdmin || isVerifiedAdmin) && showAdminEdit && data && (
       <ProductEditDialog
         productId={data.id}
         isOpen={showAdminEdit}

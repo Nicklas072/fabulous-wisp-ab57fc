@@ -43,7 +43,7 @@ let cachedSettings: { data: SettingsCache; exp: number } | null = null;
 let cachedCatalogIndex: { data: CatalogProduct[]; exp: number } | null = null;
 let cachedFullCatalogIndex: { data: AdminCatalogProduct[]; exp: number } | null = null;
 
-const CACHE_TTL = 1000 * 60 * 5; // 5 minutos de respuesta instantánea (0.1ms)
+const CACHE_TTL = 1000 * 1; // 1 segundo para reflejar cambios en tiempo real al editar
 
 export function invalidateCatalogCache() {
   cachedCatalogIndex = null;

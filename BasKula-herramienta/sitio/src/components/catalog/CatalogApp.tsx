@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Search, Heart, LayoutGrid, X, Sparkles, User, ArrowLeft, LogIn, LogOut, MessageCircle } from "lucide-react";
+import { Search, Heart, LayoutGrid, X, Sparkles, User, ArrowLeft, LogIn, LogOut, MessageCircle, Shield, UtensilsCrossed, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +16,7 @@ import {
   TONE_ORDER,
   TONE_FINISH,
 } from "@/lib/types";
-import { clientFetch, setClientCode, getClientCode, clearClientCode, clearAdminPin } from "@/lib/api-client";
+import { clientFetch, setClientCode, getClientCode, clearClientCode, clearAdminPin, getAdminPin } from "@/lib/api-client";
 import ProductGrid from "./ProductGrid";
 import ProductModal from "./ProductModal";
 import FilterPanel from "./FilterPanel";
@@ -114,15 +114,17 @@ export default function CatalogApp({
 
   // Ventana "Inicia sesión"
   const [loginOpen, setLoginOpen] = useState(false);
+  const [hasAdminSession, setHasAdminSession] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setHasAdminSession(!!getAdminPin());
+    }
+  }, []);
 
   const welcome = searchParams.get("welcome") === "1";
 
-  // Si hay sesión de cliente activa, asegurar que no queden credenciales admin residuales
-  useEffect(() => {
-    if (clientInfo) {
-      clearAdminPin();
-    }
-  }, [clientInfo]);
+
 
   // Cargar índice del catálogo solo si no vino precargado del servidor
   useEffect(() => {
@@ -183,6 +185,15 @@ export default function CatalogApp({
     const onStorage = (e: StorageEvent) => {
       if (e.key === "baskula_catalog_sync") {
         refreshCatalogProducts();
+      }
+      if (e.key === "pb_admin_pin") {
+        setHasAdminSession(!!getAdminPin());
+      }
+      if (e.key === "pb_client_code") {
+        const code = getClientCode();
+        if (!code) {
+          setClientInfo(null);
+        }
       }
     };
 
@@ -296,7 +307,7 @@ export default function CatalogApp({
       if (params.view) setCurrentView(params.view as View);
       if (params.p !== undefined) setSelectedProductSlug(params.p);
       setUrlSearch(current.toString() ? `?${current.toString()}` : "");
-      if (params.view || params.grupo || params.q || params.tipo) {
+      if (params.view && params.view !== currentView) {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     },
@@ -335,10 +346,14 @@ export default function CatalogApp({
     go({ p: null });
   }, [go]);
 
-  // ═══ Inicio / cierre de sesión del cliente ═══
+  // ═══ Inicio / cierre de sesión del cliente y admin ═══
   const handleLoginSuccess = useCallback(
     (data: LoginResult) => {
+      // Invalida explícitamente cualquier sesión residual de admin
       clearAdminPin();
+      fetch("/api/admin/auth", { method: "DELETE" }).catch(() => {});
+      setHasAdminSession(false);
+
       setClientInfo(data.client);
       setCuratedItems((data.curated as CatalogProduct[]) || []);
       setSuggestionItems((data.suggestions as CatalogProduct[]) || []);
@@ -353,9 +368,12 @@ export default function CatalogApp({
 
   const handleLogout = useCallback(() => {
     clearClientCode();
-    clearAdminPin();
     // También limpiar la cookie (si no, al recargar vuelve a identificarse)
     fetch("/api/client/logout", { method: "POST" }).catch(() => {});
+    clearAdminPin();
+    fetch("/api/admin/auth", { method: "DELETE" }).catch(() => {});
+    setHasAdminSession(false);
+
     setClientInfo(null);
     setCuratedItems([]);
     setSuggestionItems([]);
@@ -365,6 +383,17 @@ export default function CatalogApp({
     goClean({ view: "home" });
     toast({ title: "Sesión cerrada", description: "Volverás al catálogo general." });
   }, [goClean, toast]);
+
+  const handleAdminLogout = useCallback(async () => {
+    clearAdminPin();
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } catch {
+      /* ignore */
+    }
+    setHasAdminSession(false);
+    toast({ title: "Sesión cerrada", description: "Has salido del panel de administración." });
+  }, [toast]);
 
   // Sincronizar el corazón cuando el cliente quita una pieza desde su
   // «Mi lista» (la vista usa su propio flujo de borrado)
@@ -385,7 +414,7 @@ export default function CatalogApp({
         toast({
           title: "Tu lista de interés",
           description:
-            "Ingresa con tu código de cliente o pídelo por WhatsApp para guardar y compartir tus favoritos.",
+            "Inicia sesión o solicita tu acceso por WhatsApp para guardar y compartir tus favoritos.",
         });
         return;
       }
@@ -515,9 +544,19 @@ export default function CatalogApp({
           )}
 
           {clientInfo && (
-            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f6e9c8] text-[#8b5a2b] text-xs font-medium border border-[#c28b17]/30 shrink-0">
-              {clientInfo.name.split(" ")[0]}
-            </span>
+            <div className="flex items-center gap-1.5 shrink-0">
+              <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f6e9c8] text-[#8b5a2b] text-xs font-medium border border-[#c28b17]/30 shrink-0 max-w-[150px] lg:max-w-[220px] truncate">
+                {clientInfo.name}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 h-8.5 sm:h-10 rounded-full border border-[#e5d5c5] bg-[#faf8f5] text-[#8d8677] hover:text-destructive hover:border-destructive/40 transition-all text-xs font-medium cursor-pointer shrink-0"
+                title="Cerrar sesión"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline text-xs">Cerrar sesión</span>
+              </button>
+            </div>
           )}
 
           <button
@@ -528,14 +567,36 @@ export default function CatalogApp({
             <span>Catálogo</span>
           </button>
 
-          {!clientInfo && (
+          {!clientInfo && !hasAdminSession && (
             <button
               onClick={() => setLoginOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 sm:px-4.5 h-8.5 sm:h-10 rounded-full bg-[#faf8f5] text-[#222222] border border-[#e5d5c5] text-xs sm:text-sm font-medium hover:border-[#c28b17] hover:text-[#c28b17] transition-all shadow-xs shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4.5 h-8.5 sm:h-10 rounded-full bg-[#faf8f5] text-[#222222] border border-[#e5d5c5] text-xs sm:text-sm font-medium hover:border-[#c28b17] hover:text-[#c28b17] transition-all shadow-xs shrink-0 cursor-pointer"
             >
               <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#c28b17] shrink-0" />
-              <span>Iniciar sesión</span>
+              <span className="hidden sm:inline">Iniciar sesión</span>
+              <span className="sm:hidden text-xs">Entrar</span>
             </button>
+          )}
+
+          {hasAdminSession && !clientInfo && (
+            <div className="flex items-center gap-1.5 shrink-0">
+              <Link
+                href="/admin"
+                className="inline-flex items-center gap-1.5 px-3 sm:px-4 h-8.5 sm:h-10 rounded-full bg-[#2a241e] text-[#e2a727] border border-[#e2a727]/40 text-xs sm:text-sm font-medium hover:bg-[#1f1a15] hover:border-[#e2a727] transition-all shadow-xs shrink-0 cursor-pointer"
+                title="Volver al Panel de Administrador"
+              >
+                <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#e2a727] shrink-0" />
+                <span className="hidden sm:inline">Panel Admin</span>
+              </Link>
+              <button
+                onClick={handleAdminLogout}
+                className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 h-8.5 sm:h-10 rounded-full border border-[#e5d5c5] bg-[#faf8f5] text-[#8d8677] hover:text-destructive hover:border-destructive/40 transition-all text-xs font-medium cursor-pointer shrink-0"
+                title="Cerrar sesión de administrador"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline text-xs">Salir admin</span>
+              </button>
+            </div>
           )}
 
           <button
@@ -570,7 +631,7 @@ export default function CatalogApp({
                     ¡Bienvenido a nuestro catálogo!
                   </h1>
                   <p className="text-muted-foreground text-sm sm:text-lg mb-6 sm:mb-8 max-w-xl mx-auto text-center leading-relaxed">
-                    Si tienes clave personal{" "}
+                    Si ya eres cliente{" "}
                     <button
                       type="button"
                       onClick={() => setLoginOpen(true)}
@@ -861,6 +922,7 @@ export default function CatalogApp({
               </div>
             </section>
 
+
             {/* Navegación rápida por diámetro */}
             <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 pb-16 flex flex-col items-center">
               <SectionTitle
@@ -901,6 +963,7 @@ export default function CatalogApp({
             onToggleFavorite={toggleFavorite}
             onGo={go}
             urlSearch={urlSearch}
+            whatsapp={whatsapp}
           />
         )}
 

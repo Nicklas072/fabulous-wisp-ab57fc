@@ -23,7 +23,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
-import { adminFetch, setAdminPin, clearAdminPin, normalizeClientCode } from "@/lib/api-client";
+import { adminFetch, setAdminPin, clearAdminPin, clearClientCode, normalizeClientCode } from "@/lib/api-client";
 import FullCatalogView, { type PublishCounts } from "./FullCatalogView";
 import ProductPicker from "./ProductPicker";
 
@@ -171,6 +171,8 @@ export default function AdminPanel() {
       body: JSON.stringify({ pin: pin.trim() }),
     });
     if (res.ok) {
+      clearClientCode();
+      fetch("/api/client/logout", { method: "POST" }).catch(() => {});
       // Guardar el código en localStorage: se envía como header en cada
       // petición de admin y SOBREVIVE a la navegación panel ⇄ catálogo
       // (incluso si el navegador bloquea las cookies en previews).
@@ -184,7 +186,11 @@ export default function AdminPanel() {
 
   const logout = async () => {
     clearAdminPin();
-    await fetch("/api/admin/auth", { method: "DELETE" });
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } catch {
+      /* ignore */
+    }
     setAuthed(false);
     window.location.assign("/");
   };
