@@ -58,7 +58,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="styles.min.css">
     <style>
-        .mobile-nav-divider,
         .mobile-subnav {
             display: none;
         }
@@ -78,6 +77,30 @@
             -webkit-backdrop-filter: blur(12px) !important;
             box-shadow: 0 4px 20px rgba(34, 34, 34, 0.05);
         }
+
+        /* Separador gráfico fino con micro-rombo central mostaza */
+        .mobile-nav-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 8px;
+            padding: 0 20px;
+            gap: 12px;
+        }
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(226, 167, 39, 0.45), transparent);
+        }
+        .divider-diamond {
+            font-size: 7.5px;
+            color: #c28b17;
+            opacity: 0.9;
+            line-height: 1;
+        }
+
         @media (max-width: 768px) {
             .header-actions {
                 display: none !important;
@@ -88,30 +111,12 @@
                 height: 36px;
             }
 
-            /* Separador gráfico fino y moderno entre logo y botones */
             .mobile-nav-divider {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
                 max-width: 280px;
                 margin: 2px auto 6px;
                 padding: 0 16px;
                 gap: 10px;
             }
-            .divider-line {
-                flex: 1;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(226, 167, 39, 0.45), transparent);
-            }
-            .divider-diamond {
-                font-size: 7px;
-                color: #c28b17;
-                opacity: 0.85;
-                line-height: 1;
-            }
-
-            /* Barra de navegación móvil: solo texto puro con efecto y barritas */
             .mobile-subnav {
                 display: flex;
                 align-items: center;
@@ -349,17 +354,33 @@
     <!-- Hero Slider Section (Costa Nova style) -->
     <section class="hero-section hero-slider">
         <div class="slider-wrapper">
-            <!-- Slide 1: Split Screen -->
-            <div class="slide active" data-layout="split">
+            <!-- Desktop Slides (Split & Full) -->
+            <div class="slide desktop-only active" data-layout="split">
                 <div class="slide-images">
-                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-left.jpg?v=2');"></div>
-                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-right.jpg?v=2');"></div>
+                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-left.jpg?v=5');"></div>
+                    <div class="slide-image-half" style="background-image: url('images/hero-slide1-right.jpg?v=5');"></div>
                 </div>
             </div>
-            <!-- Slide 2: Full Width Storefront -->
-            <div class="slide" data-layout="full">
+            <div class="slide desktop-only" data-layout="full">
                 <div class="slide-images">
-                    <div class="slide-image-full" style="background-image: url('images/hero-slide2.jpg?v=2');"></div>
+                    <div class="slide-image-full" style="background-image: url('images/hero-slide2.jpg?v=4');"></div>
+                </div>
+            </div>
+
+            <!-- Mobile Slides (3-Photo Cinematic Crossfade) -->
+            <div class="slide mobile-only active">
+                <div class="slide-images">
+                    <div class="slide-image-full" style="background-image: url('images/hero-slide1-left.jpg?v=5');"></div>
+                </div>
+            </div>
+            <div class="slide mobile-only">
+                <div class="slide-images">
+                    <div class="slide-image-full" style="background-image: url('images/hero-slide1-right.jpg?v=5');"></div>
+                </div>
+            </div>
+            <div class="slide mobile-only">
+                <div class="slide-images">
+                    <div class="slide-image-full" style="background-image: url('images/hero-slide2.jpg?v=4');"></div>
                 </div>
             </div>
         </div>
@@ -371,16 +392,20 @@
                 <div class="card-corners"></div>
                 <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
                 <div class="hero-actions">
-                    <a href="catalogo.html" class="btn-cta">Bascula online <i data-lucide="scale"></i></a>
-                    <a href="#concepto" class="btn-secondary">Conocer Más</a>
+                    <a href="#concepto" class="btn-secondary">Conocer Más <i data-lucide="chevron-down" class="btn-icon"></i></a>
                 </div>
             </div>
         </div>
 
-        <!-- Slider Pagination Indicators (dashes like Costa Nova) -->
-        <div class="slider-pagination">
+        <!-- Slider Pagination Indicators (Desktop: 2 dashes, Mobile: 3 dashes) -->
+        <div class="slider-pagination desktop-only">
             <span class="pagination-dash active" data-slide="0"></span>
             <span class="pagination-dash" data-slide="1"></span>
+        </div>
+        <div class="slider-pagination mobile-only">
+            <span class="pagination-dash active" data-slide="0"></span>
+            <span class="pagination-dash" data-slide="1"></span>
+            <span class="pagination-dash" data-slide="2"></span>
         </div>
 
         <!-- Scroll Indicator -->
@@ -421,8 +446,8 @@
             <!-- Image 1: Wide -->
             <div class="gallery-card wide" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria1.jpg"
-                        alt="Taza blanca con corazones rojos en mesa con mantel a cuadros de BasKula" loading="lazy"
+                    <img src="images/galeria1.jpg?v=4"
+                        alt="Cuencos de cerámica esmaltada toffee caramelo apilados de BasKula" loading="lazy"
                         decoding="async" />
                 </div>
             </div>
@@ -436,30 +461,30 @@
             <!-- Image 3: Standard -->
             <div class="gallery-card" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria3.jpg"
-                        alt="Bowl de cerámica blanca con limones sobre azulejos turquesas de BasKula" loading="lazy"
+                    <img src="images/galeria3.jpg?v=4"
+                        alt="Pieza de vajilla artesanal de cerámica de BasKula" loading="lazy"
                         decoding="async" />
                 </div>
             </div>
             <!-- Image 4: Standard -->
             <div class="gallery-card" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria4.jpg"
-                        alt="Vajilla de cerámica en tonos pastel con rodajas de cítricos de BasKula" loading="lazy"
+                    <img src="images/galeria4.jpg?v=3"
+                        alt="Plato de cerámica blanca con ornamentos y flores negras finas de BasKula" loading="lazy"
                         decoding="async" />
                 </div>
             </div>
             <!-- Image 5: Standard -->
             <div class="gallery-card" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria5.png" alt="Mesa con mantel a cuadros azul y vajilla artesanal a rayas de BasKula"
+                    <img src="images/galeria5.png?v=3" alt="Rincón de la tienda BasKula con estantería de mimbre con piezas de vajilla y pared amarilla"
                         loading="lazy" decoding="async" />
                 </div>
             </div>
             <!-- Image 6: Wide -->
             <div class="gallery-card wide" data-aos="fade-up">
                 <div class="gallery-img-wrapper">
-                    <img src="images/galeria6.jpg" alt="Nueva vajilla artesanal y mediterránea de BasKula"
+                    <img src="images/galeria6.jpg?v=3" alt="Caja de cerámicas apiladas en mosaico con platos y tazas artesanales de BasKula"
                         loading="lazy" decoding="async" />
                 </div>
             </div>
