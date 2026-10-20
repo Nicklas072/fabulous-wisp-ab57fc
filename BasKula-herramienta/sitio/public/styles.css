@@ -200,19 +200,19 @@ a {
     display: block;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nNjUnIHZpZXdCb3g9JzAgMCAxNjAgNjUnPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nZGFyaycgeDE9JzAlJyB5MT0nMCUnIHgyPScxMDAlJyB5Mj0nMCUnPjxzdG9wIG9mZnNldD0nMCUnIHN0b3AtY29sb3I9JyMxODE4MTgnLz48c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nIzMzMzMzMycvPjxzdG9wIG9mZnNldD0nMTAwJScgc3RvcC1jb2xvcj0nIzE4MTgxOCcvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSdjcmVhbScgeDE9JzAlJyB5MT0nMCUnIHgyPScxMDAlJyB5Mj0nMCUnPjxzdG9wIG9mZnNldD0nMCUnIHN0b3AtY29sb3I9JyNkZmRiZDMnLz48c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nI2ZhZjhmNScvPjxzdG9wIG9mZnNldD0nMTAwJScgc3RvcC1jb2xvcj0nI2RmZGJkMycvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSd2ZXJ0aWNhbC1zaGFkaW5nJyB4MT0nMCUnIHkxPScwJScgeDI9JzAlJyB5Mj0nMTAwJSc+PHN0b3Agb2Zmc2V0PScwJScgc3RvcC1jb2xvcj0nI2ZmZmZmZicgc3RvcC1vcGFjaXR5PScwLjI1Jy8+PHN0b3Agb2Zmc2V0PSc2MCUnIHN0b3AtY29sb3I9JyMwMDAwMDAnIHN0b3Atb3BhY2l0eT0nMC4wJy8+PHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjMDAwMDAwJyBzdG9wLW9wYWNpdHk9JzAuNCcvPjwvbGluZWFyR3JhZGllbnQ+PGNsaXBQYXRoIGlkPSdzY2FsbG9wLWNsaXAnPjxwYXRoIGQ9J00gMCAwIEggMTYwIFYgNTAgQSA0MCAxNSAwIDAgMSA4MCA1MCBBIDQwIDE1IDAgMCAxIDAgNTAgWicvPjwvY2xpcFBhdGg+PC9kZWZzPjxwYXRoIGQ9J00gMCAwIEggODAgViA1MCBBIDQwIDE1IDAgMCAxIDAgNTAgWicgZmlsbD0ndXJsKCNkYXJrKScvPjxwYXRoIGQ9J00gODAgMCBIIDE2MCBWIDUwIEEgNDAgMTUgMCAwIDEgODAgNTAgWicgZmlsbD0ndXJsKCNjcmVhbSknLz48cmVjdCB3aWR0aD0nMTYwJyBoZWlnaHQ9JzY1JyBmaWxsPSd1cmwoI3ZlcnRpY2FsLXNoYWRpbmcpJyBjbGlwLXBhdGg9J3VybCgjc2NhbGxvcC1jbGlwKScvPjwvc3ZnPg==");
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nNjUnIHZpZXdCb3g9JzAgMCAxNjAgNjUnPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSdibGFjay1zdHJpcGUnIHgxPScwJScgeTE9JzAlJyB4Mj0nMTAwJScgeTI9JzAlJz4KICAgICAgPHN0b3Agb2Zmc2V0PScwJScgc3RvcC1jb2xvcj0nIzBlMGUwZScvPgogICAgICA8c3RvcCBvZmZzZXQ9JzUwJScgc3RvcC1jb2xvcj0nIzE4MTgxOCcvPgogICAgICA8c3RvcCBvZmZzZXQ9JzEwMCUnIHN0b3AtY29sb3I9JyMwZTBlMGUnLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9J3doaXRlLXN0cmlwZScgeDE9JzAlJyB5MT0nMCUnIHgyPScxMDAlJyB5Mj0nMCUnPgogICAgICA8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjZWFlOWU2Jy8+CiAgICAgIDxzdG9wIG9mZnNldD0nNTAlJyBzdG9wLWNvbG9yPScjZjZmNWYzJy8+CiAgICAgIDxzdG9wIG9mZnNldD0nMTAwJScgc3RvcC1jb2xvcj0nI2VhZTllNicvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0nc29mdC1kZXB0aCcgeDE9JzAlJyB5MT0nMCUnIHgyPScwJScgeTI9JzEwMCUnPgogICAgICA8c3RvcCBvZmZzZXQ9JzAlJyBzdG9wLWNvbG9yPScjMDAwMDAwJyBzdG9wLW9wYWNpdHk9JzAuMCcvPgogICAgICA8c3RvcCBvZmZzZXQ9JzU1JScgc3RvcC1jb2xvcj0nIzAwMDAwMCcgc3RvcC1vcGFjaXR5PScwLjAnLz4KICAgICAgPHN0b3Agb2Zmc2V0PSc4MCUnIHN0b3AtY29sb3I9JyMwMDAwMDAnIHN0b3Atb3BhY2l0eT0nMC4xNicvPgogICAgICA8c3RvcCBvZmZzZXQ9JzEwMCUnIHN0b3AtY29sb3I9JyMwMDAwMDAnIHN0b3Atb3BhY2l0eT0nMC4zNCcvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxjbGlwUGF0aCBpZD0nc2NhbGxvcC1jbGlwJz4KICAgICAgPHBhdGggZD0nTSAwIDAgSCAxNjAgViA1MCBBIDQwIDE1IDAgMCAxIDgwIDUwIEEgNDAgMTUgMCAwIDEgMCA1MCBaJy8+CiAgICA8L2NsaXBQYXRoPgogIDwvZGVmcz4KICA8cGF0aCBkPSdNIDAgMCBIIDgwIFYgNTAgQSA0MCAxNSAwIDAgMSAwIDUwIFonIGZpbGw9J3VybCgjYmxhY2stc3RyaXBlKScvPgogIDxwYXRoIGQ9J00gODAgMCBIIDE2MCBWIDUwIEEgNDAgMTUgMCAwIDEgODAgNTAgWicgZmlsbD0ndXJsKCN3aGl0ZS1zdHJpcGUpJy8+CiAgPHJlY3Qgd2lkdGg9JzE2MCcgaGVpZ2h0PSc2NScgZmlsbD0ndXJsKCNzb2Z0LWRlcHRoKScgY2xpcC1wYXRoPSd1cmwoI3NjYWxsb3AtY2xpcCknLz4KPC9zdmc+");
     background-repeat: repeat-x;
     background-size: 160px 100%;
     transform-origin: top center;
     transform: scaleY(0); /* start collapsed for rollout animation */
-    filter: drop-shadow(0px 8px 10px rgba(0, 0, 0, 0.22)); /* Cast drop shadow of the scallops */
+    filter: drop-shadow(0px 5px 8px rgba(115, 82, 45, 0.28)) drop-shadow(0px 12px 18px rgba(135, 95, 50, 0.20)); /* Sombra cromática cálida que oscurece el lino crema de forma natural */
     will-change: transform;
 }
 
 /* Page load ready rollout animation + continuous wind sway animation */
 body.ready .awning-border::after {
     animation: awningEntrance 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-               awningBreeze 6s ease-in-out infinite 1.4s;
+               awningBreeze 7s ease-in-out infinite 1.4s;
 }
 
 @keyframes awningEntrance {
@@ -229,13 +229,13 @@ body.ready .awning-border::after {
         transform: skewX(0deg) scaleY(1);
     }
     25% {
-        transform: skewX(-2.5deg) scaleY(0.97);
+        transform: skewX(-1.2deg) scaleY(0.985);
     }
     50% {
-        transform: skewX(0deg) scaleY(0.94);
+        transform: skewX(0.4deg) scaleY(0.975);
     }
     75% {
-        transform: skewX(2.5deg) scaleY(0.97);
+        transform: skewX(1.2deg) scaleY(0.985);
     }
 }
 
@@ -365,19 +365,38 @@ body.scrolled .nav-item {
     max-height: 48px;
     display: block;
     transform-origin: center center;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.2s ease;
+    /* Relieve de Sello de Cerámica: Bisel de luz superior + sombra de contacto y volumen cálido */
+    filter: drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.85))
+            drop-shadow(0px 1.5px 1px rgba(95, 68, 38, 0.38))
+            drop-shadow(0px 3px 5px rgba(60, 42, 22, 0.16));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.3s ease;
 }
 
 .logo-area:hover .nav-logo {
-    opacity: 0.85;
+    opacity: 1;
+    transform: translateY(-1.5px) scale(1.02);
+    filter: drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.95))
+            drop-shadow(0px 2.5px 2px rgba(95, 68, 38, 0.45))
+            drop-shadow(0px 5px 8px rgba(60, 42, 22, 0.20));
+}
+
+.logo-area:active .nav-logo {
+    transform: translateY(0.5px) scale(0.99);
 }
 
 /* Adjust size for footer and postcard */
-.postcard-info .nav-logo,
+.postcard-info .nav-logo {
+    height: 60px;
+    max-height: 60px;
+    filter: drop-shadow(0px -1px 0px rgba(255, 255, 255, 0.85))
+            drop-shadow(0px 1.5px 1.5px rgba(95, 68, 38, 0.35));
+}
+
 .footer-brand .nav-logo {
     height: 60px; /* slightly larger in content sections */
     max-height: 60px;
+    filter: none; /* keep clean on dark footer */
 }
 
 /* Right: Action icons */
@@ -775,6 +794,14 @@ body.drawer-open {
         gap: 4px;
     }
 
+    .hero-actions .btn-secondary:only-child {
+        flex: 0 1 auto;
+        min-width: 180px;
+        max-width: 280px;
+        padding: 12px 24px !important;
+        font-size: 0.82rem !important;
+    }
+
     .hero-actions .btn-cta svg,
     .hero-actions .btn-secondary svg {
         width: 14px;
@@ -900,9 +927,9 @@ body.drawer-open {
 .slide-image-full {
     width: 100%;
     height: 100%;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center 35%;
     background-color: var(--color-crema);
     transition: transform 7s ease-in-out;
 }
@@ -940,18 +967,23 @@ body.drawer-open {
     width: 55px; /* extends horizontal length slightly when active */
 }
 
+/* Responsive visibility for slider */
+@media (min-width: 769px) {
+    .hero-slider .slide.mobile-only,
+    .slider-pagination.mobile-only {
+        display: none !important;
+    }
+}
+
 @media (max-width: 768px) {
-    .slide-image-half:nth-child(2) {
-        display: none;
+    .hero-slider .slide.desktop-only,
+    .slider-pagination.desktop-only {
+        display: none !important;
     }
-    .slide-image-half:nth-child(1) {
-        width: 100%;
-        flex: none;
-    }
-    .slider-pagination {
+    .slider-pagination.mobile-only {
         right: 50%;
         transform: translateX(50%);
-        bottom: 25px;
+        bottom: 20px;
     }
 }
 
@@ -1167,25 +1199,74 @@ body.drawer-open {
     box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.25) !important;
 }
 
+/* Disabled state for Bascula Online CTA button */
+.hero-actions .btn-cta.btn-disabled {
+    background-color: #d8d0c5 !important;
+    color: #4a453e !important;
+    border-color: rgba(34, 34, 34, 0.25) !important;
+    outline-color: rgba(34, 34, 34, 0.25) !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    opacity: 0.85;
+    pointer-events: none;
+    transform: none !important;
+}
+
+.hero-actions .btn-cta.btn-disabled .badge-proximamente {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: var(--color-charcoal, #222);
+    color: #FAF8F5;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    margin-left: 6px;
+    line-height: 1;
+    vertical-align: middle;
+}
+
 .hero-actions .btn-secondary {
-    background-color: rgba(250, 248, 245, 0.88) !important;
-    border: 1px solid var(--color-carbon) !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: rgba(250, 248, 245, 0.92) !important;
+    border: 1px solid rgba(34, 34, 34, 0.55) !important;
     color: var(--color-carbon) !important;
-    outline: 1px solid var(--color-carbon) !important;
+    outline: 1.5px solid var(--color-mostaza, #E2A727) !important;
     outline-offset: 4px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 4px 14px rgba(226, 167, 39, 0.20), 0px 2px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.hero-actions .btn-secondary .btn-icon,
+.hero-actions .btn-secondary svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-mostaza, #E2A727);
+    stroke: var(--color-mostaza, #E2A727);
+    stroke-width: 2.4px;
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .hero-actions .btn-secondary:hover {
-    background-color: var(--color-carbon) !important;
-    color: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    color: var(--color-carbon) !important;
     border-color: var(--color-carbon) !important;
-    outline-color: var(--color-carbon) !important;
-    outline-offset: 6px;
+    outline: 1.5px solid var(--color-mostaza, #E2A727) !important;
+    outline-offset: 6.5px;
     transform: translateY(-2px) !important;
-    box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.25) !important;
+    box-shadow: 0px 8px 26px rgba(226, 167, 39, 0.32), 0px 4px 12px rgba(0, 0, 0, 0.12) !important;
+}
+
+.hero-actions .btn-secondary:hover .btn-icon,
+.hero-actions .btn-secondary:hover svg {
+    transform: translateY(3px);
 }
 
 /* Ivy Swaying Animation */
@@ -2684,14 +2765,7 @@ body.drawer-open {
     }
 
     .hero-section .slider-wrapper {
-        background-image: url('images/hero-mobile.jpg') !important;
-        background-size: cover !important;
-        background-position: center !important;
-    }
-
-    .hero-section .slide,
-    .hero-section .slider-pagination {
-        display: none !important;
+        background-image: none !important;
     }
 
     .storefront-content {

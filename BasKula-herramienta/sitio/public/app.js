@@ -347,50 +347,67 @@ if (contactForm) {
     });
 }
 
-// --- Hero Slider Logic (Costa Nova style) ---
-const slides = document.querySelectorAll('.hero-slider .slide');
-const dashes = document.querySelectorAll('.hero-slider .pagination-dash');
-let currentSlideIndex = 0;
-let slideInterval = null;
+// --- Hero Slider Logic (Costa Nova style + Responsive Crossfade) ---
+function initHeroSlider() {
+    const isMobile = window.innerWidth <= 768;
+    const slides = isMobile 
+        ? document.querySelectorAll('.hero-slider .slide.mobile-only') 
+        : document.querySelectorAll('.hero-slider .slide.desktop-only');
+    const pagination = isMobile
+        ? document.querySelector('.slider-pagination.mobile-only')
+        : document.querySelector('.slider-pagination.desktop-only');
+    const dashes = pagination 
+        ? pagination.querySelectorAll('.pagination-dash') 
+        : [];
 
-const showSlide = (index) => {
-    if (slides.length === 0) return;
-    
-    // Deactivate current slide and dash
-    slides[currentSlideIndex].classList.remove('active');
-    if (dashes[currentSlideIndex]) dashes[currentSlideIndex].classList.remove('active');
-    
-    // Set new slide index
-    currentSlideIndex = index;
-    
-    // Activate new slide and dash
-    slides[currentSlideIndex].classList.add('active');
-    if (dashes[currentSlideIndex]) dashes[currentSlideIndex].classList.add('active');
-};
+    if (slides.length === 0) return null;
 
-const nextSlide = () => {
-    let nextIndex = (currentSlideIndex + 1) % slides.length;
-    showSlide(nextIndex);
-};
+    let currentIndex = 0;
+    let slideInterval = null;
 
-const startSlideShow = () => {
-    stopSlideShow();
-    slideInterval = setInterval(nextSlide, 6000); // rotates slides every 6 seconds
-};
+    const showSlide = (index) => {
+        slides.forEach(s => s.classList.remove('active'));
+        dashes.forEach(d => d.classList.remove('active'));
+        currentIndex = (index + slides.length) % slides.length;
+        slides[currentIndex].classList.add('active');
+        if (dashes[currentIndex]) dashes[currentIndex].classList.add('active');
+    };
 
-const stopSlideShow = () => {
-    if (slideInterval) clearInterval(slideInterval);
-};
+    const nextSlide = () => {
+        showSlide(currentIndex + 1);
+    };
 
-// Add click listeners to paginating dashes
-dashes.forEach((dash, idx) => {
-    dash.addEventListener('click', () => {
-        showSlide(idx);
-        startSlideShow(); // restart interval on manual change
+    const startSlideShow = () => {
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, isMobile ? 4500 : 6000);
+    };
+
+    dashes.forEach((dash, idx) => {
+        dash.addEventListener('click', () => {
+            showSlide(idx);
+            startSlideShow();
+        });
     });
-});
 
-// Start slideshow if components exist on the page
-if (slides.length > 0) {
+    showSlide(0);
     startSlideShow();
+
+    return () => {
+        if (slideInterval) clearInterval(slideInterval);
+    };
+}
+
+let cleanupSlider = null;
+if (document.querySelector('.hero-slider')) {
+    cleanupSlider = initHeroSlider();
+    let lastWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+        const currentIsMobile = window.innerWidth <= 768;
+        const lastIsMobile = lastWidth <= 768;
+        if (currentIsMobile !== lastIsMobile) {
+            lastWidth = window.innerWidth;
+            if (cleanupSlider) cleanupSlider();
+            cleanupSlider = initHeroSlider();
+        }
+    });
 }
