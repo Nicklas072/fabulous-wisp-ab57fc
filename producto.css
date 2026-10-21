@@ -1,0 +1,653 @@
+/* ==========================================================================
+   BasKula — Hoja de Estilos de Página de Producto (Inspirada en Costa Nova)
+   Estilo editorial, paleta artesanal lino, mostaza y carbón.
+   ========================================================================== */
+
+/* Variables base alineadas con el sistema de diseño de BasKula */
+:root {
+    --pdp-mustard: #E2A727;
+    --pdp-mustard-hover: #C28B17;
+    --pdp-bg-cream: #FAF8F5;
+    --pdp-bg-linen: #F4EEE2;
+    --pdp-bg-card: #FFFFFF;
+    --pdp-charcoal: #222222;
+    --pdp-charcoal-muted: #555555;
+    --pdp-terracotta: #C66B4E;
+    --pdp-olive: #6E8058;
+    --pdp-border-subtle: rgba(194, 139, 23, 0.18);
+    --pdp-font-heading: 'Lora', Georgia, serif;
+    --pdp-font-body: 'Outfit', 'Lexend Deca', system-ui, sans-serif;
+    --pdp-radius: 12px;
+    --pdp-shadow: 0 10px 30px rgba(34, 34, 34, 0.06);
+    --pdp-shadow-lg: 0 18px 45px rgba(34, 34, 34, 0.10);
+}
+
+/* Base de página de producto */
+body.pdp-page {
+    background-color: var(--pdp-bg-cream);
+    color: var(--pdp-charcoal);
+    font-family: var(--pdp-font-body);
+    margin: 0;
+    padding-top: 96px; /* Altura de header fijo */
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 768px) {
+    body.pdp-page {
+        padding-top: 104px;
+    }
+}
+
+/* Contenedor central */
+.pdp-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+}
+
+/* Breadcrumbs / Miga de pan */
+.pdp-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--pdp-charcoal-muted);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.pdp-breadcrumbs a {
+    color: var(--pdp-charcoal-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pdp-breadcrumbs a:hover {
+    color: var(--pdp-mustard);
+}
+
+.pdp-breadcrumbs .breadcrumb-separator {
+    opacity: 0.45;
+    font-size: 0.75rem;
+}
+
+.pdp-breadcrumbs .breadcrumb-current {
+    color: var(--pdp-charcoal);
+    font-weight: 500;
+}
+
+/* Estructura Principal de Dos Columnas */
+.pdp-layout-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 52px;
+    align-items: start;
+    margin-bottom: 80px;
+}
+
+@media (max-width: 960px) {
+    .pdp-layout-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+/* Columna Izquierda: Escenario de Galería */
+.pdp-gallery-column {
+    position: sticky;
+    top: 110px;
+}
+
+@media (max-width: 960px) {
+    .pdp-gallery-column {
+        position: static;
+    }
+}
+
+.pdp-gallery-stage {
+    position: relative;
+    background: linear-gradient(145deg, #ffffff 0%, #f7f3ec 100%);
+    border-radius: var(--pdp-radius);
+    border: 1px solid var(--pdp-border-subtle);
+    box-shadow: var(--pdp-shadow);
+    padding: 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 440px;
+    overflow: hidden;
+    cursor: zoom-in;
+    transition: box-shadow 0.3s ease;
+}
+
+.pdp-gallery-stage:hover {
+    box-shadow: var(--pdp-shadow-lg);
+}
+
+.pdp-stage-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background-color: rgba(244, 238, 226, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--pdp-border-subtle);
+    color: var(--pdp-mustard-hover);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+
+.pdp-main-image {
+    max-width: 90%;
+    max-height: 420px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.12));
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    user-select: none;
+}
+
+.pdp-gallery-stage:hover .pdp-main-image {
+    transform: scale(1.04);
+}
+
+/* Tira de Miniaturas (Gallery Thumbnails) */
+.pdp-thumbnails-strip {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+}
+
+.pdp-thumbnail-item {
+    width: 76px;
+    height: 76px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background: #fff;
+    padding: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
+
+.pdp-thumbnail-item:hover {
+    border-color: rgba(226, 167, 39, 0.5);
+}
+
+.pdp-thumbnail-item.active {
+    border-color: var(--pdp-mustard);
+    box-shadow: 0 0 0 2px rgba(226, 167, 39, 0.2);
+}
+
+.pdp-thumbnail-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Columna Derecha: Información Editorial */
+.pdp-info-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.pdp-origin-tag {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--pdp-mustard-hover);
+    margin-bottom: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pdp-title {
+    font-family: var(--pdp-font-heading);
+    font-size: 2.35rem;
+    font-weight: 500;
+    line-height: 1.18;
+    color: var(--pdp-charcoal);
+    margin: 0 0 16px 0;
+}
+
+@media (max-width: 768px) {
+    .pdp-title {
+        font-size: 1.85rem;
+    }
+}
+
+/* Bloque de Precios y Peso */
+.pdp-price-card {
+    background-color: #ffffff;
+    border-radius: var(--pdp-radius);
+    border: 1px solid var(--pdp-border-subtle);
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--pdp-shadow);
+}
+
+.pdp-price-main-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.pdp-unit-price {
+    font-family: var(--pdp-font-heading);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--pdp-charcoal);
+}
+
+.pdp-unit-price-label {
+    font-size: 0.82rem;
+    color: var(--pdp-charcoal-muted);
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+.pdp-rate-badge {
+    background-color: rgba(226, 167, 39, 0.12);
+    color: var(--pdp-mustard-hover);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pdp-weight-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--pdp-charcoal-muted);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 10px;
+    margin-top: 8px;
+}
+
+.pdp-weight-val {
+    font-weight: 600;
+    color: var(--pdp-charcoal);
+}
+
+.pdp-kilo-note {
+    font-size: 0.78rem;
+    color: #777;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Descripción de la Pieza */
+.pdp-story {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: #444;
+    margin-bottom: 26px;
+}
+
+/* Fila de Acciones: Cantidad + Poner en Báscula + WhatsApp */
+.pdp-actions-box {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 34px;
+}
+
+.pdp-qty-and-cta {
+    display: flex;
+    gap: 14px;
+    align-items: stretch;
+}
+
+@media (max-width: 540px) {
+    .pdp-qty-and-cta {
+        flex-direction: column;
+    }
+}
+
+.pdp-qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--pdp-border-subtle);
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 4px 8px;
+    min-width: 110px;
+    justify-content: space-between;
+}
+
+.pdp-qty-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--pdp-charcoal);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.pdp-qty-btn:hover {
+    background-color: var(--pdp-bg-linen);
+    color: var(--pdp-mustard-hover);
+}
+
+.pdp-qty-display {
+    font-weight: 600;
+    font-size: 1rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+.btn-add-scale {
+    flex: 1;
+    background: linear-gradient(135deg, #E2A727 0%, #C28B17 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    font-family: var(--pdp-font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 14px 24px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(226, 167, 39, 0.35);
+    transition: all 0.25s ease;
+}
+
+.btn-add-scale:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(226, 167, 39, 0.45);
+}
+
+.btn-add-scale:active {
+    transform: translateY(0);
+}
+
+.btn-add-scale.added-feedback {
+    background: linear-gradient(135deg, #6E8058 0%, #586944 100%);
+    box-shadow: 0 4px 15px rgba(110, 128, 88, 0.35);
+}
+
+.btn-whatsapp-inquire {
+    width: 100%;
+    background-color: transparent;
+    border: 1.5px solid rgba(34, 34, 34, 0.18);
+    color: var(--pdp-charcoal);
+    border-radius: 30px;
+    font-family: var(--pdp-font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    padding: 12px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-whatsapp-inquire:hover {
+    border-color: #25D366;
+    color: #128C7E;
+    background-color: rgba(37, 211, 102, 0.06);
+}
+
+/* Acordeones al estilo Costa Nova */
+.pdp-accordion-group {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.pdp-accordion-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.pdp-accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--pdp-font-body);
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: var(--pdp-charcoal);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.pdp-accordion-header:hover {
+    color: var(--pdp-mustard);
+}
+
+.pdp-accordion-icon {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+    color: var(--pdp-mustard-hover);
+}
+
+.pdp-accordion-item.active .pdp-accordion-icon {
+    transform: rotate(45deg);
+}
+
+.pdp-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.pdp-accordion-item.active .pdp-accordion-body {
+    max-height: 300px;
+    padding-bottom: 18px;
+}
+
+/* Badges de Cuidados dentro del acordeón */
+.pdp-care-badges-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.pdp-care-pill {
+    background-color: var(--pdp-bg-linen);
+    color: var(--pdp-charcoal);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Sección de Piezas Sugeridas */
+.pdp-related-section {
+    border-top: 1px solid rgba(194, 139, 23, 0.18);
+    padding-top: 50px;
+    margin-top: 30px;
+}
+
+.pdp-related-title {
+    font-family: var(--pdp-font-heading);
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.pdp-related-subtitle {
+    text-align: center;
+    color: var(--pdp-charcoal-muted);
+    font-size: 0.92rem;
+    margin-bottom: 36px;
+}
+
+.pdp-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+}
+
+.pdp-related-card {
+    background: #fff;
+    border: 1px solid var(--pdp-border-subtle);
+    border-radius: var(--pdp-radius);
+    padding: 18px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease;
+}
+
+.pdp-related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--pdp-shadow);
+    border-color: rgba(226, 167, 39, 0.4);
+}
+
+.pdp-related-img-wrap {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+}
+
+.pdp-related-img-wrap img {
+    max-width: 85%;
+    max-height: 160px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.08));
+    transition: transform 0.3s ease;
+}
+
+.pdp-related-card:hover .pdp-related-img-wrap img {
+    transform: scale(1.05);
+}
+
+.pdp-related-card-title {
+    font-family: var(--pdp-font-heading);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--pdp-charcoal);
+}
+
+.pdp-related-card-meta {
+    font-size: 0.82rem;
+    color: var(--pdp-charcoal-muted);
+    margin-bottom: 8px;
+}
+
+.pdp-related-card-price {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--pdp-mustard-hover);
+}
+
+/* Toast de notificación rápida */
+.pdp-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: var(--pdp-charcoal);
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transform: translateY(100px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 9999;
+}
+
+.pdp-toast.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.pdp-toast i {
+    color: var(--pdp-mustard);
+}
+
+/* Estado de error o no encontrado */
+.pdp-not-found {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.pdp-not-found h2 {
+    font-family: var(--pdp-font-heading);
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.pdp-not-found p {
+    color: var(--pdp-charcoal-muted);
+    margin-bottom: 24px;
+}
+
+.pdp-not-found .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: var(--pdp-mustard);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+}
