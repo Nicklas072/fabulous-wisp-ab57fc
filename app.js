@@ -1384,6 +1384,7 @@ const openAparadorModal = (item) => {
     const imgEl = document.getElementById('aparador-modal-img');
     const priceEl = document.getElementById('aparador-modal-price');
     const weightEl = document.getElementById('aparador-modal-weight');
+    const weightWrapEl = document.getElementById('aparador-modal-weight-wrap');
     const dimEl = document.getElementById('aparador-modal-dimensions');
     const finishEl = document.getElementById('aparador-modal-finish');
     const wppEl = document.getElementById('aparador-modal-whatsapp');
@@ -1395,18 +1396,24 @@ const openAparadorModal = (item) => {
         imgEl.alt = item.name;
     }
     if (priceEl) priceEl.textContent = item.priceFormatted;
-    if (weightEl) weightEl.textContent = item.weightFormatted;
+    if (weightEl) weightEl.textContent = item.weightFormatted || '';
+    if (weightWrapEl) {
+        weightWrapEl.style.display = item.hideWeight ? 'none' : '';
+    }
     if (dimEl) dimEl.textContent = item.dimensions;
     if (finishEl) finishEl.textContent = item.finish;
 
     const badgeEl = document.getElementById('aparador-modal-badge');
     const originTagEl = modal.querySelector('.ficha-origin-tag');
-    const isHoliday = HOLIDAY_ITEMS.some(h => h.id === item.id) || (item.id && item.id.startsWith('holiday-'));
+    const isHoliday = (typeof HOLIDAY_ITEMS !== 'undefined' && HOLIDAY_ITEMS.some(h => h.id === item.id)) || (item.id && item.id.startsWith('holiday-'));
+    const isTrend = (typeof TREND_ITEMS !== 'undefined' && TREND_ITEMS.some(t => t.id === item.id)) || (item.id && item.id.startsWith('trend-'));
     const isFixed = item.pricingType === 'fixed';
 
     if (badgeEl) {
         if (isHoliday) {
             badgeEl.innerHTML = '🚢 En viaje · Llegando en Noviembre';
+        } else if (isTrend) {
+            badgeEl.innerHTML = '✦ Nueva Temporada · Portugal ✦';
         } else if (isFixed) {
             badgeEl.innerHTML = 'Pieza Especial';
         } else {
@@ -1416,6 +1423,8 @@ const openAparadorModal = (item) => {
     if (originTagEl) {
         if (isHoliday) {
             originTagEl.textContent = 'BasKula · Próximo Desembarco Navideño';
+        } else if (isTrend) {
+            originTagEl.textContent = 'BasKula · Nueva Temporada';
         } else if (isFixed) {
             originTagEl.textContent = 'BasKula · Piezas Especiales';
         } else {
@@ -1429,13 +1438,17 @@ const openAparadorModal = (item) => {
             if (wppTextSpan) wppTextSpan.textContent = 'Avisarme al llegar';
             const text = encodeURIComponent(`Hola BasKula! Me gustaría anotarme en la lista de espera para cuando llegue la pieza navideña "${item.name}" (${item.priceFormatted}) que vi en su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
+        } else if (isTrend) {
+            if (wppTextSpan) wppTextSpan.textContent = 'Consultar por esta colección';
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por las piezas de la ${item.name} ($16.50 / kg) de Nueva Temporada que vi en su web.`);
+            wppEl.href = `https://wa.me/59893658477?text=${text}`;
         } else if (isFixed) {
             if (wppTextSpan) wppTextSpan.textContent = 'Reserva por wpp!';
             const text = encodeURIComponent(`Hola BasKula, quisiera consultar disponibilidad para adquirir la pieza ${item.name} (${item.priceFormatted}) que vi en su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         } else {
             if (wppTextSpan) wppTextSpan.textContent = 'Consultar por esta pieza';
-            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por la pieza "${item.name}" (${item.weightFormatted} · ${item.priceFormatted}) que vi en el catálogo de su web.`);
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por la pieza "${item.name}" (${item.weightFormatted ? item.weightFormatted + ' · ' : ''}${item.priceFormatted}) que vi en el catálogo de su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         }
     }
@@ -1713,11 +1726,88 @@ const initProductosKiloCarousel = () => {
     }
 };
 
+// ==========================================================================
+// NUEVA TEMPORADA (TENDENCIAS) MODAL EDITORIAL
+// ==========================================================================
+const TREND_ITEMS = [
+    {
+        id: 'trend-perlas',
+        name: 'Colección Perlas',
+        shortName: 'Perlas',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend1.jpg?v=3',
+        dimensions: 'Variedad de piezas y medidas',
+        finish: 'Esmalte satinado con relieve perolado',
+        story: 'Inspirada en el relieve de pequeñas perlas cerámicas dispuestas con delicadeza sobre el borde. Una colección contemporánea procedente de Portugal que combina textura sutil, elegancia cotidiana y una agradable calidez táctil.'
+    },
+    {
+        id: 'trend-rayas',
+        name: 'Colección Rayas',
+        shortName: 'Rayas',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend2.jpg?v=3',
+        dimensions: 'Variedad de piezas y formatos',
+        finish: 'Gres estriado artesanal · Esmalte natural',
+        story: 'Líneas y surcos acanalados que dibujan juegos de luz y sombra orgánicos sobre la arcilla. El ritmo lineal y la pureza geométrica del diseño portugués directo a tu mesa.'
+    },
+    {
+        id: 'trend-handmade',
+        name: 'Colección Handmade',
+        shortName: 'Handmade',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend3.jpg?v=3',
+        dimensions: 'Formatos irregulares orgánicos',
+        finish: 'Arcilla viva modelada a mano · Gres crudo',
+        story: 'Bordes orgánicos e imperfecciones deliberadas que celebran la huella manual y espontánea del alfarero. Cada pieza es irrepetible, con texturas genuinas que transmiten calma y autenticidad.'
+    },
+    {
+        id: 'trend-vintage',
+        name: 'Colección Vintage',
+        shortName: 'Vintage',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend4.jpg?v=3',
+        dimensions: 'Piezas clásicas atemporales',
+        finish: 'Pátina rústica envejecida · Esmalte reactivo',
+        story: 'Rescatando los esmaltes reactivos y la nobleza de las vajillas clásicas de las quintas tradicionales portuguesas. Tonos terrosos y destellos nostálgicos que visten cualquier ambiente con distinción.'
+    }
+];
+
+const initTrendsModal = () => {
+    const trendCards = document.querySelectorAll('.trend-card[data-trend-id]');
+    if (!trendCards.length) return;
+
+    trendCards.forEach(card => {
+        const trendId = card.getAttribute('data-trend-id');
+        const item = TREND_ITEMS.find(t => t.id === trendId);
+        if (!item) return;
+
+        card.addEventListener('click', () => {
+            openAparadorModal(item);
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openAparadorModal(item);
+            }
+        });
+    });
+};
+
 // Eventos de cierre del modal
 document.addEventListener('DOMContentLoaded', () => {
     initHolidayCarousel();
     initAparador();
     initProductosKiloCarousel();
+    initTrendsModal();
     initWishlistAndBalanzaSystem();
 
     const modal = document.getElementById('aparador-modal');
@@ -1747,6 +1837,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const getProductById = (id) => {
     return (
         (typeof PRODUCTS_CAROUSEL_ITEMS !== 'undefined' ? PRODUCTS_CAROUSEL_ITEMS.find(p => p.id === id) : null) ||
+        (typeof TREND_ITEMS !== 'undefined' ? TREND_ITEMS.find(p => p.id === id) : null) ||
         HOLIDAY_ITEMS.find(p => p.id === id) ||
         FIXED_PRICE_ITEMS.find(p => p.id === id) ||
         (typeof CATALOG_ITEMS !== 'undefined' ? CATALOG_ITEMS.find(p => p.id === id) : null) ||

@@ -5586,6 +5586,13 @@ body.drawer-open {
     align-items: center;
     text-align: center;
     background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.trend-card:focus-visible .trend-img-wrapper {
+    outline: 2px solid var(--color-mostaza, #E2A727);
+    outline-offset: 3px;
 }
 
 .trend-img-wrapper {
@@ -5652,6 +5659,24 @@ body.drawer-open {
 
 .trend-card:hover .trend-title {
     color: var(--color-mostaza, #E2A727);
+}
+
+.trend-price-subtle {
+    display: inline-block;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #A27012;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    opacity: 0.9;
+    transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.trend-card:hover .trend-price-subtle {
+    color: #E2A727;
+    opacity: 1;
+    transform: translateY(-1px);
 }
 
 @media (max-width: 992px) {
