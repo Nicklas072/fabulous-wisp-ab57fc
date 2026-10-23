@@ -6356,19 +6356,23 @@ body.drawer-open {
 /* Adaptabilidad Móvil */
 @media (max-width: 768px) {
     .floating-scale-widget {
-        bottom: 18px;
-        right: 18px;
+        /* Despegado de los bordes con safe-area para que nunca quede cortado por la curvatura de la pantalla ni por la barra inferior del navegador */
+        bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+        right: calc(22px + env(safe-area-inset-right, 0px));
+        z-index: 995;
     }
     .floating-scale-btn {
-        width: 52px;
-        height: 52px;
+        width: 56px;
+        height: 56px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32),
+                    0 0 18px rgba(226, 167, 39, 0.4);
     }
     .scale-pans-svg {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
     }
     .floating-scale-pill {
-        display: none;
+        display: none !important;
     }
     .wishlist-drawer {
         max-width: 100%;
