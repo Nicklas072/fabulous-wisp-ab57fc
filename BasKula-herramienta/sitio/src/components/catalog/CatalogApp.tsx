@@ -871,13 +871,20 @@ export default function CatalogApp({
                 >
                   <div className="aspect-[4/3] overflow-hidden bg-[#f7f3ec] w-full relative">
                     <img
-                      src="/Plato llano con bordes.webp"
-                      alt="Colección Gres"
+                      src="/gres-lifestyle-azul.webp"
+                      alt="Colección Gres - Piezas artesanales"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                    <span className="absolute top-3 right-3 text-[11px] font-semibold tracking-wide bg-[#c28b17] text-white px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                    
+                    {/* Badge BasKula superior izquierda */}
+                    <div className="absolute top-3 left-3 z-10 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg shadow-sm border border-stone-200/50 flex items-center justify-center">
+                      <img src="/logo-baskula.png" alt="BasKula" className="h-3.5 sm:h-4 w-auto object-contain" />
+                    </div>
+
+                    {/* Contador de piezas superior derecha */}
+                    <span className="absolute top-3 right-3 text-[11px] font-semibold tracking-wide bg-[#c28b17] text-white px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5 z-10">
                       <Sparkles className="w-3 h-3 text-white" />
                       <span>{products?.length || 0} piezas</span>
                     </span>
@@ -897,23 +904,28 @@ export default function CatalogApp({
 
                 {/* 2. Tarjeta Colección Porcelana */}
                 <a
-                  href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "") || "59893658477"}?text=${encodeURIComponent("Hola BasKula, quisiera consultar sobre la línea de Porcelana.")}`}
+                  href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "") || "59893658477"}?text=${encodeURIComponent("Hola BasKula, me interesa la futura línea de Porcelana.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:shadow-[0_8px_30px_rgba(194,139,23,0.18)] hover:border-[#c28b17] transition-all text-center cursor-pointer flex flex-col"
                   title="Consultar por Porcelana en WhatsApp"
                 >
-                  <div className="aspect-[4/3] overflow-hidden bg-[#f7f3ec] w-full relative">
-                    <img
-                      src="/Plato postre Esmaltado.webp"
-                      alt="Colección Porcelana"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                    <span className="absolute top-3 right-3 text-[11px] font-semibold tracking-wide bg-[#2a241e] text-[#f4c458] border border-[#f4c458]/40 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
-                      <span>✨ Línea Exclusiva</span>
-                    </span>
+                  <div className="aspect-[4/3] w-full relative overflow-hidden bg-gradient-to-br from-[#FAF8F5] via-[#F4ECE1] to-[#EAE0D2] flex flex-col items-center justify-center border-b border-border/40 select-none">
+                    {/* Cinta diagonal de PRÓXIMAMENTE en la esquina superior derecha */}
+                    <div className="absolute top-0 right-0 overflow-hidden w-32 h-32 pointer-events-none z-10">
+                      <span className="absolute top-6 -right-9 w-36 text-center rotate-45 bg-[#c28b17] text-white font-bold text-[10px] tracking-wider py-1 shadow-md uppercase">
+                        Próximamente
+                      </span>
+                    </div>
+
+                    {/* Sello / emblema central artesanal */}
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/85 shadow-sm border border-[#decbb2] flex flex-col items-center justify-center text-[#9c783e] group-hover:scale-105 transition-transform duration-500">
+                      <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 stroke-[1.5] text-[#c28b17]" />
+                      <span className="text-[9px] uppercase tracking-widest font-serif font-semibold mt-0.5 text-[#8a6833]">Fina</span>
+                    </div>
+                    <p className="font-serif italic text-[12px] sm:text-[13px] text-stone-600 mt-2.5 tracking-wide">
+                      Línea de Alta Gama
+                    </p>
                   </div>
                   <div className="p-4 sm:p-5 text-center flex flex-col items-center justify-center flex-1">
                     <p className="font-display font-medium text-[16px] sm:text-[18px] text-foreground text-center">
