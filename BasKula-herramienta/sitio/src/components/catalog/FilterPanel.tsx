@@ -71,11 +71,13 @@ export default function FilterPanel({
     [activeParams]
   );
 
+  const [prevQ, setPrevQ] = useState(filters.q);
   const [searchInput, setSearchInput] = useState(filters.q);
 
-  useEffect(() => {
+  if (filters.q !== prevQ) {
+    setPrevQ(filters.q);
     setSearchInput(filters.q);
-  }, [filters.q]);
+  }
 
   // Firma de filtros → clave de remount del grid (resetea paginación y scroll)
   const filterSig = useMemo(() => JSON.stringify(filters), [filters]);
