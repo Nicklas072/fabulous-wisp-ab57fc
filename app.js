@@ -1550,36 +1550,6 @@ const PRODUCTS_CAROUSEL_ITEMS = [
         dimensions: 'Ø 21 cm · Alto 2.0 cm',
         finish: 'Esmaltado Brillante Vítreo',
         story: 'El complemento ideal para entradas, desayunos o postres. Destaca por su flor central y una delicada guarda radial en tonos arcilla tostada y rubor que irradia frescura.'
-    },
-    {
-        id: 'plato-verde-musgo',
-        name: 'Plato Playo Verde Musgo',
-        shortName: 'Plato Verde Musgo',
-        category: 'platos',
-        weight: 0.820,
-        weightFormatted: '0.82 kg',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
-        pricingType: 'weight',
-        img: 'images/cutouts/plato-verde-musgo.webp',
-        dimensions: 'Ø 26 cm · Alto 2.0 cm',
-        finish: 'Esmaltado Satinado Orgánico',
-        story: 'Esmalte satinado de tonalidad verde bosque profundo con sutiles matices térreos. Cada horneada otorga una textura viva y singular a la superficie.'
-    },
-    {
-        id: 'bowl-rosa-esmaltado',
-        name: 'Bowl Esmaltado Rosa Empolvado',
-        shortName: 'Bowl Rosa',
-        category: 'bowls',
-        weight: 0.420,
-        weightFormatted: '0.42 kg',
-        rate: 29.50,
-        priceFormatted: '$29.50 / kg',
-        pricingType: 'weight',
-        img: 'images/cutouts/bowl-rosa-esmaltado.webp',
-        dimensions: 'Ø 15 cm · Alto 7.5 cm',
-        finish: 'Esmaltado Suave Rosa',
-        story: 'Tonalidad rubor delicada y forma armónica modelada a torno. Aporta calidez y dulzura al momento del desayuno o una merienda especial.'
     }
 ];
 
