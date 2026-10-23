@@ -726,46 +726,6 @@ export default function CatalogApp({
                 )}
               </div>
 
-              {/* ═══ Categorías Principales: Colección Gres & Porcelana ═══ */}
-              <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-3 mt-6 w-full max-w-xl mx-auto px-4">
-                {/* 1. Tarjeta Colección Gres */}
-                <button
-                  onClick={() =>
-                    goClean({
-                      view: "catalogo",
-                    })
-                  }
-                  className="group relative flex-1 min-w-[200px] inline-flex items-center justify-between gap-3 px-5 sm:px-6 h-12 rounded-2xl text-[13px] sm:text-[14px] font-semibold tracking-wide border-2 border-[#c28b17] bg-gradient-to-r from-[#c28b17] to-[#dfa427] text-white shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
-                  title={`Ver toda la Colección Gres (${products?.length || 0} piezas)`}
-                >
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-white/95 group-hover:rotate-12 transition-transform" />
-                    <span>Colección Gres</span>
-                  </div>
-                  <span className="text-[11px] sm:text-[12px] bg-black/20 text-white px-2.5 py-0.5 rounded-full font-normal">
-                    {products?.length || 0} piezas
-                  </span>
-                </button>
-
-                {/* 2. Tarjeta Colección Porcelana con botón Consultar por WhatsApp */}
-                <a
-                  href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "") || "59893658477"}?text=${encodeURIComponent("Hola BasKula, quisiera consultar sobre la línea de Porcelana.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex-1 min-w-[200px] inline-flex items-center justify-between gap-3 px-5 sm:px-6 h-12 rounded-2xl text-[13px] sm:text-[14px] font-semibold tracking-wide border-2 border-[#c28b17]/35 bg-card/95 hover:bg-card text-foreground shadow-xs hover:shadow-md hover:border-[#c28b17] transition-all hover:scale-[1.02] cursor-pointer"
-                  title="Consultar por Porcelana en WhatsApp"
-                >
-                  <div className="flex items-center gap-2 text-foreground font-medium">
-                    <span className="text-base">✨</span>
-                    <span>Porcelana</span>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] bg-[#25D366]/15 text-[#1b8a43] dark:text-[#25D366] font-semibold px-2.5 py-0.5 rounded-full border border-[#25D366]/30 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
-                    <MessageCircle className="w-3 h-3" />
-                    <span>Consultar</span>
-                  </span>
-                </a>
-              </div>
-
               {/* ═══ Gama de colores ampliada ═══ */}
               {products && (
                 <div className="mt-5 w-full max-w-2xl mx-auto">
@@ -896,42 +856,78 @@ export default function CatalogApp({
               </section>
             )}
 
-            {/* Tiles por tipo de pieza */}
+            {/* Tarjetas Colección Gres & Porcelana */}
             <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-10 border-t border-border/60 flex flex-col items-center">
               <SectionTitle
                 title="Explora por tipo de pieza"
-                subtitle="Del plato llano a la vajilla completa"
+                subtitle="Nuestras colecciones en gres artesanal y porcelana"
               />
-              <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-                {Object.entries(PIECE_GROUP_INFO).map(([key, info]) => {
-                  const count = products?.filter((p) => p.pieceGroup === key).length || 0;
-                  if (count === 0) return null;
-                  const sample = products?.find((p) => p.pieceGroup === key && p.image);
-                  return (
-                    <button
-                      key={key}
-                      onClick={() => goClean({ view: "catalogo", grupo: key })}
-                      className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:shadow-[0_6px_24px_rgba(34,34,34,0.10)] hover:border-[#c28b17]/40 transition-all text-center cursor-pointer flex flex-col"
-                    >
-                      <div className="aspect-[4/3] overflow-hidden bg-[#f7f3ec] w-full">
-                        {sample?.image && (
-                          <img
-                            src={sample.image}
-                            alt={info.label}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                          />
-                        )}
-                      </div>
-                      <div className="p-3 sm:p-3.5 text-center flex flex-col items-center justify-center flex-1">
-                        <p className="font-medium text-[13px] sm:text-[14px] text-foreground text-center">{info.label}</p>
-                        <p className="text-[11px] text-muted-foreground mt-0.5 text-center leading-snug">
-                          {count} productos · {info.desc}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
+              <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                {/* 1. Tarjeta Colección Gres */}
+                <button
+                  type="button"
+                  onClick={() => goClean({ view: "catalogo" })}
+                  className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:shadow-[0_8px_30px_rgba(194,139,23,0.18)] hover:border-[#c28b17] transition-all text-center cursor-pointer flex flex-col"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-[#f7f3ec] w-full relative">
+                    <img
+                      src="/Plato llano con bordes.webp"
+                      alt="Colección Gres"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                    <span className="absolute top-3 right-3 text-[11px] font-semibold tracking-wide bg-[#c28b17] text-white px-3 py-1 rounded-full shadow-sm flex items-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-white" />
+                      <span>{products?.length || 0} piezas</span>
+                    </span>
+                  </div>
+                  <div className="p-4 sm:p-5 text-center flex flex-col items-center justify-center flex-1">
+                    <p className="font-display font-medium text-[16px] sm:text-[18px] text-foreground text-center">
+                      Colección Gres
+                    </p>
+                    <p className="text-[12px] sm:text-[13px] text-muted-foreground mt-1 text-center leading-relaxed">
+                      Todas las piezas artesanales de gres portugués disponibles para entrega inmediata.
+                    </p>
+                    <span className="inline-flex items-center gap-1 mt-3 text-[12px] font-semibold text-[#c28b17] group-hover:translate-x-0.5 transition-transform">
+                      Ver catálogo completo →
+                    </span>
+                  </div>
+                </button>
+
+                {/* 2. Tarjeta Colección Porcelana */}
+                <a
+                  href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "") || "59893658477"}?text=${encodeURIComponent("Hola BasKula, quisiera consultar sobre la línea de Porcelana.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:shadow-[0_8px_30px_rgba(194,139,23,0.18)] hover:border-[#c28b17] transition-all text-center cursor-pointer flex flex-col"
+                  title="Consultar por Porcelana en WhatsApp"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-[#f7f3ec] w-full relative">
+                    <img
+                      src="/Plato postre Esmaltado.webp"
+                      alt="Colección Porcelana"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                    <span className="absolute top-3 right-3 text-[11px] font-semibold tracking-wide bg-[#2a241e] text-[#f4c458] border border-[#f4c458]/40 px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+                      <span>✨ Línea Exclusiva</span>
+                    </span>
+                  </div>
+                  <div className="p-4 sm:p-5 text-center flex flex-col items-center justify-center flex-1">
+                    <p className="font-display font-medium text-[16px] sm:text-[18px] text-foreground text-center">
+                      Porcelana
+                    </p>
+                    <p className="text-[12px] sm:text-[13px] text-muted-foreground mt-1 text-center leading-relaxed">
+                      Vajilla fina y piezas de autor. Consultá disponibilidad de modelos y catálogo por WhatsApp.
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 mt-3 px-3.5 py-1.5 rounded-full bg-[#25D366]/15 text-[#1b8a43] dark:text-[#25D366] text-[12px] font-semibold border border-[#25D366]/30 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>Consultar por WhatsApp</span>
+                    </span>
+                  </div>
+                </a>
               </div>
             </section>
 
