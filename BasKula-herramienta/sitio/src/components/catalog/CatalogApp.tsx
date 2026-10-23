@@ -726,31 +726,44 @@ export default function CatalogApp({
                 )}
               </div>
 
-              {/* ═══ Botones de categoría ═══ */}
-              <div className="flex flex-wrap justify-center items-center gap-2 mt-6 w-full max-w-2xl mx-auto">
-                {CATEGORY_BUTTONS.map((cat) => {
-                  const count = cat.grupo
-                    ? products?.filter((p) => p.pieceGroup === cat.grupo).length || 0
-                    : products?.filter((p) => p.productType === cat.tipo).length || 0;
-                  if (count === 0) return null;
-                  return (
-                    <button
-                      key={cat.label}
-                      onClick={() =>
-                        goClean({
-                          view: "catalogo",
-                          grupo: cat.grupo || undefined,
-                          tipo: cat.tipo || undefined,
-                        })
-                      }
-                      className="inline-flex items-center gap-1.5 px-4 h-8.5 rounded-full text-[13px] font-medium border border-border/80 bg-card text-foreground transition-all hover:border-[#c28b17] hover:text-[#c28b17] shadow-xs cursor-pointer"
-                      title={`${cat.label} · ${count} piezas`}
-                    >
-                      <span>{cat.label}</span>
-                      <span className="text-[11px] text-muted-foreground/80 font-normal">({count})</span>
-                    </button>
-                  );
-                })}
+              {/* ═══ Categorías Principales: Colección Gres & Porcelana ═══ */}
+              <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-3 mt-6 w-full max-w-xl mx-auto px-4">
+                {/* 1. Tarjeta Colección Gres */}
+                <button
+                  onClick={() =>
+                    goClean({
+                      view: "catalogo",
+                    })
+                  }
+                  className="group relative flex-1 min-w-[200px] inline-flex items-center justify-between gap-3 px-5 sm:px-6 h-12 rounded-2xl text-[13px] sm:text-[14px] font-semibold tracking-wide border-2 border-[#c28b17] bg-gradient-to-r from-[#c28b17] to-[#dfa427] text-white shadow-md hover:shadow-lg transition-all hover:scale-[1.02] cursor-pointer"
+                  title={`Ver toda la Colección Gres (${products?.length || 0} piezas)`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-white/95 group-hover:rotate-12 transition-transform" />
+                    <span>Colección Gres</span>
+                  </div>
+                  <span className="text-[11px] sm:text-[12px] bg-black/20 text-white px-2.5 py-0.5 rounded-full font-normal">
+                    {products?.length || 0} piezas
+                  </span>
+                </button>
+
+                {/* 2. Tarjeta Colección Porcelana con botón Consultar por WhatsApp */}
+                <a
+                  href={`https://wa.me/${whatsapp.replace(/[^0-9]/g, "") || "59893658477"}?text=${encodeURIComponent("Hola BasKula, quisiera consultar sobre la línea de Porcelana.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative flex-1 min-w-[200px] inline-flex items-center justify-between gap-3 px-5 sm:px-6 h-12 rounded-2xl text-[13px] sm:text-[14px] font-semibold tracking-wide border-2 border-[#c28b17]/35 bg-card/95 hover:bg-card text-foreground shadow-xs hover:shadow-md hover:border-[#c28b17] transition-all hover:scale-[1.02] cursor-pointer"
+                  title="Consultar por Porcelana en WhatsApp"
+                >
+                  <div className="flex items-center gap-2 text-foreground font-medium">
+                    <span className="text-base">✨</span>
+                    <span>Porcelana</span>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-[12px] bg-[#25D366]/15 text-[#1b8a43] dark:text-[#25D366] font-semibold px-2.5 py-0.5 rounded-full border border-[#25D366]/30 group-hover:bg-[#25D366] group-hover:text-white transition-colors">
+                    <MessageCircle className="w-3 h-3" />
+                    <span>Consultar</span>
+                  </span>
+                </a>
               </div>
 
               {/* ═══ Gama de colores ampliada ═══ */}

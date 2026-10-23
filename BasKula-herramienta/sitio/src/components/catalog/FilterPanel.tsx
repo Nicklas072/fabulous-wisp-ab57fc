@@ -494,10 +494,18 @@ export default function FilterPanel({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
       {/* Encabezado de resultados */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
-        <div className="flex items-center gap-2.5">
-          <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-medium truncate">
-            Catálogo
-          </h1>
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-2.5">
+            <h1 className="font-display text-xl sm:text-2xl md:text-3xl font-medium truncate">
+              Catálogo · Colección Gres
+            </h1>
+            <span className="text-xs sm:text-sm font-normal text-muted-foreground bg-muted/60 px-2.5 py-0.5 rounded-full">
+              {filtered.length} {filtered.length === 1 ? "pieza" : "piezas"}
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            Vajilla y piezas en gres portugués de alta densidad y acabado artesanal.
+          </p>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">

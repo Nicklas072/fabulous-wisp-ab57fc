@@ -58,24 +58,35 @@
     <!-- CSS Striped Awning Accent at Top of Window -->
     <div class="awning-border"></div>
 
-    <!-- Header Navigation (Botones a los costados del logo central) -->
+    <!-- Header Navigation -->
     <header class="main-header">
         <div class="header-container">
-            <nav class="nav-menu">
-                <div class="nav-group nav-group-left">
+            <!-- Left: Brand Logo -->
+            <a href="index.html" class="logo-area" aria-label="Ir a Inicio de BasKula">
+                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+            </a>
+
+            <!-- Right: Navigation Menu -->
+            <div class="header-right">
+                <nav class="nav-menu">
                     <a href="index.html" class="nav-item">Inicio</a>
                     <a href="catalogo.html" class="nav-item active">La Tienda</a>
-                </div>
-
-                <a href="index.html" class="logo-area" aria-label="Ir a Inicio de BasKula">
-                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
-                </a>
-
-                <div class="nav-group nav-group-right">
                     <a href="https://baskulab2b.vercel.app" class="nav-item">Catálogo</a>
                     <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="nav-item">Contacto</a>
-                </div>
-            </nav>
+                </nav>
+
+                <!-- Botón Corazón Balanza en Nav -->
+                <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza" title="Piezas que me gustan / Mi Balanza">
+                    <svg viewBox="0 0 24 24" class="nav-heart-icon" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                    <span class="nav-heart-badge" id="navHeartBadge">0</span>
+                </button>
+            </div>
+
+            <button class="menu-toggle-btn" id="menu-toggle" style="display:none;" aria-label="Abrir menú">
+                <i data-lucide="menu"></i>
+            </button>
         </div>
     </header>
 
@@ -122,10 +133,11 @@
     <!-- Interactive Scale Simulator Section -->
     <section id="simulador" class="section-container simulator-section-wrapper">
         <div class="section-header simulator-compact-header">
-            <span class="section-tag">Alacena Interactiva</span>
-            <h2>Elegí, inspeccioná y pesá</h2>
-            <p class="section-subtitle">Tocá cualquier cerámica para alzarla y girarla en tu mano, o pulsá
-                <strong>+</strong> para llevarla directo a la Báscula.</p>
+            <span class="section-tag">Estanteria web</span>
+            <h2>Elegí y pesá tus favoritos</h2>
+            <p class="section-subtitle">Conocé los articulos de nuestra nueva colección
+                <strong> Hablá con nuestro equipo para reservar tus piezas preferidas !.</strong>
+            </p>
         </div>
 
         <div class="simulator-layout">
@@ -398,6 +410,74 @@
             <button class="btn-cta btn-modal-done" id="modal-done-btn">Seguir probando en la Báscula</button>
         </div>
     </div>
+
+    <!-- Wishlist / Balanza Lateral Drawer -->
+    <div class="wishlist-drawer-overlay" id="wishlistOverlay"></div>
+    <aside class="wishlist-drawer" id="wishlistDrawer" aria-label="Balanza de piezas seleccionadas">
+        <div class="wishlist-drawer__header">
+            <div class="wishlist-drawer__title-group">
+                <span class="wishlist-drawer__tag">Cerámica por Kilo</span>
+                <h3 class="wishlist-drawer__title">Tu Balanza</h3>
+            </div>
+            <button type="button" class="wishlist-drawer__close" id="wishlistCloseBtn" aria-label="Cerrar balanza">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+
+        <!-- Balanza Simpática Ilustrada en la cabecera del drawer -->
+        <div class="wishlist-drawer__scale-stage">
+            <div class="sympathetic-scale">
+                <svg class="sympathetic-scale-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35 74h30 M40 74c0-4 4-6 10-6s10 2 10 6 M50 20v48" stroke="#C28B17" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="50" cy="18" r="4" fill="#E2A727"/>
+                    <circle cx="50" cy="18" r="1.5" fill="#FAF8F5"/>
+                    <g class="sympathetic-beam" id="sympatheticBeam">
+                        <path d="M20 23h60" stroke="#E2A727" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="50" cy="23" r="2.5" fill="#C28B17"/>
+                        <!-- Platillo Izquierdo -->
+                        <g class="sympathetic-pan-left" id="sympatheticPanLeft">
+                            <line x1="24" y1="23" x2="16" y2="46" stroke="#9A7010" stroke-width="1.3"/>
+                            <line x1="24" y1="23" x2="32" y2="46" stroke="#9A7010" stroke-width="1.3"/>
+                            <path d="M12 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458" stroke-width="1.2"/>
+                        </g>
+                        <!-- Platillo Derecho -->
+                        <g class="sympathetic-pan-right" id="sympatheticPanRight">
+                            <line x1="76" y1="23" x2="68" y2="46" stroke="#9A7010" stroke-width="1.3"/>
+                            <line x1="76" y1="23" x2="84" y2="46" stroke="#9A7010" stroke-width="1.3"/>
+                            <path d="M64 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458" stroke-width="1.2"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="sympathetic-scale__readout">
+                <div class="scale-readout__metric">
+                    <span class="readout-label">Peso en Balanza</span>
+                    <strong class="readout-value" id="drawerTotalWeight">0.00 kg</strong>
+                </div>
+                <div class="scale-readout__divider"></div>
+                <div class="scale-readout__metric">
+                    <span class="readout-label">Total Estimado</span>
+                    <strong class="readout-value price-gold" id="drawerTotalPrice">$0 USD</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido / Lista de productos seleccionados -->
+        <div class="wishlist-drawer__body" id="wishlistDrawerBody">
+            <!-- Renderizado dinámico en app.js -->
+        </div>
+
+        <!-- Pie del Drawer con resumen y botón Reservar ! -->
+        <div class="wishlist-drawer__footer">
+            <p class="wishlist-drawer__hint">
+                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>Reservar !</strong> se enviará tu pedido directo a nuestro WhatsApp para coordinar retiro o envío.
+            </p>
+            <button type="button" class="btn-cta btn-reserve-whatsapp" id="btnReserveWhatsApp">
+                <span>Reservar !</span>
+                <i data-lucide="send"></i>
+            </button>
+        </div>
+    </aside>
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
