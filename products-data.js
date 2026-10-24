@@ -20,19 +20,188 @@ const BASKULA_CATEGORY_LABELS = {
     vasos: 'Vasos',
     bowls: 'Bowls',
     ensaladeras: 'Ensaladeras',
-    fuentes: 'Fuentes'
+    fuentes: 'Fuentes',
+    especial: 'Piezas de Autor'
 };
 
 const BASKULA_PRODUCTS = [
+    {
+        id: 'plato-rayas-navy',
+        name: 'Plato Playo Rayas Navy',
+        shortName: 'Plato Rayas Navy',
+        category: 'platos',
+        weight: 0.975,
+        img: 'images/ceramics/plato-rayas-navy.webp',
+        images: [
+            'images/ceramics/plato-rayas-navy.webp'
+        ],
+        dimensions: 'Ø 28 cm · Alto 2.2 cm',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'Plato playo de inspiración mediterránea y estética marinera. Su composición de franjas azul índigo de trazo orgánico sobre fondo blanco puro viste cualquier mesa con frescura, elegancia y calidez artesanal.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C', 'Apto Congelador'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'bowl-rayas-navy',
+        name: 'Bowl Cerealero Rayas Navy',
+        shortName: 'Bowl Rayas Navy',
+        category: 'bowls',
+        weight: 0.480,
+        img: 'images/ceramics/bowl-rayas-navy.webp',
+        images: [
+            'images/ceramics/bowl-rayas-navy.webp'
+        ],
+        dimensions: 'Ø 14.5 cm · Alto 8 cm (550 ml)',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'Bowl cónico con fileteado vertical en azul profundo sobre base cerámica blanca. Cómodo y versátil, ideal para desayunos, cereales, sopas, yogurt o dips en el centro de la mesa.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'taza-rayas-navy',
+        name: 'Taza Mug Rayas Navy',
+        shortName: 'Taza Rayas Navy',
+        category: 'tazas',
+        weight: 0.360,
+        img: 'images/ceramics/taza-rayas-navy.webp',
+        images: [
+            'images/ceramics/taza-rayas-navy.webp'
+        ],
+        dimensions: 'Ø 9 cm · Alto 11 cm (350 ml)',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'Mug cerámico con asa ergonómica modelada y franjas verticales azul marino. De tacto cálido y cómodo agarre, perfecto para café filtrado, té en hebras o infusiones matutinas.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'ensaladera-rayas-navy',
+        name: 'Ensaladera Honda Rayas Navy',
+        shortName: 'Ensaladera Rayas Navy',
+        category: 'ensaladeras',
+        weight: 0.975,
+        img: 'images/ceramics/ensaladera-rayas-navy.webp',
+        images: [
+            'images/ceramics/ensaladera-rayas-navy.webp'
+        ],
+        dimensions: 'Ø 25 cm · Alto 9.5 cm',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'Pieza central de generosa capacidad con perfil abierto y líneas que convergen hacia la base. Diseñada para lucir ensaladas frescas, pastas para compartir o como frutero de autor en la cocina.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'plato-corona-floral',
+        name: 'Plato Playo Corona Floral Terracota',
+        shortName: 'Plato Corona Floral',
+        category: 'platos',
+        weight: 0.875,
+        img: 'images/ceramics/plato-corona-floral.webp',
+        images: [
+            'images/ceramics/plato-corona-floral.webp'
+        ],
+        dimensions: 'Ø 27 cm · Alto 2.2 cm',
+        finish: 'Esmaltado Satinado Suave',
+        story: 'Una pieza de inspiración campestre y calidez mediterránea. Su diseño presenta una corona circular de hojas y flores pinceladas en tonos terracota y rosa empolvado, enmarcando el centro del plato para destacar los colores vivos de cualquier creación culinaria.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C', 'Apto Congelador'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'plato-sol-botanico',
+        name: 'Plato Entrada Sol Botánico Terracota',
+        shortName: 'Plato Sol Botánico',
+        category: 'platos',
+        weight: 0.522,
+        img: 'images/ceramics/plato-sol-botanico.webp',
+        images: [
+            'images/ceramics/plato-sol-botanico.webp'
+        ],
+        dimensions: 'Ø 21 cm · Alto 2.0 cm',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'El complemento ideal para entradas, desayunos o postres. Destaca por su flor central y una delicada guarda radial en tonos arcilla tostada y rubor que irradia frescura, complementando a la perfección la vajilla principal de la colección.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C', 'Apto Congelador'],
+        origin: 'Fabricado artesanalmente en Portugal · Gres Fino de alta resistencia'
+    },
+    {
+        id: 'plato-sol-edicion-fp',
+        name: 'Plato de Sol Terracota Edición Especial',
+        shortName: 'Plato de Sol',
+        category: 'especial',
+        pricingType: 'fixed',
+        price: 35,
+        weight: 0.98,
+        img: 'images/ceramics/plato-sol-edicion-35usd.webp',
+        images: [
+            'images/ceramics/plato-sol-edicion-35usd.webp'
+        ],
+        dimensions: 'Ø 29 cm · Pieza de Colección',
+        finish: 'Esmaltado Satinado Terracota y Marfil',
+        story: 'Edición exclusiva con motivo solar pintado a mano. Una pieza protagonista de centro de mesa o decoración mural de alta artesanía.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C'],
+        origin: 'Fabricado artesanalmente en Portugal · Pieza de Autor'
+    },
+    {
+        id: 'jarra-family-red-fp',
+        name: 'Jarra Family Red',
+        shortName: 'Jarra Family Red',
+        category: 'especial',
+        pricingType: 'fixed',
+        price: 35,
+        weight: 1.055,
+        img: 'images/ceramics/jarra-family-red.webp',
+        images: [
+            'images/ceramics/jarra-family-red.webp'
+        ],
+        dimensions: 'Alto 27 cm · Capacidad 1.5 L',
+        finish: 'Gres Esmaltado Bicolor',
+        story: 'Jarra de gran porte con asa ergonómica robusta y boquilla vertedora precisa. Ideal para servir agua fresca, limonadas o lucir como florero rústico.',
+        care: ['Apto Lavavajillas', 'Apto Microondas'],
+        origin: 'Fabricado artesanalmente en Portugal · Pieza de Autor'
+    },
+    {
+        id: 'jarrita-family-red-fp',
+        name: 'Jarrita Individual Family Red',
+        shortName: 'Jarrita Individual',
+        category: 'especial',
+        pricingType: 'fixed',
+        price: 35,
+        weight: 0.755,
+        img: 'images/ceramics/jarrita-family-red.webp',
+        images: [
+            'images/ceramics/jarrita-family-red.webp'
+        ],
+        dimensions: 'Alto 18 cm · Capacidad 600 ml',
+        finish: 'Gres Esmaltado Bicolor',
+        story: 'Compañera individual de la colección Family Red. Perfecta para servir leche, almíbares, salsas o aceite en la mesa con encanto.',
+        care: ['Apto Lavavajillas', 'Apto Microondas'],
+        origin: 'Fabricado artesanalmente en Portugal · Pieza de Autor'
+    },
+    {
+        id: 'tabla-servir-fp',
+        name: 'Tabla Amplia de Servir',
+        shortName: 'Tabla Amplia',
+        category: 'especial',
+        pricingType: 'fixed',
+        price: 38,
+        weight: 1.350,
+        img: 'images/ceramics/tabla-servir-28usd.webp',
+        images: [
+            'images/ceramics/tabla-servir-28usd.webp'
+        ],
+        dimensions: '38 cm × 22 cm · Formato Tabla',
+        finish: 'Cerámica Rústica de Alta Densidad',
+        story: 'Tabla cerámica plana con asa perforada para colgar. Diseñada para quesos, fiambres, panes artesanales y aperitivos de autor.',
+        care: ['Apto Lavavajillas', 'Apto Microondas', 'Apto Horno hasta 220°C'],
+        origin: 'Fabricado artesanalmente en Portugal · Pieza de Autor'
+    },
     {
         id: 'plato-verde-musgo',
         name: 'Plato Llano Verde Musgo',
         shortName: 'Plato Verde Musgo',
         category: 'platos',
         weight: 0.72,
-        img: 'Plato llano con bordes.webp',
+        img: 'images/cutouts/plato-verde-musgo.webp',
         images: [
-            'Plato llano con bordes.webp'
+            'images/cutouts/plato-verde-musgo.webp'
         ],
         dimensions: 'Ø 27 cm · Alto 2.4 cm',
         finish: 'Esmalte Reactivo Mate-Satinado',
@@ -46,9 +215,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Plato Hondo Botánico',
         category: 'platos',
         weight: 0.58,
-        img: 'Plato hondo esmaltado.webp',
+        img: 'images/cutouts/plato-hondo-hojas.webp',
         images: [
-            'Plato hondo esmaltado.webp'
+            'images/cutouts/plato-hondo-hojas.webp'
         ],
         dimensions: 'Ø 23 cm · Profundidad 4.5 cm',
         finish: 'Esmalte Vitrificado Tradicional',
@@ -62,9 +231,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Taza Degradé Azul',
         category: 'tazas',
         weight: 0.31,
-        img: 'images/taza-azul-degrade.jpg',
+        img: 'images/cutouts/taza-azul-degrade.webp',
         images: [
-            'images/taza-azul-degrade.jpg'
+            'images/cutouts/taza-azul-degrade.webp'
         ],
         dimensions: 'Ø 9.2 cm · Alto 11 cm (340 ml)',
         finish: 'Doble Baño Reactivo Tostado y Bruma',
@@ -78,9 +247,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Vaso Gris Bruma',
         category: 'vasos',
         weight: 0.25,
-        img: 'Vaso degradado Gris Esmaltado.webp',
+        img: 'images/cutouts/vaso-gris.webp',
         images: [
-            'Vaso degradado Gris Esmaltado.webp'
+            'images/cutouts/vaso-gris.webp'
         ],
         dimensions: 'Ø 8.5 cm · Alto 9.5 cm (280 ml)',
         finish: 'Gres Texturado + Interior Cristalino',
@@ -94,9 +263,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Bowl Rosa Cuarzo',
         category: 'bowls',
         weight: 0.38,
-        img: 'images/bowl-rosa.jpg',
+        img: 'images/cutouts/bowl-rosa-esmaltado.webp',
         images: [
-            'images/bowl-rosa.jpg'
+            'images/cutouts/bowl-rosa-esmaltado.webp'
         ],
         dimensions: 'Ø 15.5 cm · Alto 6.8 cm',
         finish: 'Interior Rosado Jaspeado · Exterior Crema',
@@ -110,9 +279,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Ensaladera Blanca',
         category: 'ensaladeras',
         weight: 0.94,
-        img: 'images/ensaladera-blanca.jpg',
+        img: 'images/cutouts/ensaladera-blanca.webp',
         images: [
-            'images/ensaladera-blanca.jpg'
+            'images/cutouts/ensaladera-blanca.webp'
         ],
         dimensions: 'Ø 25 cm · Alto 11.5 cm',
         finish: 'Blanco Nevado Jaspeado',
@@ -126,9 +295,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Fuente Oval Marfil',
         category: 'fuentes',
         weight: 0.86,
-        img: 'images/fuente-oval-blanca.jpg',
+        img: 'images/cutouts/fuente-oval-blanca.webp',
         images: [
-            'images/fuente-oval-blanca.jpg'
+            'images/cutouts/fuente-oval-blanca.webp'
         ],
         dimensions: '34 cm × 23 cm · Alto 3.2 cm',
         finish: 'Gres Marfil de Alta Resistencia',
@@ -142,9 +311,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Fuente Horno Negra',
         category: 'fuentes',
         weight: 0.78,
-        img: 'images/fuente-peugeot-negra.jpg',
+        img: 'images/cutouts/fuente-peugeot-negra.webp',
         images: [
-            'images/fuente-peugeot-negra.jpg'
+            'images/cutouts/fuente-peugeot-negra.webp'
         ],
         dimensions: '26 cm × 16 cm · Alto 5.5 cm',
         finish: 'Gres Negro Carbón Satinado',
@@ -158,9 +327,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Plato Postre Nieve',
         category: 'platos',
         weight: 0.42,
-        img: 'Plato postre borde irregular Esmaltado.webp',
+        img: 'images/cutouts/plato-postre-irregular.webp',
         images: [
-            'Plato postre borde irregular Esmaltado.webp'
+            'images/cutouts/plato-postre-irregular.webp'
         ],
         dimensions: 'Ø 20.5 cm · Silueta Orgánica',
         finish: 'Blanco Hueso con Borde Tostado',
@@ -206,9 +375,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Plato Guarda Azul',
         category: 'platos',
         weight: 0.35,
-        img: 'Plato postre Esmaltado.webp',
+        img: 'images/cutouts/plato-postre-azul.webp',
         images: [
-            'Plato postre Esmaltado.webp'
+            'images/cutouts/plato-postre-azul.webp'
         ],
         dimensions: 'Ø 19.5 cm · Alto 2.0 cm',
         finish: 'Esmalte Brillante con Guarda Geométrica',

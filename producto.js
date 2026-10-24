@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             shortName: urlParams.get('shortName') || urlParams.get('name'),
             category: urlParams.get('category') || 'platos',
             weight: parseFloat(urlParams.get('weight')) || 0.5,
-            img: urlParams.get('img') || 'Plato llano con bordes.webp',
-            images: [urlParams.get('img') || 'Plato llano con bordes.webp'],
+            img: urlParams.get('img') || 'images/cutouts/plato-verde-musgo.webp',
+            images: [urlParams.get('img') || 'images/cutouts/plato-verde-musgo.webp'],
             dimensions: urlParams.get('dimensions') || 'Medida estándar',
             finish: urlParams.get('finish') || 'Cerámica artesanal',
             story: urlParams.get('story') || 'Pieza exclusiva de gres elaborada en Portugal.',
@@ -43,21 +43,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Normalizar imágenes
     const imagesList = Array.isArray(item.images) && item.images.length > 0 
         ? item.images 
-        : [item.img || 'Plato llano con bordes.webp'];
+        : [item.img || 'images/cutouts/plato-verde-musgo.webp'];
 
-    const rate = (typeof getBaskulaRate === 'function') 
-        ? getBaskulaRate(item.category) 
-        : (item.rate || 16.50);
-    const unitPrice = (item.weight || 0.5) * rate;
+    const isFixed = item.pricingType === 'fixed';
+    const rate = isFixed
+        ? 0
+        : ((typeof getBaskulaRate === 'function') ? getBaskulaRate(item.category) : (item.rate || 16.50));
+    const unitPrice = isFixed
+        ? (item.price || 35)
+        : ((item.weight || 0.5) * rate);
     const categoryName = (typeof BASKULA_CATEGORY_LABELS !== 'undefined' && BASKULA_CATEGORY_LABELS[item.category])
         ? BASKULA_CATEGORY_LABELS[item.category]
         : (item.category ? item.category.toUpperCase() : 'PIEZA');
 
-    // Actualizar título y SEO de la página
-    document.title = `${item.name} — BasKula Cerámica por Kilo`;
+    // Actualizar título, etiquetas SEO y Schema.org Product JSON-LD dinámico
+    updateProductSEO(item, imagesList[0], unitPrice, rate, isFixed, categoryName);
 
     // 4. Renderizar contenido PDP
-    renderProductPage(container, item, imagesList, unitPrice, rate, categoryName);
+    renderProductPage(container, item, imagesList, unitPrice, rate, categoryName, isFixed);
 
     // 5. Inicializar interactividad
     initGallery(imagesList);
@@ -67,12 +70,110 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHeaderScaleBadge();
 });
 
+// --- SEO Dinámico y Rich Snippets Schema.org (Product + Offer) ---
+function updateProductSEO(item, mainImg, unitPrice, rate, isFixed, categoryName) {
+    const baseUrl = 'https://www.baskula.com';
+    const canonicalUrl = `${baseUrl}/producto.html?id=${encodeURIComponent(item.id)}`;
+    const absoluteImgUrl = mainImg.startsWith('http') ? mainImg : `${baseUrl}/${mainImg.replace(/^\//, '')}`;
+    const seoTitle = `${item.name} — Cerámica Portuguesa en Punta Piedras | BasKula`;
+    const priceDesc = isFixed
+        ? `Precio: USD ${unitPrice.toFixed(2)}`
+        : `Peso aprox. ${item.weight.toFixed(2)} kg · Tarifa USD ${rate.toFixed(2)}/kg (USD ${unitPrice.toFixed(2)} aprox.)`;
+    const seoDesc = `${item.name}: ${item.story || 'Cerámica artesanal portuguesa en gres fino.'} ${priceDesc}. Reservá online y retirá en nuestra tienda de Punta Piedras, Maldonado.`;
+
+    document.title = seoTitle;
+
+    const setMeta = (selector, attr, value) => {
+        let el = document.querySelector(selector);
+        if (!el) {
+            el = document.createElement('meta');
+            if (selector.includes('property=')) {
+                const propMatch = selector.match(/property="([^"]+)"/);
+                if (propMatch) el.setAttribute('property', propMatch[1]);
+            } else if (selector.includes('name=')) {
+                const nameMatch = selector.match(/name="([^"]+)"/);
+                if (nameMatch) el.setAttribute('name', nameMatch[1]);
+            }
+            document.head.appendChild(el);
+        }
+        el.setAttribute(attr, value);
+    };
+
+    setMeta('meta[name="description"]', 'content', seoDesc);
+    setMeta('meta[property="og:title"]', 'content', seoTitle);
+    setMeta('meta[property="og:description"]', 'content', seoDesc);
+    setMeta('meta[property="og:image"]', 'content', absoluteImgUrl);
+    setMeta('meta[property="og:url"]', 'content', canonicalUrl);
+
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonicalUrl);
+
+    // Inyectar JSON-LD Schema.org Product para Rich Snippets en Google
+    let ldScript = document.getElementById('pdp-jsonld');
+    if (!ldScript) {
+        ldScript = document.createElement('script');
+        ldScript.type = 'application/ld+json';
+        ldScript.id = 'pdp-jsonld';
+        document.head.appendChild(ldScript);
+    }
+
+    const productSchema = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": item.name,
+        "sku": item.id,
+        "category": categoryName,
+        "image": [absoluteImgUrl],
+        "description": item.story || seoDesc,
+        "brand": {
+            "@type": "Brand",
+            "name": "BasKula"
+        },
+        "countryOfOrigin": {
+            "@type": "Country",
+            "name": "Portugal"
+        },
+        "material": "Gres cerámico artesanal portugués",
+        "weight": {
+            "@type": "QuantitativeValue",
+            "value": item.weight || 0.5,
+            "unitCode": "KGM"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": canonicalUrl,
+            "priceCurrency": "USD",
+            "price": unitPrice.toFixed(2),
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "availableDeliveryMethod": "https://schema.org/OnSitePickup",
+            "seller": {
+                "@type": "HomeGoodsStore",
+                "name": "BasKula",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Ruta 10 Km 162, Calle 2, Punta Piedras",
+                    "addressLocality": "Manantiales, Maldonado",
+                    "addressCountry": "UY"
+                }
+            }
+        }
+    };
+
+    ldScript.textContent = JSON.stringify(productSchema);
+}
+
 // --- Renderizado principal de la página ---
-function renderProductPage(container, item, imagesList, unitPrice, rate, categoryName) {
+function renderProductPage(container, item, imagesList, unitPrice, rate, categoryName, isFixed) {
     const formattedPrice = `USD ${unitPrice.toFixed(2)}`;
-    const formattedWeight = `${item.weight.toFixed(2)} kg (${Math.round(item.weight * 1000)} g)`;
+    const formattedWeight = `${(item.weight || 0.5).toFixed(2)} kg (${Math.round((item.weight || 0.5) * 1000)} g)`;
     const whatsappText = encodeURIComponent(
-        `Hola BasKula! Me interesa consultar por la pieza "${item.name}" (Precio aprox: ${formattedPrice}, Peso: ${item.weight} kg). Link: ${window.location.href}`
+        `¡Hola BasKula! Me interesa consultar disponibilidad de la pieza "${item.name}" (${formattedPrice}${isFixed ? ' · Pieza de Autor' : `, Peso aprox: ${item.weight} kg`}) para retirar en la tienda de Punta Piedras. Link: ${window.location.href}`
     );
 
     // Miniaturas solo si hay más de 1 imagen
@@ -82,7 +183,7 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
             <div class="pdp-thumbnails-strip" id="pdp-thumbnails">
                 ${imagesList.map((src, idx) => `
                     <button type="button" class="pdp-thumbnail-item ${idx === 0 ? 'active' : ''}" data-index="${idx}" aria-label="Ver foto ${idx + 1}">
-                        <img src="${src}" alt="${item.name} miniatura ${idx + 1}" loading="lazy">
+                        <img src="${src}" alt="${item.name} — vista ${idx + 1} cerámica portuguesa BasKula" loading="lazy">
                     </button>
                 `).join('')}
             </div>
@@ -111,11 +212,11 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
         <div class="pdp-layout-grid">
             <!-- Galería Izquierda -->
             <div class="pdp-gallery-column">
-                <div class="pdp-gallery-stage" id="gallery-stage" title="Click para abrir vista ampliada">
+                <div class="pdp-gallery-stage" id="gallery-stage" title="Cerámica artesanal portuguesa BasKula">
                     <span class="pdp-stage-badge">
                         <i data-lucide="sparkles"></i> Cerámica Portuguesa
                     </span>
-                    <img src="${imagesList[0]}" alt="${item.name}" class="pdp-main-image" id="pdp-active-img" fetchpriority="high">
+                    <img src="${imagesList[0]}" alt="${item.name} — Vajilla de cerámica artesanal portuguesa en BasKula Punta Piedras" class="pdp-main-image" id="pdp-active-img" fetchpriority="high" width="600" height="600">
                 </div>
                 ${thumbnailsHTML}
             </div>
@@ -132,10 +233,10 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
                     <div class="pdp-price-main-row">
                         <div>
                             <span class="pdp-unit-price">${formattedPrice}</span>
-                            <span class="pdp-unit-price-label">aprox. por unidad</span>
+                            <span class="pdp-unit-price-label">${isFixed ? 'precio fijo por unidad' : 'aprox. por unidad'}</span>
                         </div>
                         <span class="pdp-rate-badge">
-                            <i data-lucide="tag"></i> Tarifa: USD ${rate.toFixed(2)}/kg
+                            <i data-lucide="tag"></i> ${isFixed ? 'Pieza de Autor' : `Tarifa: USD ${rate.toFixed(2)}/kg`}
                         </span>
                     </div>
                     <div class="pdp-weight-row">
@@ -144,7 +245,7 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
                     </div>
                     <div class="pdp-kilo-note">
                         <i data-lucide="info"></i>
-                        <span>En BasKula pagás exactamente lo que pesa tu pieza.</span>
+                        <span>${isFixed ? 'Edición especial con valor fijo por pieza.' : 'En BasKula pagás exactamente lo que pesa tu pieza.'}</span>
                     </div>
                 </div>
 
@@ -212,15 +313,15 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
                         </div>
                     </div>
 
-                    <!-- Acordeón 4: Envíos y Retiros -->
+                    <!-- Acordeón 4: Retiro en Tienda y Proyectos B2B -->
                     <div class="pdp-accordion-item">
                         <button type="button" class="pdp-accordion-header">
-                            <span>Envíos y Retiros</span>
+                            <span>Retiro en Tienda y Proyectos B2B</span>
                             <span class="pdp-accordion-icon">+</span>
                         </button>
                         <div class="pdp-accordion-body">
-                            <p><strong>Retiro en tienda:</strong> Podés retirar tu selección y pesarla en vivo en nuestro local de Punta Piedras, Manantiales / La Barra, Maldonado.</p>
-                            <p><strong>Envíos:</strong> Embalaje de máxima protección a todo el país coordinado directamente por WhatsApp.</p>
+                            <p><strong>Atención y retiro exclusivo en tienda:</strong> Reservá tu selección online por WhatsApp y retirala en nuestro local de Punta Piedras (Ruta 10 Km 162, Calle 2, entre Manantiales y José Ignacio, Maldonado), donde la pesamos juntos en el momento.</p>
+                            <p><strong>Proyectos B2B:</strong> Para restaurantes, hoteles boutique, desarrollos inmobiliarios y home staging coordinamos atención personalizada y logística a medida.</p>
                         </div>
                     </div>
                 </div>
@@ -338,15 +439,25 @@ function addToBaskulaBasket(item, qtyToAdd) {
         basket = [];
     }
 
+    const isFixed = item.pricingType === 'fixed';
+    const rate = isFixed ? 0 : ((typeof getBaskulaRate === 'function') ? getBaskulaRate(item.category) : (item.rate || 16.50));
+    const unitPrice = isFixed ? (item.price || 35) : ((item.weight || 0.5) * rate);
+
     const existingIdx = basket.findIndex(b => b.id === item.id);
     if (existingIdx >= 0) {
         basket[existingIdx].qty = (basket[existingIdx].qty || 1) + qtyToAdd;
     } else {
         basket.push({
             id: item.id,
+            name: item.name,
+            shortName: item.shortName || item.name,
+            category: item.category || 'platos',
+            pricingType: item.pricingType || 'weight',
+            rate: rate,
+            price: unitPrice,
             qty: qtyToAdd,
             weight: item.weight,
-            name: item.name
+            img: item.img || (Array.isArray(item.images) && item.images[0]) || 'images/cutouts/plato-verde-musgo.webp'
         });
     }
 
@@ -377,7 +488,9 @@ function updateHeaderScaleBadge() {
     basket.forEach(item => {
         const qty = item.qty || 1;
         totalCount += qty;
-        totalWeight += (item.weight || 0.5) * qty;
+        if (item.pricingType !== 'fixed') {
+            totalWeight += (item.weight || 0.5) * qty;
+        }
     });
 
     const countEl = document.getElementById('nav-scale-count');
@@ -419,17 +532,18 @@ function renderRelatedItems(currentId, currentCategory) {
     const related = allItems.filter(p => p.id !== currentId).slice(0, 4);
 
     grid.innerHTML = related.map(rel => {
-        const relRate = (typeof getBaskulaRate === 'function') ? getBaskulaRate(rel.category) : 16.50;
-        const relPrice = (rel.weight || 0.5) * relRate;
-        const relImg = (Array.isArray(rel.images) && rel.images[0]) || rel.img || 'Plato llano con bordes.webp';
+        const relIsFixed = rel.pricingType === 'fixed';
+        const relRate = relIsFixed ? 0 : ((typeof getBaskulaRate === 'function') ? getBaskulaRate(rel.category) : 16.50);
+        const relPrice = relIsFixed ? (rel.price || 35) : ((rel.weight || 0.5) * relRate);
+        const relImg = (Array.isArray(rel.images) && rel.images[0]) || rel.img || 'images/cutouts/plato-verde-musgo.webp';
 
         return `
             <a href="producto.html?id=${rel.id}" class="pdp-related-card">
                 <div class="pdp-related-img-wrap">
-                    <img src="${relImg}" alt="${rel.name}" loading="lazy">
+                    <img src="${relImg}" alt="${rel.name} — Cerámica portuguesa BasKula" loading="lazy" width="240" height="240">
                 </div>
                 <h3 class="pdp-related-card-title">${rel.shortName || rel.name}</h3>
-                <div class="pdp-related-card-meta">${Math.round(rel.weight * 1000)}g · USD ${relRate.toFixed(2)}/kg</div>
+                <div class="pdp-related-card-meta">${relIsFixed ? `${Math.round((rel.weight || 0.8) * 1000)}g · Pieza de Autor` : `${Math.round(rel.weight * 1000)}g · USD ${relRate.toFixed(2)}/kg`}</div>
                 <div class="pdp-related-card-price">USD ${relPrice.toFixed(2)}</div>
             </a>
         `;

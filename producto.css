@@ -16,7 +16,7 @@
     --pdp-olive: #6E8058;
     --pdp-border-subtle: rgba(194, 139, 23, 0.18);
     --pdp-font-heading: 'Lora', Georgia, serif;
-    --pdp-font-body: 'Outfit', 'Lexend Deca', system-ui, sans-serif;
+    --pdp-font-body: 'Outfit', system-ui, sans-serif;
     --pdp-radius: 12px;
     --pdp-shadow: 0 10px 30px rgba(34, 34, 34, 0.06);
     --pdp-shadow-lg: 0 18px 45px rgba(34, 34, 34, 0.10);
@@ -28,13 +28,13 @@ body.pdp-page {
     color: var(--pdp-charcoal);
     font-family: var(--pdp-font-body);
     margin: 0;
-    padding-top: 96px; /* Altura de header fijo */
+    padding-top: 0;
     -webkit-font-smoothing: antialiased;
 }
 
 @media (max-width: 768px) {
     body.pdp-page {
-        padding-top: 104px;
+        padding-top: 0;
     }
 }
 
@@ -650,4 +650,22 @@ body.pdp-page {
     text-decoration: none;
     border-radius: 30px;
     font-weight: 600;
+}
+
+/* Botón de navegación B2B con marco sutil */
+.nav-item.nav-item--b2b {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--pdp-mustard);
+    background-color: rgba(226, 167, 39, 0.08);
+    border: 1px solid rgba(226, 167, 39, 0.55);
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.nav-item.nav-item--b2b:hover {
+    background-color: var(--pdp-mustard);
+    color: #FFFFFF;
+    border-color: var(--pdp-mustard);
 }
