@@ -6,7 +6,7 @@
     "dev": "npx http-server -p 3000 -c-1",
     "build": "cssnano --no-zindex styles.css styles.min.css && uglifyjs app.js -o app.min.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "cssnano-cli": "^1.0.5",
     "uglify-js": "^3.19.3"
   }
