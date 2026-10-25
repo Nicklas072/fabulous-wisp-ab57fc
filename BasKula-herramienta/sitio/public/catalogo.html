@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <!-- Título y descripción -->
-    <title>Balanza Interactiva — BasKula Cerámica por Kilo</title>
+    <title>Catálogo & Balanza Interactiva | BasKula Cerámica por Kilo en Punta Piedras</title>
     <meta name="description"
-        content="Simulá tu pesaje en tiempo real con la Báscula interactiva de BasKula. Elegí tus platos, tazas y bowls de cerámica portuguesa y calcula el precio por peso.">
+        content="Simulá tu pesaje en tiempo real con la Báscula online de BasKula. Elegí platos, fuentes, tazas, bowls y ensaladeras de cerámica portuguesa artesanal y reservá tus piezas en Punta Piedras, Maldonado.">
     <meta name="author" content="BasKula">
     <meta name="theme-color" content="#E2A727">
 
@@ -16,21 +16,30 @@
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://baskula.netlify.app/catalogo.html">
+    <link rel="canonical" href="https://www.baskula.com/catalogo.html">
 
     <!-- Robots & Indexación -->
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="googlebot" content="index, follow">
 
-    <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
+    <!-- Open Graph (Facebook, WhatsApp, Instagram, Telegram) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BasKula">
-    <meta property="og:title" content="Balanza Interactiva — BasKula Cerámica por Kilo">
+    <meta property="og:title" content="Catálogo & Balanza Interactiva — BasKula Cerámica por Kilo">
     <meta property="og:description"
-        content="Simulá tu pesaje en tiempo real con la Báscula de BasKula. Elegí tus platos de cerámica portuguesa y calcula el precio.">
-    <meta property="og:url" content="https://baskula.netlify.app/catalogo.html">
-    <meta property="og:image" content="https://baskula.netlify.app/hero.jpg">
+        content="Simulá tu pesaje en tiempo real con la Báscula de BasKula. Elegí tus piezas de gres portugués artesanal y reservá para retirar en nuestra tienda de Punta Piedras.">
+    <meta property="og:url" content="https://www.baskula.com/catalogo.html">
+    <meta property="og:image" content="https://www.baskula.com/images/hero-single.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Catálogo y Balanza Interactiva BasKula en Punta Piedras, Uruguay">
     <meta property="og:locale" content="es_UY">
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Catálogo & Balanza Interactiva — BasKula Cerámica por Kilo">
+    <meta name="twitter:description" content="Elegí y pesá cerámica artesanal de Portugal online. Reservá tu selección en Punta Piedras, Maldonado.">
+    <meta name="twitter:image" content="https://www.baskula.com/images/hero-single.jpg">
 
     <!-- Preconnect a orígenes externos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,13 +47,13 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="dns-prefetch" href="https://unpkg.com">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Únicamente Lora + Outfit) -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="styles.min.css?v=20261024_nav">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons -->
@@ -63,16 +72,17 @@
         <div class="header-container">
             <!-- Left: Brand Logo -->
             <a href="index.html" class="logo-area" aria-label="Ir a Inicio de BasKula">
-                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="164" height="58">
             </a>
 
             <!-- Right: Navigation Menu -->
             <div class="header-right">
                 <nav class="nav-menu">
                     <a href="index.html" class="nav-item">Inicio</a>
-                    <a href="catalogo.html" class="nav-item active">La Tienda</a>
-                    <a href="https://baskulab2b.vercel.app" class="nav-item">Catálogo</a>
-                    <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="nav-item">Contacto</a>
+                    <a href="index.html#concepto" class="nav-item">La Tienda</a>
+                    <a href="catalogo.html" class="nav-item active">Catálogo</a>
+                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="nav-item nav-item--b2b" title="Catálogo Privado para Restaurantes y Hoteles">Catálogo B2B <i data-lucide="external-link" style="width:13px; height:13px; vertical-align:middle; margin-left:3px; opacity:0.8;"></i></a>
+                    <a href="index.html#contacto" class="nav-item">Contacto</a>
                 </nav>
 
                 <!-- Botón Corazón Balanza en Nav -->
@@ -82,11 +92,27 @@
                     </svg>
                     <span class="nav-heart-badge" id="navHeartBadge">0</span>
                 </button>
-            </div>
 
-            <button class="menu-toggle-btn" id="menu-toggle" style="display:none;" aria-label="Abrir menú">
-                <i data-lucide="menu"></i>
-            </button>
+                <div class="header-actions">
+                    <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link"
+                        aria-label="Contacto WhatsApp">
+                        <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Botón Menú Hamburguesa para móvil -->
+                <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -97,19 +123,23 @@
         <div class="drawer-plant"></div>
         <div class="drawer-header">
             <a href="index.html" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo"
-                    style="height: 36px; max-height: 36px;"></a>
+                    width="102" height="36" style="height: 36px; max-height: 36px;"></a>
             <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
                 <i data-lucide="x"></i>
             </button>
         </div>
         <div class="drawer-body">
             <nav class="drawer-nav">
-                <a href="catalogo.html" class="drawer-link">La Tienda</a>
-                <a href="index.html#concepto" class="drawer-link">Concepto</a>
-                <a href="index.html#coleccion" class="drawer-link">Catálogo</a>
+                <a href="index.html" class="drawer-link">Inicio</a>
+                <a href="index.html#concepto" class="drawer-link">La Tienda</a>
+                <a href="catalogo.html" class="drawer-link">Catálogo</a>
                 <a href="index.html#contacto" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
                 <a href="index.html#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
+                <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
+                    <span>Catálogo Privado B2B</span>
+                    <i data-lucide="external-link" style="width:16px; height:16px;"></i>
+                </a>
             </nav>
             <div class="drawer-footer">
                 <div class="drawer-contact-info">
@@ -117,7 +147,7 @@
                     <p><strong>Email:</strong> info@baskula.com</p>
                 </div>
                 <div class="drawer-socials">
-                    <a href="https://www.instagram.com/baskula_/" target="_blank" rel="noopener"
+                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener"
                         class="drawer-social-icon" aria-label="Instagram">
                         <i data-lucide="instagram"></i>
                     </a>
@@ -130,13 +160,15 @@
         </div>
     </div>
 
+    <main id="main-content">
+
     <!-- Interactive Scale Simulator Section -->
     <section id="simulador" class="section-container simulator-section-wrapper">
         <div class="section-header simulator-compact-header">
-            <span class="section-tag">Estanteria web</span>
+            <span class="section-tag">Estantería web</span>
             <h2>Elegí y pesá tus favoritos</h2>
-            <p class="section-subtitle">Conocé los articulos de nuestra nueva colección
-                <strong> Hablá con nuestro equipo para reservar tus piezas preferidas !.</strong>
+            <p class="section-subtitle">Conocé los artículos de nuestra nueva colección.
+                <strong>¡Hablá con nuestro equipo para reservar tus piezas preferidas y retirarlas en nuestra tienda de Punta Piedras!</strong>
             </p>
         </div>
 
@@ -147,7 +179,7 @@
                 <div class="alacena-cornice">
                     <div class="alacena-cornice-top">
                         <div class="alacena-rate-badge" id="alacena-rate-badge">
-                            Platos/Fuentes <strong>$16.50/kg</strong> · Tazas/Bowls/Vasos <strong>$29.50/kg</strong>
+                            Platos/Fuentes <strong>$16.50/kg</strong> · Tazas/Bowls/Vasos/Ensaladeras <strong>$29.50/kg</strong>
                         </div>
                     </div>
 
@@ -213,13 +245,13 @@
                             <div class="scale-tray-assembly" id="scale-tray-assembly">
                                 <div class="scale-stacked-items" id="scale-stacked-items" aria-hidden="true"></div>
                                 <img src="images/scale-tray.webp" alt="Platillo de la báscula" class="scale-tray-img"
-                                    draggable="false">
+                                    width="1024" height="898" draggable="false">
                             </div>
 
                             <!-- Cuerpo negro de la báscula -->
                             <div class="scale-body-wrap">
                                 <img src="images/scale-body.webp" alt="Báscula analógica BasKula" class="scale-body-img"
-                                    draggable="false">
+                                    width="1024" height="898" draggable="false">
                                 <!-- Esfera del reloj y aguja con inercia -->
                                 <div class="scale-dial">
                                     <div class="dial-needle" id="scale-needle"></div>
@@ -275,7 +307,7 @@
                                 <span>Vaciar</span>
                             </button>
                             <button type="button" class="btn-cta btn-checkout" id="btn-checkout" disabled>
-                                <span>Reservar!</span>
+                                <span>¡Reservar!</span>
                                 <i data-lucide="store"></i>
                             </button>
                         </div>
@@ -284,6 +316,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Ventana Editorial: Ficha de Personalidad de la Pieza (Opción A) -->
     <div class="modal-overlay piece-ficha-overlay" id="piece-detail-modal" aria-hidden="true">
@@ -297,7 +331,7 @@
                 <div class="ficha-stage">
                     <span class="ficha-category-pill" id="ficha-category-pill">Platos · $16.50/kg</span>
                     <div class="ficha-image-container" id="ficha-image-container">
-                        <img src="" alt="" class="ficha-piece-img" id="ficha-piece-img" loading="eager">
+                        <img src="" alt="" class="ficha-piece-img" id="ficha-piece-img" width="600" height="600" loading="eager">
                     </div>
                     <div class="ficha-thumbs-bar" id="ficha-thumbs-bar"></div>
                 </div>
@@ -355,13 +389,13 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <div class="logo-area">
-                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo">
+                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
                 </div>
                 <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
             </div>
             <div class="footer-links">
                 <a href="index.html">Inicio</a>
-                <a href="#">Catálogo</a>
+                <a href="catalogo.html">Catálogo</a>
                 <a href="index.html#servicios">Servicios</a>
                 <a href="index.html#contacto">Contacto</a>
             </div>
@@ -382,8 +416,7 @@
             <p>Pesaste un total de <strong id="modal-weight">0.00 kg</strong> de cerámica portuguesa artesanal.</p>
             <div class="modal-store-invite">
                 <i data-lucide="map-pin"></i>
-                <span>Cada pieza es única al tacto: <strong>no realizamos envíos</strong> para que vivas la experiencia
-                    de elegirlas y retirarlas en nuestra casa de <strong>Punta Piedras</strong>.</span>
+                <span>Cada pieza es única al tacto: <strong>envianos tu selección por WhatsApp</strong> para apartarlas y retirarlas personalmente en nuestra tienda de <strong>Punta Piedras</strong>.</span>
             </div>
             <div class="modal-receipt-summary">
                 <div class="modal-receipt-title">Detalle de tu Pesaje</div>
@@ -398,7 +431,7 @@
             <p class="modal-closing-text"
                 style="font-size: 0.88rem; margin-top: 14px; color: var(--color-charcoal-light);">
                 Envianos tu pesaje por WhatsApp para <strong>apartar tus piezas en el local</strong> y coordinar tu
-                visita:
+                retiro en Punta Piedras:
             </p>
             <a href="#" id="whatsapp-link" class="btn-whatsapp" target="_blank" rel="noopener">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
@@ -467,21 +500,21 @@
             <!-- Renderizado dinámico en app.js -->
         </div>
 
-        <!-- Pie del Drawer con resumen y botón Reservar ! -->
+        <!-- Pie del Drawer con resumen y botón ¡Reservar! -->
         <div class="wishlist-drawer__footer">
             <p class="wishlist-drawer__hint">
-                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>Reservar !</strong> se enviará tu pedido directo a nuestro WhatsApp para coordinar retiro o envío.
+                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>¡Reservar!</strong> enviaremos tu selección a nuestro WhatsApp para apartar tus piezas y coordinar tu retiro en nuestra tienda de <strong>Punta Piedras</strong>.
             </p>
             <button type="button" class="btn-cta btn-reserve-whatsapp" id="btnReserveWhatsApp">
-                <span>Reservar !</span>
+                <span>¡Reservar!</span>
                 <i data-lucide="send"></i>
             </button>
         </div>
     </aside>
 
     <!-- JS Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="app.min.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="app.min.js?v=20261024" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle de la Pieza — BasKula Cerámica por Kilo en Punta Piedras</title>
+    <meta name="description" content="Conocé en detalle esta pieza de cerámica artesanal portuguesa en BasKula (Punta Piedras, Maldonado). Descubrí su peso, precio por kilo, acabado vitrificado y cuidados.">
+    <meta name="author" content="BasKula">
+    <meta name="theme-color" content="#E2A727">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.baskula.com/producto.html">
+
+    <!-- Robots & Indexación -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="BasKula">
+    <meta property="og:title" content="Detalle de la Pieza — BasKula Cerámica por Kilo">
+    <meta property="og:description" content="Cerámica artesanal portuguesa vendida al peso en Punta Piedras, Maldonado. Reservá tus piezas online.">
+    <meta property="og:image" content="https://www.baskula.com/images/hero-single.jpg">
+    <meta property="og:locale" content="es_UY">
+
+    <!-- Preconnect & Fonts (Únicamente Lora + Outfit) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos globales de BasKula -->
+    <link rel="stylesheet" href="styles.min.css?v=20261024_nav">
+    <!-- Estilos dedicados de la Ficha de Producto (Inspirada en Costa Nova) -->
+    <link rel="stylesheet" href="producto.css?v=20261024_nav">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"
+        integrity="sha384-hJnF5AwidE18GSWTAGHv3ByzzvfNZ1Tcx5y1UUV3WkauuMCEzBJBMSwSt/PUPXnM" crossorigin="anonymous"
+        defer></script>
+</head>
+
+<body class="pdp-page">
+
+    <!-- Borde de Toldo Rayado Superior -->
+    <div class="awning-border"></div>
+
+    <!-- Header Navigation (Consistente con todo el sitio) -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- Izquierda: Botón Menú Móvil -->
+            <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
+                <i data-lucide="menu"></i>
+            </button>
+
+            <!-- Menú de Navegación Desktop -->
+            <nav class="nav-menu">
+                <a href="index.html#concepto" class="nav-item">La Tienda</a>
+                <a href="catalogo.html" class="nav-item">Catálogo</a>
+
+                <a href="index.html" class="logo-area" aria-label="Ir al inicio">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="164" height="58">
+                </a>
+
+                <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="nav-item nav-item--b2b" title="Catálogo Privado para Restaurantes y Hoteles">Catálogo B2B <i data-lucide="external-link" style="width:13px; height:13px; vertical-align:middle; margin-left:3px; opacity:0.8;"></i></a>
+                <a href="index.html#contacto" class="nav-item">Contacto</a>
+            </nav>
+
+            <!-- Derecha: Mini-Báscula interactiva en vivo -->
+            <a href="catalogo.html#simulador" class="nav-scale-widget" id="nav-scale-widget" aria-label="Ver piezas en tu báscula" title="Ver tu selección en la Báscula">
+                <span class="nav-scale-icon-wrap">
+                    <i data-lucide="scale" class="nav-scale-icon"></i>
+                    <span class="nav-scale-count" id="nav-scale-count">0</span>
+                </span>
+                <span class="nav-scale-weight" id="nav-scale-weight">0.00 kg</span>
+            </a>
+        </div>
+
+        <!-- Separador gráfico fino -->
+        <div class="mobile-nav-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-diamond">◆</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <!-- Subnavegación móvil -->
+        <nav class="mobile-subnav" aria-label="Navegación principal móvil">
+            <a href="catalogo.html" class="mobile-subnav-link mobile-subnav-featured">Catálogo</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="index.html#concepto" class="mobile-subnav-link">La Tienda</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="index.html#servicios" class="mobile-subnav-link">B2B</a>
+            <span class="subnav-separator" aria-hidden="true"></span>
+            <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="mobile-subnav-link">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Sidebar Drawer para Móviles -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="sidebar-drawer" id="sidebarDrawer">
+        <div class="drawer-awning"></div>
+        <div class="drawer-header">
+            <a href="index.html" class="drawer-logo">
+                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="102" height="36" style="height: 36px; max-height: 36px;">
+            </a>
+            <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="catalogo.html" class="drawer-nav-item"><i data-lucide="scale"></i> Catálogo & Báscula</a>
+            <a href="index.html#concepto" class="drawer-nav-item"><i data-lucide="store"></i> La Tienda</a>
+            <a href="index.html#galeria" class="drawer-nav-item"><i data-lucide="sparkles"></i> Nuestra Casa</a>
+            <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="drawer-nav-item" style="color:var(--color-mustard-dark, #C28B17); font-weight:600;"><i data-lucide="utensils"></i> Catálogo B2B Restaurantes <i data-lucide="external-link" style="width:14px; height:14px; margin-left:auto;"></i></a>
+            <a href="index.html#servicios" class="drawer-nav-item"><i data-lucide="book-open"></i> Servicios Profesionales</a>
+            <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="drawer-nav-item"><i data-lucide="message-circle"></i> Contacto WhatsApp</a>
+        </nav>
+    </div>
+
+    <!-- Contenido Dinámico de la Pieza (Cargado por producto.js) -->
+    <main class="pdp-container" id="pdp-dynamic-content" role="main">
+        <!-- Spinner o esqueleto de carga inicial elegante -->
+        <div style="text-align: center; padding: 100px 20px; color: #888;">
+            <p>Cargando pieza artesanal...</p>
+        </div>
+    </main>
+
+    <!-- Footer Oficial BasKula -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-area">
+                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
+                </div>
+                <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="catalogo.html">Catálogo</a>
+                <a href="index.html#servicios">Servicios</a>
+                <a href="https://wa.me/59893658477" target="_blank" rel="noopener">Contacto</a>
+            </div>
+            <div class="footer-copy">
+                &copy; BasKula. Cerámica por kilo en Punta Piedras, Uruguay.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: Catálogo de productos + Lógica interactiva PDP -->
+    <script src="products-data.js?v=20261024" defer></script>
+    <script src="producto.js?v=20261024" defer></script>
+</body>
+
+</html>

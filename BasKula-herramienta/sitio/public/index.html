@@ -3,46 +3,49 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <!-- Título y descripción -->
-    <title>BasKula — Cerámica por Kilo en Punta Piedras, Uruguay</title>
+    <title>BasKula — Vajilla de Cerámica Portuguesa por Kilo | Punta Piedras, Punta del Este</title>
     <meta name="description"
-        content="BasKula - Cerámica portuguesa vendida por kilo en Manantiales, Uruguay. Un espacio donde la cerámica, el diseño y la calidez conectan. Elegí. Pesá. Llevate lo que te enamora.">
+        content="Tienda exclusiva de vajilla y cerámica artesanal portuguesa vendida por kilo en Punta Piedras (Manantiales / Punta del Este, Maldonado, Uruguay). Venta al público y proyectos B2B para restaurantes, hoteles e interiorismo.">
     <meta name="author" content="BasKula">
-    <meta name="theme-color" content="#E2A727">
+    <meta name="theme-color" content="#C88A1E">
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://baskula.netlify.app/">
+    <link rel="canonical" href="https://www.baskula.com/">
 
     <!-- Robots & Indexación -->
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="googlebot" content="index, follow">
 
     <!-- Open Graph (Facebook, WhatsApp, Telegram) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="BasKula">
-    <meta property="og:title" content="BasKula — Cerámica por Kilo">
+    <meta property="og:title" content="BasKula — Cerámica Artesanal Portuguesa por Kilo en Punta Piedras">
     <meta property="og:description"
-        content="Cerámica portuguesa por kilo en Manantiales, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
-    <meta property="og:url" content="https://baskula.netlify.app/">
-    <meta property="og:image" content="https://baskula.netlify.app/hero.jpg">
-    <meta property="og:image:secure_url" content="https://baskula.netlify.app/hero.jpg">
+        content="Elegí. Pesá. Llevate lo que te enamora. Vajilla de autor en Punta Piedras, Manantiales y Punta del Este, Uruguay.">
+    <meta property="og:url" content="https://www.baskula.com/">
+    <meta property="og:image" content="https://www.baskula.com/images/hero-single.jpg">
+    <meta property="og:image:secure_url" content="https://www.baskula.com/images/hero-single.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt"
-        content="Vajilla de cerámica portuguesa artesanal de BasKula expuesta en la tienda de Manantiales, Uruguay">
+        content="Vajilla de cerámica portuguesa artesanal de BasKula expuesta en nuestra tienda de Punta Piedras, Maldonado, Uruguay">
     <meta property="og:locale" content="es_UY">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BasKula — Cerámica por Kilo">
+    <meta name="twitter:title" content="BasKula — Cerámica Artesanal Portuguesa por Kilo en Punta Piedras">
     <meta name="twitter:description"
-        content="Cerámica portuguesa por kilo en Manantiales, Uruguay. Elegí. Pesá. Llevate lo que te enamora.">
-    <meta name="twitter:image" content="https://baskula.netlify.app/hero.jpg">
+        content="Elegí. Pesá. Llevate lo que te enamora. Vajilla de autor en Punta Piedras, Manantiales y Punta del Este, Uruguay.">
+    <meta name="twitter:image" content="https://www.baskula.com/images/hero-single.jpg">
+
+    <!-- Preload LCP Hero Image en formato WebP -->
+    <link rel="preload" as="image" href="images/hero-single.webp" type="image/webp" fetchpriority="high">
 
     <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,13 +53,13 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="dns-prefetch" href="https://unpkg.com">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Unificadas: Lora & Outfit) -->
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="styles.min.css?v=20261024_nav">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -70,26 +73,37 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "LocalBusiness",
-          "@id": "https://baskula.netlify.app/#business",
-          "name": "BasKula",
-          "description": "Cerámica portuguesa vendida por kilo en Punta Piedras, Uruguay. Elegí. Pesá. Llevate lo que te enamora.",
-          "image": "https://baskula.netlify.app/hero.jpg",
-          "url": "https://baskula.netlify.app/",
+          "@type": ["HomeGoodsStore", "Store", "LocalBusiness"],
+          "@id": "https://www.baskula.com/#business",
+          "name": "BasKula — Cerámica Portuguesa por Kilo",
+          "description": "Boutique de vajilla de cerámica artesanal portuguesa vendida al peso en Punta Piedras, Maldonado, Uruguay. Atención a clientes finales (B2C) y equipamiento gastronómico, hotelero e inmobiliario (B2B).",
+          "image": "https://www.baskula.com/images/hero-single.jpg",
+          "logo": "https://www.baskula.com/images/logo.png",
+          "url": "https://www.baskula.com/",
           "telephone": "+598 93 658 477",
           "email": "info@baskula.com",
-          "priceRange": "$$",
-          "currenciesAccepted": "USD",
+          "priceRange": "$$-$$$",
+          "currenciesAccepted": "USD, UYU",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Manantiales",
+            "streetAddress": "Ruta 10, Punta Piedras",
+            "addressLocality": "Punta Piedras, Manantiales",
             "addressRegion": "Maldonado",
+            "postalCode": "20002",
             "addressCountry": "UY"
           },
+          "areaServed": [
+            { "@type": "Place", "name": "Punta Piedras" },
+            { "@type": "Place", "name": "Manantiales" },
+            { "@type": "Place", "name": "José Ignacio" },
+            { "@type": "Place", "name": "La Barra" },
+            { "@type": "Place", "name": "Punta del Este" },
+            { "@type": "Country", "name": "Uruguay" }
+          ],
           "geo": {
             "@type": "GeoCoordinates",
             "latitude": -34.9072,
-            "longitude": -54.9350
+            "longitude": -54.8250
           },
           "sameAs": [
             "https://www.instagram.com/baskula.uy/"
@@ -103,25 +117,22 @@
         },
         {
           "@type": "Product",
-          "@id": "https://baskula.netlify.app/#ceramica-por-kilo",
-          "name": "Cerámica portuguesa por kilo",
-          "description": "Piezas de cerámica portuguesa artesanal vendidas por peso. Mezclá colores, texturas, platos y tazas para armar tu propia vajilla.",
-          "image": "https://baskula.netlify.app/images/plato-hojas-verdes.jpg",
+          "@id": "https://www.baskula.com/#ceramica-por-kilo",
+          "name": "Vajilla de Cerámica Artesanal Portuguesa por Kilo",
+          "description": "Platos, fuentes, tazas, bowls y ensaladeras de gres portugués vendidos por peso. Mezclá texturas, esmaltes reactivos y colores para diseñar tu mesa.",
+          "image": "https://www.baskula.com/images/ceramics/plato-rayas-navy.webp",
           "brand": { "@type": "Brand", "name": "BasKula" },
+          "countryOfOrigin": "PT",
+          "material": "Gres cerámico artesanal portugués",
           "offers": {
-            "@type": "Offer",
-            "url": "https://baskula.netlify.app/#simulador",
+            "@type": "AggregateOffer",
+            "url": "https://www.baskula.com/catalogo.html",
             "priceCurrency": "USD",
-            "price": "16.50",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "16.50",
-              "priceCurrency": "USD",
-              "unitText": "por kilogramo",
-              "referenceQuantity": { "@type": "QuantitativeValue", "value": 1, "unitCode": "KGM" }
-            },
-            "availability": "https://schema.org/PreOrder",
-            "seller": { "@id": "https://baskula.netlify.app/#business" }
+            "lowPrice": "16.50",
+            "highPrice": "29.50",
+            "offerCount": "18",
+            "availability": "https://schema.org/InStock",
+            "seller": { "@id": "https://www.baskula.com/#business" }
           }
         }
       ]
@@ -139,15 +150,15 @@
         <div class="header-container">
             <!-- Left: Brand Logo -->
             <a href="#" class="logo-area" aria-label="BasKula - Ir al inicio">
-                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="164" height="58">
             </a>
 
             <!-- Right: Navigation Menu & Actions -->
             <div class="header-right">
                 <nav class="nav-menu">
-                    <a href="catalogo.html" class="nav-item">La Tienda</a>
-                    <a href="#concepto" class="nav-item">Concepto</a>
+                    <a href="#concepto" class="nav-item">La Tienda</a>
                     <a href="catalogo.html" class="nav-item">Catálogo</a>
+                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="nav-item nav-item--b2b" title="Catálogo Privado para Restaurantes y Hoteles">Catálogo B2B <i data-lucide="external-link" style="width:13px; height:13px; vertical-align:middle; margin-left:3px; opacity:0.8;"></i></a>
                     <a href="#contacto" class="nav-item">Contacto</a>
                 </nav>
 
@@ -172,12 +183,16 @@
                         <i data-lucide="concierge-bell"></i>
                     </a>
                 </div>
-            </div>
 
-            <!-- Hidden button to keep app.js drawer binding safe -->
-            <button class="menu-toggle-btn" id="menu-toggle" style="display:none;" aria-label="Abrir menú">
-                <i data-lucide="menu"></i>
-            </button>
+                <!-- Botón Menú Hamburguesa para móvil -->
+                <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -188,19 +203,23 @@
         <div class="drawer-plant"></div>
         <div class="drawer-header">
             <a href="#" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo"
-                    style="height: 36px; max-height: 36px;"></a>
+                    width="102" height="36" style="height: 36px; max-height: 36px;"></a>
             <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
                 <i data-lucide="x"></i>
             </button>
         </div>
         <div class="drawer-body">
             <nav class="drawer-nav">
-                <a href="catalogo.html" class="drawer-link">La Tienda</a>
-                <a href="#concepto" class="drawer-link">Concepto</a>
-                <a href="#coleccion" class="drawer-link">Catálogo</a>
+                <a href="#concepto" class="drawer-link">La Tienda</a>
+                <a href="#galeria" class="drawer-link">Nuestra Casa</a>
+                <a href="catalogo.html" class="drawer-link">Catálogo</a>
                 <a href="#contacto" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
                 <a href="#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
+                <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
+                    <span>Catálogo Privado B2B</span>
+                    <i data-lucide="external-link" style="width:16px; height:16px;"></i>
+                </a>
             </nav>
             <div class="drawer-footer">
                 <div class="drawer-contact-info">
@@ -208,7 +227,7 @@
                     <p><strong>Email:</strong> info@baskula.com</p>
                 </div>
                 <div class="drawer-socials">
-                    <a href="https://www.instagram.com/baskula_/" target="_blank" rel="noopener"
+                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener"
                         class="drawer-social-icon" aria-label="Instagram">
                         <i data-lucide="instagram"></i>
                     </a>
@@ -221,6 +240,8 @@
         </div>
     </div>
 
+    <main id="main-content">
+
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="slider-wrapper">
@@ -228,7 +249,7 @@
             <div class="slide active" data-layout="full">
                 <div class="slide-images">
                     <div class="slide-image-full hero-single-image"
-                        style="background-image: url('images/hero-single.jpg?v=10');"></div>
+                        style="background-image: url('images/hero-single.webp');"></div>
                 </div>
             </div>
         </div>
@@ -238,11 +259,23 @@
         <div class="hero-container">
             <div class="storefront-content">
                 <div class="card-corners"></div>
+                <span class="hero-editorial-badge">✦ Punta Piedras · Cerámica de Portugal ✦</span>
                 <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
-                <p class="hero-editorial-desc">Cerámica artesanal por kilo, vajilla de autor y piezas únicas para vestir tus momentos.</p>
+                <p class="hero-editorial-desc">
+                    Vajilla artesanal de gres portugués vendida al peso en Punta Piedras, Maldonado. Piezas únicas horneadas a 1180 °C para vestir tu mesa con alma atlántica.
+                </p>
                 <div class="hero-actions">
-                    <a href="catalogo.html" class="btn-cta">Báscula online <i data-lucide="scale"></i></a>
-                    <a href="#galeria" class="btn-secondary">Conocer Más</a>
+                    <a href="catalogo.html" class="btn-cta">
+                        <span>Báscula online</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
+                            <path d="M7 21h10"></path>
+                            <path d="M12 3v18"></path>
+                            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+                        </svg>
+                    </a>
+                    <a href="#concepto" class="btn-secondary">Cómo Funciona</a>
                 </div>
             </div>
         </div>
@@ -288,7 +321,7 @@
                 <div class="gallery-dual-img-wrap">
                     <img src="images/galeria-rectangular.jpg"
                         alt="Composición artesanal de bowls y cuencos esmaltados en tonos tostados y miel de BasKula"
-                        loading="lazy" decoding="async" />
+                        width="1024" height="563" loading="lazy" decoding="async" />
                 </div>
             </div>
 
@@ -297,7 +330,7 @@
                 <div class="gallery-dual-img-wrap">
                     <img src="images/galeria-cuadrada.jpg"
                         alt="Centro de mesa con pie a rayas, limones frescos y jarra floral artesanal de BasKula"
-                        loading="lazy" decoding="async" />
+                        width="722" height="953" loading="lazy" decoding="async" />
                 </div>
             </div>
         </div>
@@ -336,7 +369,7 @@
                 <div class="holiday-card" data-aos="fade-up">
                     <div class="holiday-img-wrap">
                         <img src="images/navidad-banner-1.jpg"
-                            alt="Vajilla navideña en forma de pinitos y cerámica artesanal festiva" loading="lazy">
+                            alt="Vajilla navideña en forma de pinitos y cerámica artesanal festiva" width="766" height="1024" loading="lazy" decoding="async">
                         <div class="holiday-overlay"></div>
                     </div>
                     <div class="holiday-card-content">
@@ -350,7 +383,7 @@
                 <div class="holiday-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="holiday-img-wrap">
                         <img src="images/navidad-banner-2.jpg?v=2"
-                            alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" loading="lazy">
+                            alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766" height="1024" loading="lazy" decoding="async">
                         <div class="holiday-overlay"></div>
                     </div>
                     <div class="holiday-card-content">
@@ -385,7 +418,7 @@
         <div class="bestsellers-container">
             <div class="bestsellers-header">
                 <span class="section-tag">Piezas Especiales</span>
-                <h2 class="bestsellers-heading"><em>Piezas para regalar !</em></h2>
+                <h2 class="bestsellers-heading"><em>¡Piezas para regalar!</em></h2>
                 <p class="bestsellers-subheading">Dentro de nuestras colecciones vas a descubrir una variedad única en
                     Uruguay.</p>
             </div>
@@ -423,7 +456,7 @@
         <div class="section-header text-center">
             <span class="section-tag">Una experiencia diferente</span>
             <h2>¿Cómo funciona BasKula?</h2>
-            <p class="section-subtitle">Podes conocernos en nuestra tienda o tambien en nuestro catálogo online.</p>
+            <p class="section-subtitle">Podés conocernos en nuestra tienda de Punta Piedras o también en nuestro catálogo online.</p>
             <p class="concept-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
         </div>
 
@@ -435,7 +468,7 @@
                     style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
                 </div>
                 <h3>1. Elegí lo que te guste.</h3>
-                <p>Podes elegir juegos completos y tambien podés mezclar colores, texturas, platos y tazas creando tus
+                <p>Podés elegir juegos completos y también podés mezclar colores, texturas, platos y tazas creando tus
                     propios juegos.
                 </p>
                 <p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
@@ -447,7 +480,7 @@
                     <i data-lucide="scale" class="concept-icon"></i>
                 </div>
                 <h3>2. Pesá en la Báscula.</h3>
-                <p>Pesá lo que te guste en alguna de las basculas disponibles en la tienda</p>
+                <p>Pesá lo que te guste en alguna de las básculas disponibles en la tienda.</p>
                 <p>Pagá solo por el peso de lo que elijas.</p>
             </div>
             <!-- Step 3 -->
@@ -458,10 +491,12 @@
                 </div>
                 <h3>3. Llevá tus favoritos.</h3>
                 <p>Te llevás lo que te gusta para ponerlo donde quieras.</p>
-                <p>Arte de Portual a tu mesa.</p>
+                <p>Arte de Portugal a tu mesa.</p>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Carrusel de Cerámica por Kilo (Debajo de Una Experiencia Diferente) -->
     <section id="productos-kilo" class="bestsellers-section productos-kilo-section" data-aos="fade-up">
@@ -515,54 +550,60 @@
     <!-- New Season / Trends Section -->
     <section id="tendencias" class="section-container trends-section" data-aos="fade-up">
         <div class="section-header text-center">
-            <h2 class="trends-main-heading">Nueva Temporada!</h2>
+            <h2 class="trends-main-heading">¡Nueva Temporada!</h2>
             <p class="section-subtitle trends-subtitle">Portugal nos trae...</p>
         </div>
 
         <div class="trends-grid">
             <!-- Card 1: Perlas -->
-            <div class="trend-card">
+            <div class="trend-card" data-trend-id="trend-perlas" role="button" tabindex="0" aria-label="Ver ficha de Colección Perlas">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend1.jpg?v=3" alt="Perlas - Nueva Temporada BasKula" loading="lazy"
+                    <img src="images/trend1.webp" alt="Perlas - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
                         decoding="async" />
                 </div>
                 <h3 class="trend-title">Perlas</h3>
+                <span class="trend-price-subtle">$16.50 / kg</span>
             </div>
             <!-- Card 2: Rayas -->
-            <div class="trend-card">
+            <div class="trend-card" data-trend-id="trend-rayas" role="button" tabindex="0" aria-label="Ver ficha de Colección Rayas">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend2.jpg?v=3" alt="Rayas - Nueva Temporada BasKula" loading="lazy"
+                    <img src="images/trend2.webp" alt="Rayas - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
                         decoding="async" />
                 </div>
                 <h3 class="trend-title">Rayas</h3>
+                <span class="trend-price-subtle">$16.50 / kg</span>
             </div>
             <!-- Card 3: Handmade -->
-            <div class="trend-card">
+            <div class="trend-card" data-trend-id="trend-handmade" role="button" tabindex="0" aria-label="Ver ficha de Colección Handmade">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend3.jpg?v=3" alt="Handmade - Nueva Temporada BasKula" loading="lazy"
+                    <img src="images/trend3.webp" alt="Handmade - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
                         decoding="async" />
                 </div>
                 <h3 class="trend-title">Handmade</h3>
+                <span class="trend-price-subtle">$16.50 / kg</span>
             </div>
             <!-- Card 4: Vintage -->
-            <div class="trend-card">
+            <div class="trend-card" data-trend-id="trend-vintage" role="button" tabindex="0" aria-label="Ver ficha de Colección Vintage">
                 <div class="trend-img-wrapper">
-                    <img src="images/trend4.jpg?v=3" alt="Vintage - Nueva Temporada BasKula" loading="lazy"
+                    <img src="images/trend4.webp" alt="Vintage - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
                         decoding="async" />
                 </div>
                 <h3 class="trend-title">Vintage</h3>
+                <span class="trend-price-subtle">$16.50 / kg</span>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- B2B Services Section: Full-Width Mostaza Oscuro -->
     <section id="servicios" class="b2b-special-section" data-aos="fade-up">
         <div class="b2b-special-container">
             <div class="b2b-content-wrapper">
-                <span class="b2b-tag">Servicios Especiales</span>
-                <h2 class="b2b-heading">Cerámica de autor para proyectos de Gastronomía y Decoración</h2>
+                <span class="b2b-tag">División Profesional B2B · Maldonado & Uruguay</span>
+                <h2 class="b2b-heading">Vajilla de autor para Gastronomía, Hotelería e Interiorismo</h2>
                 <p class="b2b-intro">
-                    Llevamos la calidez, textura y autenticidad de la cerámica artesanal portuguesa al entorno profesional. Ofrecemos soluciones a medida con venta por peso, diseñadas para resistir el uso intensivo y potenciar la identidad estética de cada propuesta.
+                    Equipamos restaurantes de autor, hoteles boutique y desarrollos inmobiliarios en José Ignacio, Manantiales, Punta del Este y todo el país. Gres vitrificado a 1180 °C de resistencia profesional con cotización transparente por volumen y kilo.
                 </p>
 
                 <!-- Bloques descriptivos de los dos servicios -->
@@ -571,42 +612,57 @@
                     <div class="b2b-service-card">
                         <div class="b2b-card-header">
                             <div class="b2b-thumb-frame">
-                                <img src="images/b2b-thumb-gastronomia.webp" alt="Hoteles & Restaurantes" class="b2b-card-thumb" loading="lazy">
+                                <img src="images/b2b-thumb-gastronomia.webp" alt="Hoteles y Restaurantes" class="b2b-card-thumb" width="48" height="48" loading="lazy">
                             </div>
                             <h3 class="b2b-card-title">Hoteles & Restaurantes</h3>
                         </div>
                         <p class="b2b-card-desc">
-                            Vajilla de alta durabilidad para el ritmo diario de salón y lavavajillas profesional. Platos y fuentes que enmarcan la propuesta del chef con reposición continua y escala por kilo.
+                            Vajilla de alta densidad para uso intensivo en salón, horno y lavavajillas industrial. Platos, fuentes y cuencos que enmarcan la propuesta del chef con reposición continua.
                         </p>
+                        <a href="Programa_Hoteles_y_Restaurantes.pdf" target="_blank" rel="noopener" class="b2b-pdf-link">
+                            <i data-lucide="file-down"></i>
+                            <span>Descargar Programa Gastronómico (PDF)</span>
+                        </a>
                     </div>
 
-                    <!-- Servicio 2: Sector de Decoración -->
+                    <!-- Servicio 2: Decoración & Real Estate -->
                     <div class="b2b-service-card">
                         <div class="b2b-card-header">
                             <div class="b2b-thumb-frame">
-                                <img src="images/b2b-thumb-decoracion.webp" alt="Sector Decoración" class="b2b-card-thumb" loading="lazy">
+                                <img src="images/b2b-thumb-decoracion.webp" alt="Interiorismo y Real Estate" class="b2b-card-thumb" width="48" height="48" loading="lazy">
                             </div>
-                            <h3 class="b2b-card-title">Sector Decoración</h3>
+                            <h3 class="b2b-card-title">Interiorismo & Home Staging</h3>
                         </div>
                         <p class="b2b-card-desc">
-                            Asesoramiento para interioristas, arquitectos, estilismo de mesas, ambientación y eventos. Piezas escultóricas, jarrones y acentos orgánicos que visten espacios con carácter propio.
+                            Curaduría de sets llave en mano para estudios de arquitectura, desarrolladores inmobiliarios y casas de alquiler de lujo en la costa.
                         </p>
+                        <a href="Programa_Inmobiliarias_y_HomeStaging.pdf" target="_blank" rel="noopener" class="b2b-pdf-link">
+                            <i data-lucide="file-down"></i>
+                            <span>Descargar Programa Interiorismo & Real Estate (PDF)</span>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Botones de Acción -->
                 <div class="b2b-cta-group">
-                    <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20me%20gustar%C3%ADa%20consultar%20por%20los%20servicios%20especiales%20para%20hoteles,%20restaurantes%20y%20decoraci%C3%B3n." 
-                       target="_blank" rel="noopener" class="b2b-btn-primary">
+                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="b2b-btn-primary b2b-btn-tool" style="background: linear-gradient(135deg, #1C1A17 0%, #2A241E 100%); color: #FAF8F5 !important; border: 1.5px solid var(--color-mustard, #E2A727); box-shadow: 0 6px 20px rgba(0,0,0,0.25);">
+                        <i data-lucide="utensils" style="width:18px; height:18px; stroke:var(--color-mustard, #E2A727);"></i>
+                        <span>Acceder al Catálogo Privado B2B Online</span>
+                        <i data-lucide="external-link" style="width:15px; height:15px; opacity:0.85;"></i>
+                    </a>
+                    <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20quisiera%20solicitar%20asesoramiento%20y%20cotizaci%C3%B3n%20del%20Programa%20B2B%20(Gastronom%C3%ADa%20/%20Hoteler%C3%ADa%20/%20Interiorismo)." 
+                       target="_blank" rel="noopener" class="b2b-btn-secondary">
                         <svg class="b2b-whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z" />
                         </svg>
-                        <span>Consultar Propuesta B2B</span>
+                        <span>Solicitar Cotización B2B por WhatsApp</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Franchise / Contact Postcard Section -->
     <section id="contacto" class="section-container contact-section-wrapper">
@@ -614,7 +670,7 @@
             <!-- Left Column: Story & Info -->
             <div class="postcard-info">
                 <div class="logo-area">
-                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo">
+                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
                 </div>
                 <h3>¿Te enamoraste de la idea?</h3>
                 <p>
@@ -624,7 +680,7 @@
                 <div class="contact-details">
                     <div class="detail-item">
                         <i data-lucide="map-pin"></i>
-                        <span>Manantiales - Uruguay</span>
+                        <span>Punta Piedras, Manantiales - Uruguay</span>
                     </div>
                     <div class="detail-item">
                         <i data-lucide="mail"></i>
@@ -663,7 +719,7 @@
                         <label>No llenar este campo: <input name="bot-field"></label>
                     </p>
                     <div class="form-row">
-                        <label for="name">Hola! Mi nombre es</label>
+                        <label for="name">¡Hola! Mi nombre es</label>
                         <input type="text" id="name" name="name" placeholder="Tu nombre..." required
                             autocomplete="name">
                     </div>
@@ -685,12 +741,16 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
+    </main>
+
     <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-brand">
                 <div class="logo-area">
-                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo">
+                    <img src="images/logo-white.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
                 </div>
                 <p class="footer-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
             </div>
@@ -713,7 +773,7 @@
                 <div class="ficha-stage">
                     <span class="ficha-category-pill" id="aparador-modal-badge">Pieza de Autor</span>
                     <div class="ficha-image-container">
-                        <img src="" alt="" class="ficha-piece-img" id="aparador-modal-img">
+                        <img src="" alt="" class="ficha-piece-img" id="aparador-modal-img" width="600" height="600">
                     </div>
                 </div>
                 <div class="ficha-info-col">
@@ -725,7 +785,7 @@
                             <span class="spec-label">Precio</span>
                             <strong class="spec-gold" id="aparador-modal-price"></strong>
                         </div>
-                        <div class="ficha-spec">
+                        <div class="ficha-spec" id="aparador-modal-weight-wrap">
                             <span class="spec-label">Peso de referencia</span>
                             <strong id="aparador-modal-weight"></strong>
                         </div>
@@ -742,7 +802,7 @@
                         <a href="#" id="aparador-modal-whatsapp" target="_blank" rel="noopener noreferrer"
                             class="ficha-wpp-btn">
                             <i data-lucide="message-circle"></i>
-                            <span>Reserva por wpp!</span>
+                            <span>¡Reservar por WhatsApp!</span>
                         </a>
                     </div>
                 </div>
@@ -776,6 +836,7 @@
                     </g>
                 </g>
             </svg>
+            <span class="floating-scale-badge" id="floatingScaleBadge">0</span>
         </button>
         <div class="floating-scale-pill" id="floatingScalePill">
             <span class="scale-pill-weight" id="floatingScaleWeightText">0.0 kg</span>
@@ -838,21 +899,21 @@
             <!-- Renderizado dinámico en app.js -->
         </div>
 
-        <!-- Pie del Drawer con resumen y botón Reservar ! -->
+        <!-- Pie del Drawer con resumen y botón ¡Reservar! -->
         <div class="wishlist-drawer__footer">
             <p class="wishlist-drawer__hint">
-                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>Reservar !</strong> se enviará tu pedido directo a nuestro WhatsApp para coordinar retiro o envío.
+                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>¡Reservar!</strong> enviaremos tu selección a nuestro WhatsApp para apartar tus piezas y coordinar tu retiro en nuestra tienda de <strong>Punta Piedras</strong>.
             </p>
             <button type="button" class="btn-cta btn-reserve-whatsapp" id="btnReserveWhatsApp">
-                <span>Reservar !</span>
+                <span>¡Reservar!</span>
                 <i data-lucide="send"></i>
             </button>
         </div>
     </aside>
 
     <!-- JS Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="app.min.js" defer></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
+    <script src="app.min.js?v=20261024" defer></script>
 
 
 </body>

@@ -321,12 +321,12 @@ const renderAlacenaShelves = () => {
                             </svg>
                         </button>
                         ${qtyInBasket > 0 ? `<span class="piece-qty-badge" title="En tu balanza">×${qtyInBasket}</span>` : ''}
-                        <img src="${item.img}" alt="${item.name}" class="gallery-photo" loading="lazy" decoding="async" draggable="false">
+                        <img src="${item.img}" alt="${item.name} — Cerámica artesanal portuguesa por kilo en BasKula" class="gallery-photo" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                         <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
                     </div>
                     <div class="gallery-caption">
                         <div class="gallery-caption-meta">
-                            <span class="gallery-item-name" title="${item.name}">${item.shortName}</span>
+                            <a href="producto.html?id=${item.id}" class="gallery-item-name" title="Ver ficha completa de ${item.name}">${item.shortName}</a>
                             <span class="gallery-item-price">${Math.round(item.weight * 1000)}g · ${formatCurrency(unitPrice)}</span>
                         </div>
                         <button type="button" class="gallery-quick-add-btn" data-action="quick-add" data-id="${item.id}" aria-label="Agregar ${item.name} directo a la báscula" title="Poner en la báscula">
@@ -352,13 +352,20 @@ const renderAlacenaShelves = () => {
     }
 };
 
-// --- Interacción en el Estante (Click directo en pieza abre Ficha, '+' agrega a báscula) ---
+// --- Interacción en el Estante (Click en título lleva a producto.html, click en foto abre Ficha, '+' agrega a báscula) ---
 if (alacenaShelvesStage) {
     alacenaShelvesStage.addEventListener('click', (e) => {
         if (e.target.closest('.card-heart-btn')) return;
 
+        // Permitir navegación directa a producto.html?id=... al hacer clic en el enlace del nombre
+        if (e.target.closest('a.gallery-item-name')) {
+            e.stopPropagation();
+            return;
+        }
+
         const quickAddBtn = e.target.closest('[data-action="quick-add"]');
         if (quickAddBtn) {
+            e.preventDefault();
             e.stopPropagation();
             const id = quickAddBtn.getAttribute('data-id');
             addItemToScale(id, 1, quickAddBtn);
@@ -374,8 +381,9 @@ if (alacenaShelvesStage) {
 
     alacenaShelvesStage.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('a.gallery-item-name')) return;
             const tile = e.target.closest('.shelf-piece-tile');
-            if (tile && !e.target.closest('.tile-quick-add-btn')) {
+            if (tile && !e.target.closest('.tile-quick-add-btn') && !e.target.closest('[data-action="quick-add"]')) {
                 e.preventDefault();
                 openPieceFicha(tile.getAttribute('data-id'));
             }
@@ -400,7 +408,7 @@ if (alacenaFilterBar) {
 
         if (alacenaRateBadge) {
             if (category === 'todos') {
-                alacenaRateBadge.innerHTML = `Platos/Fuentes <strong>$16.50/kg</strong> · Tazas/Bowls/Vasos <strong>$29.50/kg</strong>`;
+                alacenaRateBadge.innerHTML = `Platos/Fuentes <strong>$16.50/kg</strong> · Tazas/Bowls/Vasos/Ensaladeras <strong>$29.50/kg</strong>`;
             } else {
                 const rate = getRateForCategory(category);
                 alacenaRateBadge.innerHTML = `${CATEGORY_LABELS[category]}: Tarifa <strong>USD ${rate.toFixed(2)} / kg</strong>`;
@@ -773,6 +781,27 @@ if (checkoutModal) {
     });
 }
 
+// --- Notificación Toast integrada en la interfaz ---
+const showBaskulaToast = (message, isError = false) => {
+    let toast = document.getElementById('baskula-ui-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'baskula-ui-toast';
+        toast.className = 'baskula-toast';
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        document.body.appendChild(toast);
+    }
+    toast.classList.toggle('baskula-toast--error', isError);
+    toast.innerHTML = `<i data-lucide="${isError ? 'alert-circle' : 'check-circle'}"></i><span>${message}</span>`;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 4200);
+};
+
 // --- Postcard Form Logic (Netlify Forms via AJAX) ---
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
@@ -801,7 +830,7 @@ if (contactForm) {
                 btnSubmit.style.boxShadow = 'none';
                 lucide.createIcons();
 
-                alert(`¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.`);
+                showBaskulaToast('¡Gracias por tu mensaje! Tu postal fue enviada con éxito. Nos pondremos en contacto muy pronto.');
 
                 setTimeout(() => {
                     contactForm.reset();
@@ -816,337 +845,11 @@ if (contactForm) {
                 btnSubmit.innerHTML = originalContent;
                 btnSubmit.disabled = false;
                 lucide.createIcons();
-                alert('Hubo un problema al enviar el mensaje. Por favor, intentá de nuevo o escribinos a info@baskula.com');
+                showBaskulaToast('Hubo un problema al enviar el mensaje. Por favor, intentá de nuevo o escribinos a info@baskula.com', true);
                 console.error('Form submit error:', error);
             });
     });
 }
-
-// --- Hero Slider Logic (Costa Nova style + Responsive Crossfade) ---
-function initHeroSlider() {
-    const isMobile = window.innerWidth <= 768;
-    const slides = isMobile
-        ? document.querySelectorAll('.hero-slider .slide.mobile-only')
-        : document.querySelectorAll('.hero-slider .slide.desktop-only');
-    const pagination = isMobile
-        ? document.querySelector('.slider-pagination.mobile-only')
-        : document.querySelector('.slider-pagination.desktop-only');
-    const dashes = pagination
-        ? pagination.querySelectorAll('.pagination-dash')
-        : [];
-
-    if (slides.length <= 1) return null;
-
-    let currentIndex = 0;
-    let slideInterval = null;
-
-    const showSlide = (index) => {
-        slides.forEach(s => s.classList.remove('active'));
-        dashes.forEach(d => d.classList.remove('active'));
-        currentIndex = (index + slides.length) % slides.length;
-        slides[currentIndex].classList.add('active');
-        if (dashes[currentIndex]) dashes[currentIndex].classList.add('active');
-    };
-
-    const nextSlide = () => {
-        showSlide(currentIndex + 1);
-    };
-
-    const startSlideShow = () => {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, isMobile ? 4500 : 6000);
-    };
-
-    dashes.forEach((dash, idx) => {
-        dash.addEventListener('click', () => {
-            showSlide(idx);
-            startSlideShow();
-        });
-    });
-
-    showSlide(0);
-    startSlideShow();
-
-    return () => {
-        if (slideInterval) clearInterval(slideInterval);
-    };
-}
-
-let cleanupSlider = null;
-if (document.querySelector('.hero-slider')) {
-    cleanupSlider = initHeroSlider();
-    let lastWidth = window.innerWidth;
-    window.addEventListener('resize', () => {
-        const currentIsMobile = window.innerWidth <= 768;
-        const lastIsMobile = lastWidth <= 768;
-        if (currentIsMobile !== lastIsMobile) {
-            lastWidth = window.innerWidth;
-            if (cleanupSlider) cleanupSlider();
-            cleanupSlider = initHeroSlider();
-        }
-    });
-}
-
-// ==========================================================================
-// COLECCIÓN FESTIVA / NAVIDAD (A la mesa, en las Fiestas)
-// ==========================================================================
-const HOLIDAY_ITEMS = [
-    {
-        id: 'holiday-pinitos-festivos',
-        name: 'Set de Pinitos Esmaltados Festivos',
-        shortName: 'Pinitos Esmaltados',
-        pricingType: 'fixed',
-        price: 28,
-        priceFormatted: '$28',
-        weight: 0.68,
-        weightFormatted: '680g',
-        badge: 'Edición Fiestas',
-        img: 'images/navidad-banner-1.jpg',
-        dimensions: '22 cm × 18 cm · Set Navideño',
-        finish: 'Esmalte brillante verde pino y frutos rojos',
-        story: 'Piezas artesanales en forma de pino ideales para entradas, frutos secos, confituras o como detalle central de la mesa navideña.'
-    },
-    {
-        id: 'holiday-fuente-dorada',
-        name: 'Fuente Oval Festiva Borde Dorado',
-        shortName: 'Fuente Festiva',
-        pricingType: 'weight',
-        rate: 16.50,
-        price: 19.80,
-        priceFormatted: '$16.50 / kg',
-        weight: 1.20,
-        weightFormatted: '~1.2 kg ($19.80)',
-        badge: 'Por Kilo',
-        img: 'images/ceramics/tabla-servir-28usd.webp',
-        dimensions: '36 cm × 24 cm · Fuente para servir',
-        finish: 'Gres marfil con acabado satinado',
-        story: 'La reina de la mesa familiar: fuente amplia para carnes, ensaladas de fiesta o postres navideños, cobrada exactamente por lo que pesa.'
-    },
-    {
-        id: 'holiday-jarra-celebracion',
-        name: 'Jarra Festiva Red Berry',
-        shortName: 'Jarra Red Berry',
-        pricingType: 'fixed',
-        price: 35,
-        priceFormatted: '$35',
-        weight: 1.05,
-        weightFormatted: '1.05 kg',
-        badge: 'Ideal Regalo',
-        img: 'images/ceramics/jarra-family-red.webp',
-        dimensions: 'Alto 27 cm · Capacidad 1.5 L',
-        finish: 'Gres esmaltado rojo intenso artesanal',
-        story: 'Una presencia impactante en cualquier mesa de brindis. Su color rojo festivo aporta toda la calidez y el encanto de la Navidad portuguesa.'
-    },
-    {
-        id: 'holiday-platos-degrade',
-        name: 'Plato Playo Bicolor Verde & Rosa',
-        shortName: 'Plato Bicolor Fiestas',
-        pricingType: 'weight',
-        rate: 16.50,
-        price: 9.57,
-        priceFormatted: '$16.50 / kg',
-        weight: 0.58,
-        weightFormatted: '~580g ($9.50 c/u)',
-        badge: 'Por Kilo',
-        img: 'images/navidad-banner-2.jpg',
-        dimensions: 'Ø 27 cm · Plato Playo Principal',
-        finish: 'Esmaltado degradé verde bosque y cereza',
-        story: 'Ideal para armar tu vajilla festiva combinando tonos clásicos de fin de año con la suavidad del esmalte artesanal al peso.'
-    },
-    {
-        id: 'holiday-plato-sol-dorado',
-        name: 'Plato de Sol Terracota & Oro',
-        shortName: 'Plato de Sol',
-        pricingType: 'fixed',
-        price: 35,
-        priceFormatted: '$35',
-        weight: 0.98,
-        weightFormatted: '980g',
-        badge: 'Pieza de Autor',
-        img: 'images/ceramics/plato-sol-edicion-35usd.webp',
-        dimensions: 'Ø 29 cm · Plato de Celebración',
-        finish: 'Pintado a mano con detalles solares',
-        story: 'Símbolo de luz y nuevos comienzos para la mesa de fin de año. Perfecto como centro de mesa o bandeja de servicio.'
-    },
-    {
-        id: 'holiday-jarrita-regalo',
-        name: 'Jarrita Individual Red & Cream',
-        shortName: 'Jarrita Individual',
-        pricingType: 'fixed',
-        price: 22,
-        priceFormatted: '$22',
-        weight: 0.755,
-        weightFormatted: '755g',
-        badge: 'Detalle Especial',
-        img: 'images/ceramics/jarrita-family-red.webp',
-        dimensions: 'Alto 18 cm · Capacidad 600 ml',
-        finish: 'Gres esmaltado artesanal',
-        story: 'El regalo navideño ideal para amantes del diseño: práctica, hermosa y con el peso auténtico de la cerámica tradicional.'
-    }
-];
-
-const initHolidayCarousel = () => {
-    const track = document.getElementById('holiday-track');
-    const viewport = document.getElementById('holiday-viewport');
-    const prevBtn = document.getElementById('holiday-prev-btn');
-    const nextBtn = document.getElementById('holiday-next-btn');
-    const dotsContainer = document.getElementById('holiday-mobile-dots');
-
-    if (!track || !viewport) return;
-
-    track.innerHTML = '';
-    if (dotsContainer) dotsContainer.innerHTML = '';
-
-    let wasDragging = false;
-
-    HOLIDAY_ITEMS.forEach((item, idx) => {
-        const card = document.createElement('article');
-        card.className = 'bw-product-card';
-        card.setAttribute('data-id', item.id);
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Saber más sobre ${item.name}`);
-
-        const metaText = item.pricingType === 'weight' ? 'Venta por kilo · Cerámica artesanal' : 'Edición especial · Lista para regalar';
-        const badgeHTML = item.badge ? `<span class="holiday-card-badge">${item.badge}</span>` : '';
-
-        card.innerHTML = `
-            <div class="bw-product-card__figure">
-                <div class="bw-product-card__media">
-                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Guardar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                        <svg viewBox="0 0 24 24" class="card-heart-svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </button>
-                    <span class="holiday-transit-badge"><span class="badge-ship-icon">🚢</span> En viaje · Noviembre</span>
-                    <img src="${item.img}" alt="${item.name}" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false">
-                    <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
-                </div>
-            </div>
-            <div class="bw-product-card__info">
-                <a href="javascript:void(0)" class="bw-product-title" title="${item.name}">${item.name}</a>
-                <div class="bw-product-meta-row">
-                    <span class="bw-weight-tag"><i data-lucide="scale"></i> ${item.weightFormatted}</span>
-                    <span class="bw-price-pill">${item.priceFormatted}</span>
-                </div>
-            </div>
-        `;
-
-        card.addEventListener('click', (e) => {
-            if (wasDragging || e.target.closest('.card-heart-btn')) return;
-            openAparadorModal(item);
-        });
-
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.closest('.card-heart-btn')) return;
-                e.preventDefault();
-                openAparadorModal(item);
-            }
-        });
-
-        track.appendChild(card);
-
-        if (dotsContainer) {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
-            dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
-            dot.addEventListener('click', () => {
-                const cardEl = track.querySelectorAll('.bw-product-card')[idx];
-                if (cardEl) {
-                    viewport.scrollTo({
-                        left: cardEl.offsetLeft - track.offsetLeft,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-            dotsContainer.appendChild(dot);
-        }
-    });
-
-    const updateNavButtons = () => {
-        if (!prevBtn || !nextBtn) return;
-        const maxScroll = viewport.scrollWidth - viewport.clientWidth - 4;
-
-        if (viewport.scrollWidth <= viewport.clientWidth + 4) {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        } else {
-            prevBtn.style.display = '';
-            nextBtn.style.display = '';
-            prevBtn.disabled = viewport.scrollLeft <= 4;
-            nextBtn.disabled = viewport.scrollLeft >= maxScroll;
-        }
-
-        if (dotsContainer) {
-            const dots = dotsContainer.querySelectorAll('.bw-dot');
-            const cards = track.querySelectorAll('.bw-product-card');
-            const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
-            cards.forEach((card, i) => {
-                const cLeft = card.offsetLeft - track.offsetLeft;
-                const cRight = cLeft + card.offsetWidth;
-                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
-                    dots.forEach(d => d.classList.remove('active'));
-                    if (dots[i]) dots[i].classList.add('active');
-                }
-            });
-        }
-    };
-
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const scrollDistance = viewport.clientWidth * 0.75;
-            viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
-        });
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const scrollDistance = viewport.clientWidth * 0.75;
-            viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
-        });
-    }
-
-    viewport.addEventListener('scroll', updateNavButtons, { passive: true });
-    window.addEventListener('resize', updateNavButtons, { passive: true });
-
-    let isDown = false;
-    let startX = 0;
-    let initialScrollLeft = 0;
-
-    viewport.addEventListener('mousedown', (e) => {
-        isDown = true;
-        wasDragging = false;
-        startX = e.pageX - viewport.offsetLeft;
-        initialScrollLeft = viewport.scrollLeft;
-    });
-
-    viewport.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
-
-    viewport.addEventListener('mouseup', () => {
-        isDown = false;
-        setTimeout(() => { wasDragging = false; }, 80);
-    });
-
-    viewport.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        const x = e.pageX - viewport.offsetLeft;
-        const walk = (x - startX) * 1.35;
-        if (Math.abs(walk) > 4) {
-            wasDragging = true;
-            viewport.scrollLeft = initialScrollLeft - walk;
-        }
-    });
-
-    setTimeout(updateNavButtons, 100);
-
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-};
 
 // ==========================================================================
 // BESTSELLERS · PIEZAS DE AUTOR (index.html)
@@ -1241,12 +944,12 @@ const initAparador = () => {
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </button>
-                    <img src="${item.img}" alt="${item.name}" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false">
+                    <img src="${item.img}" alt="${item.name} — Pieza de autor cerámica portuguesa BasKula" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                     <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
                 </div>
             </div>
             <div class="bw-product-card__info">
-                <a href="javascript:void(0)" class="bw-product-title" title="${item.name}">${item.name}</a>
+                <a href="producto.html?id=${item.id}" class="bw-product-title" title="Ver ficha completa de ${item.name}">${item.name}</a>
                 <div class="bw-product-meta-row">
                     <span class="bw-price-pill">${item.priceFormatted}</span>
                 </div>
@@ -1254,13 +957,21 @@ const initAparador = () => {
         `;
 
         card.addEventListener('click', (e) => {
-            if (wasDragging || e.target.closest('.card-heart-btn')) return;
+            if (wasDragging) {
+                e.preventDefault();
+                return;
+            }
+            if (e.target.closest('.card-heart-btn')) return;
+            if (e.target.closest('a.bw-product-title')) {
+                e.stopPropagation();
+                return;
+            }
             openAparadorModal(item);
         });
 
         card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.closest('.card-heart-btn')) return;
+                if (e.target.closest('.card-heart-btn') || e.target.closest('a.bw-product-title')) return;
                 e.preventDefault();
                 openAparadorModal(item);
             }
@@ -1374,7 +1085,7 @@ const initAparador = () => {
     }
 };
 
-// Modal para las piezas de Autor
+// Modal para las piezas de Autor y Catálogo en Home
 const openAparadorModal = (item) => {
     const modal = document.getElementById('aparador-modal');
     if (!modal) return;
@@ -1384,6 +1095,7 @@ const openAparadorModal = (item) => {
     const imgEl = document.getElementById('aparador-modal-img');
     const priceEl = document.getElementById('aparador-modal-price');
     const weightEl = document.getElementById('aparador-modal-weight');
+    const weightWrapEl = document.getElementById('aparador-modal-weight-wrap');
     const dimEl = document.getElementById('aparador-modal-dimensions');
     const finishEl = document.getElementById('aparador-modal-finish');
     const wppEl = document.getElementById('aparador-modal-whatsapp');
@@ -1395,18 +1107,21 @@ const openAparadorModal = (item) => {
         imgEl.alt = item.name;
     }
     if (priceEl) priceEl.textContent = item.priceFormatted;
-    if (weightEl) weightEl.textContent = item.weightFormatted;
+    if (weightEl) weightEl.textContent = item.weightFormatted || '';
+    if (weightWrapEl) {
+        weightWrapEl.style.display = item.hideWeight ? 'none' : '';
+    }
     if (dimEl) dimEl.textContent = item.dimensions;
     if (finishEl) finishEl.textContent = item.finish;
 
     const badgeEl = document.getElementById('aparador-modal-badge');
     const originTagEl = modal.querySelector('.ficha-origin-tag');
-    const isHoliday = HOLIDAY_ITEMS.some(h => h.id === item.id) || (item.id && item.id.startsWith('holiday-'));
+    const isTrend = (typeof TREND_ITEMS !== 'undefined' && TREND_ITEMS.some(t => t.id === item.id)) || (item.id && item.id.startsWith('trend-'));
     const isFixed = item.pricingType === 'fixed';
 
     if (badgeEl) {
-        if (isHoliday) {
-            badgeEl.innerHTML = '🚢 En viaje · Llegando en Noviembre';
+        if (isTrend) {
+            badgeEl.innerHTML = '✦ Nueva Temporada · Portugal ✦';
         } else if (isFixed) {
             badgeEl.innerHTML = 'Pieza Especial';
         } else {
@@ -1414,8 +1129,8 @@ const openAparadorModal = (item) => {
         }
     }
     if (originTagEl) {
-        if (isHoliday) {
-            originTagEl.textContent = 'BasKula · Próximo Desembarco Navideño';
+        if (isTrend) {
+            originTagEl.textContent = 'BasKula · Nueva Temporada';
         } else if (isFixed) {
             originTagEl.textContent = 'BasKula · Piezas Especiales';
         } else {
@@ -1425,17 +1140,17 @@ const openAparadorModal = (item) => {
 
     if (wppEl) {
         const wppTextSpan = wppEl.querySelector('span');
-        if (isHoliday) {
-            if (wppTextSpan) wppTextSpan.textContent = 'Avisarme al llegar';
-            const text = encodeURIComponent(`Hola BasKula! Me gustaría anotarme en la lista de espera para cuando llegue la pieza navideña "${item.name}" (${item.priceFormatted}) que vi en su web.`);
+        if (isTrend) {
+            if (wppTextSpan) wppTextSpan.textContent = 'Consultar por esta colección';
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por las piezas de la ${item.name} ($16.50 / kg) de Nueva Temporada que vi en su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         } else if (isFixed) {
-            if (wppTextSpan) wppTextSpan.textContent = 'Reserva por wpp!';
-            const text = encodeURIComponent(`Hola BasKula, quisiera consultar disponibilidad para adquirir la pieza ${item.name} (${item.priceFormatted}) que vi en su web.`);
+            if (wppTextSpan) wppTextSpan.textContent = '¡Reservar por WhatsApp!';
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar disponibilidad para reservar y retirar en Punta Piedras la pieza ${item.name} (${item.priceFormatted}) que vi en su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         } else {
             if (wppTextSpan) wppTextSpan.textContent = 'Consultar por esta pieza';
-            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por la pieza "${item.name}" (${item.weightFormatted} · ${item.priceFormatted}) que vi en el catálogo de su web.`);
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por la pieza "${item.name}" (${item.weightFormatted ? item.weightFormatted + ' · ' : ''}${item.priceFormatted}) que vi en el catálogo de su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         }
     }
@@ -1513,8 +1228,8 @@ const PRODUCTS_CAROUSEL_ITEMS = [
         category: 'ensaladeras',
         weight: 0.975,
         weightFormatted: '0.98 kg',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
+        rate: 29.50,
+        priceFormatted: '$29.50 / kg',
         pricingType: 'weight',
         img: 'images/ceramics/ensaladera-rayas-navy.webp',
         dimensions: 'Ø 25 cm · Alto 9.5 cm',
@@ -1583,12 +1298,12 @@ const initProductosKiloCarousel = () => {
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </button>
-                    <img src="${item.img}" alt="${item.name}" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false">
+                    <img src="${item.img}" alt="${item.name} — Cerámica portuguesa por kilo en BasKula Punta Piedras" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                     <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
                 </div>
             </div>
             <div class="bw-product-card__info">
-                <a href="javascript:void(0)" class="bw-product-title" title="${item.name}">${item.name}</a>
+                <a href="producto.html?id=${item.id}" class="bw-product-title" title="Ver ficha completa de ${item.name}">${item.name}</a>
                 <div class="bw-product-meta-row">
                     <span class="bw-price-pill">${item.priceFormatted}</span>
                     <span class="bw-weight-tag"><i data-lucide="scale"></i> ${item.weightFormatted}</span>
@@ -1597,13 +1312,21 @@ const initProductosKiloCarousel = () => {
         `;
 
         card.addEventListener('click', (e) => {
-            if (wasDragging || e.target.closest('.card-heart-btn')) return;
+            if (wasDragging) {
+                e.preventDefault();
+                return;
+            }
+            if (e.target.closest('.card-heart-btn')) return;
+            if (e.target.closest('a.bw-product-title')) {
+                e.stopPropagation();
+                return;
+            }
             openAparadorModal(item);
         });
 
         card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.closest('.card-heart-btn')) return;
+                if (e.target.closest('.card-heart-btn') || e.target.closest('a.bw-product-title')) return;
                 e.preventDefault();
                 openAparadorModal(item);
             }
@@ -1713,11 +1436,87 @@ const initProductosKiloCarousel = () => {
     }
 };
 
+// ==========================================================================
+// NUEVA TEMPORADA (TENDENCIAS) MODAL EDITORIAL
+// ==========================================================================
+const TREND_ITEMS = [
+    {
+        id: 'trend-perlas',
+        name: 'Colección Perlas',
+        shortName: 'Perlas',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend1.webp',
+        dimensions: 'Variedad de piezas y medidas',
+        finish: 'Esmalte satinado con relieve perolado',
+        story: 'Inspirada en el relieve de pequeñas perlas cerámicas dispuestas con delicadeza sobre el borde. Una colección contemporánea procedente de Portugal que combina textura sutil, elegancia cotidiana y una agradable calidez táctil.'
+    },
+    {
+        id: 'trend-rayas',
+        name: 'Colección Rayas',
+        shortName: 'Rayas',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend2.webp',
+        dimensions: 'Variedad de piezas y formatos',
+        finish: 'Gres estriado artesanal · Esmalte natural',
+        story: 'Líneas y surcos acanalados que dibujan juegos de luz y sombra orgánicos sobre la arcilla. El ritmo lineal y la pureza geométrica del diseño portugués directo a tu mesa.'
+    },
+    {
+        id: 'trend-handmade',
+        name: 'Colección Handmade',
+        shortName: 'Handmade',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend3.webp',
+        dimensions: 'Formatos irregulares orgánicos',
+        finish: 'Arcilla viva modelada a mano · Gres crudo',
+        story: 'Bordes orgánicos e imperfecciones deliberadas que celebran la huella manual y espontánea del alfarero. Cada pieza es irrepetible, con texturas genuinas que transmiten calma y autenticidad.'
+    },
+    {
+        id: 'trend-vintage',
+        name: 'Colección Vintage',
+        shortName: 'Vintage',
+        pricingType: 'weight',
+        priceFormatted: '$16.50 / kg',
+        hideWeight: true,
+        img: 'images/trend4.webp',
+        dimensions: 'Piezas clásicas atemporales',
+        finish: 'Pátina rústica envejecida · Esmalte reactivo',
+        story: 'Rescatando los esmaltes reactivos y la nobleza de las vajillas clásicas de las quintas tradicionales portuguesas. Tonos terrosos y destellos nostálgicos que visten cualquier ambiente con distinción.'
+    }
+];
+
+const initTrendsModal = () => {
+    const trendCards = document.querySelectorAll('.trend-card[data-trend-id]');
+    if (!trendCards.length) return;
+
+    trendCards.forEach(card => {
+        const trendId = card.getAttribute('data-trend-id');
+        const item = TREND_ITEMS.find(t => t.id === trendId);
+        if (!item) return;
+
+        card.addEventListener('click', () => {
+            openAparadorModal(item);
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openAparadorModal(item);
+            }
+        });
+    });
+};
+
 // Eventos de cierre del modal
 document.addEventListener('DOMContentLoaded', () => {
-    initHolidayCarousel();
     initAparador();
     initProductosKiloCarousel();
+    initTrendsModal();
     initWishlistAndBalanzaSystem();
 
     const modal = document.getElementById('aparador-modal');
@@ -1747,7 +1546,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const getProductById = (id) => {
     return (
         (typeof PRODUCTS_CAROUSEL_ITEMS !== 'undefined' ? PRODUCTS_CAROUSEL_ITEMS.find(p => p.id === id) : null) ||
-        HOLIDAY_ITEMS.find(p => p.id === id) ||
+        (typeof TREND_ITEMS !== 'undefined' ? TREND_ITEMS.find(p => p.id === id) : null) ||
         FIXED_PRICE_ITEMS.find(p => p.id === id) ||
         (typeof CATALOG_ITEMS !== 'undefined' ? CATALOG_ITEMS.find(p => p.id === id) : null) ||
         basket.find(p => p.id === id) ||
@@ -1893,15 +1692,18 @@ const updateWishlistUI = () => {
     const floatingScaleBadge = document.getElementById('floatingScaleBadge');
     const floatingScaleWeightText = document.getElementById('floatingScaleWeightText');
     const floatingScalePill = document.getElementById('floatingScalePill');
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
     if (floatingScaleBadge) {
-        floatingScaleBadge.style.display = 'none';
+        floatingScaleBadge.textContent = totalPieces > 0 ? totalPieces : '0';
+        floatingScaleBadge.style.display = (totalPieces > 0 && isMobile) ? 'inline-flex' : 'none';
     }
     if (floatingScaleWeightText) {
         floatingScaleWeightText.textContent = `${totalWeight.toFixed(2)} kg`;
     }
     if (floatingScalePill) {
-        // Solo mostrar la píldora con peso si hay peso acumulado (artículos por peso)
-        floatingScalePill.style.display = totalWeight > 0 ? 'block' : 'none';
+        // En desktop muestra la píldora; en móvil el botón se mantiene fijo y compacto con su badge
+        floatingScalePill.style.display = (totalWeight > 0 && !isMobile) ? 'block' : 'none';
     }
 
     // 4. Contenido del Drawer
@@ -2014,7 +1816,7 @@ const handleWhatsAppReservation = () => {
     lines.push(`💰 *Total estimado:* $${totalPrice.toFixed(2)} USD`);
     lines.push('─────────────────────');
     lines.push('');
-    lines.push('¿Podrían confirmarme disponibilidad para coordinar la entrega o retiro en Punta Piedras? ¡Muchas gracias!');
+    lines.push('¿Podrían confirmarme disponibilidad para apartarlas y coordinar mi retiro en la tienda de Punta Piedras? ¡Muchas gracias!');
 
     const message = encodeURIComponent(lines.join('\n'));
     const url = `https://wa.me/59893658477?text=${message}`;
