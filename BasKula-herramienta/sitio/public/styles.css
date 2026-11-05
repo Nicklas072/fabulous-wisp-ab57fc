@@ -177,8 +177,13 @@ a {
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
+    font-family: var(--font-heading, 'Lora', Georgia, serif);
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
     line-height: 1.2;
+    color: #181818;
     margin-bottom: 16px;
 }
 
@@ -1720,12 +1725,14 @@ body.drawer-open {
 
 .holiday-header h2 {
     margin: 0;
-    font-family: var(--font-heading, 'Lora', serif);
-    font-size: clamp(2rem, 3.2vw, 2.75rem);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--color-brown, #2A2521);
-    text-transform: uppercase;
+    font-family: var(--font-heading, 'Lora', Georgia, serif);
+    font-size: clamp(2.3rem, 4.2vw, 3.4rem);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: #181818;
+    text-transform: none;
 }
 
 .holiday-marquee-container {
@@ -4490,7 +4497,7 @@ body.drawer-open {
     }
     
     .section-header h2 {
-        font-size: 2rem;
+        font-size: clamp(1.85rem, 6vw, 2.35rem);
     }
 
     /* ======================================================================
