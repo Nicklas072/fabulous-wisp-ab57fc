@@ -1132,28 +1132,69 @@ body.drawer-open {
     }
     
     .hero-editorial-badge {
-        display: inline-flex !important;
-        align-items: center;
-        gap: 8px;
-        font-family: var(--font-body);
-        font-size: 0.74rem;
-        font-weight: 700;
-        letter-spacing: 2.5px;
-        text-transform: uppercase;
-        color: var(--color-mostaza, #E2A727) !important;
-        margin: 0 auto 28px auto !important;
-        /* Fondo crema translúcido con esquinas rectas */
-        background: rgba(255, 253, 248, 0.85) !important;
-        backdrop-filter: blur(14px) saturate(140%) !important;
-        -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
-        padding: 7px 18px;
-        border-radius: 0 !important; /* Sin redondez en los bordes */
-        border: 1px solid rgba(226, 167, 39, 0.65);
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08), 0 0 16px rgba(226, 167, 39, 0.12);
+        display: none !important;
     }
     
     /* Franja / Caja horizontal de lado a lado de la pantalla (100% width) con +30% más de translucidez */
-    .storefront-content h1 {
+    .hero-editorial-frame {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        background: rgba(255, 252, 246, 0.58) !important;
+        backdrop-filter: blur(20px) saturate(150%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+        padding: 24px 32px !important;
+        margin: 0 0 28px 0 !important;
+        border-radius: 0 !important; /* De borde a borde de la pantalla */
+        border-top: 1px solid rgba(226, 167, 39, 0.45) !important;
+        border-bottom: 1px solid rgba(226, 167, 39, 0.45) !important;
+        border-left: none !important;
+        border-right: none !important;
+        box-shadow:
+            0 12px 36px rgba(0, 0, 0, 0.12),
+            0 2px 8px rgba(0, 0, 0, 0.05),
+            0 0 35px rgba(226, 167, 39, 0.16) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        text-align: center !important;
+    }
+
+    .hero-main-title {
+        font-family: var(--font-heading, 'Lora', serif) !important;
+        font-size: clamp(1.85rem, 3.4vw, 3.1rem) !important;
+        font-weight: 700 !important;
+        letter-spacing: 2px !important;
+        text-transform: uppercase !important;
+        line-height: 1.25 !important;
+        color: #1A1815 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .hero-main-title .text-mustard {
+        color: var(--color-mostaza-dark, #C28B17) !important;
+        font-weight: 700 !important;
+        letter-spacing: 2.2px !important;
+    }
+
+    .hero-subtitle {
+        font-family: var(--font-heading, 'Lora', serif) !important;
+        font-size: clamp(0.95rem, 1.35vw, 1.25rem) !important;
+        font-style: italic !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.3px !important;
+        line-height: 1.4 !important;
+        color: #383025 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .storefront-content h1:not(.hero-main-title) {
         text-align: center !important;
         font-size: clamp(1.4rem, 1.9vw, 2.05rem) !important;
         font-weight: 500 !important;
@@ -1164,28 +1205,20 @@ body.drawer-open {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        /* Fondo crema 30% más translúcido (alpha 0.52 en vez de 0.78-0.88) */
         background: rgba(255, 252, 246, 0.52) !important;
         backdrop-filter: blur(20px) saturate(150%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
         padding: 24px 32px !important;
-        border-radius: 0 !important; /* De borde a borde de la pantalla */
+        border-radius: 0 !important;
         border-top: 1px solid rgba(226, 167, 39, 0.45) !important;
         border-bottom: 1px solid rgba(226, 167, 39, 0.45) !important;
         border-left: none !important;
         border-right: none !important;
-        /* Sombra suave y halo dorado superior/inferior */
         box-shadow:
             0 12px 36px rgba(0, 0, 0, 0.12),
             0 2px 8px rgba(0, 0, 0, 0.05),
             0 0 35px rgba(226, 167, 39, 0.16) !important;
         text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.8) !important;
-    }
-    
-    .storefront-content h1 .text-mustard {
-        color: var(--color-mostaza, #E2A727) !important;
-        display: block !important;
-        margin-top: 6px !important;
     }
     
     /* Sutil flecha interactiva que invita a ir a la siguiente sección */
@@ -1250,26 +1283,66 @@ body.drawer-open {
 /* Tablets / Celulares */
 @media (max-width: 991px) {
     .hero-editorial-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-family: var(--font-body);
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--color-mostaza, #E2A727) !important;
-        margin-bottom: 22px;
-        background: rgba(255, 253, 248, 0.85) !important;
-        backdrop-filter: blur(14px) saturate(140%) !important;
-        -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
-        padding: 6px 14px;
-        border-radius: 0 !important;
-        border: 1px solid rgba(226, 167, 39, 0.55);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        display: none !important;
     }
 
-    .storefront-content h1 {
+    .hero-editorial-frame {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        padding: 16px 20px !important;
+        margin-bottom: 24px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        background: rgba(255, 252, 246, 0.58) !important;
+        backdrop-filter: blur(18px) saturate(145%) !important;
+        -webkit-backdrop-filter: blur(18px) saturate(145%) !important;
+        border-top: 1px solid rgba(226, 167, 39, 0.4) !important;
+        border-bottom: 1px solid rgba(226, 167, 39, 0.4) !important;
+        border-left: none !important;
+        border-right: none !important;
+        box-shadow:
+            0 8px 24px rgba(35, 20, 8, 0.08),
+            0 0 20px rgba(226, 167, 39, 0.16) !important;
+    }
+
+    .hero-main-title {
+        font-family: var(--font-heading, 'Lora', serif) !important;
+        font-size: clamp(1.2rem, 5.2vw, 1.75rem) !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.2px !important;
+        text-transform: uppercase !important;
+        line-height: 1.25 !important;
+        color: #1A1815 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95) !important;
+    }
+
+    .hero-main-title .text-mustard {
+        color: var(--color-mostaza-dark, #C28B17) !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.5px !important;
+    }
+
+    .hero-subtitle {
+        font-family: var(--font-heading, 'Lora', serif) !important;
+        font-size: clamp(0.85rem, 3.2vw, 1.05rem) !important;
+        font-style: italic !important;
+        font-weight: 400 !important;
+        line-height: 1.35 !important;
+        color: #383025 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85) !important;
+    }
+
+    .storefront-content h1:not(.hero-main-title) {
         font-size: clamp(1.15rem, 3.8vw, 1.4rem) !important;
         font-weight: 500 !important;
         line-height: 1.38 !important;
