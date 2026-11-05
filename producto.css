@@ -79,8 +79,8 @@ body.pdp-page {
 /* Estructura Principal de Dos Columnas */
 .pdp-layout-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 52px;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 48px;
     align-items: start;
     margin-bottom: 80px;
 }
@@ -114,7 +114,7 @@ body.pdp-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 440px;
+    min-height: 520px;
     overflow: hidden;
     cursor: zoom-in;
     transition: box-shadow 0.3s ease;
@@ -144,9 +144,35 @@ body.pdp-page {
     z-index: 2;
 }
 
+.pdp-zoom-hint {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background-color: rgba(24, 24, 24, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FAF7F0;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+    pointer-events: none;
+    transition: background-color 0.2s ease;
+}
+
+.pdp-gallery-stage:hover .pdp-zoom-hint {
+    background-color: rgba(24, 24, 24, 0.92);
+}
+
 .pdp-main-image {
-    max-width: 90%;
-    max-height: 420px;
+    max-width: 95%;
+    max-height: 480px;
     object-fit: contain;
     filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.12));
     transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -668,4 +694,109 @@ body.pdp-page {
     background-color: var(--pdp-mustard);
     color: #FFFFFF;
     border-color: var(--pdp-mustard);
+}
+
+/* Universal Image Lightbox */
+.baskula-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(14, 13, 11, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+    cursor: zoom-out;
+}
+
+.baskula-lightbox.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.baskula-lightbox-content {
+    position: relative;
+    max-width: 92vw;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+.baskula-lightbox-img {
+    max-width: 88vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7);
+    user-select: none;
+    transform: scale(0.92);
+    transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+}
+
+.baskula-lightbox.open .baskula-lightbox-img {
+    transform: scale(1);
+}
+
+.baskula-lightbox-close {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    color: #FAF7F0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.baskula-lightbox-close:hover {
+    background: var(--pdp-mustard, #E2A727);
+    color: #181818;
+    transform: scale(1.08);
+}
+
+.baskula-lightbox-caption {
+    margin-top: 14px;
+    color: #FAF7F0;
+    font-family: var(--pdp-font-heading, 'Lora', serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+@media (max-width: 768px) {
+    .baskula-lightbox-img {
+        max-width: 94vw;
+        max-height: 75vh;
+    }
+    .baskula-lightbox-close {
+        top: -44px;
+        right: 4px;
+        width: 36px;
+        height: 36px;
+    }
+    .baskula-lightbox-caption {
+        font-size: 0.92rem;
+        margin-top: 10px;
+    }
 }

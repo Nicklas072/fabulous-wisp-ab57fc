@@ -326,7 +326,7 @@ const renderAlacenaShelves = () => {
                     </div>
                     <div class="gallery-caption">
                         <div class="gallery-caption-meta">
-                            <a href="producto.html?id=${item.id}" class="gallery-item-name" title="Ver ficha completa de ${item.name}">${item.shortName}</a>
+                            <span class="gallery-item-name">${item.shortName}</span>
                             <span class="gallery-item-price">${Math.round(item.weight * 1000)}g · ${formatCurrency(unitPrice)}</span>
                         </div>
                         <button type="button" class="gallery-quick-add-btn" data-action="quick-add" data-id="${item.id}" aria-label="Agregar ${item.name} directo a la báscula" title="Poner en la báscula">
@@ -352,16 +352,10 @@ const renderAlacenaShelves = () => {
     }
 };
 
-// --- Interacción en el Estante (Click en título lleva a producto.html, click en foto abre Ficha, '+' agrega a báscula) ---
+// --- Interacción en el Estante (Click en foto abre Ficha, '+' agrega a báscula) ---
 if (alacenaShelvesStage) {
     alacenaShelvesStage.addEventListener('click', (e) => {
         if (e.target.closest('.card-heart-btn')) return;
-
-        // Permitir navegación directa a producto.html?id=... al hacer clic en el enlace del nombre
-        if (e.target.closest('a.gallery-item-name')) {
-            e.stopPropagation();
-            return;
-        }
 
         const quickAddBtn = e.target.closest('[data-action="quick-add"]');
         if (quickAddBtn) {
@@ -372,18 +366,21 @@ if (alacenaShelvesStage) {
             return;
         }
 
-        const tile = e.target.closest('.shelf-piece-tile');
-        if (tile) {
-            const id = tile.getAttribute('data-id');
-            openPieceFicha(id);
+        // Abrir la ficha únicamente cuando se hace clic en la imagen
+        const imgFrame = e.target.closest('.passepartout-container');
+        if (imgFrame) {
+            const tile = imgFrame.closest('.shelf-piece-tile');
+            if (tile) {
+                const id = tile.getAttribute('data-id');
+                openPieceFicha(id);
+            }
         }
     });
 
     alacenaShelvesStage.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-            if (e.target.closest('a.gallery-item-name')) return;
             const tile = e.target.closest('.shelf-piece-tile');
-            if (tile && !e.target.closest('.tile-quick-add-btn') && !e.target.closest('[data-action="quick-add"]')) {
+            if (tile && !e.target.closest('[data-action="quick-add"]')) {
                 e.preventDefault();
                 openPieceFicha(tile.getAttribute('data-id'));
             }
@@ -474,6 +471,67 @@ const openPieceFicha = (id) => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 };
 
+// ==========================================================================
+// UNIVERSAL LIGHTBOX (Visor de Fotos en Pantalla Completa)
+// ==========================================================================
+const openLightbox = (imgSrc, title = '') => {
+    if (!imgSrc) return;
+    let lb = document.getElementById('baskula-lightbox');
+    if (!lb) {
+        lb = document.createElement('div');
+        lb.id = 'baskula-lightbox';
+        lb.className = 'baskula-lightbox';
+        lb.setAttribute('role', 'dialog');
+        lb.setAttribute('aria-modal', 'true');
+        lb.setAttribute('aria-label', 'Visor de foto ampliada');
+        lb.innerHTML = `
+            <div class="baskula-lightbox-content">
+                <button type="button" class="baskula-lightbox-close" id="baskula-lightbox-close" aria-label="Cerrar visor">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <img src="" alt="" class="baskula-lightbox-img" id="baskula-lightbox-img">
+                <div class="baskula-lightbox-caption" id="baskula-lightbox-caption"></div>
+            </div>
+        `;
+        document.body.appendChild(lb);
+
+        const closeBtn = lb.querySelector('#baskula-lightbox-close');
+        const closeLb = () => {
+            lb.classList.remove('open');
+            document.removeEventListener('keydown', lb._onEsc);
+        };
+        const onEsc = (e) => {
+            if (e.key === 'Escape') closeLb();
+        };
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLb();
+        });
+        lb.addEventListener('click', (e) => {
+            if (e.target === lb || e.target.classList.contains('baskula-lightbox-content')) {
+                closeLb();
+            }
+        });
+        lb._close = closeLb;
+        lb._onEsc = onEsc;
+    }
+
+    const lbImg = document.getElementById('baskula-lightbox-img');
+    const lbCaption = document.getElementById('baskula-lightbox-caption');
+    if (lbImg) {
+        lbImg.src = imgSrc;
+        lbImg.alt = title;
+    }
+    if (lbCaption) lbCaption.textContent = title;
+
+    lb.classList.add('open');
+    document.addEventListener('keydown', lb._onEsc);
+};
+
 const closePieceFicha = () => {
     if (!pieceDetailModal) return;
     pieceDetailModal.classList.remove('open');
@@ -493,6 +551,13 @@ document.addEventListener('keydown', (e) => {
         closePieceFicha();
     }
 });
+
+const fichaImgContainer = document.getElementById('ficha-image-container');
+if (fichaImgContainer && fichaPieceImg) {
+    fichaImgContainer.addEventListener('click', () => {
+        openLightbox(fichaPieceImg.src, fichaTitle ? fichaTitle.textContent : '');
+    });
+}
 
 if (fichaQtyMinus) {
     fichaQtyMinus.addEventListener('click', () => {
@@ -910,6 +975,25 @@ const FIXED_PRICE_ITEMS = [
         dimensions: '38 cm × 22 cm · Formato Tabla',
         finish: 'Cerámica Rústica de Alta Densidad',
         story: 'Tabla cerámica plana con asa perforada para colgar. Diseñada para quesos, fiambres, panes artesanales y aperitivos de autor.'
+    },
+    {
+        id: 'ensaladera-lechuga-fp',
+        name: 'Ensaladera Hoja de Lechuga',
+        shortName: 'Ensaladera Lechuga',
+        pricingType: 'fixed',
+        price: 42,
+        priceFormatted: '$42',
+        weight: 1.15,
+        weightFormatted: '1.15 kg',
+        img: 'images/ceramics/ensaladera-lechuga-42usd.webp',
+        images: [
+            'images/ceramics/ensaladera-lechuga-42usd.webp',
+            'images/ceramics/ensaladera-lechuga-stack.webp',
+            'images/ceramics/ensaladera-lechuga-detalle.webp'
+        ],
+        dimensions: 'Ø 26 cm · Alto 9.5 cm · Formato Escultórico',
+        finish: 'Esmaltado Verde Oliva en Relieve Botánico',
+        story: 'Ensaladera escultórica inspirada en la rica tradición naturalista de la cerámica portuguesa. Su modelado captura los pliegues, curvas y nervaduras de hojas de lechuga fresca bajo un esmalte vidriado brillante en tono verde oliva.'
     }
 ];
 
@@ -1106,7 +1190,36 @@ const openAparadorModal = (item) => {
         imgEl.src = item.img;
         imgEl.alt = item.name;
     }
-    if (priceEl) priceEl.textContent = item.priceFormatted;
+
+    // Miniaturas de galería para el modal si la pieza cuenta con más de una imagen
+    const modalThumbsBar = document.getElementById('aparador-modal-thumbs-bar');
+    if (modalThumbsBar) {
+        modalThumbsBar.innerHTML = '';
+        const imgList = (item.images && item.images.length > 0) ? item.images : (item.img ? [item.img] : []);
+        if (imgList.length > 1) {
+            imgList.forEach((imgSrc, idx) => {
+                const thumb = document.createElement('button');
+                thumb.type = 'button';
+                thumb.className = `ficha-thumb-btn${idx === 0 ? ' active' : ''}`;
+                thumb.setAttribute('aria-label', `Ver foto ${idx + 1}`);
+                thumb.innerHTML = `<img src="${imgSrc}" alt="${item.name} vista ${idx + 1}">`;
+                thumb.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (imgEl) imgEl.src = imgSrc;
+                    modalThumbsBar.querySelectorAll('.ficha-thumb-btn').forEach(b => b.classList.toggle('active', b === thumb));
+                });
+                modalThumbsBar.appendChild(thumb);
+            });
+            modalThumbsBar.style.display = 'flex';
+        } else {
+            modalThumbsBar.style.display = 'none';
+        }
+    }
+    if (priceEl) priceEl.textContent = item.priceFormatted || '';
+    const priceWrapEl = document.getElementById('aparador-modal-price-wrap');
+    if (priceWrapEl) {
+        priceWrapEl.style.display = item.hidePrice ? 'none' : '';
+    }
     if (weightEl) weightEl.textContent = item.weightFormatted || '';
     if (weightWrapEl) {
         weightWrapEl.style.display = item.hideWeight ? 'none' : '';
@@ -1142,7 +1255,7 @@ const openAparadorModal = (item) => {
         const wppTextSpan = wppEl.querySelector('span');
         if (isTrend) {
             if (wppTextSpan) wppTextSpan.textContent = 'Consultar por esta colección';
-            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por las piezas de la ${item.name} ($16.50 / kg) de Nueva Temporada que vi en su web.`);
+            const text = encodeURIComponent(`Hola BasKula, quisiera consultar por las piezas de la ${item.name} de Nueva Temporada que vi en su web.`);
             wppEl.href = `https://wa.me/59893658477?text=${text}`;
         } else if (isFixed) {
             if (wppTextSpan) wppTextSpan.textContent = '¡Reservar por WhatsApp!';
@@ -1268,6 +1381,267 @@ const PRODUCTS_CAROUSEL_ITEMS = [
     }
 ];
 
+// ==========================================================================
+// SELECCIÓN FESTIVA (Artículos Navideños Exclusivos)
+// ==========================================================================
+const FESTIVE_CAROUSEL_ITEMS = [
+    {
+        id: 'plato-arbolito-rojo',
+        name: 'Platos arbolitos rojo con diseño',
+        shortName: 'Plato Arbolito Rojo',
+        category: 'platos',
+        weight: 0.580,
+        weightFormatted: '0.580 kg',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/plato-arbolito-rojo.webp',
+        dimensions: '22 × 18 cm aprox.',
+        finish: 'Esmalte Reactivo Rojo Carmín con Relieve',
+        story: 'Plato artesanal en forma de arbolito navideño con esmalte carmín y motivos festivos en relieve. Viste la mesa de Nochebuena con calidez y espíritu de celebración.'
+    },
+    {
+        id: 'plato-arbolito-verde',
+        name: 'Platos arbolitos verde con diseño',
+        shortName: 'Plato Arbolito Verde',
+        category: 'platos',
+        weight: 0.580,
+        weightFormatted: '0.580 kg',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/plato-arbolito-verde.webp',
+        dimensions: '22 × 18 cm aprox.',
+        finish: 'Esmalte Reactivo Verde Pino con Relieve',
+        story: 'Plato festivo con silueta de pino en esmalte verde bosque y texturas navideñas en relieve. Auténtico gres portugués para compartir en familia.'
+    },
+    {
+        id: 'taza-plato-rojo-puntille',
+        name: 'Juego de tazas y platos rojos con puntille',
+        shortName: 'Taza y Plato Rojo Puntillé',
+        category: 'tazas',
+        weight: 0.420,
+        weightFormatted: '0.420 kg',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/taza-plato-rojo-puntille.webp',
+        dimensions: 'Taza 80 ml · Plato Ø 12 cm',
+        finish: 'Esmalte Carmín Moteado con Puntillé',
+        story: 'Juego de café con taza facetada y platillo acanalado en esmalte rojo festivo con efecto puntillé. Calidez y encanto europeo para las sobremesas.'
+    },
+    {
+        id: 'taza-plato-verde-puntille',
+        name: 'Juego de tazas y platos verdes con puntille',
+        shortName: 'Taza y Plato Verde Puntillé',
+        category: 'tazas',
+        weight: 0.420,
+        weightFormatted: '0.420 kg',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/taza-plato-verde-puntille.webp',
+        dimensions: 'Taza 80 ml · Plato Ø 12 cm',
+        finish: 'Esmalte Verde Moteado con Puntillé',
+        story: 'Juego de taza y plato de café en gres portugués verde muérdago con textura esmaltada puntillé. Sofisticación artesanal para regalar o compartir.'
+    },
+    {
+        id: 'portavela-rojo-puntille',
+        name: 'Porta velas rojo puntille',
+        shortName: 'Portavela Rojo',
+        category: 'especial',
+        weight: 0.280,
+        weightFormatted: '0.280 kg',
+        price: 6,
+        priceFormatted: '6 USD c/u',
+        pricingType: 'fixed',
+        img: 'images/festive/portavela-rojo-puntille.webp',
+        dimensions: 'Ø 10 cm aprox.',
+        finish: 'Esmalte Carmín con Puntillé Festivo',
+        story: 'Portavela artesanal en esmalte reactivo rojo carmín. Diseñado para iluminar y dar calidez a las mesas de Nochebuena o como detalle para el amigo invisible.'
+    },
+    {
+        id: 'portavela-verde-puntille',
+        name: 'Porta velas verde puntille',
+        shortName: 'Portavela Verde',
+        category: 'especial',
+        weight: 0.280,
+        weightFormatted: '0.280 kg',
+        price: 6,
+        priceFormatted: '6 USD c/u',
+        pricingType: 'fixed',
+        img: 'images/festive/portavela-verde-puntille.webp',
+        dimensions: 'Ø 10 cm aprox.',
+        finish: 'Esmalte Verde con Puntillé Festivo',
+        story: 'Portavela en tono verde pino con diseño puntillé. Una pieza delicada y versátil para crear ambiente o regalar en estas fiestas.'
+    }
+];
+
+const initFestiveCarousel = () => {
+    const track = document.getElementById('festive-track');
+    const viewport = document.getElementById('festive-viewport');
+    const prevBtn = document.getElementById('festive-prev-btn');
+    const nextBtn = document.getElementById('festive-next-btn');
+    const dotsContainer = document.getElementById('festive-dots');
+
+    if (!track || !viewport) return;
+
+    track.innerHTML = '';
+    if (dotsContainer) dotsContainer.innerHTML = '';
+
+    let wasDragging = false;
+
+    FESTIVE_CAROUSEL_ITEMS.forEach((item, idx) => {
+        const card = document.createElement('article');
+        card.className = 'bw-product-card';
+        card.setAttribute('data-id', item.id);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Ver ${item.name} en Instagram`);
+
+        card.innerHTML = `
+            <div class="bw-product-card__figure">
+                <div class="bw-product-card__media">
+                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
+                        <svg viewBox="0 0 24 24" class="card-heart-svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                    <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
+                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram"><i data-lucide="instagram"></i> Saber más</a>
+                </div>
+            </div>
+            <div class="bw-product-card__info">
+                <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="bw-product-title" title="Ver en Instagram @baskula.uy">${item.name}</a>
+                <div class="bw-product-meta-row" style="justify-content: center;">
+                    <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : ${item.weightFormatted}</span>
+                </div>
+            </div>
+        `;
+
+        card.addEventListener('click', (e) => {
+            if (wasDragging) {
+                e.preventDefault();
+                return;
+            }
+            if (e.target.closest('.card-heart-btn')) return;
+            if (e.target.closest('.gallery-view-hint') || e.target.closest('a.bw-product-title')) {
+                return;
+            }
+            window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint') || e.target.closest('a.bw-product-title')) return;
+                e.preventDefault();
+                window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
+            }
+        });
+
+        track.appendChild(card);
+
+        if (dotsContainer) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+            dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
+            dot.addEventListener('click', () => {
+                const cardEl = track.querySelectorAll('.bw-product-card')[idx];
+                if (cardEl) {
+                    viewport.scrollTo({
+                        left: cardEl.offsetLeft - track.offsetLeft,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            dotsContainer.appendChild(dot);
+        }
+    });
+
+    const updateNavButtons = () => {
+        if (!prevBtn || !nextBtn) return;
+        const maxScroll = viewport.scrollWidth - viewport.clientWidth - 4;
+
+        if (viewport.scrollWidth <= viewport.clientWidth + 4) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = '';
+            nextBtn.style.display = '';
+            prevBtn.disabled = viewport.scrollLeft <= 4;
+            nextBtn.disabled = viewport.scrollLeft >= maxScroll;
+        }
+
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.bw-dot');
+            const cards = track.querySelectorAll('.bw-product-card');
+            const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
+            cards.forEach((card, i) => {
+                const cLeft = card.offsetLeft - track.offsetLeft;
+                const cRight = cLeft + card.offsetWidth;
+                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[i]) dots[i].classList.add('active');
+                }
+            });
+        }
+    };
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const scrollDistance = viewport.clientWidth * 0.75;
+            viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const scrollDistance = viewport.clientWidth * 0.75;
+            viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+        });
+    }
+
+    viewport.addEventListener('scroll', updateNavButtons, { passive: true });
+    window.addEventListener('resize', updateNavButtons, { passive: true });
+
+    let isDown = false;
+    let startX = 0;
+    let initialScrollLeft = 0;
+
+    viewport.addEventListener('mousedown', (e) => {
+        isDown = true;
+        wasDragging = false;
+        startX = e.pageX - viewport.offsetLeft;
+        initialScrollLeft = viewport.scrollLeft;
+    });
+
+    viewport.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    viewport.addEventListener('mouseup', () => {
+        isDown = false;
+        setTimeout(() => { wasDragging = false; }, 80);
+    });
+
+    viewport.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - viewport.offsetLeft;
+        const walk = (x - startX) * 1.35;
+        if (Math.abs(walk) > 4) {
+            wasDragging = true;
+            viewport.scrollLeft = initialScrollLeft - walk;
+        }
+    });
+
+    setTimeout(updateNavButtons, 100);
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+};
+
 const initProductosKiloCarousel = () => {
     const track = document.getElementById('productos-kilo-track');
     const viewport = document.getElementById('productos-kilo-viewport');
@@ -1306,7 +1680,7 @@ const initProductosKiloCarousel = () => {
                 <a href="producto.html?id=${item.id}" class="bw-product-title" title="Ver ficha completa de ${item.name}">${item.name}</a>
                 <div class="bw-product-meta-row">
                     <span class="bw-price-pill">${item.priceFormatted}</span>
-                    <span class="bw-weight-tag"><i data-lucide="scale"></i> ${item.weightFormatted}</span>
+                    <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : ${item.weightFormatted}</span>
                 </div>
             </div>
         `;
@@ -1445,48 +1819,52 @@ const TREND_ITEMS = [
         name: 'Colección Perlas',
         shortName: 'Perlas',
         pricingType: 'weight',
-        priceFormatted: '$16.50 / kg',
-        hideWeight: true,
-        img: 'images/trend1.webp',
+        weight: 1.40,
+        weightFormatted: '1.40 kg',
+        hidePrice: true,
+        img: 'images/trend1.webp?v=20261025',
         dimensions: 'Variedad de piezas y medidas',
-        finish: 'Esmalte satinado con relieve perolado',
-        story: 'Inspirada en el relieve de pequeñas perlas cerámicas dispuestas con delicadeza sobre el borde. Una colección contemporánea procedente de Portugal que combina textura sutil, elegancia cotidiana y una agradable calidez táctil.'
+        finish: 'Esmalte vidriado rubí con relieve perolado en guarda',
+        story: 'Inspirada en el relieve de pequeñas perlas cerámicas dispuestas con delicadeza sobre el borde festoneado. Una colección contemporánea de gres portugués en tono rubí intenso que combina textura sutil, elegancia y calidez sobre la mesa.'
     },
     {
         id: 'trend-rayas',
         name: 'Colección Rayas',
         shortName: 'Rayas',
         pricingType: 'weight',
-        priceFormatted: '$16.50 / kg',
-        hideWeight: true,
-        img: 'images/trend2.webp',
+        weight: 1.42,
+        weightFormatted: '1.42 kg',
+        hidePrice: true,
+        img: 'images/trend2.webp?v=20261025',
         dimensions: 'Variedad de piezas y formatos',
-        finish: 'Gres estriado artesanal · Esmalte natural',
-        story: 'Líneas y surcos acanalados que dibujan juegos de luz y sombra orgánicos sobre la arcilla. El ritmo lineal y la pureza geométrica del diseño portugués directo a tu mesa.'
+        finish: 'Gres esmaltado artesanal · Franjas azul cobalto',
+        story: 'Líneas y franjas horizontales en azul mediterráneo sobre base blanca pura. El ritmo lineal y la frescura marinera del diseño portugués directo a tu mesa.'
     },
     {
         id: 'trend-handmade',
         name: 'Colección Handmade',
         shortName: 'Handmade',
         pricingType: 'weight',
-        priceFormatted: '$16.50 / kg',
-        hideWeight: true,
-        img: 'images/trend3.webp',
-        dimensions: 'Formatos irregulares orgánicos',
-        finish: 'Arcilla viva modelada a mano · Gres crudo',
-        story: 'Bordes orgánicos e imperfecciones deliberadas que celebran la huella manual y espontánea del alfarero. Cada pieza es irrepetible, con texturas genuinas que transmiten calma y autenticidad.'
+        weight: 1.34,
+        weightFormatted: '1.34 kg',
+        hidePrice: true,
+        img: 'images/trend3.webp?v=20261025',
+        dimensions: 'Formatos artesanales modelados',
+        finish: 'Pintado a mano con motivos ornitológicos y botánicos',
+        story: 'Piezas ilustradas a mano que celebran la alfarería tradicional portuguesa con motivos de aves y follaje en tonos olivo y azul campestre sobre cerámica natural. Cada pieza es irrepetible.'
     },
     {
         id: 'trend-vintage',
         name: 'Colección Vintage',
         shortName: 'Vintage',
         pricingType: 'weight',
-        priceFormatted: '$16.50 / kg',
-        hideWeight: true,
-        img: 'images/trend4.webp',
+        weight: 1.25,
+        weightFormatted: '1.25 kg',
+        hidePrice: true,
+        img: 'images/trend4.webp?v=20261025',
         dimensions: 'Piezas clásicas atemporales',
-        finish: 'Pátina rústica envejecida · Esmalte reactivo',
-        story: 'Rescatando los esmaltes reactivos y la nobleza de las vajillas clásicas de las quintas tradicionales portuguesas. Tonos terrosos y destellos nostálgicos que visten cualquier ambiente con distinción.'
+        finish: 'Esmalte brillante marrón ámbar y borde perfilado',
+        story: 'Rescatando los esmaltes reactivos profundos y la nobleza de las vajillas clásicas europeas de mediados de siglo. Tonos chocolate, ámbar y marfil que visten cualquier mesa con sofisticación retro.'
     }
 ];
 
@@ -1495,32 +1873,136 @@ const initTrendsModal = () => {
     if (!trendCards.length) return;
 
     trendCards.forEach(card => {
-        const trendId = card.getAttribute('data-trend-id');
-        const item = TREND_ITEMS.find(t => t.id === trendId);
-        if (!item) return;
-
-        card.addEventListener('click', () => {
-            openAparadorModal(item);
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.trend-view-btn')) return;
+            window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
         });
 
         card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.closest('.trend-view-btn')) return;
                 e.preventDefault();
-                openAparadorModal(item);
+                window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
             }
         });
     });
+};
+
+const initCasaCarousel = () => {
+    const carousel = document.getElementById('casaCarousel');
+    const prevBtn = document.getElementById('casa-prev-btn');
+    const nextBtn = document.getElementById('casa-next-btn');
+
+    if (!carousel || !prevBtn || !nextBtn) return;
+
+    const getScrollStep = () => {
+        const card = carousel.querySelector('.casa-carousel-card');
+        return card ? card.offsetWidth + 14 : carousel.clientWidth * 0.75;
+    };
+
+    const updateArrows = () => {
+        const tolerance = 15;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth - tolerance;
+        const atStart = carousel.scrollLeft <= tolerance;
+        const atEnd = carousel.scrollLeft >= maxScroll;
+
+        if (atStart) {
+            prevBtn.style.display = 'none';
+            prevBtn.classList.add('is-hidden');
+            prevBtn.setAttribute('aria-hidden', 'true');
+            prevBtn.tabIndex = -1;
+        } else {
+            prevBtn.style.display = 'flex';
+            prevBtn.classList.remove('is-hidden');
+            prevBtn.removeAttribute('aria-hidden');
+            prevBtn.tabIndex = 0;
+        }
+
+        if (atEnd) {
+            nextBtn.style.display = 'none';
+            nextBtn.classList.add('is-hidden');
+            nextBtn.setAttribute('aria-hidden', 'true');
+            nextBtn.tabIndex = -1;
+        } else {
+            nextBtn.style.display = 'flex';
+            nextBtn.classList.remove('is-hidden');
+            nextBtn.removeAttribute('aria-hidden');
+            nextBtn.tabIndex = 0;
+        }
+    };
+
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    });
+
+    carousel.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows, { passive: true });
+
+    updateArrows();
+    setTimeout(updateArrows, 100);
+    setTimeout(updateArrows, 400);
+};
+
+const initHolidayParallax = () => {
+    const cards = document.querySelectorAll('.holiday-card');
+    if (!cards.length) return;
+
+    let ticking = false;
+
+    const onScroll = () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const windowHeight = window.innerHeight;
+                cards.forEach((card) => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.bottom > -60 && rect.top < windowHeight + 60) {
+                        const img = card.querySelector('.holiday-parallax-img');
+                        if (img) {
+                            const centerOffset = (rect.top + rect.height / 2) - (windowHeight / 2);
+                            const ratio = centerOffset / (windowHeight / 2);
+                            const translateY = ratio * 48;
+                            img.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
+                        }
+                    }
+                });
+                ticking = false;
+            });
+            ticking = true;
+        }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
 };
 
 // Eventos de cierre del modal
 document.addEventListener('DOMContentLoaded', () => {
     initAparador();
     initProductosKiloCarousel();
+    initFestiveCarousel();
+    initCasaCarousel();
+    initHolidayParallax();
     initTrendsModal();
     initWishlistAndBalanzaSystem();
 
     const modal = document.getElementById('aparador-modal');
     const closeBtn = document.getElementById('aparador-modal-close');
+    const aparadorImgWrap = document.getElementById('aparador-modal-img-container');
+    const aparadorImg = document.getElementById('aparador-modal-img');
+    const aparadorTitle = document.getElementById('aparador-modal-title');
+
+    if (aparadorImgWrap && aparadorImg) {
+        aparadorImgWrap.addEventListener('click', () => {
+            openLightbox(aparadorImg.src, aparadorTitle ? aparadorTitle.textContent : '');
+        });
+    }
 
     if (closeBtn) {
         closeBtn.addEventListener('click', closeAparadorModal);
@@ -1545,6 +2027,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const getProductById = (id) => {
     return (
+        (typeof FESTIVE_CAROUSEL_ITEMS !== 'undefined' ? FESTIVE_CAROUSEL_ITEMS.find(p => p.id === id) : null) ||
         (typeof PRODUCTS_CAROUSEL_ITEMS !== 'undefined' ? PRODUCTS_CAROUSEL_ITEMS.find(p => p.id === id) : null) ||
         (typeof TREND_ITEMS !== 'undefined' ? TREND_ITEMS.find(p => p.id === id) : null) ||
         FIXED_PRICE_ITEMS.find(p => p.id === id) ||

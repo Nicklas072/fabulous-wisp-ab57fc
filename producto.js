@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProductPage(container, item, imagesList, unitPrice, rate, categoryName, isFixed);
 
     // 5. Inicializar interactividad
-    initGallery(imagesList);
+    initGallery(imagesList, item);
     initQuantityAndScale(item, unitPrice);
     initAccordions();
     initMobileNav();
@@ -122,13 +122,58 @@ function updateProductSEO(item, mainImg, unitPrice, rate, isFixed, categoryName)
         document.head.appendChild(ldScript);
     }
 
+    // Estructurar la oferta según formato de venta (Precio Fijo por unidad o Venta por Peso / Tarifa por Kilo)
+    const offerSchema = {
+        "@type": "Offer",
+        "url": canonicalUrl,
+        "priceCurrency": "USD",
+        "price": unitPrice.toFixed(2),
+        "priceSpecification": isFixed
+            ? {
+                "@type": "UnitPriceSpecification",
+                "price": unitPrice.toFixed(2),
+                "priceCurrency": "USD",
+                "unitCode": "C62" // Unidad (each)
+            }
+            : {
+                "@type": "UnitPriceSpecification",
+                "price": rate.toFixed(2),
+                "priceCurrency": "USD",
+                "unitCode": "KGM", // Kilogramo
+                "unitText": "kg",
+                "referenceQuantity": {
+                    "@type": "QuantitativeValue",
+                    "value": 1,
+                    "unitCode": "KGM"
+                }
+            },
+        "description": isFixed
+            ? `Pieza especial de autor. Valor por unidad: USD ${unitPrice.toFixed(2)}.`
+            : `Formato de venta por peso: USD ${rate.toFixed(2)} por kilogramo. Peso aprox. de esta pieza: ${item.weight.toFixed(2)} kg (estimado en USD ${unitPrice.toFixed(2)}).`,
+        "availability": "https://schema.org/InStock",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availableDeliveryMethod": "https://schema.org/OnSitePickup",
+        "seller": {
+            "@type": "HomeGoodsStore",
+            "name": "BasKula",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Ruta 10 Km 162, Calle 2, Punta Piedras",
+                "addressLocality": "Manantiales, Maldonado",
+                "addressCountry": "UY"
+            }
+        }
+    };
+
     const productSchema = {
         "@context": "https://schema.org",
         "@type": "Product",
         "name": item.name,
         "sku": item.id,
         "category": categoryName,
-        "image": [absoluteImgUrl],
+        "image": Array.isArray(item.images) && item.images.length > 0
+            ? item.images.map(img => img.startsWith('http') ? img : `${baseUrl}/${img.replace(/^\//, '')}`)
+            : [absoluteImgUrl],
         "description": item.story || seoDesc,
         "brand": {
             "@type": "Brand",
@@ -142,30 +187,30 @@ function updateProductSEO(item, mainImg, unitPrice, rate, isFixed, categoryName)
         "weight": {
             "@type": "QuantitativeValue",
             "value": item.weight || 0.5,
-            "unitCode": "KGM"
+            "unitCode": "KGM",
+            "unitText": "kg"
         },
-        "offers": {
-            "@type": "Offer",
-            "url": canonicalUrl,
-            "priceCurrency": "USD",
-            "price": unitPrice.toFixed(2),
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition",
-            "availableDeliveryMethod": "https://schema.org/OnSitePickup",
-            "seller": {
-                "@type": "HomeGoodsStore",
-                "name": "BasKula",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "Ruta 10 Km 162, Calle 2, Punta Piedras",
-                    "addressLocality": "Manantiales, Maldonado",
-                    "addressCountry": "UY"
-                }
+        "additionalProperty": [
+            {
+                "@type": "PropertyValue",
+                "name": "Formato de venta",
+                "value": isFixed ? "Por unidad (Pieza de Autor)" : `Por peso (USD ${rate.toFixed(2)}/kg)`
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Dimensiones",
+                "value": item.dimensions || "Pieza de formato artesanal"
+            },
+            {
+                "@type": "PropertyValue",
+                "name": "Acabado",
+                "value": item.finish || "Esmaltado artesanal"
             }
-        }
+        ],
+        "offers": offerSchema
     };
 
-    ldScript.textContent = JSON.stringify(productSchema);
+    ldScript.textContent = JSON.stringify(productSchema, null, 2);
 }
 
 // --- Renderizado principal de la página ---
@@ -212,11 +257,14 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
         <div class="pdp-layout-grid">
             <!-- Galería Izquierda -->
             <div class="pdp-gallery-column">
-                <div class="pdp-gallery-stage" id="gallery-stage" title="Cerámica artesanal portuguesa BasKula">
+                <div class="pdp-gallery-stage" id="gallery-stage" title="Clic para ver foto en pantalla completa">
                     <span class="pdp-stage-badge">
                         <i data-lucide="sparkles"></i> Cerámica Portuguesa
                     </span>
                     <img src="${imagesList[0]}" alt="${item.name} — Vajilla de cerámica artesanal portuguesa en BasKula Punta Piedras" class="pdp-main-image" id="pdp-active-img" fetchpriority="high" width="600" height="600">
+                    <span class="pdp-zoom-hint">
+                        <i data-lucide="zoom-in"></i> Ampliar foto
+                    </span>
                 </div>
                 ${thumbnailsHTML}
             </div>
@@ -345,22 +393,91 @@ function renderProductPage(container, item, imagesList, unitPrice, rate, categor
     }
 }
 
-// --- Galería e interactividad de fotos ---
-function initGallery(imagesList) {
-    const mainImg = document.getElementById('pdp-active-img');
-    const thumbnails = document.querySelectorAll('.pdp-thumbnail-item');
-    if (!mainImg || thumbnails.length === 0) return;
+// --- Universal Lightbox para PDP ---
+function openLightbox(imgSrc, title = '') {
+    if (!imgSrc) return;
+    let lb = document.getElementById('baskula-lightbox');
+    if (!lb) {
+        lb = document.createElement('div');
+        lb.id = 'baskula-lightbox';
+        lb.className = 'baskula-lightbox';
+        lb.setAttribute('role', 'dialog');
+        lb.setAttribute('aria-modal', 'true');
+        lb.setAttribute('aria-label', 'Visor de foto ampliada');
+        lb.innerHTML = `
+            <div class="baskula-lightbox-content">
+                <button type="button" class="baskula-lightbox-close" id="baskula-lightbox-close" aria-label="Cerrar visor">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <img src="" alt="" class="baskula-lightbox-img" id="baskula-lightbox-img">
+                <div class="baskula-lightbox-caption" id="baskula-lightbox-caption"></div>
+            </div>
+        `;
+        document.body.appendChild(lb);
 
-    thumbnails.forEach(thumb => {
-        thumb.addEventListener('click', () => {
-            const idx = parseInt(thumb.getAttribute('data-index'), 10);
-            if (imagesList[idx]) {
-                mainImg.src = imagesList[idx];
-                thumbnails.forEach(t => t.classList.remove('active'));
-                thumb.classList.add('active');
+        const closeBtn = lb.querySelector('#baskula-lightbox-close');
+        const closeLb = () => {
+            lb.classList.remove('open');
+            document.removeEventListener('keydown', lb._onEsc);
+        };
+        const onEsc = (e) => {
+            if (e.key === 'Escape') closeLb();
+        };
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLb();
+        });
+        lb.addEventListener('click', (e) => {
+            if (e.target === lb || e.target.classList.contains('baskula-lightbox-content')) {
+                closeLb();
             }
         });
-    });
+        lb._close = closeLb;
+        lb._onEsc = onEsc;
+    }
+
+    const lbImg = document.getElementById('baskula-lightbox-img');
+    const lbCaption = document.getElementById('baskula-lightbox-caption');
+    if (lbImg) {
+        lbImg.src = imgSrc;
+        lbImg.alt = title;
+    }
+    if (lbCaption) lbCaption.textContent = title;
+
+    lb.classList.add('open');
+    document.addEventListener('keydown', lb._onEsc);
+}
+
+// --- Galería e interactividad de fotos ---
+function initGallery(imagesList, item) {
+    const stage = document.getElementById('gallery-stage');
+    const mainImg = document.getElementById('pdp-active-img');
+    const thumbnails = document.querySelectorAll('.pdp-thumbnail-item');
+    if (!mainImg) return;
+
+    if (stage) {
+        stage.addEventListener('click', (e) => {
+            if (e.target.closest('.pdp-stage-badge')) return;
+            openLightbox(mainImg.src, item ? item.name : '');
+        });
+    }
+
+    if (thumbnails.length > 0) {
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const idx = parseInt(thumb.getAttribute('data-index'), 10);
+                if (imagesList[idx]) {
+                    mainImg.src = imagesList[idx];
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                }
+            });
+        });
+    }
 }
 
 // --- Selector de Cantidad y Guardado en Báscula (localStorage) ---
