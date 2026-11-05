@@ -13,7 +13,9 @@
     <meta name="theme-color" content="#E2A727">
 
     <!-- Favicon -->
-    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+    <link rel="icon" href="favicon-32x32.png?v=3" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://www.baskula.com/catalogo.html">
@@ -81,7 +83,7 @@
                     <a href="index.html" class="nav-item">Inicio</a>
                     <a href="index.html#concepto" class="nav-item">La Tienda</a>
                     <a href="catalogo.html" class="nav-item active">Catálogo</a>
-                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="nav-item nav-item--b2b" title="Catálogo Privado para Restaurantes y Hoteles">Catálogo B2B <i data-lucide="external-link" style="width:13px; height:13px; vertical-align:middle; margin-left:3px; opacity:0.8;"></i></a>
+                    <a href="b2b.html" class="nav-item nav-item--b2b" title="División Profesional B2B · Hoteles, Restaurantes e Interiorismo">B2B</a>
                     <a href="index.html#contacto" class="nav-item">Contacto</a>
                 </nav>
 
@@ -133,12 +135,12 @@
                 <a href="index.html" class="drawer-link">Inicio</a>
                 <a href="index.html#concepto" class="drawer-link">La Tienda</a>
                 <a href="catalogo.html" class="drawer-link">Catálogo</a>
+                <a href="b2b.html" class="drawer-link">B2B</a>
                 <a href="index.html#contacto" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
-                <a href="index.html#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
-                <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
-                    <span>Catálogo Privado B2B</span>
-                    <i data-lucide="external-link" style="width:16px; height:16px;"></i>
+                <a href="b2b.html" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
+                    <span>División Profesional B2B</span>
+                    <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
                 </a>
             </nav>
             <div class="drawer-footer">
@@ -330,8 +332,9 @@
                 <!-- Galería / Imagen de la pieza -->
                 <div class="ficha-stage">
                     <span class="ficha-category-pill" id="ficha-category-pill">Platos · $16.50/kg</span>
-                    <div class="ficha-image-container" id="ficha-image-container">
+                    <div class="ficha-image-container" id="ficha-image-container" title="Clic para ampliar foto">
                         <img src="" alt="" class="ficha-piece-img" id="ficha-piece-img" width="600" height="600" loading="eager">
+                        <span class="ficha-zoom-badge"><i data-lucide="zoom-in"></i> Ampliar</span>
                     </div>
                     <div class="ficha-thumbs-bar" id="ficha-thumbs-bar"></div>
                 </div>

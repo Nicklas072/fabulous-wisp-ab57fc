@@ -13,7 +13,9 @@
     <meta name="theme-color" content="#C88A1E">
 
     <!-- Favicon -->
-    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+    <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+    <link rel="icon" href="favicon-32x32.png?v=3" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://www.baskula.com/">
@@ -59,7 +61,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261024_nav">
+    <link rel="stylesheet" href="styles.min.css?v=20261104_casa">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -158,14 +160,16 @@
                 <nav class="nav-menu">
                     <a href="#concepto" class="nav-item">La Tienda</a>
                     <a href="catalogo.html" class="nav-item">Catálogo</a>
-                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="nav-item nav-item--b2b" title="Catálogo Privado para Restaurantes y Hoteles">Catálogo B2B <i data-lucide="external-link" style="width:13px; height:13px; vertical-align:middle; margin-left:3px; opacity:0.8;"></i></a>
+                    <a href="b2b.html" class="nav-item nav-item--b2b" title="División Profesional B2B · Hoteles, Restaurantes e Interiorismo">B2B</a>
                     <a href="#contacto" class="nav-item">Contacto</a>
                 </nav>
 
                 <!-- Botón Corazón Balanza en Nav -->
-                <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza" title="Piezas que me gustan / Mi Balanza">
+                <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza"
+                    title="Piezas que me gustan / Mi Balanza">
                     <svg viewBox="0 0 24 24" class="nav-heart-icon" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                     </svg>
                     <span class="nav-heart-badge" id="navHeartBadge">0</span>
                 </button>
@@ -186,7 +190,8 @@
 
                 <!-- Botón Menú Hamburguesa para móvil -->
                 <button class="menu-toggle-btn" id="menu-toggle" aria-label="Abrir menú">
-                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -202,8 +207,8 @@
         <div class="drawer-awning"></div>
         <div class="drawer-plant"></div>
         <div class="drawer-header">
-            <a href="#" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo"
-                    width="102" height="36" style="height: 36px; max-height: 36px;"></a>
+            <a href="#" class="drawer-logo"><img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="102"
+                    height="36" style="height: 36px; max-height: 36px;"></a>
             <button class="drawer-close-btn" id="drawerClose" aria-label="Cerrar menú">
                 <i data-lucide="x"></i>
             </button>
@@ -213,12 +218,13 @@
                 <a href="#concepto" class="drawer-link">La Tienda</a>
                 <a href="#galeria" class="drawer-link">Nuestra Casa</a>
                 <a href="catalogo.html" class="drawer-link">Catálogo</a>
+                <a href="b2b.html" class="drawer-link">B2B</a>
                 <a href="#contacto" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
-                <a href="#servicios" class="drawer-link-secondary">Servicios Profesionales (B2B)</a>
-                <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
-                    <span>Catálogo Privado B2B</span>
-                    <i data-lucide="external-link" style="width:16px; height:16px;"></i>
+                <a href="b2b.html" class="drawer-link-secondary"
+                    style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
+                    <span>División Profesional B2B</span>
+                    <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
                 </a>
             </nav>
             <div class="drawer-footer">
@@ -242,506 +248,427 @@
 
     <main id="main-content">
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="slider-wrapper">
-            <!-- Single Hero Image with subtle Ken Burns motion -->
-            <div class="slide active" data-layout="full">
-                <div class="slide-images">
-                    <div class="slide-image-full hero-single-image"
-                        style="background-image: url('images/hero-single.webp');"></div>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="slider-wrapper">
+                <!-- Single Hero Image with subtle Ken Burns motion -->
+                <div class="slide active" data-layout="full">
+                    <div class="slide-images">
+                        <div class="slide-image-full hero-single-image"
+                            style="background-image: url('images/hero-single.webp');"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="hero-bg-overlay"></div>
+            <div class="hero-bg-overlay"></div>
 
-        <div class="hero-container">
-            <div class="storefront-content">
-                <div class="card-corners"></div>
-                <span class="hero-editorial-badge">✦ Punta Piedras · Cerámica de Portugal ✦</span>
-                <h1>Elegí. Pesá.<br><span class="text-mustard">Llevate lo que te enamora.</span></h1>
-                <p class="hero-editorial-desc">
-                    Vajilla artesanal de gres portugués vendida al peso en Punta Piedras, Maldonado. Piezas únicas horneadas a 1180 °C para vestir tu mesa con alma atlántica.
-                </p>
-                <div class="hero-actions">
-                    <a href="catalogo.html" class="btn-cta">
-                        <span>Báscula online</span>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                            <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path>
-                            <path d="M7 21h10"></path>
-                            <path d="M12 3v18"></path>
-                            <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path>
+            <div class="hero-container">
+                <div class="storefront-content">
+                    <span class="hero-editorial-badge">✦ CERÁMICA PORTUGUESA POR KILO ✦</span>
+                    <h1>Descubrí una nueva forma de elegir y disfrutar la cerámica.</h1>
+                    <a href="#concepto" class="hero-scroll-arrow" aria-label="Ir a la siguiente sección">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6"/>
                         </svg>
                     </a>
-                    <a href="#concepto" class="btn-secondary">Cómo Funciona</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Banner Marquee -->
-    <div class="marquee-container">
-        <div class="marquee-content">
-            <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
-            <span><span class="star-gold">✦</span> Creá tu espacio</span>
-            <span><span class="star-gold">✦</span> Mesas con alma</span>
-            <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
-            <span><span class="star-gold">✦</span> Espacio Inspirador</span>
-            <span><span class="star-gold">✦</span> Piezas Únicas</span>
-            <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
-            <span><span class="star-gold">✦</span> Más que vajillas</span>
-            <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
-            <span><span class="star-gold">✦</span> Creá tu espacio</span>
-            <span><span class="star-gold">✦</span> Mesas con alma</span>
-            <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
-            <span><span class="star-gold">✦</span> Espacio Inspirador</span>
-            <span><span class="star-gold">✦</span> Piezas Únicas</span>
-            <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
-            <span><span class="star-gold">✦</span> Más que vajillas</span>
-        </div>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <!-- Atmosphere & Gallery Section -->
-    <section id="galeria" class="gallery-section-wrapper">
-        <div class="section-header text-center">
-            <span class="section-tag">Nuestra casa</span>
-            <h2>Somos calidez y encanto</h2>
-            <p class="section-subtitle">Cada rincón está diseñado desde el
-                amor, estilo y naturaleza viva.</p>
-        </div>
-
-        <!-- Atmosphere & Gallery (2-Image Editorial Composition) -->
-        <div class="gallery-dual-container">
-            <!-- Image 1: Rectangular (Wide) -->
-            <div class="gallery-dual-card gallery-dual-rect" data-aos="fade-up">
-                <div class="gallery-dual-img-wrap">
-                    <img src="images/galeria-rectangular.jpg"
-                        alt="Composición artesanal de bowls y cuencos esmaltados en tonos tostados y miel de BasKula"
-                        width="1024" height="563" loading="lazy" decoding="async" />
-                </div>
-            </div>
-
-            <!-- Image 2: Cuadrada (1:1) -->
-            <div class="gallery-dual-card gallery-dual-square" data-aos="fade-up" data-aos-delay="120">
-                <div class="gallery-dual-img-wrap">
-                    <img src="images/galeria-cuadrada.jpg"
-                        alt="Centro de mesa con pie a rayas, limones frescos y jarra floral artesanal de BasKula"
-                        width="722" height="953" loading="lazy" decoding="async" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Holiday / Navidad Section (Costa Nova style) -->
-    <section id="navidad" class="holiday-section">
-        <!-- Holiday Marquee Banner (Reverse Direction) -->
-        <div class="holiday-marquee-container" aria-label="Temática navideña">
-            <div class="holiday-marquee-content">
-                <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+        <!-- Banner Marquee -->
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
+                <span><span class="star-gold">✦</span> Creá tu espacio</span>
+                <span><span class="star-gold">✦</span> Mesas con alma</span>
+                <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
+                <span><span class="star-gold">✦</span> Espacio Inspirador</span>
+                <span><span class="star-gold">✦</span> Piezas Únicas</span>
+                <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
+                <span><span class="star-gold">✦</span> Más que vajillas</span>
+                <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
+                <span><span class="star-gold">✦</span> Creá tu espacio</span>
+                <span><span class="star-gold">✦</span> Mesas con alma</span>
+                <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
+                <span><span class="star-gold">✦</span> Espacio Inspirador</span>
+                <span><span class="star-gold">✦</span> Piezas Únicas</span>
+                <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
+                <span><span class="star-gold">✦</span> Más que vajillas</span>
             </div>
         </div>
 
-        <!-- 2-Image Split Editorial Block (Costa Nova Style) -->
-        <div class="holiday-split-container">
-            <div class="holiday-grid">
-                <!-- Card 1: Pinitos Cerámicos -->
-                <div class="holiday-card" data-aos="fade-up">
-                    <div class="holiday-img-wrap">
-                        <img src="images/navidad-banner-1.jpg"
-                            alt="Vajilla navideña en forma de pinitos y cerámica artesanal festiva" width="766" height="1024" loading="lazy" decoding="async">
-                        <div class="holiday-overlay"></div>
+        <div class="section-divider"></div>
+
+        <!-- Concept Section: Una experiencia diferente -->
+        <section id="concepto" class="section-container concept-section">
+            <div class="section-header text-center">
+                <span class="section-tag">Una experiencia diferente</span>
+                <h2>¿Cómo funciona BasKula?</h2>
+                <p class="section-subtitle">Podés conocernos en nuestra tienda de Punta Piedras o también en nuestro
+                    catálogo online.</p>
+                <p class="concept-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
+            </div>
+
+            <div class="concept-grid">
+                <!-- Step 1 -->
+                <div class="concept-card" data-aos="fade-up">
+                    <div class="card-corners"></div>
+                    <div class="concept-icon-wrapper"
+                        style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
                     </div>
-                    <div class="holiday-card-content">
-                        <span class="holiday-tag">Colección Fiestas</span>
-                        <h2 class="holiday-title">Mesas que Celebran</h2>
-                        <span class="holiday-subtext">Diseños únicos para compartir</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: Hogar & Fiestas -->
-                <div class="holiday-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="holiday-img-wrap">
-                        <img src="images/navidad-banner-2.jpg?v=2"
-                            alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766" height="1024" loading="lazy" decoding="async">
-                        <div class="holiday-overlay"></div>
-                    </div>
-                    <div class="holiday-card-content">
-                        <span class="holiday-tag">Espíritu Navideño</span>
-                        <h2 class="holiday-title">Calidez en el Hogar</h2>
-                        <span class="holiday-subtext">La magia de celebrar juntos</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Holiday Expectation Callout (Editorial & Sutil) -->
-        <div class="holiday-teaser-bar" data-aos="fade-up">
-            <div class="holiday-teaser-content">
-                <span class="holiday-teaser-tag">✦ Próximo Desembarco · Fiestas ✦</span>
-                <p class="holiday-teaser-text">
-                    Nuevas piezas exclusivas están en viaje desde los talleres de Portugal para vestir tu mesa navideña.
-                </p>
-                <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20quisiera%20consultar%20por%20las%20propuestas%20y%20novedades%20de%20la%20colecci%C3%B3n%20de%20Fiestas." 
-                   target="_blank" rel="noopener noreferrer" class="holiday-teaser-btn">
-                    <i data-lucide="message-circle"></i>
-                    <span>Consultar por propuestas de Fiestas</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Bestsellers Section (Piezas Especiales) -->
-    <section id="bestsellers" class="bestsellers-section" data-aos="fade-up">
-        <div class="bestsellers-container">
-            <div class="bestsellers-header">
-                <span class="section-tag">Piezas Especiales</span>
-                <h2 class="bestsellers-heading"><em>¡Piezas para regalar!</em></h2>
-                <p class="bestsellers-subheading">Dentro de nuestras colecciones vas a descubrir una variedad única en
-                    Uruguay.</p>
-            </div>
-
-            <!-- Carrusel con Controles Flotantes estilo Bone & White -->
-            <div class="bw-carousel-wrapper">
-                <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="aparador-prev-btn" aria-label="Anterior">
-                    <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                        <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"></path>
-                    </svg>
-                </button>
-
-                <div class="bw-scroll-carousel" id="aparador-viewport">
-                    <div class="bw-product-list" id="aparador-track">
-                        <!-- Renderizado dinámico de tarjetas en app.js -->
-                    </div>
-                </div>
-
-                <button type="button" class="bw-nav-btn bw-nav-btn--next" id="aparador-next-btn" aria-label="Siguiente">
-                    <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                        <path d="m5 17 8-8-8-8" stroke="currentColor" stroke-width="2" stroke-linecap="square"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Indicador sutil de navegación en celulares -->
-            <div class="bw-mobile-dots" id="bw-mobile-dots" aria-hidden="true"></div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Concept Section -->
-    <section id="concepto" class="section-container concept-section">
-        <div class="section-header text-center">
-            <span class="section-tag">Una experiencia diferente</span>
-            <h2>¿Cómo funciona BasKula?</h2>
-            <p class="section-subtitle">Podés conocernos en nuestra tienda de Punta Piedras o también en nuestro catálogo online.</p>
-            <p class="concept-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
-        </div>
-
-        <div class="concept-grid">
-            <!-- Step 1 -->
-            <div class="concept-card" data-aos="fade-up">
-                <div class="card-corners"></div>
-                <div class="concept-icon-wrapper"
-                    style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
-                </div>
-                <h3>1. Elegí lo que te guste.</h3>
-                <p>Podés elegir juegos completos y también podés mezclar colores, texturas, platos y tazas creando tus
-                    propios juegos.
-                </p>
-                <p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
-            </div>
-            <!-- Step 2 -->
-            <div class="concept-card" data-aos="fade-up" data-delay="100">
-                <div class="card-corners"></div>
-                <div class="concept-icon-wrapper">
-                    <i data-lucide="scale" class="concept-icon"></i>
-                </div>
-                <h3>2. Pesá en la Báscula.</h3>
-                <p>Pesá lo que te guste en alguna de las básculas disponibles en la tienda.</p>
-                <p>Pagá solo por el peso de lo que elijas.</p>
-            </div>
-            <!-- Step 3 -->
-            <div class="concept-card" data-aos="fade-up" data-delay="200">
-                <div class="card-corners"></div>
-                <div class="concept-icon-wrapper">
-                    <i data-lucide="heart" class="concept-icon"></i>
-                </div>
-                <h3>3. Llevá tus favoritos.</h3>
-                <p>Te llevás lo que te gusta para ponerlo donde quieras.</p>
-                <p>Arte de Portugal a tu mesa.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Carrusel de Cerámica por Kilo (Debajo de Una Experiencia Diferente) -->
-    <section id="productos-kilo" class="bestsellers-section productos-kilo-section" data-aos="fade-up">
-        <div class="bestsellers-container">
-            <div class="bestsellers-header">
-                <span class="section-tag">Colección por Kilo</span>
-                <h2 class="bestsellers-heading"><em>Elegí tus favoritas</em></h2>
-                <p class="bestsellers-subheading">Piezas únicas de gres portugués. Tocá el corazón ♥ para pesar en tu balanza o hacé clic para ver los detalles.</p>
-            </div>
-
-            <!-- Carrusel con Controles Flotantes estilo Bone & White -->
-            <div class="bw-carousel-wrapper">
-                <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="productos-kilo-prev-btn" aria-label="Anterior">
-                    <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                        <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"></path>
-                    </svg>
-                </button>
-
-                <div class="bw-scroll-carousel" id="productos-kilo-viewport">
-                    <div class="bw-product-list" id="productos-kilo-track">
-                        <!-- Renderizado dinámico de tarjetas en app.js -->
-                    </div>
-                </div>
-
-                <button type="button" class="bw-nav-btn bw-nav-btn--next" id="productos-kilo-next-btn" aria-label="Siguiente">
-                    <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                        <path d="m5 17 8-8-8-8" stroke="currentColor" stroke-width="2" stroke-linecap="square"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Indicador sutil de navegación en celulares -->
-            <div class="bw-mobile-dots" id="productos-kilo-dots" aria-hidden="true"></div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Collection Banner: full-screen photo + centered title + CTA -->
-    <section id="coleccion" class="collection-banner">
-        <div class="collection-content">
-            <span class="collection-tag">Catálogo Online</span>
-            <h2>Nuestra colección</h2>
-            <p class="collection-subtext">Descubrí todas las piezas, formas y colores disponibles por kilo.</p>
-            <a href="catalogo.html" class="btn-cta">Ver colección <i data-lucide="arrow-right"></i></a>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- New Season / Trends Section -->
-    <section id="tendencias" class="section-container trends-section" data-aos="fade-up">
-        <div class="section-header text-center">
-            <h2 class="trends-main-heading">¡Nueva Temporada!</h2>
-            <p class="section-subtitle trends-subtitle">Portugal nos trae...</p>
-        </div>
-
-        <div class="trends-grid">
-            <!-- Card 1: Perlas -->
-            <div class="trend-card" data-trend-id="trend-perlas" role="button" tabindex="0" aria-label="Ver ficha de Colección Perlas">
-                <div class="trend-img-wrapper">
-                    <img src="images/trend1.webp" alt="Perlas - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
-                        decoding="async" />
-                </div>
-                <h3 class="trend-title">Perlas</h3>
-                <span class="trend-price-subtle">$16.50 / kg</span>
-            </div>
-            <!-- Card 2: Rayas -->
-            <div class="trend-card" data-trend-id="trend-rayas" role="button" tabindex="0" aria-label="Ver ficha de Colección Rayas">
-                <div class="trend-img-wrapper">
-                    <img src="images/trend2.webp" alt="Rayas - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
-                        decoding="async" />
-                </div>
-                <h3 class="trend-title">Rayas</h3>
-                <span class="trend-price-subtle">$16.50 / kg</span>
-            </div>
-            <!-- Card 3: Handmade -->
-            <div class="trend-card" data-trend-id="trend-handmade" role="button" tabindex="0" aria-label="Ver ficha de Colección Handmade">
-                <div class="trend-img-wrapper">
-                    <img src="images/trend3.webp" alt="Handmade - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
-                        decoding="async" />
-                </div>
-                <h3 class="trend-title">Handmade</h3>
-                <span class="trend-price-subtle">$16.50 / kg</span>
-            </div>
-            <!-- Card 4: Vintage -->
-            <div class="trend-card" data-trend-id="trend-vintage" role="button" tabindex="0" aria-label="Ver ficha de Colección Vintage">
-                <div class="trend-img-wrapper">
-                    <img src="images/trend4.webp" alt="Vintage - Nueva Temporada BasKula" width="800" height="800" loading="lazy"
-                        decoding="async" />
-                </div>
-                <h3 class="trend-title">Vintage</h3>
-                <span class="trend-price-subtle">$16.50 / kg</span>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- B2B Services Section: Full-Width Mostaza Oscuro -->
-    <section id="servicios" class="b2b-special-section" data-aos="fade-up">
-        <div class="b2b-special-container">
-            <div class="b2b-content-wrapper">
-                <span class="b2b-tag">División Profesional B2B · Maldonado & Uruguay</span>
-                <h2 class="b2b-heading">Vajilla de autor para Gastronomía, Hotelería e Interiorismo</h2>
-                <p class="b2b-intro">
-                    Equipamos restaurantes de autor, hoteles boutique y desarrollos inmobiliarios en José Ignacio, Manantiales, Punta del Este y todo el país. Gres vitrificado a 1180 °C de resistencia profesional con cotización transparente por volumen y kilo.
-                </p>
-
-                <!-- Bloques descriptivos de los dos servicios -->
-                <div class="b2b-services-duo">
-                    <!-- Servicio 1: Hoteles y Restaurantes -->
-                    <div class="b2b-service-card">
-                        <div class="b2b-card-header">
-                            <div class="b2b-thumb-frame">
-                                <img src="images/b2b-thumb-gastronomia.webp" alt="Hoteles y Restaurantes" class="b2b-card-thumb" width="48" height="48" loading="lazy">
-                            </div>
-                            <h3 class="b2b-card-title">Hoteles & Restaurantes</h3>
-                        </div>
-                        <p class="b2b-card-desc">
-                            Vajilla de alta densidad para uso intensivo en salón, horno y lavavajillas industrial. Platos, fuentes y cuencos que enmarcan la propuesta del chef con reposición continua.
-                        </p>
-                        <a href="Programa_Hoteles_y_Restaurantes.pdf" target="_blank" rel="noopener" class="b2b-pdf-link">
-                            <i data-lucide="file-down"></i>
-                            <span>Descargar Programa Gastronómico (PDF)</span>
-                        </a>
-                    </div>
-
-                    <!-- Servicio 2: Decoración & Real Estate -->
-                    <div class="b2b-service-card">
-                        <div class="b2b-card-header">
-                            <div class="b2b-thumb-frame">
-                                <img src="images/b2b-thumb-decoracion.webp" alt="Interiorismo y Real Estate" class="b2b-card-thumb" width="48" height="48" loading="lazy">
-                            </div>
-                            <h3 class="b2b-card-title">Interiorismo & Home Staging</h3>
-                        </div>
-                        <p class="b2b-card-desc">
-                            Curaduría de sets llave en mano para estudios de arquitectura, desarrolladores inmobiliarios y casas de alquiler de lujo en la costa.
-                        </p>
-                        <a href="Programa_Inmobiliarias_y_HomeStaging.pdf" target="_blank" rel="noopener" class="b2b-pdf-link">
-                            <i data-lucide="file-down"></i>
-                            <span>Descargar Programa Interiorismo & Real Estate (PDF)</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Botones de Acción -->
-                <div class="b2b-cta-group">
-                    <a href="https://baskulab2b.vercel.app" target="_blank" rel="noopener" class="b2b-btn-primary b2b-btn-tool" style="background: linear-gradient(135deg, #1C1A17 0%, #2A241E 100%); color: #FAF8F5 !important; border: 1.5px solid var(--color-mustard, #E2A727); box-shadow: 0 6px 20px rgba(0,0,0,0.25);">
-                        <i data-lucide="utensils" style="width:18px; height:18px; stroke:var(--color-mustard, #E2A727);"></i>
-                        <span>Acceder al Catálogo Privado B2B Online</span>
-                        <i data-lucide="external-link" style="width:15px; height:15px; opacity:0.85;"></i>
-                    </a>
-                    <a href="https://wa.me/59893658477?text=Hola%20BasKula,%20quisiera%20solicitar%20asesoramiento%20y%20cotizaci%C3%B3n%20del%20Programa%20B2B%20(Gastronom%C3%ADa%20/%20Hoteler%C3%ADa%20/%20Interiorismo)." 
-                       target="_blank" rel="noopener" class="b2b-btn-secondary">
-                        <svg class="b2b-whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z" />
-                        </svg>
-                        <span>Solicitar Cotización B2B por WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Franchise / Contact Postcard Section -->
-    <section id="contacto" class="section-container contact-section-wrapper">
-        <div class="postcard-container">
-            <!-- Left Column: Story & Info -->
-            <div class="postcard-info">
-                <div class="logo-area">
-                    <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
-                </div>
-                <h3>¿Te enamoraste de la idea?</h3>
-                <p>
-                    Estamos dando forma a este proyecto y nos encantaría saber qué opinas, recibir tus sugerencias o
-                    conversar.
-                </p>
-                <div class="contact-details">
-                    <div class="detail-item">
-                        <i data-lucide="map-pin"></i>
-                        <span>Punta Piedras, Manantiales - Uruguay</span>
-                    </div>
-                    <div class="detail-item">
-                        <i data-lucide="mail"></i>
-                        <a href="mailto:info@baskula.com">info@baskula.com</a>
-                    </div>
-                    <div class="detail-item">
-                        <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                            height="20">
-                            <defs>
-                                <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#FEDA75" />
-                                    <stop offset="25%" stop-color="#FA7E1E" />
-                                    <stop offset="50%" stop-color="#D62976" />
-                                    <stop offset="75%" stop-color="#962FBF" />
-                                    <stop offset="100%" stop-color="#4F5BD5" />
-                                </linearGradient>
-                            </defs>
-                            <path fill="url(#ig-grad)"
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                        </svg>
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener">@baskula.uy</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: The Postcard Form -->
-            <div class="postcard-form-wrapper">
-                <form class="postcard-form" id="contact-form" name="contacto" method="POST" data-netlify="true"
-                    netlify-honeypot="bot-field">
-                    <div class="form-stamp">
-                        <div class="stamp-zig-zag"></div>
-                        <i data-lucide="heart" class="stamp-icon"></i>
-                    </div>
-                    <input type="hidden" name="form-name" value="contacto">
-                    <p class="hidden-honeypot">
-                        <label>No llenar este campo: <input name="bot-field"></label>
+                    <h3>1. Elegí lo que te guste.</h3>
+                    <p>Podés elegir juegos completos y también podés mezclar colores, texturas, platos y tazas creando
+                        tus
+                        propios juegos.
                     </p>
-                    <div class="form-row">
-                        <label for="name">¡Hola! Mi nombre es</label>
-                        <input type="text" id="name" name="name" placeholder="Tu nombre..." required
-                            autocomplete="name">
+                    <p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="concept-card" data-aos="fade-up" data-delay="100">
+                    <div class="card-corners"></div>
+                    <div class="concept-icon-wrapper">
+                        <i data-lucide="scale" class="concept-icon"></i>
                     </div>
-                    <div class="form-row">
-                        <label for="email">Correo</label>
-                        <input type="email" id="email" name="email" placeholder="Tu correo..." required
-                            autocomplete="email">
+                    <h3>2. Pesá en la Báscula.</h3>
+                    <p>Pesá lo que te guste en alguna de las básculas disponibles en la tienda.</p>
+                    <p>Pagá solo por el peso de lo que elijas.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="concept-card" data-aos="fade-up" data-delay="200">
+                    <div class="card-corners"></div>
+                    <div class="concept-icon-wrapper">
+                        <i data-lucide="heart" class="concept-icon"></i>
                     </div>
-                    <div class="form-row message-row">
-                        <label for="message">Dejanos tu mensaje</label>
-                        <textarea id="message" name="message"
-                            placeholder="Me encantó el simulador / Quisiera saber sobre la tienda..."
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="btn-cta btn-postcard">Enviar Mensaje <i
-                            data-lucide="send"></i></button>
-                </form>
+                    <h3>3. Llevá tus favoritos.</h3>
+                    <p>Te llevás lo que te gusta para ponerlo donde quieras.</p>
+                    <p>Arte de Portugal a tu mesa.</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div class="section-divider"></div>
+        <div class="section-divider"></div>
+
+        <!-- Atmosphere & Gallery Section -->
+        <section id="galeria" class="gallery-section-wrapper">
+            <div class="section-header text-center">
+                <span class="section-tag">Nuestra casa</span>
+                <h2>Mesas con personalidad</h2>
+                <p class="section-subtitle">Colores de inspiración mediterránea, texturas que sorprenden, formas diferentes y una enorme variedad de piezas para crear mesas con estilo propio.</p>
+            </div>
+
+            <!-- Native Pure CSS Carousel with Nav Arrows -->
+            <div class="casa-carousel-wrapper">
+                <button type="button" class="casa-nav-btn casa-nav-btn--prev is-hidden" id="casa-prev-btn" aria-label="Tarjeta anterior" style="display: none;">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E2A727" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button type="button" class="casa-nav-btn casa-nav-btn--next" id="casa-next-btn" aria-label="Tarjeta siguiente">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E2A727" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="casa-carousel" id="casaCarousel" role="region" aria-label="Carrusel Nuestra Casa">
+                    <!-- Tarjeta 1 -->
+                    <article class="casa-carousel-card" id="casa-card-1">
+                        <h3 class="casa-card-title">ORIGEN PORTUGUÉS</h3>
+                        <div class="casa-card-img-wrap">
+                            <img src="images/casa-origen-portugues.webp"
+                                alt="Pueblo tradicional de Portugal con casas blancas y azules, flores y cerámica"
+                                class="casa-card-img" width="1024" height="576" loading="lazy" decoding="async" />
+                        </div>
+                        <p class="casa-card-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                    </article>
+
+                    <!-- Tarjeta 2 -->
+                    <article class="casa-carousel-card" id="casa-card-2">
+                        <h3 class="casa-card-title">DISEÑO EUROPEO</h3>
+                        <div class="casa-card-img-wrap">
+                            <img src="images/casa-colecciones-exclusivas.webp"
+                                alt="Diseño europeo con grabado floral clásico y borde ondeado en vajilla fina"
+                                class="casa-card-img" width="1024" height="766" loading="lazy" decoding="async" />
+                        </div>
+                        <p class="casa-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                    </article>
+
+                    <!-- Tarjeta 3 -->
+                    <article class="casa-carousel-card" id="casa-card-3">
+                        <h3 class="casa-card-title">COLECCIONES EXCLUSIVAS</h3>
+                        <div class="casa-card-img-wrap">
+                            <img src="images/casa-diseno-europeo.webp"
+                                alt="Colección exclusiva de vajilla mediterránea y patrones florales sobre mesa de madera"
+                                class="casa-card-img" width="766" height="1024" loading="lazy" decoding="async" />
+                        </div>
+                        <p class="casa-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                    </article>
+
+                    <!-- Tarjeta 4 -->
+                    <article class="casa-carousel-card" id="casa-card-4">
+                        <h3 class="casa-card-title">VENTA POR KILO</h3>
+                        <div class="casa-card-img-wrap">
+                            <img src="images/casa-venta-kilo.webp"
+                                alt="Balanza tradicional de platillos dorada sobre mesa rústica"
+                                class="casa-card-img" width="1024" height="796" loading="lazy" decoding="async" />
+                        </div>
+                        <p class="casa-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Holiday / Navidad Section (Costa Nova style) -->
+        <section id="navidad" class="holiday-section">
+            <!-- Holiday Marquee Banner (Reverse Direction) -->
+            <div class="holiday-marquee-container" aria-label="Temática navideña">
+                <div class="holiday-marquee-content">
+                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
+                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+                </div>
+            </div>
+
+            <div class="section-header text-center holiday-header">
+                <h2>ESPECIAL FIESTAS</h2>
+            </div>
+
+            <!-- 2-Image Split Editorial Block (Costa Nova Style) -->
+            <div class="holiday-split-container">
+                <div class="holiday-grid">
+                    <!-- Card 1: Mesa Navideña -->
+                    <div class="holiday-card" data-aos="fade-up">
+                        <div class="holiday-img-wrap">
+                            <img src="images/navidad-banner-1.jpg"
+                                alt="Vajilla navideña en forma de pinitos y cerámica artesanal festiva" width="766"
+                                height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
+                            <div class="holiday-overlay"></div>
+                        </div>
+                        <div class="holiday-card-content">
+                            <span class="holiday-tag">Colección Fiestas</span>
+                            <h2 class="holiday-title">PREPARÁ TU MESA NAVIDEÑA</h2>
+                            <span class="holiday-subtext">Inspirate con nuestros artículos para estas fiestas.</span>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Una Noche Especial -->
+                    <div class="holiday-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="holiday-img-wrap">
+                            <img src="images/navidad-banner-2.jpg?v=2"
+                                alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
+                                height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
+                            <div class="holiday-overlay"></div>
+                        </div>
+                        <div class="holiday-card-content">
+                            <span class="holiday-tag">Espíritu Navideño</span>
+                            <h2 class="holiday-title">UNA NOCHE ESPECIAL</h2>
+                            <span class="holiday-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Holiday Products Carousel: Selección Festiva -->
+            <div class="holiday-products-wrapper" data-aos="fade-up">
+                <div class="bestsellers-header text-center" style="margin-bottom: 30px;">
+                    <span class="section-tag">Colección Fiestas</span>
+                    <h2 class="bestsellers-heading"><em>Selección Festiva</em></h2>
+                    <p class="bestsellers-subheading">Piezas exclusivas para celebrar y compartir. Tocá el corazón ♥ para pesar en tu balanza o hacé clic para ver los detalles.</p>
+                </div>
+
+                <!-- Carrusel con Controles Flotantes estilo Bone & White -->
+                <div class="bw-carousel-wrapper">
+                    <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn" aria-label="Anterior">
+                        <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                            <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                        </svg>
+                    </button>
+
+                    <div class="bw-scroll-carousel" id="festive-viewport">
+                        <div class="bw-product-list" id="festive-track">
+                            <!-- Inyectado dinámicamente por initFestiveCarousel() -->
+                        </div>
+                    </div>
+
+                    <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn" aria-label="Siguiente">
+                        <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                            <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Dots para móvil -->
+                <div class="bw-mobile-dots" id="festive-dots"></div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- New Season / Trends Section -->
+        <section id="tendencias" class="section-container trends-section" data-aos="fade-up">
+            <div class="section-header text-center">
+                <h2 class="trends-main-heading">ESTA TEMPORADA 2026, PORTUGAL NOS TRAE...</h2>
+            </div>
+
+            <div class="trends-grid">
+                <!-- Card 1: Perlas -->
+                <div class="trend-card" data-trend-id="trend-perlas" role="button" tabindex="0"
+                    aria-label="Ver Colección Perlas en Instagram">
+                    <div class="trend-img-wrapper">
+                        <img src="images/trend1.webp?v=20261025" alt="Colección Perlas - Nueva Temporada BasKula"
+                            width="800" height="800" loading="lazy" decoding="async" />
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Perlas en Instagram">
+                            <i data-lucide="eye"></i> Ver más
+                        </a>
+                    </div>
+                    <h3 class="trend-title">Perlas</h3>
+                    <div class="trend-meta-row">
+                        <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : 1.40 kg</span>
+                    </div>
+                </div>
+                <!-- Card 2: Rayas -->
+                <div class="trend-card" data-trend-id="trend-rayas" role="button" tabindex="0"
+                    aria-label="Ver Colección Rayas en Instagram">
+                    <div class="trend-img-wrapper">
+                        <img src="images/trend2.webp?v=20261025" alt="Colección Rayas - Nueva Temporada BasKula"
+                            width="800" height="800" loading="lazy" decoding="async" />
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Rayas en Instagram">
+                            <i data-lucide="eye"></i> Ver más
+                        </a>
+                    </div>
+                    <h3 class="trend-title">Rayas</h3>
+                    <div class="trend-meta-row">
+                        <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : 1.42 kg</span>
+                    </div>
+                </div>
+                <!-- Card 3: Handmade -->
+                <div class="trend-card" data-trend-id="trend-handmade" role="button" tabindex="0"
+                    aria-label="Ver Colección Handmade en Instagram">
+                    <div class="trend-img-wrapper">
+                        <img src="images/trend3.webp?v=20261025" alt="Colección Handmade - Nueva Temporada BasKula"
+                            width="800" height="800" loading="lazy" decoding="async" />
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Handmade en Instagram">
+                            <i data-lucide="eye"></i> Ver más
+                        </a>
+                    </div>
+                    <h3 class="trend-title">Handmade</h3>
+                    <div class="trend-meta-row">
+                        <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : 1.34 kg</span>
+                    </div>
+                </div>
+                <!-- Card 4: Vintage -->
+                <div class="trend-card" data-trend-id="trend-vintage" role="button" tabindex="0"
+                    aria-label="Ver Colección Vintage en Instagram">
+                    <div class="trend-img-wrapper">
+                        <img src="images/trend4.webp?v=20261025" alt="Colección Vintage - Nueva Temporada BasKula"
+                            width="800" height="800" loading="lazy" decoding="async" />
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Vintage en Instagram">
+                            <i data-lucide="eye"></i> Ver más
+                        </a>
+                    </div>
+                    <h3 class="trend-title">Vintage</h3>
+                    <div class="trend-meta-row">
+                        <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : 1.25 kg</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Franchise / Contact Postcard Section -->
+        <section id="contacto" class="section-container contact-section-wrapper">
+            <div class="postcard-container">
+                <!-- Left Column: Story & Info -->
+                <div class="postcard-info">
+                    <div class="logo-area">
+                        <img src="images/logo.png" alt="BasKula Logo" class="nav-logo" width="169" height="60">
+                    </div>
+                    <h3>¿Te enamoraste de la idea?</h3>
+                    <p>
+                        Estamos dando forma a este proyecto y nos encantaría saber qué opinas, recibir tus sugerencias o
+                        conversar.
+                    </p>
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <i data-lucide="map-pin"></i>
+                            <span>Punta Piedras, Manantiales - Uruguay</span>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="mail"></i>
+                            <a href="mailto:info@baskula.com">info@baskula.com</a>
+                        </div>
+                        <div class="detail-item">
+                            <svg class="instagram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="20" height="20">
+                                <defs>
+                                    <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#FEDA75" />
+                                        <stop offset="25%" stop-color="#FA7E1E" />
+                                        <stop offset="50%" stop-color="#D62976" />
+                                        <stop offset="75%" stop-color="#962FBF" />
+                                        <stop offset="100%" stop-color="#4F5BD5" />
+                                    </linearGradient>
+                                </defs>
+                                <path fill="url(#ig-grad)"
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
+                            <a href="https://www.instagram.com/baskula.uy/" target="_blank"
+                                rel="noopener">@baskula.uy</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: The Postcard Form -->
+                <div class="postcard-form-wrapper">
+                    <form class="postcard-form" id="contact-form" name="contacto" method="POST" data-netlify="true"
+                        netlify-honeypot="bot-field">
+                        <div class="form-stamp">
+                            <div class="stamp-zig-zag"></div>
+                            <i data-lucide="heart" class="stamp-icon"></i>
+                        </div>
+                        <input type="hidden" name="form-name" value="contacto">
+                        <p class="hidden-honeypot">
+                            <label>No llenar este campo: <input name="bot-field"></label>
+                        </p>
+                        <div class="form-row">
+                            <label for="name">¡Hola! Mi nombre es</label>
+                            <input type="text" id="name" name="name" placeholder="Tu nombre..." required
+                                autocomplete="name">
+                        </div>
+                        <div class="form-row">
+                            <label for="email">Correo</label>
+                            <input type="email" id="email" name="email" placeholder="Tu correo..." required
+                                autocomplete="email">
+                        </div>
+                        <div class="form-row message-row">
+                            <label for="message">Dejanos tu mensaje</label>
+                            <textarea id="message" name="message"
+                                placeholder="Me encantó el simulador / Quisiera saber sobre la tienda..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-cta btn-postcard">Enviar Mensaje <i
+                                data-lucide="send"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
 
     </main>
 
@@ -772,16 +699,18 @@
             <div class="ficha-layout">
                 <div class="ficha-stage">
                     <span class="ficha-category-pill" id="aparador-modal-badge">Pieza de Autor</span>
-                    <div class="ficha-image-container">
+                    <div class="ficha-image-container" id="aparador-modal-img-container" title="Clic para ampliar foto">
                         <img src="" alt="" class="ficha-piece-img" id="aparador-modal-img" width="600" height="600">
+                        <span class="ficha-zoom-badge"><i data-lucide="zoom-in"></i> Ampliar</span>
                     </div>
+                    <div class="ficha-thumbs-bar" id="aparador-modal-thumbs-bar"></div>
                 </div>
                 <div class="ficha-info-col">
                     <span class="ficha-origin-tag">BasKula · Pieza de Autor</span>
                     <h3 class="ficha-title" id="aparador-modal-title"></h3>
                     <p class="ficha-story" id="aparador-modal-story"></p>
                     <div class="ficha-specs-grid">
-                        <div class="ficha-spec">
+                        <div class="ficha-spec" id="aparador-modal-price-wrap">
                             <span class="spec-label">Precio</span>
                             <strong class="spec-gold" id="aparador-modal-price"></strong>
                         </div>
@@ -812,27 +741,29 @@
 
     <!-- Floating Two-Pan Brass Scale Widget -->
     <aside class="floating-scale-widget" id="floatingScaleWidget" aria-label="Balanza de piezas">
-        <button type="button" class="floating-scale-btn" id="floatingScaleBtn" aria-label="Abrir balanza de piezas" title="Ver mi balanza y reservar">
+        <button type="button" class="floating-scale-btn" id="floatingScaleBtn" aria-label="Abrir balanza de piezas"
+            title="Ver mi balanza y reservar">
             <svg class="scale-pans-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Base y Columna central -->
-                <path d="M22 58h20 M26 58c0-3 3-5 6-5s6 2 6 5 M32 16v37" stroke="#E2A727" stroke-width="2.5" stroke-linecap="round"/>
-                <circle cx="32" cy="14" r="3" fill="#E2A727"/>
-                <circle cx="32" cy="14" r="1.2" fill="#1C1A17"/>
+                <path d="M22 58h20 M26 58c0-3 3-5 6-5s6 2 6 5 M32 16v37" stroke="#E2A727" stroke-width="2.5"
+                    stroke-linecap="round" />
+                <circle cx="32" cy="14" r="3" fill="#E2A727" />
+                <circle cx="32" cy="14" r="1.2" fill="#1C1A17" />
                 <!-- Brazo móvil de la balanza que bascula al pesar -->
                 <g class="scale-tilting-beam" id="floatingScaleBeam">
-                    <path d="M12 18h40" stroke="#F4C458" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="32" cy="18" r="2.2" fill="#E2A727"/>
+                    <path d="M12 18h40" stroke="#F4C458" stroke-width="2.5" stroke-linecap="round" />
+                    <circle cx="32" cy="18" r="2.2" fill="#E2A727" />
                     <!-- Platillo Izquierdo -->
                     <g class="scale-pan-left" id="floatingScalePanLeft">
-                        <line x1="14" y1="18" x2="8" y2="34" stroke="#C28B17" stroke-width="1.2"/>
-                        <line x1="14" y1="18" x2="20" y2="34" stroke="#C28B17" stroke-width="1.2"/>
-                        <path d="M6 34c1 4 7 6 8 6s7-2 8-6z" fill="#E2A727" stroke="#F4C458" stroke-width="1"/>
+                        <line x1="14" y1="18" x2="8" y2="34" stroke="#C28B17" stroke-width="1.2" />
+                        <line x1="14" y1="18" x2="20" y2="34" stroke="#C28B17" stroke-width="1.2" />
+                        <path d="M6 34c1 4 7 6 8 6s7-2 8-6z" fill="#E2A727" stroke="#F4C458" stroke-width="1" />
                     </g>
                     <!-- Platillo Derecho -->
                     <g class="scale-pan-right" id="floatingScalePanRight">
-                        <line x1="50" y1="18" x2="44" y2="34" stroke="#C28B17" stroke-width="1.2"/>
-                        <line x1="50" y1="18" x2="56" y2="34" stroke="#C28B17" stroke-width="1.2"/>
-                        <path d="M42 34c1 4 7 6 8 6s7-2 8-6z" fill="#E2A727" stroke="#F4C458" stroke-width="1"/>
+                        <line x1="50" y1="18" x2="44" y2="34" stroke="#C28B17" stroke-width="1.2" />
+                        <line x1="50" y1="18" x2="56" y2="34" stroke="#C28B17" stroke-width="1.2" />
+                        <path d="M42 34c1 4 7 6 8 6s7-2 8-6z" fill="#E2A727" stroke="#F4C458" stroke-width="1" />
                     </g>
                 </g>
             </svg>
@@ -860,23 +791,26 @@
         <div class="wishlist-drawer__scale-stage">
             <div class="sympathetic-scale">
                 <svg class="sympathetic-scale-svg" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M35 74h30 M40 74c0-4 4-6 10-6s10 2 10 6 M50 20v48" stroke="#C28B17" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="50" cy="18" r="4" fill="#E2A727"/>
-                    <circle cx="50" cy="18" r="1.5" fill="#FAF8F5"/>
+                    <path d="M35 74h30 M40 74c0-4 4-6 10-6s10 2 10 6 M50 20v48" stroke="#C28B17" stroke-width="3"
+                        stroke-linecap="round" />
+                    <circle cx="50" cy="18" r="4" fill="#E2A727" />
+                    <circle cx="50" cy="18" r="1.5" fill="#FAF8F5" />
                     <g class="sympathetic-beam" id="sympatheticBeam">
-                        <path d="M20 23h60" stroke="#E2A727" stroke-width="3" stroke-linecap="round"/>
-                        <circle cx="50" cy="23" r="2.5" fill="#C28B17"/>
+                        <path d="M20 23h60" stroke="#E2A727" stroke-width="3" stroke-linecap="round" />
+                        <circle cx="50" cy="23" r="2.5" fill="#C28B17" />
                         <!-- Platillo Izquierdo -->
                         <g class="sympathetic-pan-left" id="sympatheticPanLeft">
-                            <line x1="24" y1="23" x2="16" y2="46" stroke="#9A7010" stroke-width="1.3"/>
-                            <line x1="24" y1="23" x2="32" y2="46" stroke="#9A7010" stroke-width="1.3"/>
-                            <path d="M12 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458" stroke-width="1.2"/>
+                            <line x1="24" y1="23" x2="16" y2="46" stroke="#9A7010" stroke-width="1.3" />
+                            <line x1="24" y1="23" x2="32" y2="46" stroke="#9A7010" stroke-width="1.3" />
+                            <path d="M12 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458"
+                                stroke-width="1.2" />
                         </g>
                         <!-- Platillo Derecho -->
                         <g class="sympathetic-pan-right" id="sympatheticPanRight">
-                            <line x1="76" y1="23" x2="68" y2="46" stroke="#9A7010" stroke-width="1.3"/>
-                            <line x1="76" y1="23" x2="84" y2="46" stroke="#9A7010" stroke-width="1.3"/>
-                            <path d="M64 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458" stroke-width="1.2"/>
+                            <line x1="76" y1="23" x2="68" y2="46" stroke="#9A7010" stroke-width="1.3" />
+                            <line x1="76" y1="23" x2="84" y2="46" stroke="#9A7010" stroke-width="1.3" />
+                            <path d="M64 46c2 6 10 8 12 8s10-2 12-8z" fill="#E2A727" stroke="#F4C458"
+                                stroke-width="1.2" />
                         </g>
                     </g>
                 </svg>
@@ -902,7 +836,9 @@
         <!-- Pie del Drawer con resumen y botón ¡Reservar! -->
         <div class="wishlist-drawer__footer">
             <p class="wishlist-drawer__hint">
-                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>¡Reservar!</strong> enviaremos tu selección a nuestro WhatsApp para apartar tus piezas y coordinar tu retiro en nuestra tienda de <strong>Punta Piedras</strong>.
+                ✦ Piezas únicas pesadas a mano. Al hacer clic en <strong>¡Reservar!</strong> enviaremos tu selección a
+                nuestro WhatsApp para apartar tus piezas y coordinar tu retiro en nuestra tienda de <strong>Punta
+                    Piedras</strong>.
             </p>
             <button type="button" class="btn-cta btn-reserve-whatsapp" id="btnReserveWhatsApp">
                 <span>¡Reservar!</span>
@@ -913,7 +849,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261024" defer></script>
+    <script src="app.min.js?v=20261104_casa" defer></script>
 
 
 </body>
