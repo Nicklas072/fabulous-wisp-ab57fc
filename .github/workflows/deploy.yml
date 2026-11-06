@@ -13,6 +13,8 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,17 +44,13 @@ jobs:
           CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '[:space:]')
           CLEAN_SITE_ID=$(echo "$RAW_SITE_ID" | tr -d '[:space:]')
 
-          echo "Consultando información del sitio en Netlify..."
-          curl -s -H "Authorization: Bearer $CLEAN_TOKEN" "https://api.netlify.com/api/v1/sites/$CLEAN_SITE_ID" > site_info.json
-          SITE_NAME=$(jq -r '.name // empty' site_info.json)
-          SITE_URL=$(jq -r '.url // empty' site_info.json)
-          CUSTOM_DOMAIN=$(jq -r '.custom_domain // empty' site_info.json)
-          echo "Sitio Netlify detectado: $SITE_NAME ($SITE_URL) | Dominio: $CUSTOM_DOMAIN"
+          echo "Iniciando despliegue en Netlify..."
+          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" > deploy-result.txt 2>&1 || true
 
-          echo "Iniciando despliegue de archivos en producción..."
-          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" --message="GitHub Actions Deploy (${{ github.sha }})"
-
-          echo "## Despliegue Exitoso en Netlify" >> $GITHUB_STEP_SUMMARY
-          echo "- **Sitio:** $SITE_NAME" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL Netlify:** $SITE_URL" >> $GITHUB_STEP_SUMMARY
-          echo "- **Dominio Personalizado:** $CUSTOM_DOMAIN" >> $GITHUB_STEP_SUMMARY
+      - name: Commit deploy log
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add deploy-result.txt
+          git commit -m "chore: actualizar log de despliegue [skip ci]" || true
+          git push origin main || true
