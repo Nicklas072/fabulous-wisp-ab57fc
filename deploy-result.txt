@@ -1,0 +1,20 @@
+=== TEST POST DEPLOYS ===
+HTTP/2 403 
+date: Fri, 06 Nov 2026 19:05:33 GMT
+content-type: application/json; charset=utf-8
+content-length: 91
+cache-control: no-cache
+retry-after: 2026-11-06 19:06:33 UTC
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+timing-allow-origin: https://app.netlify.com, https://www.netlify.com
+vary: Accept, Origin
+x-content-type-options: nosniff
+x-frame-options: ALLOWALL
+x-nf-srv-version: 8ccc87e
+x-ratelimit-limit: 500
+x-ratelimit-remaining: 499
+x-ratelimit-reset: 2026-11-06 19:06:33 UTC
+x-request-id: e4421708-fd2f-4332-b879-0fc17ffc6553
+x-runtime: 0.032009
+
+{"error":"Account credit usage exceeded - new deploys are blocked until credits are added"}
