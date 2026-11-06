@@ -46,12 +46,11 @@ jobs:
           echo "Site ID length: ${#CLEAN_SITE_ID}"
 
           npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" --message="GitHub Actions Deploy (${{ github.sha }})" 2>&1 | tee deploy-output.txt
-          echo "=== Salida del Despliegue ==="
-          cat deploy-output.txt
 
-      - name: Upload deploy log artifact
+      - name: Log summary
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: deploy-log
-          path: deploy-output.txt
+        run: |
+          echo "### Netlify Deploy Summary" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat deploy-output.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
