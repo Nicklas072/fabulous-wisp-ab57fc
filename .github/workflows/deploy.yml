@@ -31,12 +31,8 @@ jobs:
       - name: Build site (sitemap, CSS & JS minification)
         run: |
           npm run build
-          cp styles.min.css BasKula-herramienta/sitio/public/styles.min.css || true
-          cp styles.css BasKula-herramienta/sitio/public/styles.css || true
-          cp index.html BasKula-herramienta/sitio/public/index.html || true
-          cp sitemap.xml BasKula-herramienta/sitio/public/sitemap.xml || true
 
-      - name: Deploy to Netlify via Netlify CLI
+      - name: Diagnose Netlify API
         env:
           RAW_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           RAW_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -44,13 +40,16 @@ jobs:
           CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '[:space:]')
           CLEAN_SITE_ID=$(echo "$RAW_SITE_ID" | tr -d '[:space:]')
 
-          echo "Iniciando despliegue en Netlify..."
-          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" > deploy-result.txt 2>&1 || true
+          echo "=== USER INFO ===" > deploy-result.txt
+          curl -s -i -H "Authorization: Bearer $CLEAN_TOKEN" https://api.netlify.com/api/v1/user >> deploy-result.txt
+
+          echo -e "\n=== SITE INFO ===" >> deploy-result.txt
+          curl -s -i -H "Authorization: Bearer $CLEAN_TOKEN" "https://api.netlify.com/api/v1/sites/$CLEAN_SITE_ID" >> deploy-result.txt
 
       - name: Commit deploy log
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add deploy-result.txt
-          git commit -m "chore: actualizar log de despliegue [skip ci]" || true
+          git commit -m "chore: diagnostico de api netlify [skip ci]" || true
           git push origin main || true
