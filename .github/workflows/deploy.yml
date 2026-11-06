@@ -34,31 +34,24 @@ jobs:
           cp index.html BasKula-herramienta/sitio/public/index.html || true
           cp sitemap.xml BasKula-herramienta/sitio/public/sitemap.xml || true
 
-      - name: Verify Netlify secrets
+      - name: Deploy to Netlify via Netlify CLI
         env:
-          TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          RAW_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          RAW_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
-          if [ -z "$TOKEN" ]; then
-            echo "::error::NETLIFY_AUTH_TOKEN no está configurado en GitHub Secrets."
-            exit 1
-          fi
-          if [ -z "$SITE_ID" ]; then
-            echo "::error::NETLIFY_SITE_ID no está configurado en GitHub Secrets."
-            exit 1
-          fi
-          echo "Secretos de Netlify verificados correctamente."
+          # Limpiar posibles espacios en blanco
+          CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '[:space:]')
+          CLEAN_SITE_ID=$(echo "$RAW_SITE_ID" | tr -d '[:space:]')
 
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: '.'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy via GitHub Actions (${{ github.sha }})"
-          enable-pull-request-comment: false
-          enable-commit-comment: false
-          overwrites-pull-request-comment: false
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          if [ -z "$CLEAN_TOKEN" ]; then
+            echo "::error::El secreto NETLIFY_AUTH_TOKEN está vacío en GitHub Secrets."
+            exit 1
+          fi
+
+          if [ -z "$CLEAN_SITE_ID" ]; then
+            echo "::error::El secreto NETLIFY_SITE_ID está vacío en GitHub Secrets."
+            exit 1
+          fi
+
+          echo "Iniciando despliegue directo a Netlify..."
+          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" --message="GitHub Actions Deploy (${{ github.sha }})"
