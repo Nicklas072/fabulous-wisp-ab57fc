@@ -1892,8 +1892,28 @@ const initCasaCarousel = () => {
     const carousel = document.getElementById('casaCarousel');
     const prevBtn = document.getElementById('casa-prev-btn');
     const nextBtn = document.getElementById('casa-next-btn');
+    const dotsContainer = document.getElementById('casa-dots');
 
     if (!carousel || !prevBtn || !nextBtn) return;
+
+    const cards = carousel.querySelectorAll('.casa-carousel-card');
+
+    if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        cards.forEach((card, idx) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+            dot.setAttribute('aria-label', `Ver tarjeta ${idx + 1}`);
+            dot.addEventListener('click', () => {
+                carousel.scrollTo({
+                    left: card.offsetLeft - carousel.offsetLeft,
+                    behavior: 'smooth'
+                });
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
 
     const getScrollStep = () => {
         const card = carousel.querySelector('.casa-carousel-card');
@@ -1928,6 +1948,19 @@ const initCasaCarousel = () => {
             nextBtn.classList.remove('is-hidden');
             nextBtn.removeAttribute('aria-hidden');
             nextBtn.tabIndex = 0;
+        }
+
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.bw-dot');
+            const scrollMiddle = carousel.scrollLeft + (carousel.clientWidth / 2);
+            cards.forEach((card, i) => {
+                const cLeft = card.offsetLeft - carousel.offsetLeft;
+                const cRight = cLeft + card.offsetWidth;
+                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[i]) dots[i].classList.add('active');
+                }
+            });
         }
     };
 
