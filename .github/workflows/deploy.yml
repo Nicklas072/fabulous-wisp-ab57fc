@@ -34,9 +34,31 @@ jobs:
           cp index.html BasKula-herramienta/sitio/public/index.html || true
           cp sitemap.xml BasKula-herramienta/sitio/public/sitemap.xml || true
 
+      - name: Verify Netlify secrets
+        env:
+          TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::NETLIFY_AUTH_TOKEN no está configurado en GitHub Secrets."
+            exit 1
+          fi
+          if [ -z "$SITE_ID" ]; then
+            echo "::error::NETLIFY_SITE_ID no está configurado en GitHub Secrets."
+            exit 1
+          fi
+          echo "Secretos de Netlify verificados correctamente."
+
       - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: '.'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy via GitHub Actions (${{ github.sha }})"
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          overwrites-pull-request-comment: false
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          npx netlify-cli deploy --prod --dir=. --site="${{ secrets.NETLIFY_SITE_ID }}" --auth="${{ secrets.NETLIFY_AUTH_TOKEN }}" --message="Deploy via GitHub Actions (${{ github.sha }})"
