@@ -39,19 +39,17 @@ jobs:
           RAW_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           RAW_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
-          # Limpiar posibles espacios en blanco
           CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '[:space:]')
           CLEAN_SITE_ID=$(echo "$RAW_SITE_ID" | tr -d '[:space:]')
 
-          if [ -z "$CLEAN_TOKEN" ]; then
-            echo "::error::El secreto NETLIFY_AUTH_TOKEN está vacío en GitHub Secrets."
-            exit 1
-          fi
+          echo "Token length: ${#CLEAN_TOKEN}"
+          echo "Site ID length: ${#CLEAN_SITE_ID}"
 
-          if [ -z "$CLEAN_SITE_ID" ]; then
-            echo "::error::El secreto NETLIFY_SITE_ID está vacío en GitHub Secrets."
-            exit 1
-          fi
+          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" 2>&1 | tee deploy-output.txt
 
-          echo "Iniciando despliegue directo a Netlify..."
-          npx --yes netlify-cli deploy --prod --dir=. --site="$CLEAN_SITE_ID" --auth="$CLEAN_TOKEN" --message="GitHub Actions Deploy (${{ github.sha }})"
+      - name: Upload deploy log artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-log
+          path: deploy-output.txt
