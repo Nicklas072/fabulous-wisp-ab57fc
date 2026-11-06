@@ -25,14 +25,7 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build site (sitemap, CSS & JS minification)
-        run: |
-          npm run build
-
-      - name: Diagnose Netlify API
+      - name: Test Netlify Deploy API
         env:
           RAW_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           RAW_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -40,16 +33,13 @@ jobs:
           CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '[:space:]')
           CLEAN_SITE_ID=$(echo "$RAW_SITE_ID" | tr -d '[:space:]')
 
-          echo "=== USER INFO ===" > deploy-result.txt
-          curl -s -i -H "Authorization: Bearer $CLEAN_TOKEN" https://api.netlify.com/api/v1/user >> deploy-result.txt
-
-          echo -e "\n=== SITE INFO ===" >> deploy-result.txt
-          curl -s -i -H "Authorization: Bearer $CLEAN_TOKEN" "https://api.netlify.com/api/v1/sites/$CLEAN_SITE_ID" >> deploy-result.txt
+          echo "=== TEST POST DEPLOYS ===" > deploy-result.txt
+          curl -s -i -X POST -H "Authorization: Bearer $CLEAN_TOKEN" -H "Content-Type: application/json" -d '{"files": {}}' "https://api.netlify.com/api/v1/sites/$CLEAN_SITE_ID/deploys" >> deploy-result.txt
 
       - name: Commit deploy log
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add deploy-result.txt
-          git commit -m "chore: diagnostico de api netlify [skip ci]" || true
+          git commit -m "chore: test post deploys [skip ci]" || true
           git push origin main || true
