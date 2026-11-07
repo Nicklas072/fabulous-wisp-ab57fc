@@ -1286,6 +1286,71 @@ const closeAparadorModal = () => {
 };
 
 // ==========================================================================
+// VISOR DE GALERÍA LIMPIO (ESTILO HERRAMIENTA BASKULA)
+// ==========================================================================
+const openFestiveViewerModal = (item) => {
+    const modal = document.getElementById('festive-viewer-modal');
+    if (!modal) return;
+
+    const imgEl = document.getElementById('festive-viewer-img');
+    const thumbsContainer = document.getElementById('festive-viewer-thumbs');
+
+    const imgList = (item.images && item.images.length > 0) ? item.images : (item.img ? [item.img] : []);
+
+    if (imgEl && imgList.length > 0) {
+        imgEl.src = imgList[0];
+        imgEl.alt = item.name;
+    }
+
+    if (thumbsContainer) {
+        thumbsContainer.innerHTML = '';
+        if (imgList.length > 1) {
+            imgList.forEach((src, idx) => {
+                const thumbBtn = document.createElement('button');
+                thumbBtn.type = 'button';
+                thumbBtn.className = `festive-viewer-thumb-btn${idx === 0 ? ' active' : ''}`;
+                thumbBtn.setAttribute('aria-label', `Ver imagen ${idx + 1} de ${item.name}`);
+                thumbBtn.innerHTML = `<img src="${src}" alt="" loading="lazy">`;
+
+                thumbBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (imgEl) {
+                        imgEl.style.opacity = '0';
+                        setTimeout(() => {
+                            imgEl.src = src;
+                            imgEl.style.opacity = '1';
+                        }, 120);
+                    }
+                    thumbsContainer.querySelectorAll('.festive-viewer-thumb-btn').forEach(btn => btn.classList.remove('active'));
+                    thumbBtn.classList.add('active');
+                });
+
+                thumbsContainer.appendChild(thumbBtn);
+            });
+            thumbsContainer.style.display = 'flex';
+        } else {
+            thumbsContainer.style.display = 'none';
+        }
+    }
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+};
+
+const closeFestiveViewerModal = () => {
+    const modal = document.getElementById('festive-viewer-modal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+};
+
+// ==========================================================================
 // CARRUSEL DE PRODUCTOS POR KILO (DEBAJO DE "UNA EXPERIENCIA DIFERENTE")
 // ==========================================================================
 const PRODUCTS_CAROUSEL_ITEMS = [
@@ -1387,38 +1452,122 @@ const PRODUCTS_CAROUSEL_ITEMS = [
 const FESTIVE_CAROUSEL_ITEMS = [
     {
         id: 'plato-arbolito-rojo',
-        name: 'Platos arbolitos rojo con diseño',
-        shortName: 'Plato Arbolito Rojo',
+        name: 'Plato Árbol de Navidad verde con Relieve',
+        shortName: 'Plato Árbol de Navidad verde con Relieve',
         category: 'platos',
         weight: 0.580,
         weightFormatted: '0.580 kg',
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/plato-arbolito-rojo.webp',
+        img: 'images/festive/plato-arbol-verde-nuevo.jpg',
+        images: [
+            'images/festive/plato-arbol-verde-nuevo.jpg',
+            'images/festive/plato-arbolito-verde.webp'
+        ],
         dimensions: '22 × 18 cm aprox.',
-        finish: 'Esmalte Reactivo Rojo Carmín con Relieve',
-        story: 'Plato artesanal en forma de arbolito navideño con esmalte carmín y motivos festivos en relieve. Viste la mesa de Nochebuena con calidez y espíritu de celebración.'
+        finish: 'Esmalte Reactivo Verde Pino con Relieve',
+        story: 'Plato artesanal en forma de arbolito navideño con esmalte reactivo y motivos festivos en relieve. Viste la mesa de Nochebuena con calidez y espíritu de celebración.'
     },
     {
         id: 'plato-arbolito-verde',
-        name: 'Platos arbolitos verde con diseño',
-        shortName: 'Plato Arbolito Verde',
+        name: 'Plato Árbol de Navidad rojo con Relieve',
+        shortName: 'Plato Árbol de Navidad rojo con Relieve',
         category: 'platos',
         weight: 0.580,
         weightFormatted: '0.580 kg',
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/plato-arbolito-verde.webp',
+        img: 'images/festive/plato-arbol-rojo-1.webp',
+        images: [
+            'images/festive/plato-arbol-rojo-1.webp',
+            'images/festive/plato-arbol-rojo-2.jpg'
+        ],
         dimensions: '22 × 18 cm aprox.',
-        finish: 'Esmalte Reactivo Verde Pino con Relieve',
-        story: 'Plato festivo con silueta de pino en esmalte verde bosque y texturas navideñas en relieve. Auténtico gres portugués para compartir en familia.'
+        finish: 'Esmalte Reactivo Rojo Carmín con Relieve',
+        story: 'Plato festivo con silueta de pino en esmalte rojo carmín y texturas navideñas en relieve. Auténtico gres portugués para compartir en familia.'
+    },
+    {
+        id: 'set-vajilla-blanco-perlado',
+        name: 'Set de Vajilla Blanco con Borde Perlado',
+        shortName: 'Set Vajilla Blanco Perlado',
+        category: 'platos',
+        weight: 1.450,
+        weightFormatted: '1.450 kg (aprox.)',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/set-vajilla-blanco-perlado-1.jpg',
+        images: [
+            'images/festive/set-vajilla-blanco-perlado-1.jpg',
+            'images/festive/set-vajilla-blanco-perlado-2.jpg'
+        ],
+        dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
+        finish: 'Esmalte Blanco Brillante con Borde Perlado',
+        story: 'Elegante set de vajilla artesanal portuguesa con delicado relieve de perlas en el borde. Pureza, distinción y luminosidad para vestir mesas festivas y cotidianas.'
+    },
+    {
+        id: 'fuente-rectangular-perlas',
+        name: 'Fuente Rectangular Blanca con Borde Perlado',
+        shortName: 'Fuente Rectangular Perlada',
+        category: 'fuentes',
+        weight: 1.280,
+        weightFormatted: '1.280 kg (aprox.)',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/fuente-rectangular-perlas-1.jpg',
+        images: [
+            'images/festive/fuente-rectangular-perlas-1.jpg',
+            'images/festive/fuente-rectangular-perlas-2.jpg'
+        ],
+        dimensions: '32 × 22 cm · Alto 6 cm aprox.',
+        finish: 'Esmalte Blanco Brillante con Borde Perlado y Asas',
+        story: 'Fuente rectangular de cerámica portuguesa con detalle de perlas en relieve y cómodas asas laterales. Ideal para horno, pastas, asados o para servir al centro de la mesa con elegancia.'
+    },
+    {
+        id: 'set-vajilla-rojo-puntille',
+        name: 'Set de Vajilla Rojo Puntillé',
+        shortName: 'Set Vajilla Rojo Puntillé',
+        category: 'platos',
+        weight: 1.450,
+        weightFormatted: '1.450 kg (aprox.)',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/set-vajilla-rojo-puntille-1.jpg',
+        images: [
+            'images/festive/set-vajilla-rojo-puntille-1.jpg',
+            'images/festive/set-vajilla-rojo-puntille-2.jpg'
+        ],
+        dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
+        finish: 'Esmalte Carmín con Relieve Ondulado y Acabado Puntillé',
+        story: 'Set artesanal portugués en tono carmín festivo con textura acanalada y efecto puntillé. Calidez, carácter y sofisticación para celebrar en la mesa.'
+    },
+    {
+        id: 'set-vajilla-verde-puntille',
+        name: 'Set de Vajilla Verde Puntillé',
+        shortName: 'Set Vajilla Verde Puntillé',
+        category: 'platos',
+        weight: 1.450,
+        weightFormatted: '1.450 kg (aprox.)',
+        rate: 16.50,
+        priceFormatted: '$16.50 / kg',
+        pricingType: 'weight',
+        img: 'images/festive/set-vajilla-verde-puntille-1.jpg',
+        images: [
+            'images/festive/set-vajilla-verde-puntille-1.jpg',
+            'images/festive/set-vajilla-verde-puntille-2.jpg'
+        ],
+        dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
+        finish: 'Esmalte Verde Pino con Relieve Ondulado y Acabado Puntillé',
+        story: 'Set artesanal portugués en profundo verde pino con textura acanalada y efecto puntillé. Elegancia natural y espíritu festivo en cada pieza.'
     },
     {
         id: 'taza-plato-rojo-puntille',
-        name: 'Juego de tazas y platos rojos con puntille',
-        shortName: 'Taza y Plato Rojo Puntillé',
+        name: 'Juego de Café Rojo Vintage',
+        shortName: 'Juego de Café Rojo Vintage',
         category: 'tazas',
         weight: 0.420,
         weightFormatted: '0.420 kg',
@@ -1427,13 +1576,13 @@ const FESTIVE_CAROUSEL_ITEMS = [
         pricingType: 'weight',
         img: 'images/festive/taza-plato-rojo-puntille.webp',
         dimensions: 'Taza 80 ml · Plato Ø 12 cm',
-        finish: 'Esmalte Carmín Moteado con Puntillé',
-        story: 'Juego de café con taza facetada y platillo acanalado en esmalte rojo festivo con efecto puntillé. Calidez y encanto europeo para las sobremesas.'
+        finish: 'Esmalte Carmín Vintage con Relieve',
+        story: 'Juego de café con taza facetada y platillo acanalado en esmalte rojo festivo estilo vintage. Calidez y encanto europeo para las sobremesas.'
     },
     {
         id: 'taza-plato-verde-puntille',
-        name: 'Juego de tazas y platos verdes con puntille',
-        shortName: 'Taza y Plato Verde Puntillé',
+        name: 'Juego de Café verde Vintage',
+        shortName: 'Juego de Café verde Vintage',
         category: 'tazas',
         weight: 0.420,
         weightFormatted: '0.420 kg',
@@ -1442,13 +1591,13 @@ const FESTIVE_CAROUSEL_ITEMS = [
         pricingType: 'weight',
         img: 'images/festive/taza-plato-verde-puntille.webp',
         dimensions: 'Taza 80 ml · Plato Ø 12 cm',
-        finish: 'Esmalte Verde Moteado con Puntillé',
-        story: 'Juego de taza y plato de café en gres portugués verde muérdago con textura esmaltada puntillé. Sofisticación artesanal para regalar o compartir.'
+        finish: 'Esmalte Verde Vintage con Relieve',
+        story: 'Juego de taza y plato de café en gres portugués verde muérdago estilo vintage. Sofisticación artesanal para regalar o compartir.'
     },
     {
         id: 'portavela-rojo-puntille',
-        name: 'Porta velas rojo puntille',
-        shortName: 'Portavela Rojo',
+        name: 'Portavelas Rojo Nevado',
+        shortName: 'Portavelas Rojo Nevado',
         category: 'especial',
         weight: 0.280,
         weightFormatted: '0.280 kg',
@@ -1457,13 +1606,13 @@ const FESTIVE_CAROUSEL_ITEMS = [
         pricingType: 'fixed',
         img: 'images/festive/portavela-rojo-puntille.webp',
         dimensions: 'Ø 10 cm aprox.',
-        finish: 'Esmalte Carmín con Puntillé Festivo',
-        story: 'Portavela artesanal en esmalte reactivo rojo carmín. Diseñado para iluminar y dar calidez a las mesas de Nochebuena o como detalle para el amigo invisible.'
+        finish: 'Esmalte Carmín Nevado Festivo',
+        story: 'Portavela artesanal en esmalte reactivo rojo nevado. Diseñado para iluminar y dar calidez a las mesas de Nochebuena o como detalle para el amigo invisible.'
     },
     {
         id: 'portavela-verde-puntille',
-        name: 'Porta velas verde puntille',
-        shortName: 'Portavela Verde',
+        name: 'Portavelas Verde Nevado',
+        shortName: 'Portavelas Verde Nevado',
         category: 'especial',
         weight: 0.280,
         weightFormatted: '0.280 kg',
@@ -1472,8 +1621,8 @@ const FESTIVE_CAROUSEL_ITEMS = [
         pricingType: 'fixed',
         img: 'images/festive/portavela-verde-puntille.webp',
         dimensions: 'Ø 10 cm aprox.',
-        finish: 'Esmalte Verde con Puntillé Festivo',
-        story: 'Portavela en tono verde pino con diseño puntillé. Una pieza delicada y versátil para crear ambiente o regalar en estas fiestas.'
+        finish: 'Esmalte Verde Nevado Festivo',
+        story: 'Portavela en tono verde pino con acabado nevado. Una pieza delicada y versátil para crear ambiente o regalar en estas fiestas.'
     }
 ];
 
@@ -1508,11 +1657,11 @@ const initFestiveCarousel = () => {
                         </svg>
                     </button>
                     <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
-                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram"><i data-lucide="instagram"></i> Saber más</a>
+                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
                 </div>
             </div>
             <div class="bw-product-card__info">
-                <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="bw-product-title" title="Ver en Instagram @baskula.uy">${item.name}</a>
+                <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
                 <div class="bw-product-meta-row" style="justify-content: center;">
                     <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : ${item.weightFormatted}</span>
                 </div>
@@ -1525,17 +1674,17 @@ const initFestiveCarousel = () => {
                 return;
             }
             if (e.target.closest('.card-heart-btn')) return;
-            if (e.target.closest('.gallery-view-hint') || e.target.closest('a.bw-product-title')) {
+            if (e.target.closest('.gallery-view-hint')) {
                 return;
             }
-            window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
+            openFestiveViewerModal(item);
         });
 
         card.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint') || e.target.closest('a.bw-product-title')) return;
+                if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint')) return;
                 e.preventDefault();
-                window.open('https://www.instagram.com/baskula.uy/', '_blank', 'noopener,noreferrer');
+                openFestiveViewerModal(item);
             }
         });
 
@@ -2047,9 +2196,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const festiveModal = document.getElementById('festive-viewer-modal');
+    const festiveCloseBtn = document.getElementById('festive-viewer-close');
+
+    if (festiveCloseBtn) {
+        festiveCloseBtn.addEventListener('click', closeFestiveViewerModal);
+    }
+
+    if (festiveModal) {
+        festiveModal.addEventListener('click', (e) => {
+            if (e.target === festiveModal) closeFestiveViewerModal();
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeAparadorModal();
+            closeFestiveViewerModal();
         }
     });
 });
