@@ -2161,6 +2161,96 @@ const initHolidayParallax = () => {
     onScroll();
 };
 
+// --- Modal informativo B2B en preparación ---
+const openB2BModal = () => {
+    let modal = document.getElementById('b2b-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'b2b-modal';
+        modal.className = 'modal-overlay b2b-modal-overlay';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-labelledby', 'b2b-modal-title');
+        modal.innerHTML = `
+            <div class="modal-card b2b-modal-card">
+                <button type="button" class="modal-close-btn" id="b2b-modal-close" aria-label="Cerrar ventana">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="modal-icon-wrapper b2b-modal-icon">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                    </svg>
+                </div>
+                <span class="section-tag" style="margin-bottom: 8px;">División Profesional</span>
+                <h3 id="b2b-modal-title" style="font-family: var(--font-heading); font-size: 1.45rem; color: #181818; margin: 6px 0 12px 0;">
+                    Sección en preparación
+                </h3>
+                <p style="font-size: 0.94rem; color: #55504A; line-height: 1.6; margin: 0 0 22px 0;">
+                    Estamos preparando nuestro catálogo y condiciones exclusivas para restaurantes, hoteles y proyectos de diseño. Mientras tanto, podés consultarnos directamente por WhatsApp para presupuestos y atención personalizada.
+                </p>
+                <div class="b2b-modal-actions" style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="https://wa.me/59893658477?text=%C2%A1Hola%20BasKula!%20%F0%9F%8C%BF%20Quisiera%20hacer%20una%20consulta%20comercial%20B2B%20(hoteles%2C%20gastronom%C3%ADa%20o%20dise%C3%B1o)."
+                       target="_blank" rel="noopener noreferrer" class="btn-cta" style="justify-content: center; width: 100%; text-decoration: none;">
+                        <span>Consultar por WhatsApp</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                    </a>
+                    <button type="button" class="btn-secondary" id="b2b-modal-ok" style="justify-content: center; width: 100%;">
+                        <span>Entendido</span>
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('#b2b-modal-close') || e.target.closest('#b2b-modal-ok')) {
+                closeB2BModal();
+            }
+        });
+    }
+
+    // Cerrar drawer lateral si estuviese abierto en celulares
+    const drawer = document.getElementById('sidebarDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    if (drawer && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        if (drawerOverlay) drawerOverlay.classList.remove('open');
+        document.body.classList.remove('drawer-open');
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+};
+
+const closeB2BModal = () => {
+    const modal = document.getElementById('b2b-modal');
+    if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+};
+
+const initB2BInterception = () => {
+    document.addEventListener('click', (e) => {
+        const b2bLink = e.target.closest('a[href*="b2b.html"], .nav-item--b2b');
+        if (b2bLink) {
+            e.preventDefault();
+            openB2BModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeB2BModal();
+        }
+    });
+};
+
 // Eventos de cierre del modal
 document.addEventListener('DOMContentLoaded', () => {
     initAparador();
@@ -2170,6 +2260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHolidayParallax();
     initTrendsModal();
     initWishlistAndBalanzaSystem();
+    initB2BInterception();
 
     const modal = document.getElementById('aparador-modal');
     const closeBtn = document.getElementById('aparador-modal-close');
