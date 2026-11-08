@@ -1662,9 +1662,6 @@ const initFestiveCarousel = () => {
             </div>
             <div class="bw-product-card__info">
                 <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
-                <div class="bw-product-meta-row" style="justify-content: center;">
-                    <span class="bw-weight-tag"><i data-lucide="scale"></i> Peso : ${item.weightFormatted}</span>
-                </div>
             </div>
         `;
 

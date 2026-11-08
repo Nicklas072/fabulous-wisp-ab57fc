@@ -2056,6 +2056,19 @@ body.drawer-open {
     border-radius: 0 !important;
 }
 
+.holiday-products-wrapper .bw-product-card__info {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    min-height: 56px;
+    padding: 10px 12px !important;
+}
+
+.holiday-products-wrapper .bw-product-title {
+    text-align: center !important;
+    width: 100%;
+}
+
 .holiday-products-wrapper .gallery-view-hint {
     opacity: 0.95 !important;
     transform: translate(-50%, 0) !important;
