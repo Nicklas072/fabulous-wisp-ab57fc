@@ -411,9 +411,9 @@ const BASKULA_PRODUCTS = [
         shortName: 'Plato Árbol de Navidad verde con Relieve',
         category: 'platos',
         weight: 0.580,
-        img: 'images/festive/plato-arbol-verde-nuevo.jpg',
+        img: 'images/festive/plato-arbol-verde-nuevo.webp',
         images: [
-            'images/festive/plato-arbol-verde-nuevo.jpg',
+            'images/festive/plato-arbol-verde-nuevo.webp',
             'images/festive/plato-arbolito-verde.webp'
         ],
         dimensions: '22 × 18 cm aprox.',
@@ -431,7 +431,7 @@ const BASKULA_PRODUCTS = [
         img: 'images/festive/plato-arbol-rojo-1.webp',
         images: [
             'images/festive/plato-arbol-rojo-1.webp',
-            'images/festive/plato-arbol-rojo-2.jpg'
+            'images/festive/plato-arbol-rojo-2.webp'
         ],
         dimensions: '22 × 18 cm aprox.',
         finish: 'Esmalte Reactivo Rojo Carmín con Relieve',
@@ -445,10 +445,10 @@ const BASKULA_PRODUCTS = [
         shortName: 'Set Vajilla Blanco Perlado',
         category: 'platos',
         weight: 1.450,
-        img: 'images/festive/set-vajilla-blanco-perlado-1.jpg',
+        img: 'images/festive/set-vajilla-blanco-perlado-1.webp',
         images: [
-            'images/festive/set-vajilla-blanco-perlado-1.jpg',
-            'images/festive/set-vajilla-blanco-perlado-2.jpg'
+            'images/festive/set-vajilla-blanco-perlado-1.webp',
+            'images/festive/set-vajilla-blanco-perlado-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Blanco Brillante con Borde Perlado',
@@ -462,10 +462,10 @@ const BASKULA_PRODUCTS = [
         shortName: 'Fuente Rectangular Perlada',
         category: 'fuentes',
         weight: 1.280,
-        img: 'images/festive/fuente-rectangular-perlas-1.jpg',
+        img: 'images/festive/fuente-rectangular-perlas-1.webp',
         images: [
-            'images/festive/fuente-rectangular-perlas-1.jpg',
-            'images/festive/fuente-rectangular-perlas-2.jpg'
+            'images/festive/fuente-rectangular-perlas-1.webp',
+            'images/festive/fuente-rectangular-perlas-2.webp'
         ],
         dimensions: '32 × 22 cm · Alto 6 cm aprox.',
         finish: 'Esmalte Blanco Brillante con Borde Perlado y Asas',
@@ -479,10 +479,10 @@ const BASKULA_PRODUCTS = [
         shortName: 'Set Vajilla Rojo Puntillé',
         category: 'platos',
         weight: 1.450,
-        img: 'images/festive/set-vajilla-rojo-puntille-1.jpg',
+        img: 'images/festive/set-vajilla-rojo-puntille-1.webp',
         images: [
-            'images/festive/set-vajilla-rojo-puntille-1.jpg',
-            'images/festive/set-vajilla-rojo-puntille-2.jpg'
+            'images/festive/set-vajilla-rojo-puntille-1.webp',
+            'images/festive/set-vajilla-rojo-puntille-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Carmín con Relieve Ondulado y Acabado Puntillé',
@@ -496,10 +496,10 @@ const BASKULA_PRODUCTS = [
         shortName: 'Set Vajilla Verde Puntillé',
         category: 'platos',
         weight: 1.450,
-        img: 'images/festive/set-vajilla-verde-puntille-1.jpg',
+        img: 'images/festive/set-vajilla-verde-puntille-1.webp',
         images: [
-            'images/festive/set-vajilla-verde-puntille-1.jpg',
-            'images/festive/set-vajilla-verde-puntille-2.jpg'
+            'images/festive/set-vajilla-verde-puntille-1.webp',
+            'images/festive/set-vajilla-verde-puntille-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Verde Pino con Relieve Ondulado y Acabado Puntillé',

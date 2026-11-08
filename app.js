@@ -1460,9 +1460,9 @@ const FESTIVE_CAROUSEL_ITEMS = [
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/plato-arbol-verde-nuevo.jpg',
+        img: 'images/festive/plato-arbol-verde-nuevo.webp',
         images: [
-            'images/festive/plato-arbol-verde-nuevo.jpg',
+            'images/festive/plato-arbol-verde-nuevo.webp',
             'images/festive/plato-arbolito-verde.webp'
         ],
         dimensions: '22 × 18 cm aprox.',
@@ -1482,7 +1482,7 @@ const FESTIVE_CAROUSEL_ITEMS = [
         img: 'images/festive/plato-arbol-rojo-1.webp',
         images: [
             'images/festive/plato-arbol-rojo-1.webp',
-            'images/festive/plato-arbol-rojo-2.jpg'
+            'images/festive/plato-arbol-rojo-2.webp'
         ],
         dimensions: '22 × 18 cm aprox.',
         finish: 'Esmalte Reactivo Rojo Carmín con Relieve',
@@ -1498,10 +1498,10 @@ const FESTIVE_CAROUSEL_ITEMS = [
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/set-vajilla-blanco-perlado-1.jpg',
+        img: 'images/festive/set-vajilla-blanco-perlado-1.webp',
         images: [
-            'images/festive/set-vajilla-blanco-perlado-1.jpg',
-            'images/festive/set-vajilla-blanco-perlado-2.jpg'
+            'images/festive/set-vajilla-blanco-perlado-1.webp',
+            'images/festive/set-vajilla-blanco-perlado-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Blanco Brillante con Borde Perlado',
@@ -1517,10 +1517,10 @@ const FESTIVE_CAROUSEL_ITEMS = [
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/fuente-rectangular-perlas-1.jpg',
+        img: 'images/festive/fuente-rectangular-perlas-1.webp',
         images: [
-            'images/festive/fuente-rectangular-perlas-1.jpg',
-            'images/festive/fuente-rectangular-perlas-2.jpg'
+            'images/festive/fuente-rectangular-perlas-1.webp',
+            'images/festive/fuente-rectangular-perlas-2.webp'
         ],
         dimensions: '32 × 22 cm · Alto 6 cm aprox.',
         finish: 'Esmalte Blanco Brillante con Borde Perlado y Asas',
@@ -1536,10 +1536,10 @@ const FESTIVE_CAROUSEL_ITEMS = [
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/set-vajilla-rojo-puntille-1.jpg',
+        img: 'images/festive/set-vajilla-rojo-puntille-1.webp',
         images: [
-            'images/festive/set-vajilla-rojo-puntille-1.jpg',
-            'images/festive/set-vajilla-rojo-puntille-2.jpg'
+            'images/festive/set-vajilla-rojo-puntille-1.webp',
+            'images/festive/set-vajilla-rojo-puntille-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Carmín con Relieve Ondulado y Acabado Puntillé',
@@ -1555,10 +1555,10 @@ const FESTIVE_CAROUSEL_ITEMS = [
         rate: 16.50,
         priceFormatted: '$16.50 / kg',
         pricingType: 'weight',
-        img: 'images/festive/set-vajilla-verde-puntille-1.jpg',
+        img: 'images/festive/set-vajilla-verde-puntille-1.webp',
         images: [
-            'images/festive/set-vajilla-verde-puntille-1.jpg',
-            'images/festive/set-vajilla-verde-puntille-2.jpg'
+            'images/festive/set-vajilla-verde-puntille-1.webp',
+            'images/festive/set-vajilla-verde-puntille-2.webp'
         ],
         dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
         finish: 'Esmalte Verde Pino con Relieve Ondulado y Acabado Puntillé',

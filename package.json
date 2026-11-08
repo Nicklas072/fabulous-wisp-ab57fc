@@ -10,5 +10,8 @@
   "dependencies": {
     "cssnano-cli": "^1.0.5",
     "uglify-js": "^3.19.3"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
   }
 }

@@ -35,6 +35,32 @@
     
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-quick: all 0.2s ease;
+
+    /* --- Fase 1: Tokens de Estandarización Visual y Atmosférica (Home) --- */
+    --img-placeholder-bg: #E5D5C5;
+    --img-placeholder-gradient: linear-gradient(135deg, #EFE6DC 0%, #E5D5C5 100%);
+    --img-stage-surface: #FAF9F6;
+
+    --aspect-square: 1 / 1;
+    --aspect-editorial: 4 / 5;
+    --aspect-landscape: 4 / 3;
+    --aspect-banner: 16 / 9;
+
+    /* Luz limpia y micro-contraste neutro (sepia 0) que preserva blancos puros y colores reales del esmalte */
+    --img-filter-editorial: brightness(1.03) contrast(1.05) saturate(1.03) sepia(0);
+    --img-filter-editorial-hover: brightness(1.04) contrast(1.06) saturate(1.05) sepia(0);
+
+    /* Toque apenas cálido (sepia 0.02) exclusivamente para Hero y "Nuestra Casa" */
+    --img-filter-ambient: brightness(1.02) contrast(1.05) saturate(1.04) sepia(0.02);
+    --img-filter-ambient-hover: brightness(1.04) contrast(1.06) saturate(1.06) sepia(0.01);
+
+    /* Sombra cálida en tono tierra para recortes con transparencia (sin sepia para no teñir la cerámica) */
+    --img-filter-cutout: brightness(1.03) contrast(1.05) saturate(1.03) sepia(0) drop-shadow(0 12px 24px rgba(58, 42, 24, 0.16));
+    --img-filter-cutout-hover: brightness(1.04) contrast(1.06) saturate(1.05) sepia(0) drop-shadow(0 16px 30px rgba(58, 42, 24, 0.20));
+
+    --img-ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    --img-transition: transform 0.55s var(--img-ease-editorial), filter 0.4s ease, opacity 0.35s ease;
+    --img-hover-scale: 1.045;
 }
 
 /* --- Resets --- */
@@ -3344,8 +3370,8 @@ body.drawer-open {
 }
 
 .ficha-stage {
-    background: radial-gradient(circle at 50% 35%, #FFFFFF 0%, #EFE8DA 72%, #E2D7C3 100%);
-    border: 1px solid rgba(226, 167, 39, 0.38);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
     border-radius: 18px;
     padding: 20px 18px 18px 18px;
     display: flex;
@@ -3353,6 +3379,7 @@ body.drawer-open {
     align-items: center;
     position: relative;
     width: 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 6px 20px rgba(58, 42, 24, 0.05);
 }
 
 .ficha-category-pill {
@@ -3374,9 +3401,9 @@ body.drawer-open {
     margin: 0 auto;
     border-radius: 14px;
     overflow: hidden;
-    background: #F7F3EB;
-    border: 1px solid rgba(226, 167, 39, 0.28);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 6px 20px rgba(58, 42, 24, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3389,7 +3416,7 @@ body.drawer-open {
 
 .ficha-image-container:hover {
     border-color: var(--color-mustard);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(226, 167, 39, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 8px 24px rgba(226, 167, 39, 0.22);
 }
 
 .ficha-zoom-badge {
@@ -3424,7 +3451,7 @@ body.drawer-open {
     max-height: 100%;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+    filter: var(--img-filter-editorial) drop-shadow(0 6px 14px rgba(58, 42, 24, 0.12));
     transition: opacity 0.24s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -3445,9 +3472,9 @@ body.drawer-open {
     width: 52px;
     height: 52px;
     border-radius: 10px;
-    border: 2px solid transparent;
+    border: 1.5px solid rgba(226, 167, 39, 0.18);
     overflow: hidden;
-    background: #EFE8DA;
+    background: #FAF9F6;
     padding: 0;
     cursor: pointer;
     transition: border-color 0.2s ease, transform 0.2s ease;
@@ -3458,6 +3485,13 @@ body.drawer-open {
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.ficha-thumb-btn:hover img,
+.ficha-thumb-btn.active img {
+    filter: var(--img-filter-editorial-hover);
 }
 
 .ficha-thumb-btn.active {
@@ -6750,27 +6784,30 @@ body.drawer-open {
     display: flex;
     align-items: center;
     gap: 14px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    border-radius: 0; /* Puntas rectas */
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    border-radius: 8px;
     padding: 10px 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(58, 42, 24, 0.04);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wishlist-item-card:hover {
     border-color: rgba(226, 167, 39, 0.5);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(58, 42, 24, 0.08);
 }
 
 .wishlist-item-thumb {
     width: 64px;
     height: 64px;
     object-fit: cover;
-    border-radius: 0; /* Puntas rectas */
+    border-radius: 6px;
     flex-shrink: 0;
-    background: #FAF8F5;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
 }
 
 .wishlist-item-details {
@@ -7656,3 +7693,175 @@ body.drawer-open {
         height: 54px;
     }
 }
+
+/* ==========================================================================
+   FASE 1: ESTANDARIZACIÓN VISUAL Y ATMOSFÉRICA DE IMÁGENES (ALCANCE: HOME)
+   Armonización con paleta BasKula: Crema (#FAF8F5), Avena (#E5D5C5), Mostaza (#E2A727)
+   ========================================================================== */
+
+/* 1. Clases Utilitarias Reutilizables */
+.baskula-img-frame {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--img-placeholder-bg);
+    background-image: var(--img-placeholder-gradient);
+    border-radius: var(--border-radius-md, 10px);
+    isolation: isolate;
+}
+
+.baskula-img-frame--square    { aspect-ratio: var(--aspect-square); }
+.baskula-img-frame--editorial { aspect-ratio: var(--aspect-editorial); }
+.baskula-img-frame--landscape { aspect-ratio: var(--aspect-landscape); }
+.baskula-img-frame--banner    { aspect-ratio: var(--aspect-banner); }
+
+.baskula-img-editorial {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+    will-change: transform, filter;
+}
+
+.baskula-img-editorial--cutout {
+    object-fit: contain;
+    filter: var(--img-filter-cutout);
+}
+
+/* 2. Fondos de Carga (Placeholder Avena #E5D5C5) y Relaciones de Aspecto en Home */
+.passepartout-container,
+.bw-product-card__figure,
+.casa-card-img-wrap,
+.trend-img-wrapper,
+.holiday-img-wrap {
+    background-color: var(--img-placeholder-bg);
+    background-image: var(--img-placeholder-gradient);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.passepartout-container,
+.trend-img-wrapper,
+.holiday-products-wrapper .bw-product-card__figure {
+    aspect-ratio: var(--aspect-square);
+}
+
+.bw-product-card__figure {
+    aspect-ratio: var(--aspect-editorial);
+}
+
+.casa-card-img-wrap {
+    aspect-ratio: var(--aspect-landscape);
+}
+
+/* 3. Atmósfera sutil exclusiva para Hero y "Nuestra Casa" (Sin alterar balance de blancos en productos) */
+.hero-single-image {
+    filter: brightness(1.04) contrast(1.04) saturate(1.04) sepia(0.02);
+}
+
+.casa-card-img,
+.holiday-img-wrap img,
+.holiday-parallax-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: var(--img-filter-ambient);
+    transition: var(--img-transition);
+}
+
+.holiday-img-wrap img.holiday-parallax-img {
+    height: 130%;
+    transition: transform 0.1s linear, filter 0.4s ease;
+}
+
+.casa-carousel-card:hover .casa-card-img {
+    transform: scale(var(--img-hover-scale));
+    filter: var(--img-filter-ambient-hover);
+}
+
+.holiday-card:hover .holiday-img-wrap img {
+    filter: var(--img-filter-ambient-hover);
+}
+
+/* Asegurar que ninguna tarjeta de producto ni visor tenga overlay ::after que tiña los blancos */
+.bw-product-card__figure::after,
+.passepartout-container::after,
+.festive-viewer-white-box::after,
+.ficha-image-container::after,
+.trend-img-wrapper::after,
+.holiday-img-wrap::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* 4. Tarjetas de Producto, Selección Festiva, Alacena y Tendencias (Luz limpia, sepia 0) */
+.gallery-photo,
+.bw-product-card__image,
+.trend-img-wrapper img,
+.wishlist-item-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.shelf-piece-tile:hover .gallery-photo,
+.bw-product-card:hover .bw-product-card__image,
+.trend-card:hover .trend-img-wrapper img,
+.wishlist-item-card:hover .wishlist-item-thumb {
+    transform: scale(var(--img-hover-scale));
+    filter: var(--img-filter-editorial-hover);
+}
+
+/* 5. Modales y Visores Emergentes (Visor Festivo, Ficha de Pieza y Balanza/Drawer) — Fondos #FAF9F6 y luz limpia */
+.festive-viewer-white-box,
+.ficha-stage,
+.ficha-image-container,
+.wishlist-item-card {
+    background-color: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+}
+
+.festive-viewer-main-img,
+.ficha-piece-img {
+    filter: var(--img-filter-editorial) drop-shadow(0 8px 20px rgba(58, 42, 24, 0.08));
+    border-radius: 10px;
+    transition: opacity 0.22s ease, transform 0.45s var(--img-ease-editorial), filter 0.35s ease;
+}
+
+.festive-viewer-thumb-btn,
+.ficha-thumb-btn {
+    background-color: #FAF9F6;
+    border: 1.5px solid rgba(226, 167, 39, 0.18);
+}
+
+.festive-viewer-thumb-btn img,
+.ficha-thumb-btn img {
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.festive-viewer-thumb-btn:hover img,
+.festive-viewer-thumb-btn.active img,
+.ficha-thumb-btn:hover img,
+.ficha-thumb-btn.active img {
+    filter: var(--img-filter-editorial-hover);
+}
+
+/* 6. Distinción de Recortes con Fondo Transparente (images/cutouts/) */
+img[src*="images/cutouts/"] {
+    object-fit: contain !important;
+    filter: var(--img-filter-cutout) !important;
+}
+
+.shelf-piece-tile:hover img[src*="images/cutouts/"],
+.bw-product-card:hover img[src*="images/cutouts/"],
+.wishlist-item-card:hover img[src*="images/cutouts/"] {
+    filter: var(--img-filter-cutout-hover) !important;
+}
+
