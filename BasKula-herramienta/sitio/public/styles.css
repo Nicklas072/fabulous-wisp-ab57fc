@@ -35,6 +35,32 @@
     
     --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-quick: all 0.2s ease;
+
+    /* --- Fase 1: Tokens de Estandarización Visual y Atmosférica (Home) --- */
+    --img-placeholder-bg: #E5D5C5;
+    --img-placeholder-gradient: linear-gradient(135deg, #EFE6DC 0%, #E5D5C5 100%);
+    --img-stage-surface: #FAF9F6;
+
+    --aspect-square: 1 / 1;
+    --aspect-editorial: 4 / 5;
+    --aspect-landscape: 4 / 3;
+    --aspect-banner: 16 / 9;
+
+    /* Luz limpia y micro-contraste neutro (sepia 0) que preserva blancos puros y colores reales del esmalte */
+    --img-filter-editorial: brightness(1.03) contrast(1.05) saturate(1.03) sepia(0);
+    --img-filter-editorial-hover: brightness(1.04) contrast(1.06) saturate(1.05) sepia(0);
+
+    /* Toque apenas cálido (sepia 0.02) exclusivamente para Hero y "Nuestra Casa" */
+    --img-filter-ambient: brightness(1.02) contrast(1.05) saturate(1.04) sepia(0.02);
+    --img-filter-ambient-hover: brightness(1.04) contrast(1.06) saturate(1.06) sepia(0.01);
+
+    /* Sombra cálida en tono tierra para recortes con transparencia (sin sepia para no teñir la cerámica) */
+    --img-filter-cutout: brightness(1.03) contrast(1.05) saturate(1.03) sepia(0) drop-shadow(0 12px 24px rgba(58, 42, 24, 0.16));
+    --img-filter-cutout-hover: brightness(1.04) contrast(1.06) saturate(1.05) sepia(0) drop-shadow(0 16px 30px rgba(58, 42, 24, 0.20));
+
+    --img-ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    --img-transition: transform 0.55s var(--img-ease-editorial), filter 0.4s ease, opacity 0.35s ease;
+    --img-hover-scale: 1.045;
 }
 
 /* --- Resets --- */
@@ -1021,14 +1047,14 @@ body.drawer-open {
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center bottom;
+    background-position: center 45%;
     background-color: var(--color-crema);
     image-rendering: -webkit-optimize-contrast;
     image-rendering: high-quality;
     filter: brightness(1.08) contrast(1.04) saturate(1.06);
     animation: heroKenBurns 18s ease-in-out infinite alternate;
     will-change: transform;
-    transform-origin: center bottom;
+    transform-origin: center center;
 }
 
 @keyframes heroKenBurns {
@@ -1074,7 +1100,7 @@ body.drawer-open {
     .hero-single-image {
         background-image: url('images/hero-single.webp') !important;
         background-size: cover !important;
-        background-position: center bottom !important;
+        background-position: center 45% !important;
         width: 100% !important;
         height: 100% !important;
         transform-origin: center center !important;
@@ -1301,7 +1327,7 @@ body.drawer-open {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 6px !important;
+        gap: 4px !important;
         text-align: center !important;
         box-sizing: border-box !important;
         background: rgba(255, 252, 246, 0.58) !important;
@@ -1322,9 +1348,9 @@ body.drawer-open {
         font-weight: 700 !important;
         letter-spacing: 1.2px !important;
         text-transform: uppercase !important;
-        line-height: 1.3 !important;
+        line-height: 1.25 !important;
         color: #1A1815 !important;
-        margin: 0 !important;
+        margin: 0 0 4px 0 !important;
         padding: 0 !important;
         text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95) !important;
     }
@@ -1334,12 +1360,13 @@ body.drawer-open {
         color: var(--color-mostaza-dark, #C28B17) !important;
         font-weight: 700 !important;
         letter-spacing: 1.5px !important;
-        margin-top: 4px !important;
+        margin-top: 3px !important;
+        margin-bottom: 0 !important;
     }
 
     .hero-subtitle {
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(0.88rem, 3.2vw, 1.05rem) !important;
+        font-size: clamp(1.02rem, 3.8vw, 1.22rem) !important;
         font-style: italic !important;
         font-weight: 500 !important;
         line-height: 1.35 !important;
@@ -1892,17 +1919,38 @@ body.drawer-open {
 
 @media (max-width: 768px) {
     .holiday-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 0;
     }
     
     .holiday-img-wrap {
-        height: 460px;
+        height: clamp(300px, 64vw, 420px) !important;
     }
     
     .holiday-split-container {
         padding: 0;
         margin: 0;
+    }
+
+    .holiday-card-content {
+        padding: 14px 10px !important;
+    }
+
+    .holiday-tag {
+        font-size: 0.58rem !important;
+        letter-spacing: 1.5px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .holiday-title {
+        font-size: clamp(0.85rem, 3.2vw, 1.15rem) !important;
+        margin: 0 0 6px 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    .holiday-subtext {
+        font-size: clamp(0.68rem, 2.4vw, 0.82rem) !important;
+        line-height: 1.3 !important;
     }
 }
 
@@ -2022,12 +2070,29 @@ body.drawer-open {
     display: none !important;
 }
 
-/* Holiday Carousel: esquinas de imágenes sin redondear (puntas rectas) y botón Saber Más visible */
+/* Holiday Carousel: esquinas de imágenes sin redondear (puntas rectas), proporción cuadrada 1:1 y botón Saber Más visible */
+.holiday-products-wrapper .bw-product-card__figure {
+    aspect-ratio: 1 / 1 !important;
+}
+
 .holiday-products-wrapper .bw-product-card__figure,
 .holiday-products-wrapper .bw-product-card__media,
 .holiday-products-wrapper .bw-product-card__image,
 .holiday-products-wrapper .bw-product-card__info {
     border-radius: 0 !important;
+}
+
+.holiday-products-wrapper .bw-product-card__info {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    min-height: 56px;
+    padding: 10px 12px !important;
+}
+
+.holiday-products-wrapper .bw-product-title {
+    text-align: center !important;
+    width: 100%;
 }
 
 .holiday-products-wrapper .gallery-view-hint {
@@ -3305,8 +3370,8 @@ body.drawer-open {
 }
 
 .ficha-stage {
-    background: radial-gradient(circle at 50% 35%, #FFFFFF 0%, #EFE8DA 72%, #E2D7C3 100%);
-    border: 1px solid rgba(226, 167, 39, 0.38);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
     border-radius: 18px;
     padding: 20px 18px 18px 18px;
     display: flex;
@@ -3314,6 +3379,7 @@ body.drawer-open {
     align-items: center;
     position: relative;
     width: 100%;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 6px 20px rgba(58, 42, 24, 0.05);
 }
 
 .ficha-category-pill {
@@ -3335,9 +3401,9 @@ body.drawer-open {
     margin: 0 auto;
     border-radius: 14px;
     overflow: hidden;
-    background: #F7F3EB;
-    border: 1px solid rgba(226, 167, 39, 0.28);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 6px 20px rgba(58, 42, 24, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3350,7 +3416,7 @@ body.drawer-open {
 
 .ficha-image-container:hover {
     border-color: var(--color-mustard);
-    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(226, 167, 39, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), 0 8px 24px rgba(226, 167, 39, 0.22);
 }
 
 .ficha-zoom-badge {
@@ -3385,7 +3451,7 @@ body.drawer-open {
     max-height: 100%;
     object-fit: contain;
     display: block;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+    filter: var(--img-filter-editorial) drop-shadow(0 6px 14px rgba(58, 42, 24, 0.12));
     transition: opacity 0.24s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -3406,9 +3472,9 @@ body.drawer-open {
     width: 52px;
     height: 52px;
     border-radius: 10px;
-    border: 2px solid transparent;
+    border: 1.5px solid rgba(226, 167, 39, 0.18);
     overflow: hidden;
-    background: #EFE8DA;
+    background: #FAF9F6;
     padding: 0;
     cursor: pointer;
     transition: border-color 0.2s ease, transform 0.2s ease;
@@ -3419,6 +3485,13 @@ body.drawer-open {
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.ficha-thumb-btn:hover img,
+.ficha-thumb-btn.active img {
+    filter: var(--img-filter-editorial-hover);
 }
 
 .ficha-thumb-btn.active {
@@ -3625,11 +3698,20 @@ body.drawer-open {
 
 /* --- Atmosphere Gallery Section --- */
 .gallery-section-wrapper {
-    background-color: transparent;
-    padding: 10px 0 50px 0;
-    margin-top: -14px;
+    background-color: #FAF6EE;
+    background-image: url('images/casa-card-texture.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 70px 0 80px 0;
+    margin-top: 0;
+    margin-bottom: 0;
     width: 100%;
     position: relative;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(226, 167, 39, 0.35);
+    border-bottom: 1px solid rgba(226, 167, 39, 0.35);
+    box-shadow: inset 0 12px 30px rgba(0, 0, 0, 0.03), inset 0 -12px 30px rgba(0, 0, 0, 0.03);
 }
 
 .gallery-section-wrapper .section-header {
@@ -3765,6 +3847,24 @@ body.drawer-open {
     color: #181818;
     margin: 0 0 14px 0;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid rgba(194, 139, 23, 0.45);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.85);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(194, 139, 23, 0.06);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.casa-carousel-card:hover .casa-card-title {
+    border-color: var(--color-mustard, #E2A727);
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(226, 167, 39, 0.12);
 }
 
 .casa-card-img-wrap {
@@ -3776,8 +3876,13 @@ body.drawer-open {
     margin-bottom: 14px;
     background-color: #F1ECE4;
     box-sizing: border-box;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     position: relative;
+    transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.casa-carousel-card:hover .casa-card-img-wrap {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .casa-card-img {
@@ -3801,7 +3906,24 @@ body.drawer-open {
     color: #55504A;
     margin: 0;
     text-align: center;
-    padding: 0 4px;
+    padding: 12px 14px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(194, 139, 23, 0.35);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.85);
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(194, 139, 23, 0.06);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.casa-carousel-card:hover .casa-card-desc {
+    border-color: var(--color-mustard, #E2A727);
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(226, 167, 39, 0.1);
 }
 
 /* Dots para móvil estilo Selección Festiva */
@@ -3821,6 +3943,10 @@ body.drawer-open {
 }
 
 @media (max-width: 768px) {
+    .gallery-section-wrapper {
+        padding: 44px 0 54px 0;
+    }
+
     .casa-carousel-wrapper {
         padding: 0;
     }
@@ -4510,9 +4636,18 @@ body.drawer-open {
         display: none !important;
     }
     
-    .storefront-content h1 {
+    .storefront-content h1:not(.hero-main-title) {
         font-size: clamp(1.65rem, 6.2vw, 2.2rem) !important;
         margin-bottom: 24px !important;
+    }
+    
+    .hero-main-title {
+        margin: 0 0 4px 0 !important;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(1.02rem, 3.8vw, 1.22rem) !important;
+        margin: 0 !important;
     }
     
     .hero-desc {
@@ -6649,27 +6784,30 @@ body.drawer-open {
     display: flex;
     align-items: center;
     gap: 14px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    border-radius: 0; /* Puntas rectas */
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    border-radius: 8px;
     padding: 10px 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(58, 42, 24, 0.04);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wishlist-item-card:hover {
     border-color: rgba(226, 167, 39, 0.5);
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(58, 42, 24, 0.08);
 }
 
 .wishlist-item-thumb {
     width: 64px;
     height: 64px;
     object-fit: cover;
-    border-radius: 0; /* Puntas rectas */
+    border-radius: 6px;
     flex-shrink: 0;
-    background: #FAF8F5;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
 }
 
 .wishlist-item-details {
@@ -7369,3 +7507,361 @@ body.drawer-open {
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================================================
+   Visor de Galería Limpio (Estilo Herramienta BasKula)
+   ========================================================================== */
+.festive-viewer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(18, 16, 14, 0.68);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.festive-viewer-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.festive-viewer-card {
+    background: #F7F3EC;
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(226, 167, 39, 0.2);
+    width: 100%;
+    max-width: 520px;
+    padding: 16px 18px 20px 18px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 92vh;
+    box-sizing: border-box;
+    transform: scale(0.95) translateY(12px);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.festive-viewer-overlay.active .festive-viewer-card {
+    transform: scale(1) translateY(0);
+}
+
+.festive-viewer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.festive-viewer-logo-pill {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    padding: 6px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.festive-viewer-logo {
+    height: 22px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.festive-viewer-close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #FFFFFF;
+    color: #4A443C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+}
+
+.festive-viewer-close-btn:hover {
+    background: #181818;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+
+.festive-viewer-close-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.festive-viewer-stage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.festive-viewer-white-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 54vh;
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.festive-viewer-main-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+    transition: opacity 0.2s ease;
+}
+
+.festive-viewer-thumbs {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+    overflow-x: auto;
+    padding: 4px;
+}
+
+.festive-viewer-thumb-btn {
+    width: 62px;
+    height: 62px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #FFFFFF;
+    border: 2px solid transparent;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.festive-viewer-thumb-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.festive-viewer-thumb-btn.active {
+    border-color: var(--color-mostaza-dark, #C28B17);
+    box-shadow: 0 0 0 2px rgba(194, 139, 23, 0.3);
+    transform: scale(1.04);
+}
+
+.festive-viewer-thumb-btn:hover:not(.active) {
+    border-color: rgba(194, 139, 23, 0.5);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .festive-viewer-card {
+        padding: 14px 14px 18px 14px;
+        border-radius: 20px;
+        max-width: 95vw;
+    }
+    .festive-viewer-thumb-btn {
+        width: 54px;
+        height: 54px;
+    }
+}
+
+/* ==========================================================================
+   FASE 1: ESTANDARIZACIÓN VISUAL Y ATMOSFÉRICA DE IMÁGENES (ALCANCE: HOME)
+   Armonización con paleta BasKula: Crema (#FAF8F5), Avena (#E5D5C5), Mostaza (#E2A727)
+   ========================================================================== */
+
+/* 1. Clases Utilitarias Reutilizables */
+.baskula-img-frame {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--img-placeholder-bg);
+    background-image: var(--img-placeholder-gradient);
+    border-radius: var(--border-radius-md, 10px);
+    isolation: isolate;
+}
+
+.baskula-img-frame--square    { aspect-ratio: var(--aspect-square); }
+.baskula-img-frame--editorial { aspect-ratio: var(--aspect-editorial); }
+.baskula-img-frame--landscape { aspect-ratio: var(--aspect-landscape); }
+.baskula-img-frame--banner    { aspect-ratio: var(--aspect-banner); }
+
+.baskula-img-editorial {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+    will-change: transform, filter;
+}
+
+.baskula-img-editorial--cutout {
+    object-fit: contain;
+    filter: var(--img-filter-cutout);
+}
+
+/* 2. Fondos de Carga (Placeholder Avena #E5D5C5) y Relaciones de Aspecto en Home */
+.passepartout-container,
+.bw-product-card__figure,
+.casa-card-img-wrap,
+.trend-img-wrapper,
+.holiday-img-wrap {
+    background-color: var(--img-placeholder-bg);
+    background-image: var(--img-placeholder-gradient);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.passepartout-container,
+.trend-img-wrapper,
+.holiday-products-wrapper .bw-product-card__figure {
+    aspect-ratio: var(--aspect-square);
+}
+
+.bw-product-card__figure {
+    aspect-ratio: var(--aspect-editorial);
+}
+
+.casa-card-img-wrap {
+    aspect-ratio: var(--aspect-landscape);
+}
+
+/* 3. Atmósfera sutil exclusiva para Hero y "Nuestra Casa" (Sin alterar balance de blancos en productos) */
+.hero-single-image {
+    filter: brightness(1.04) contrast(1.04) saturate(1.04) sepia(0.02);
+}
+
+.casa-card-img,
+.holiday-img-wrap img,
+.holiday-parallax-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: var(--img-filter-ambient);
+    transition: var(--img-transition);
+}
+
+.holiday-img-wrap img.holiday-parallax-img {
+    height: 130%;
+    transition: transform 0.1s linear, filter 0.4s ease;
+}
+
+.casa-carousel-card:hover .casa-card-img {
+    transform: scale(var(--img-hover-scale));
+    filter: var(--img-filter-ambient-hover);
+}
+
+.holiday-card:hover .holiday-img-wrap img {
+    filter: var(--img-filter-ambient-hover);
+}
+
+/* Asegurar que ninguna tarjeta de producto ni visor tenga overlay ::after que tiña los blancos */
+.bw-product-card__figure::after,
+.passepartout-container::after,
+.festive-viewer-white-box::after,
+.ficha-image-container::after,
+.trend-img-wrapper::after,
+.holiday-img-wrap::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* 4. Tarjetas de Producto, Selección Festiva, Alacena y Tendencias (Luz limpia, sepia 0) */
+.gallery-photo,
+.bw-product-card__image,
+.trend-img-wrapper img,
+.wishlist-item-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.shelf-piece-tile:hover .gallery-photo,
+.bw-product-card:hover .bw-product-card__image,
+.trend-card:hover .trend-img-wrapper img,
+.wishlist-item-card:hover .wishlist-item-thumb {
+    transform: scale(var(--img-hover-scale));
+    filter: var(--img-filter-editorial-hover);
+}
+
+/* 5. Modales y Visores Emergentes (Visor Festivo, Ficha de Pieza y Balanza/Drawer) — Fondos #FAF9F6 y luz limpia */
+.festive-viewer-white-box,
+.ficha-stage,
+.ficha-image-container,
+.wishlist-item-card {
+    background-color: #FAF9F6;
+    border: 1px solid rgba(226, 167, 39, 0.18);
+}
+
+.festive-viewer-main-img,
+.ficha-piece-img {
+    filter: var(--img-filter-editorial) drop-shadow(0 8px 20px rgba(58, 42, 24, 0.08));
+    border-radius: 10px;
+    transition: opacity 0.22s ease, transform 0.45s var(--img-ease-editorial), filter 0.35s ease;
+}
+
+.festive-viewer-thumb-btn,
+.ficha-thumb-btn {
+    background-color: #FAF9F6;
+    border: 1.5px solid rgba(226, 167, 39, 0.18);
+}
+
+.festive-viewer-thumb-btn img,
+.ficha-thumb-btn img {
+    filter: var(--img-filter-editorial);
+    transition: var(--img-transition);
+}
+
+.festive-viewer-thumb-btn:hover img,
+.festive-viewer-thumb-btn.active img,
+.ficha-thumb-btn:hover img,
+.ficha-thumb-btn.active img {
+    filter: var(--img-filter-editorial-hover);
+}
+
+/* 6. Distinción de Recortes con Fondo Transparente (images/cutouts/) */
+img[src*="images/cutouts/"] {
+    object-fit: contain !important;
+    filter: var(--img-filter-cutout) !important;
+}
+
+.shelf-piece-tile:hover img[src*="images/cutouts/"],
+.bw-product-card:hover img[src*="images/cutouts/"],
+.wishlist-item-card:hover img[src*="images/cutouts/"] {
+    filter: var(--img-filter-cutout-hover) !important;
+}
+

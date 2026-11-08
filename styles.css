@@ -1047,14 +1047,14 @@ body.drawer-open {
     height: 100%;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center bottom;
+    background-position: center 45%;
     background-color: var(--color-crema);
     image-rendering: -webkit-optimize-contrast;
     image-rendering: high-quality;
     filter: brightness(1.08) contrast(1.04) saturate(1.06);
     animation: heroKenBurns 18s ease-in-out infinite alternate;
     will-change: transform;
-    transform-origin: center bottom;
+    transform-origin: center center;
 }
 
 @keyframes heroKenBurns {
@@ -1100,7 +1100,7 @@ body.drawer-open {
     .hero-single-image {
         background-image: url('images/hero-single.webp') !important;
         background-size: cover !important;
-        background-position: center bottom !important;
+        background-position: center 45% !important;
         width: 100% !important;
         height: 100% !important;
         transform-origin: center center !important;

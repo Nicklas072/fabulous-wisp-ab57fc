@@ -47,7 +47,7 @@
     <meta name="twitter:image" content="https://www.baskula.com/images/hero-single.jpg">
 
     <!-- Preload LCP Hero Image en formato WebP -->
-    <link rel="preload" as="image" href="images/hero-single.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-single.webp?v=20261108_hero" type="image/webp" fetchpriority="high">
 
     <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +61,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261106_carrusel_etereo">
+    <link rel="stylesheet" href="styles.min.css?v=20261108_hero">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -251,7 +251,7 @@
                 <div class="slide active" data-layout="full">
                     <div class="slide-images">
                         <div class="slide-image-full hero-single-image"
-                            style="background-image: url('images/hero-single.webp');"></div>
+                            style="background-image: url('images/hero-single.webp?v=20261108_hero');"></div>
                     </div>
                 </div>
             </div>
@@ -266,7 +266,7 @@
                         </h1>
                         <p class="hero-subtitle">Descubrí una nueva forma de elegir y disfrutar la cerámica.</p>
                     </div>
-                    <a href="#concepto" class="hero-scroll-arrow" aria-label="Ir a la siguiente sección">
+                    <a href="#galeria" class="hero-scroll-arrow" aria-label="Ir a la siguiente sección">
                         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M6 9l6 6 6-6"/>
                         </svg>
@@ -297,57 +297,6 @@
             </div>
         </div>
 
-        <div class="section-divider"></div>
-
-        <!-- Concept Section: Una experiencia diferente -->
-        <section id="concepto" class="section-container concept-section">
-            <div class="section-header text-center">
-                <span class="section-tag">Una experiencia diferente</span>
-                <h2>¿Cómo funciona BasKula?</h2>
-                <p class="section-subtitle">Podés conocernos en nuestra tienda de Punta Piedras o también en nuestro
-                    catálogo online.</p>
-                <p class="concept-slogan">Elegí. Pesá. Llevate lo que te enamora.</p>
-            </div>
-
-            <div class="concept-grid">
-                <!-- Step 1 -->
-                <div class="concept-card" data-aos="fade-up">
-                    <div class="card-corners"></div>
-                    <div class="concept-icon-wrapper"
-                        style="background: url('cup-icon.webp') no-repeat center center; background-size: cover; box-shadow: none;">
-                    </div>
-                    <h3>1. Elegí lo que te guste.</h3>
-                    <p>Podés elegir juegos completos y también podés mezclar colores, texturas, platos y tazas creando
-                        tus
-                        propios juegos.
-                    </p>
-                    <p>Cada pieza está hecha a mano y tiene su propia personalidad.</p>
-                </div>
-                <!-- Step 2 -->
-                <div class="concept-card" data-aos="fade-up" data-delay="100">
-                    <div class="card-corners"></div>
-                    <div class="concept-icon-wrapper">
-                        <i data-lucide="scale" class="concept-icon"></i>
-                    </div>
-                    <h3>2. Pesá en la Báscula.</h3>
-                    <p>Pesá lo que te guste en alguna de las básculas disponibles en la tienda.</p>
-                    <p>Pagá solo por el peso de lo que elijas.</p>
-                </div>
-                <!-- Step 3 -->
-                <div class="concept-card" data-aos="fade-up" data-delay="200">
-                    <div class="card-corners"></div>
-                    <div class="concept-icon-wrapper">
-                        <i data-lucide="heart" class="concept-icon"></i>
-                    </div>
-                    <h3>3. Llevá tus favoritos.</h3>
-                    <p>Te llevás lo que te gusta para ponerlo donde quieras.</p>
-                    <p>Arte de Portugal a tu mesa.</p>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
         <!-- Atmosphere & Gallery Section -->
         <section id="galeria" class="gallery-section-wrapper">
             <div class="section-header text-center">
@@ -376,7 +325,7 @@
                         <div class="casa-card-img-wrap">
                             <img src="images/casa-origen-portugues.webp"
                                 alt="Pueblo tradicional de Portugal con casas blancas y azules, flores y cerámica"
-                                class="casa-card-img" width="1024" height="576" loading="lazy" decoding="async" />
+                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
                         <p class="casa-card-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
                     </article>
@@ -387,7 +336,7 @@
                         <div class="casa-card-img-wrap">
                             <img src="images/casa-colecciones-exclusivas.webp"
                                 alt="Diseño europeo con grabado floral clásico y borde ondeado en vajilla fina"
-                                class="casa-card-img" width="1024" height="766" loading="lazy" decoding="async" />
+                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
                         <p class="casa-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
                     </article>
@@ -398,7 +347,7 @@
                         <div class="casa-card-img-wrap">
                             <img src="images/casa-diseno-europeo.webp"
                                 alt="Colección exclusiva de vajilla mediterránea y patrones florales sobre mesa de madera"
-                                class="casa-card-img" width="766" height="1024" loading="lazy" decoding="async" />
+                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
                         <p class="casa-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
                     </article>
@@ -409,7 +358,7 @@
                         <div class="casa-card-img-wrap">
                             <img src="images/casa-venta-kilo.webp"
                                 alt="Balanza tradicional de platillos dorada sobre mesa rústica"
-                                class="casa-card-img" width="1024" height="796" loading="lazy" decoding="async" />
+                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
                         <p class="casa-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
                     </article>
@@ -419,8 +368,6 @@
                 <div class="bw-mobile-dots casa-mobile-dots" id="casa-dots"></div>
             </div>
         </section>
-
-        <div class="section-divider"></div>
 
         <!-- Holiday / Navidad Section (Costa Nova style) -->
         <section id="navidad" class="holiday-section">
@@ -456,9 +403,9 @@
                     <!-- Card 1: Mesa Navideña -->
                     <div class="holiday-card" data-aos="fade-up">
                         <div class="holiday-img-wrap">
-                            <img src="images/navidad-banner-1.jpg?v=2"
-                                alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="766"
-                                height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
+                            <img src="images/navidad-banner-1.webp?v=2"
+                                alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="683"
+                                height="716" loading="lazy" decoding="async" class="holiday-parallax-img">
                             <div class="holiday-overlay"></div>
                         </div>
                         <div class="holiday-card-content">
@@ -471,7 +418,7 @@
                     <!-- Card 2: Una Noche Especial -->
                     <div class="holiday-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="holiday-img-wrap">
-                            <img src="images/navidad-banner-2.jpg?v=2"
+                            <img src="images/navidad-banner-2.webp?v=2"
                                 alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
                                 height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
                             <div class="holiday-overlay"></div>
@@ -490,7 +437,7 @@
                 <div class="bestsellers-header text-center" style="margin-bottom: 30px;">
                     <span class="section-tag">Colección Fiestas</span>
                     <h2 class="bestsellers-heading"><em>Selección Festiva</em></h2>
-                    <p class="bestsellers-subheading">Piezas exclusivas para celebrar y compartir. Tocá el corazón ♥ para pesar en tu balanza o hacé clic para ver los detalles.</p>
+                    <p class="bestsellers-subheading">Piezas exclusivas para celebrar y compartir.</p>
                 </div>
 
                 <!-- Carrusel con Controles Flotantes estilo Bone & White -->
@@ -679,6 +626,33 @@
         </div>
     </footer>
 
+    <!-- Visor de Galería Limpio (Estilo Herramienta BasKula) -->
+    <div class="modal-overlay festive-viewer-overlay" id="festive-viewer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visor de producto">
+        <div class="festive-viewer-card">
+            <!-- Header con pastilla BasKula y botón cerrar -->
+            <div class="festive-viewer-header">
+                <div class="festive-viewer-logo-pill">
+                    <img src="images/logo.png" alt="BasKula" class="festive-viewer-logo" width="90" height="32">
+                </div>
+                <button type="button" class="festive-viewer-close-btn" id="festive-viewer-close" aria-label="Cerrar visor">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+
+            <!-- Escenario Principal de Imagen (Tarjeta Blanca estilo BasKula) -->
+            <div class="festive-viewer-stage">
+                <div class="festive-viewer-white-box">
+                    <img src="" alt="" class="festive-viewer-main-img" id="festive-viewer-img">
+                </div>
+            </div>
+
+            <!-- Tira inferior de Miniaturas Cuadradas -->
+            <div class="festive-viewer-thumbs" id="festive-viewer-thumbs">
+                <!-- Inyectadas dinámicamente -->
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Ventana Editorial: Ficha de Pieza de Autor -->
@@ -841,7 +815,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261106_carrusel_etereo" defer></script>
+    <script src="app.min.js?v=20261108_home_visual_v4" defer></script>
 
 
 </body>
