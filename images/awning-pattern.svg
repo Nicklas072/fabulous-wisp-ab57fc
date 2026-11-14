@@ -1,0 +1,67 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='85' viewBox='0 0 160 85'>
+  <defs>
+    <!-- 3D Cylindrical Convex Shader: Black Canvas Stripe (x=0 to 80, center at 40) -->
+    <linearGradient id='black-cylindrical' x1='0%' y1='0%' x2='100%' y2='0%'>
+      <stop offset='0%' stop-color='#080706'/>
+      <stop offset='12%' stop-color='#12110f'/>
+      <stop offset='32%' stop-color='#262320'/>
+      <stop offset='50%' stop-color='#383430'/>
+      <stop offset='68%' stop-color='#262320'/>
+      <stop offset='88%' stop-color='#12110f'/>
+      <stop offset='100%' stop-color='#080706'/>
+    </linearGradient>
+
+    <!-- 3D Cylindrical Convex Shader: White/Linen Canvas Stripe (x=80 to 160, center at 120) -->
+    <linearGradient id='white-cylindrical' x1='0%' y1='0%' x2='100%' y2='0%'>
+      <stop offset='0%' stop-color='#d2cbbe'/>
+      <stop offset='14%' stop-color='#e5e0d5'/>
+      <stop offset='32%' stop-color='#f5f2eb'/>
+      <stop offset='50%' stop-color='#ffffff'/>
+      <stop offset='68%' stop-color='#f5f2eb'/>
+      <stop offset='86%' stop-color='#e5e0d5'/>
+      <stop offset='100%' stop-color='#d2cbbe'/>
+    </linearGradient>
+
+    <!-- Top zenith illumination to bottom ambient falloff -->
+    <linearGradient id='zenith-falloff' x1='0%' y1='0%' x2='0%' y2='100%'>
+      <stop offset='0%' stop-color='#ffffff' stop-opacity='0.16'/>
+      <stop offset='35%' stop-color='#ffffff' stop-opacity='0.05'/>
+      <stop offset='70%' stop-color='#000000' stop-opacity='0.0'/>
+      <stop offset='90%' stop-color='#000000' stop-opacity='0.10'/>
+      <stop offset='100%' stop-color='#000000' stop-opacity='0.22'/>
+    </linearGradient>
+
+    <!-- Clip path to isolate each stripe precisely -->
+    <clipPath id='black-clip'>
+      <path d='M 0 0 H 80 V 64 A 40 21 0 0 1 0 64 Z'/>
+    </clipPath>
+
+    <clipPath id='white-clip'>
+      <path d='M 80 0 H 160 V 64 A 40 21 0 0 1 80 64 Z'/>
+    </clipPath>
+
+    <clipPath id='full-clip'>
+      <path d='M 0 0 H 160 V 64 A 40 21 0 0 1 80 64 A 40 21 0 0 1 0 64 Z'/>
+    </clipPath>
+  </defs>
+
+  <!-- 1. Stripe Bases with Convex 3D Volume -->
+  <path d='M 0 0 H 80 V 64 A 40 21 0 0 1 0 64 Z' fill='url(#black-cylindrical)'/>
+  <path d='M 80 0 H 160 V 64 A 40 21 0 0 1 80 64 Z' fill='url(#white-cylindrical)'/>
+
+  <!-- 2. Vertical Ambient Zenith Light & Shading -->
+  <rect width='160' height='85' fill='url(#zenith-falloff)' clip-path='url(#full-clip)'/>
+
+  <!-- 3. Soft Physical Seam Depressions between stripes -->
+  <line x1='0.5' y1='0' x2='0.5' y2='64' stroke='#000000' stroke-opacity='0.28' stroke-width='1'/>
+  <line x1='80' y1='0' x2='80' y2='64' stroke='#000000' stroke-opacity='0.22' stroke-width='1.2'/>
+  <line x1='159.5' y1='0' x2='159.5' y2='64' stroke='#000000' stroke-opacity='0.28' stroke-width='1'/>
+
+  <!-- 4. Beveled Hem & Fabric Edge Thickness (Ribete 3D) -->
+  <!-- Inner Highlight Rim on the scallop edge -->
+  <path d='M 1 63.8 A 40 21 0 0 0 79 63.8' fill='none' stroke='rgba(255,255,255,0.22)' stroke-width='1.2'/>
+  <path d='M 81 63.8 A 40 21 0 0 0 159 63.8' fill='none' stroke='rgba(255,255,255,0.50)' stroke-width='1.4'/>
+
+  <!-- Outer Physical Edge / Bottom Hem Shadow -->
+  <path d='M 0 64 A 40 21 0 0 0 80 64 A 40 21 0 0 0 160 64' fill='none' stroke='rgba(14,11,8,0.45)' stroke-width='1.5'/>
+</svg>

@@ -19,6 +19,7 @@ next-env.d.ts
 _assets_raw/
 _originals_backup/
 *.backup.*
+*-backup.*
 
 # Logs y depuración
 *.log

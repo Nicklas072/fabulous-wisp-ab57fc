@@ -16,6 +16,21 @@ const updateScrollState = () => {
     } else {
         document.body.classList.remove('scrolled');
     }
+
+    // Control dinámico del toldo blanco y negro:
+    // Permanece oculto en el Hero para no duplicar el toldo de la foto, y se despliega con animación al salir del Hero
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        const heroRect = heroSection.getBoundingClientRect();
+        // Punto de aparición calibrado para activarse apenas un poco más abajo en el scroll
+        const triggerPoint = Math.min(window.innerHeight * 0.40, heroSection.offsetHeight * 0.48);
+        if (heroRect.bottom <= triggerPoint || lastScrollY > 430) {
+            document.body.classList.add('past-hero');
+        } else {
+            document.body.classList.remove('past-hero');
+        }
+    }
+
     ticking = false;
 };
 
@@ -1627,161 +1642,171 @@ const FESTIVE_CAROUSEL_ITEMS = [
 ];
 
 const initFestiveCarousel = () => {
-    const track = document.getElementById('festive-track');
-    const viewport = document.getElementById('festive-viewport');
-    const prevBtn = document.getElementById('festive-prev-btn');
-    const nextBtn = document.getElementById('festive-next-btn');
-    const dotsContainer = document.getElementById('festive-dots');
+    const setupMiniFestiveCarousel = (trackId, viewportId, prevBtnId, nextBtnId, dotsId, items) => {
+        const track = document.getElementById(trackId);
+        const viewport = document.getElementById(viewportId);
+        const prevBtn = document.getElementById(prevBtnId);
+        const nextBtn = document.getElementById(nextBtnId);
+        const dotsContainer = document.getElementById(dotsId);
 
-    if (!track || !viewport) return;
+        if (!track || !viewport) return;
 
-    track.innerHTML = '';
-    if (dotsContainer) dotsContainer.innerHTML = '';
+        track.innerHTML = '';
+        if (dotsContainer) dotsContainer.innerHTML = '';
 
-    let wasDragging = false;
+        let wasDragging = false;
 
-    FESTIVE_CAROUSEL_ITEMS.forEach((item, idx) => {
-        const card = document.createElement('article');
-        card.className = 'bw-product-card';
-        card.setAttribute('data-id', item.id);
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Ver ${item.name} en Instagram`);
+        items.forEach((item, idx) => {
+            const card = document.createElement('article');
+            card.className = 'bw-product-card';
+            card.setAttribute('data-id', item.id);
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', `Ver ${item.name} en Instagram`);
 
-        card.innerHTML = `
-            <div class="bw-product-card__figure">
-                <div class="bw-product-card__media">
-                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                        <svg viewBox="0 0 24 24" class="card-heart-svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </button>
-                    <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
-                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
+            card.innerHTML = `
+                <div class="bw-product-card__figure">
+                    <div class="bw-product-card__media">
+                        <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
+                            <svg viewBox="0 0 24 24" class="card-heart-svg">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                        <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
+                    </div>
                 </div>
-            </div>
-            <div class="bw-product-card__info">
-                <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
-            </div>
-        `;
+                <div class="bw-product-card__info">
+                    <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
+                </div>
+            `;
 
-        card.addEventListener('click', (e) => {
-            if (wasDragging) {
-                e.preventDefault();
-                return;
-            }
-            if (e.target.closest('.card-heart-btn')) return;
-            if (e.target.closest('.gallery-view-hint')) {
-                return;
-            }
-            openFestiveViewerModal(item);
-        });
-
-        card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint')) return;
-                e.preventDefault();
+            card.addEventListener('click', (e) => {
+                if (wasDragging) {
+                    e.preventDefault();
+                    return;
+                }
+                if (e.target.closest('.card-heart-btn')) return;
+                if (e.target.closest('.gallery-view-hint')) {
+                    return;
+                }
                 openFestiveViewerModal(item);
+            });
+
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint')) return;
+                    e.preventDefault();
+                    openFestiveViewerModal(item);
+                }
+            });
+
+            track.appendChild(card);
+
+            if (dotsContainer) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+                dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
+                dot.addEventListener('click', () => {
+                    const cardEl = track.querySelectorAll('.bw-product-card')[idx];
+                    if (cardEl) {
+                        viewport.scrollTo({
+                            left: cardEl.offsetLeft - track.offsetLeft,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                dotsContainer.appendChild(dot);
             }
         });
 
-        track.appendChild(card);
+        const updateNavButtons = () => {
+            if (!prevBtn || !nextBtn) return;
+            const maxScroll = viewport.scrollWidth - viewport.clientWidth - 4;
 
-        if (dotsContainer) {
-            const dot = document.createElement('button');
-            dot.type = 'button';
-            dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
-            dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
-            dot.addEventListener('click', () => {
-                const cardEl = track.querySelectorAll('.bw-product-card')[idx];
-                if (cardEl) {
-                    viewport.scrollTo({
-                        left: cardEl.offsetLeft - track.offsetLeft,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-            dotsContainer.appendChild(dot);
-        }
-    });
+            if (viewport.scrollWidth <= viewport.clientWidth + 4) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = '';
+                nextBtn.style.display = '';
+                prevBtn.disabled = viewport.scrollLeft <= 4;
+                nextBtn.disabled = viewport.scrollLeft >= maxScroll;
+            }
 
-    const updateNavButtons = () => {
-        if (!prevBtn || !nextBtn) return;
-        const maxScroll = viewport.scrollWidth - viewport.clientWidth - 4;
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.bw-dot');
+                const cards = track.querySelectorAll('.bw-product-card');
+                const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
+                cards.forEach((card, i) => {
+                    const cLeft = card.offsetLeft - track.offsetLeft;
+                    const cRight = cLeft + card.offsetWidth;
+                    if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
+                        dots.forEach(d => d.classList.remove('active'));
+                        if (dots[i]) dots[i].classList.add('active');
+                    }
+                });
+            }
+        };
 
-        if (viewport.scrollWidth <= viewport.clientWidth + 4) {
-            prevBtn.style.display = 'none';
-            nextBtn.style.display = 'none';
-        } else {
-            prevBtn.style.display = '';
-            nextBtn.style.display = '';
-            prevBtn.disabled = viewport.scrollLeft <= 4;
-            nextBtn.disabled = viewport.scrollLeft >= maxScroll;
-        }
-
-        if (dotsContainer) {
-            const dots = dotsContainer.querySelectorAll('.bw-dot');
-            const cards = track.querySelectorAll('.bw-product-card');
-            const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
-            cards.forEach((card, i) => {
-                const cLeft = card.offsetLeft - track.offsetLeft;
-                const cRight = cLeft + card.offsetWidth;
-                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
-                    dots.forEach(d => d.classList.remove('active'));
-                    if (dots[i]) dots[i].classList.add('active');
-                }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                const scrollDistance = viewport.clientWidth * 0.75;
+                viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
             });
         }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const scrollDistance = viewport.clientWidth * 0.75;
+                viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+            });
+        }
+
+        viewport.addEventListener('scroll', updateNavButtons, { passive: true });
+        window.addEventListener('resize', updateNavButtons, { passive: true });
+
+        let isDown = false;
+        let startX = 0;
+        let initialScrollLeft = 0;
+
+        viewport.addEventListener('mousedown', (e) => {
+            isDown = true;
+            wasDragging = false;
+            startX = e.pageX - viewport.offsetLeft;
+            initialScrollLeft = viewport.scrollLeft;
+        });
+
+        viewport.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        viewport.addEventListener('mouseup', () => {
+            isDown = false;
+            setTimeout(() => { wasDragging = false; }, 80);
+        });
+
+        viewport.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            const x = e.pageX - viewport.offsetLeft;
+            const walk = (x - startX) * 1.35;
+            if (Math.abs(walk) > 4) {
+                wasDragging = true;
+                viewport.scrollLeft = initialScrollLeft - walk;
+            }
+        });
+
+        setTimeout(updateNavButtons, 100);
     };
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const scrollDistance = viewport.clientWidth * 0.75;
-            viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
-        });
-    }
+    // Bloque 1: Mesa Navideña (5 artículos)
+    const items1 = FESTIVE_CAROUSEL_ITEMS.slice(0, 5);
+    setupMiniFestiveCarousel('festive-track-1', 'festive-viewport-1', 'festive-prev-btn-1', 'festive-next-btn-1', 'festive-dots-1', items1);
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const scrollDistance = viewport.clientWidth * 0.75;
-            viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
-        });
-    }
-
-    viewport.addEventListener('scroll', updateNavButtons, { passive: true });
-    window.addEventListener('resize', updateNavButtons, { passive: true });
-
-    let isDown = false;
-    let startX = 0;
-    let initialScrollLeft = 0;
-
-    viewport.addEventListener('mousedown', (e) => {
-        isDown = true;
-        wasDragging = false;
-        startX = e.pageX - viewport.offsetLeft;
-        initialScrollLeft = viewport.scrollLeft;
-    });
-
-    viewport.addEventListener('mouseleave', () => {
-        isDown = false;
-    });
-
-    viewport.addEventListener('mouseup', () => {
-        isDown = false;
-        setTimeout(() => { wasDragging = false; }, 80);
-    });
-
-    viewport.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        const x = e.pageX - viewport.offsetLeft;
-        const walk = (x - startX) * 1.35;
-        if (Math.abs(walk) > 4) {
-            wasDragging = true;
-            viewport.scrollLeft = initialScrollLeft - walk;
-        }
-    });
-
-    setTimeout(updateNavButtons, 100);
+    // Bloque 2: Regalos & Noche Especial (5 artículos)
+    const items2 = FESTIVE_CAROUSEL_ITEMS.slice(5);
+    setupMiniFestiveCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
 
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -2040,9 +2065,10 @@ const initCasaCarousel = () => {
     const nextBtn = document.getElementById('casa-next-btn');
     const dotsContainer = document.getElementById('casa-dots');
 
-    if (!carousel || !prevBtn || !nextBtn) return;
+    if (!carousel) return;
 
-    const cards = carousel.querySelectorAll('.casa-carousel-card');
+    const cards = carousel.querySelectorAll('.casa-carousel-card, .bento-card');
+    if (!cards.length) return;
 
     if (dotsContainer) {
         dotsContainer.innerHTML = '';
@@ -2062,38 +2088,42 @@ const initCasaCarousel = () => {
     }
 
     const getScrollStep = () => {
-        const card = carousel.querySelector('.casa-carousel-card');
+        const card = cards[0];
         return card ? card.offsetWidth + 14 : carousel.clientWidth * 0.75;
     };
 
-    const updateArrows = () => {
+    const updateCarouselUI = () => {
         const tolerance = 15;
         const maxScroll = carousel.scrollWidth - carousel.clientWidth - tolerance;
         const atStart = carousel.scrollLeft <= tolerance;
         const atEnd = carousel.scrollLeft >= maxScroll;
 
-        if (atStart) {
-            prevBtn.style.display = 'none';
-            prevBtn.classList.add('is-hidden');
-            prevBtn.setAttribute('aria-hidden', 'true');
-            prevBtn.tabIndex = -1;
-        } else {
-            prevBtn.style.display = 'flex';
-            prevBtn.classList.remove('is-hidden');
-            prevBtn.removeAttribute('aria-hidden');
-            prevBtn.tabIndex = 0;
+        if (prevBtn) {
+            if (atStart) {
+                prevBtn.style.display = 'none';
+                prevBtn.classList.add('is-hidden');
+                prevBtn.setAttribute('aria-hidden', 'true');
+                prevBtn.tabIndex = -1;
+            } else {
+                prevBtn.style.display = 'flex';
+                prevBtn.classList.remove('is-hidden');
+                prevBtn.removeAttribute('aria-hidden');
+                prevBtn.tabIndex = 0;
+            }
         }
 
-        if (atEnd) {
-            nextBtn.style.display = 'none';
-            nextBtn.classList.add('is-hidden');
-            nextBtn.setAttribute('aria-hidden', 'true');
-            nextBtn.tabIndex = -1;
-        } else {
-            nextBtn.style.display = 'flex';
-            nextBtn.classList.remove('is-hidden');
-            nextBtn.removeAttribute('aria-hidden');
-            nextBtn.tabIndex = 0;
+        if (nextBtn) {
+            if (atEnd) {
+                nextBtn.style.display = 'none';
+                nextBtn.classList.add('is-hidden');
+                nextBtn.setAttribute('aria-hidden', 'true');
+                nextBtn.tabIndex = -1;
+            } else {
+                nextBtn.style.display = 'flex';
+                nextBtn.classList.remove('is-hidden');
+                nextBtn.removeAttribute('aria-hidden');
+                nextBtn.tabIndex = 0;
+            }
         }
 
         if (dotsContainer) {
@@ -2110,22 +2140,26 @@ const initCasaCarousel = () => {
         }
     };
 
-    prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
-    });
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+    }
 
-    nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
-    });
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+    }
 
-    carousel.addEventListener('scroll', updateArrows, { passive: true });
-    window.addEventListener('resize', updateArrows, { passive: true });
+    carousel.addEventListener('scroll', updateCarouselUI, { passive: true });
+    window.addEventListener('resize', updateCarouselUI, { passive: true });
 
-    updateArrows();
-    setTimeout(updateArrows, 100);
-    setTimeout(updateArrows, 400);
+    updateCarouselUI();
+    setTimeout(updateCarouselUI, 100);
+    setTimeout(updateCarouselUI, 400);
 };
 
 const initHolidayParallax = () => {

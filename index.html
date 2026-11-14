@@ -46,8 +46,9 @@
         content="Elegí. Pesá. Llevate lo que te enamora. Vajilla de autor en Punta Piedras, Manantiales y Punta del Este, Uruguay.">
     <meta name="twitter:image" content="https://www.baskula.com/images/hero-single.jpg">
 
-    <!-- Preload LCP Hero Image en formato WebP -->
-    <link rel="preload" as="image" href="images/hero-single.webp?v=20261108_hero" type="image/webp" fetchpriority="high">
+    <!-- Preload LCP Hero Image en formato WebP (Desktop & Mobile) -->
+    <link rel="preload" as="image" href="images/hero-single-desktop.webp?v=20261114_trim280" type="image/webp" media="(min-width: 992px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-single.webp?v=20261114_crop" type="image/webp" media="(max-width: 991px)" fetchpriority="high">
 
     <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,9 +56,9 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="dns-prefetch" href="https://unpkg.com">
 
-    <!-- Google Fonts (Unificadas: Lora & Outfit) -->
+    <!-- Google Fonts (Lora, Outfit & Lexend Deca) -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- CSS -->
@@ -142,7 +143,7 @@
     </script>
 </head>
 
-<body>
+<body class="has-hero">
 
     <!-- CSS Striped Awning Accent at Top of Window -->
     <div class="awning-border"></div>
@@ -251,7 +252,7 @@
                 <div class="slide active" data-layout="full">
                     <div class="slide-images">
                         <div class="slide-image-full hero-single-image"
-                            style="background-image: url('images/hero-single.webp?v=20261108_hero');"></div>
+                            style="background-image: url('images/hero-single.webp?v=20261114_crop');"></div>
                     </div>
                 </div>
             </div>
@@ -262,7 +263,8 @@
                 <div class="storefront-content">
                     <div class="hero-editorial-frame">
                         <h1 class="hero-main-title">
-                            CERÁMICA PORTUGUESA <span class="text-mustard">POR KILO</span>
+                            <span class="hero-title-prefix"><span class="word-ceramica">CERÁMICA</span> <span class="word-portuguesa">PORTUGUESA</span></span>
+                            <span class="hero-title-kilo text-mustard"><span class="hero-word-por">POR</span> <span class="hero-word-kilo">KILO</span></span>
                         </h1>
                         <p class="hero-subtitle">Descubrí una nueva forma de elegir y disfrutar la cerámica.</p>
                     </div>
@@ -274,6 +276,8 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider section-divider--hero section-divider--star"></div>
 
         <!-- Banner Marquee -->
         <div class="marquee-container">
@@ -297,75 +301,129 @@
             </div>
         </div>
 
-        <!-- Atmosphere & Gallery Section -->
-        <section id="galeria" class="gallery-section-wrapper">
-            <div class="section-header text-center">
+        <div class="section-divider"></div>
+
+        <!-- Atmosphere & Gallery Section (Nuestra Casa - Mesas con Personalidad) -->
+        <section id="galeria" class="gallery-section-wrapper bento-section-wrapper">
+            <div class="section-header text-center bento-main-header">
                 <span class="section-tag">Nuestra casa</span>
                 <h2>Mesas con personalidad</h2>
                 <p class="section-subtitle">Colores de inspiración mediterránea, texturas que sorprenden, formas diferentes y una enorme variedad de piezas para crear mesas con estilo propio.</p>
             </div>
 
-            <!-- Native Pure CSS Carousel with Nav Arrows -->
-            <div class="casa-carousel-wrapper">
-                <button type="button" class="casa-nav-btn casa-nav-btn--prev is-hidden" id="casa-prev-btn" aria-label="Tarjeta anterior" style="display: none;">
-                    <svg viewBox="0 0 16 18" width="14" height="16" fill="none">
-                        <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                    </svg>
-                </button>
-                <button type="button" class="casa-nav-btn casa-nav-btn--next" id="casa-next-btn" aria-label="Tarjeta siguiente">
-                    <svg viewBox="0 0 16 18" width="14" height="16" fill="none">
-                        <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                    </svg>
-                </button>
-
-                <div class="casa-carousel" id="casaCarousel" role="region" aria-label="Carrusel Nuestra Casa">
-                    <!-- Tarjeta 1 -->
-                    <article class="casa-carousel-card" id="casa-card-1">
-                        <h3 class="casa-card-title">ORIGEN PORTUGUÉS</h3>
-                        <div class="casa-card-img-wrap">
+            <!-- Bento Grid Modular (Asimetría Clásica en Desktop / Touch Slider en Móvil) -->
+            <div class="bento-container-wrapper">
+                <div class="bento-grid" id="casaCarousel" role="region" aria-label="Mosaico Nuestra Casa">
+                    <!-- Tarjeta 1: Protagonista Alta (Izquierda) -->
+                    <article class="bento-card bento-card--tall bento-card--mustard" id="bento-card-1">
+                        <div class="bento-card-media">
                             <img src="images/casa-origen-portugues.webp"
                                 alt="Pueblo tradicional de Portugal con casas blancas y azules, flores y cerámica"
-                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
+                                class="bento-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
-                        <p class="casa-card-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                        <div class="bento-card-content">
+                            <h3 class="bento-card-title">Origen Portugués</h3>
+                            <p class="bento-card-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                        </div>
                     </article>
 
-                    <!-- Tarjeta 2 -->
-                    <article class="casa-carousel-card" id="casa-card-2">
-                        <h3 class="casa-card-title">DISEÑO EUROPEO</h3>
-                        <div class="casa-card-img-wrap">
+                    <!-- Tarjeta 2: Compacta (Arriba Centro) -->
+                    <article class="bento-card bento-card--compact bento-card--crema" id="bento-card-2">
+                        <div class="bento-card-media">
                             <img src="images/casa-colecciones-exclusivas.webp"
                                 alt="Diseño europeo con grabado floral clásico y borde ondeado en vajilla fina"
-                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
+                                class="bento-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
-                        <p class="casa-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                        <div class="bento-card-content">
+                            <h3 class="bento-card-title">Diseño Europeo</h3>
+                            <p class="bento-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                        </div>
                     </article>
 
-                    <!-- Tarjeta 3 -->
-                    <article class="casa-carousel-card" id="casa-card-3">
-                        <h3 class="casa-card-title">COLECCIONES EXCLUSIVAS</h3>
-                        <div class="casa-card-img-wrap">
+                    <!-- Tarjeta 3: Compacta (Arriba Derecha) -->
+                    <article class="bento-card bento-card--compact bento-card--mustard" id="bento-card-3">
+                        <div class="bento-card-media">
                             <img src="images/casa-diseno-europeo.webp"
                                 alt="Colección exclusiva de vajilla mediterránea y patrones florales sobre mesa de madera"
-                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
+                                class="bento-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
-                        <p class="casa-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                        <div class="bento-card-content">
+                            <h3 class="bento-card-title">Colecciones Exclusivas</h3>
+                            <p class="bento-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                        </div>
                     </article>
 
-                    <!-- Tarjeta 4 -->
-                    <article class="casa-carousel-card" id="casa-card-4">
-                        <h3 class="casa-card-title">VENTA POR KILO</h3>
-                        <div class="casa-card-img-wrap">
+                    <!-- Tarjeta 4: Apaisada Ancha (Abajo Derecha) -->
+                    <article class="bento-card bento-card--wide bento-card--crema" id="bento-card-4">
+                        <div class="bento-card-media">
                             <img src="images/casa-venta-kilo.webp"
                                 alt="Balanza tradicional de platillos dorada sobre mesa rústica"
-                                class="casa-card-img" width="800" height="600" loading="lazy" decoding="async" />
+                                class="bento-card-img" width="800" height="600" loading="lazy" decoding="async" />
                         </div>
-                        <p class="casa-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                        <div class="bento-card-content">
+                            <h3 class="bento-card-title">Venta por Kilo</h3>
+                            <p class="bento-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                        </div>
                     </article>
                 </div>
 
-                <!-- Dots para móvil como en Selección Festiva -->
-                <div class="bw-mobile-dots casa-mobile-dots" id="casa-dots"></div>
+                <!-- Dots para navegación táctil en móvil -->
+                <div class="bw-mobile-dots bento-mobile-dots" id="casa-dots"></div>
+            </div>
+
+            <!-- Mobile Vertical Zig-Zag Stack: Franjas sólidas alternadas (Visible únicamente en móvil < 768px) -->
+            <div class="casa-mobile-stack" aria-label="Pilares de Nuestra Casa">
+                <!-- Bloque 1 (Origen Portugués): Fondo Mostaza Claro / Foto IZQ / Textos DER -->
+                <article class="casa-pillar-mobile casa-pillar--left-img casa-pillar--mustard" id="casa-mobile-1">
+                    <div class="casa-pillar-image-wrap">
+                        <img src="images/casa-origen-portugues.webp"
+                            alt="Pueblo tradicional de Portugal con casas blancas y azules, flores y cerámica"
+                            class="casa-pillar-img" width="400" height="400" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="casa-pillar-text-wrap">
+                        <h3 class="casa-pillar-title">Origen Portugués</h3>
+                        <p class="casa-pillar-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                    </div>
+                </article>
+
+                <!-- Bloque 2 (Diseño Europeo): Fondo Crema / Textos IZQ / Foto DER -->
+                <article class="casa-pillar-mobile casa-pillar--right-img casa-pillar--crema" id="casa-mobile-2">
+                    <div class="casa-pillar-text-wrap">
+                        <h3 class="casa-pillar-title">Diseño Europeo</h3>
+                        <p class="casa-pillar-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                    </div>
+                    <div class="casa-pillar-image-wrap">
+                        <img src="images/casa-colecciones-exclusivas.webp"
+                            alt="Diseño europeo con grabado floral clásico y borde ondeado en vajilla fina"
+                            class="casa-pillar-img" width="400" height="400" loading="lazy" decoding="async" />
+                    </div>
+                </article>
+
+                <!-- Bloque 3 (Colecciones Exclusivas): Fondo Mostaza Claro / Foto IZQ / Textos DER -->
+                <article class="casa-pillar-mobile casa-pillar--left-img casa-pillar--mustard" id="casa-mobile-3">
+                    <div class="casa-pillar-image-wrap">
+                        <img src="images/casa-diseno-europeo.webp"
+                            alt="Colección exclusiva de vajilla mediterránea y patrones florales sobre mesa de madera"
+                            class="casa-pillar-img" width="400" height="400" loading="lazy" decoding="async" />
+                    </div>
+                    <div class="casa-pillar-text-wrap">
+                        <h3 class="casa-pillar-title">Colecciones Exclusivas</h3>
+                        <p class="casa-pillar-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                    </div>
+                </article>
+
+                <!-- Bloque 4 (Venta por Kilo): Fondo Crema / Textos IZQ / Foto DER -->
+                <article class="casa-pillar-mobile casa-pillar--right-img casa-pillar--crema" id="casa-mobile-4">
+                    <div class="casa-pillar-text-wrap">
+                        <h3 class="casa-pillar-title">Venta por Kilo</h3>
+                        <p class="casa-pillar-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                    </div>
+                    <div class="casa-pillar-image-wrap">
+                        <img src="images/casa-venta-kilo.webp"
+                            alt="Balanza tradicional de platillos dorada sobre mesa rústica"
+                            class="casa-pillar-img" width="400" height="400" loading="lazy" decoding="async" />
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -393,76 +451,105 @@
                 </div>
             </div>
 
+            <div class="section-divider section-divider--framed"></div>
+
             <div class="section-header text-center holiday-header">
                 <h2>Especial Fiestas</h2>
             </div>
 
-            <!-- 2-Image Split Editorial Block (Costa Nova Style) -->
-            <div class="holiday-split-container">
-                <div class="holiday-grid">
-                    <!-- Card 1: Mesa Navideña -->
-                    <div class="holiday-card" data-aos="fade-up">
-                        <div class="holiday-img-wrap">
-                            <img src="images/navidad-banner-1.webp?v=2"
-                                alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="683"
-                                height="716" loading="lazy" decoding="async" class="holiday-parallax-img">
-                            <div class="holiday-overlay"></div>
+            <div class="section-divider section-divider--framed"></div>
+
+            <!-- Bloques Fusionados de Fiestas: Carrusel + Editorial -->
+            <div class="holiday-fused-container">
+                <!-- Bloque 1: Carrusel 1 (Izq) + Foto 1 Mesa Navideña (Der) -->
+                <div class="holiday-combo-block holiday-combo--left-carousel" id="festive-combo-1" data-aos="fade-up">
+                    <div class="holiday-combo-carousel-pane">
+                        <div class="holiday-mini-carousel-header">
+                            <span class="holiday-pane-tag">Vajilla Festiva</span>
+                            <h3 class="holiday-pane-title">Prepará tu Mesa</h3>
                         </div>
-                        <div class="holiday-card-content">
-                            <span class="holiday-tag">Colección Fiestas</span>
-                            <h2 class="holiday-title">PREPARÁ TU MESA NAVIDEÑA</h2>
-                            <span class="holiday-subtext">Inspirate con nuestros artículos para estas fiestas.</span>
+                        <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
+                            <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-1" aria-label="Anterior">
+                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                    <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                            </button>
+                            <div class="bw-scroll-carousel" id="festive-viewport-1">
+                                <div class="bw-product-list" id="festive-track-1">
+                                    <!-- Inyectado dinámicamente por initFestiveCarousel() -->
+                                </div>
+                            </div>
+                            <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-1" aria-label="Siguiente">
+                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                    <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                            </button>
                         </div>
+                        <div class="bw-mobile-dots" id="festive-dots-1"></div>
                     </div>
 
-                    <!-- Card 2: Una Noche Especial -->
-                    <div class="holiday-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="holiday-img-wrap">
-                            <img src="images/navidad-banner-2.webp?v=2"
-                                alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
-                                height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
-                            <div class="holiday-overlay"></div>
-                        </div>
-                        <div class="holiday-card-content">
-                            <span class="holiday-tag">Espíritu Navideño</span>
-                            <h2 class="holiday-title">UNA NOCHE ESPECIAL</h2>
-                            <span class="holiday-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</span>
+                    <div class="holiday-combo-photo-pane">
+                        <div class="holiday-card holiday-card--fused">
+                            <div class="holiday-img-wrap">
+                                <img src="images/navidad-banner-1.webp?v=2"
+                                    alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="683"
+                                    height="716" loading="lazy" decoding="async" class="holiday-parallax-img">
+                                <div class="holiday-overlay"></div>
+                            </div>
+                            <div class="holiday-card-content">
+                                <span class="holiday-tag">Colección Fiestas</span>
+                                <h2 class="holiday-title">PREPARÁ TU MESA NAVIDEÑA</h2>
+                                <span class="holiday-subtext">Inspirate con nuestros artículos para estas fiestas.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Holiday Products Carousel: Selección Festiva -->
-            <div class="holiday-products-wrapper" data-aos="fade-up">
-                <div class="bestsellers-header text-center" style="margin-bottom: 30px;">
-                    <span class="section-tag">Colección Fiestas</span>
-                    <h2 class="bestsellers-heading"><em>Selección Festiva</em></h2>
-                    <p class="bestsellers-subheading">Piezas exclusivas para celebrar y compartir.</p>
-                </div>
+                <div class="holiday-combo-divider"></div>
 
-                <!-- Carrusel con Controles Flotantes estilo Bone & White -->
-                <div class="bw-carousel-wrapper">
-                    <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn" aria-label="Anterior">
-                        <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                            <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                        </svg>
-                    </button>
-
-                    <div class="bw-scroll-carousel" id="festive-viewport">
-                        <div class="bw-product-list" id="festive-track">
-                            <!-- Inyectado dinámicamente por initFestiveCarousel() -->
+                <!-- Bloque 2: Foto 2 Noche Especial (Izq) + Carrusel 2 (Der) -->
+                <div class="holiday-combo-block holiday-combo--left-photo" id="festive-combo-2" data-aos="fade-up">
+                    <div class="holiday-combo-photo-pane">
+                        <div class="holiday-card holiday-card--fused">
+                            <div class="holiday-img-wrap">
+                                <img src="images/navidad-banner-2.webp?v=2"
+                                    alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
+                                    height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
+                                <div class="holiday-overlay"></div>
+                            </div>
+                            <div class="holiday-card-content">
+                                <span class="holiday-tag">Espíritu Navideño</span>
+                                <h2 class="holiday-title">UNA NOCHE ESPECIAL</h2>
+                                <span class="holiday-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</span>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn" aria-label="Siguiente">
-                        <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                            <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                        </svg>
-                    </button>
+                    <div class="holiday-combo-carousel-pane">
+                        <div class="holiday-mini-carousel-header">
+                            <span class="holiday-pane-tag">Detalles Únicos</span>
+                            <h3 class="holiday-pane-title">Regalos & Momentos</h3>
+                        </div>
+                        <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
+                            <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-2" aria-label="Anterior">
+                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                    <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                            </button>
+                            <div class="bw-scroll-carousel" id="festive-viewport-2">
+                                <div class="bw-product-list" id="festive-track-2">
+                                    <!-- Inyectado dinámicamente por initFestiveCarousel() -->
+                                </div>
+                            </div>
+                            <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-2" aria-label="Siguiente">
+                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                    <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="bw-mobile-dots" id="festive-dots-2"></div>
+                    </div>
                 </div>
-
-                <!-- Dots para móvil -->
-                <div class="bw-mobile-dots" id="festive-dots"></div>
             </div>
         </section>
 
