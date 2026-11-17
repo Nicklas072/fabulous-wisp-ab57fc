@@ -297,12 +297,12 @@ body.has-hero:not(.past-hero) .awning-border {
 body.has-hero:not(.past-hero) .main-header,
 body.has-hero:not(.past-hero).scrolled .main-header {
     top: 76px !important; /* El final del toldo (85px) toca y besa apenas la parte superior del nav */
-    background-color: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border-top: 1px solid transparent !important;
-    border-bottom: 1px solid transparent !important;
-    box-shadow: none !important;
+    background-color: rgba(248, 245, 238, 0.94) !important;
+    backdrop-filter: blur(14px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(140%) !important;
+    border-top: none !important;
+    border-bottom: 1px solid rgba(226, 167, 39, 0.45) !important;
+    box-shadow: 0 4px 18px rgba(24, 20, 16, 0.06) !important;
     transition: top 0.4s ease,
                 background-color 0.4s ease,
                 backdrop-filter 0.4s ease,
@@ -310,55 +310,63 @@ body.has-hero:not(.past-hero).scrolled .main-header {
                 box-shadow 0.4s ease;
 }
 
-/* En el Hero: logo y links mantienen su color grafito coordinado con micro-sombra */
+/* En el Hero: logo y links mantienen su color grafito limpio y nítido */
 body.has-hero:not(.past-hero) .nav-logo {
-    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.95)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+    filter: none !important;
     transition: filter 0.35s ease, transform 0.3s ease;
 }
 
 body.has-hero:not(.past-hero) .nav-item {
     color: #1A1815 !important;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
-    font-weight: 600 !important;
+    text-shadow: none !important;
+    font-weight: 500 !important;
 }
 
 body.has-hero:not(.past-hero) .action-icon-link {
     color: #1A1815 !important;
-    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.95));
+    filter: none !important;
 }
 
-/* Botones interactivos principales (Corazón y Menú Hamburguesa) en cápsula de vidrio oscuro con ícono blanco */
+/* Botones interactivos principales (Corazón y Menú Hamburguesa) con estilo refinado */
 body.has-hero:not(.past-hero) .nav-heart-btn {
-    background: rgba(24, 21, 18, 0.45) !important;
-    backdrop-filter: blur(10px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(10px) saturate(140%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
-    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(26, 24, 21, 0.14) !important;
+    color: #1A1815 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    border-radius: var(--border-radius-sm, 6px) !important;
     transition: all 0.3s ease !important;
 }
 
+body.has-hero:not(.past-hero) .nav-heart-btn:hover {
+    background: #FFFFFF !important;
+    border-color: #E2A727 !important;
+    color: var(--color-mustard-dark, #C28B17) !important;
+    transform: scale(1.06) !important;
+    box-shadow: 0 4px 12px rgba(226, 167, 39, 0.22) !important;
+}
+
 body.has-hero:not(.past-hero) .nav-heart-btn .nav-heart-icon {
-    stroke: #FFFFFF !important;
-    color: #FFFFFF !important;
+    stroke: currentColor !important;
+    color: inherit !important;
 }
 
 body.has-hero:not(.past-hero) .nav-heart-badge {
     background-color: #E2A727 !important;
     color: #1A1815 !important;
     font-weight: 800 !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
 }
 
 body.has-hero:not(.past-hero) .menu-toggle-btn {
-    background: rgba(24, 21, 18, 0.45) !important;
-    backdrop-filter: blur(10px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(10px) saturate(140%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
-    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(26, 24, 21, 0.14) !important;
+    color: #1A1815 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    border-radius: var(--border-radius-sm, 6px) !important;
     padding: 7px 8px !important;
     width: 38px !important;
     height: 38px !important;
@@ -369,8 +377,8 @@ body.has-hero:not(.past-hero) .menu-toggle-btn {
 }
 
 body.has-hero:not(.past-hero) .menu-toggle-btn svg {
-    stroke: #FFFFFF !important;
-    color: #FFFFFF !important;
+    stroke: #1A1815 !important;
+    color: #1A1815 !important;
 }
 
 /* Al scrollear y salir del Hero: el toldo se mantiene visible */
@@ -665,10 +673,9 @@ body.scrolled .nav-item {
 
 /* Right: Action icons */
 .header-actions {
-    display: none; /* Hidden on desktop */
-    justify-content: flex-end;
+    display: inline-flex;
     align-items: center;
-    gap: 20px;
+    gap: 8px;
 }
 
 .action-icon-link {
@@ -1509,7 +1516,7 @@ body.drawer-open {
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
-        padding: clamp(165px, 28vh, 198px) 16px 20px 16px !important;
+        padding: clamp(108px, 16vh, 128px) 16px 20px 16px !important;
     }
 
     .hero-editorial-badge {
@@ -1996,42 +2003,42 @@ body.drawer-open {
     transform: translateY(3px);
 }
 
-/* --- Marquee (Aesthetic Mediterranean style - Inverted Light Warm Cream & Gold) --- */
+/* --- Marquee (Aesthetic Mediterranean Editorial Style - Modern, Clean & Minimal) --- */
 .marquee-container {
     margin-top: 0;
-    background-color: #EFE2CF;
-    background: linear-gradient(90deg, #EBDECA 0%, #F5EADA 28%, #FAF0E2 50%, #F5EADA 72%, #EBDECA 100%);
-    color: #B88014;
-    padding: 13px 0;
+    background-color: #F8F5EE;
+    color: var(--color-charcoal, #1C1917);
+    padding: 12px 0;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
-    border-top: 1.5px solid rgba(226, 167, 39, 0.65);
-    border-bottom: 1.5px solid rgba(226, 167, 39, 0.65);
-    box-shadow: 0 4px 14px rgba(45, 35, 20, 0.05);
+    border-top: 1px solid rgba(194, 139, 23, 0.28);
+    border-bottom: 1px solid rgba(194, 139, 23, 0.28);
+    box-shadow: none;
 }
 
 .marquee-content {
     display: inline-block;
-    animation: marquee 32s linear infinite; /* slightly slower, peaceful movement */
-    font-family: var(--font-heading, 'Lora'), Georgia, serif; /* Editorial serif tipografía */
-    font-size: 1.02rem;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0.6px;
-    color: #B88014;
+    animation: marquee 46s linear infinite; /* Ritmo sereno, pausado y elegante */
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.2px;
+    color: #26221D;
 }
 
 .marquee-content span {
-    padding: 0 40px;
+    padding: 0 32px;
     display: inline-flex;
     align-items: center;
 }
 
 .marquee-content .star-gold {
-    color: #B88014;
-    margin-right: 12px;
-    font-size: 0.9rem;
+    color: var(--color-mustard-dark, #C28B17);
+    margin-right: 14px;
+    font-size: 0.78rem;
+    opacity: 0.9;
     text-shadow: none;
 }
 
@@ -2047,7 +2054,7 @@ body.drawer-open {
 }
 
 .holiday-header {
-    padding: 16px 24px;
+    padding: clamp(34px, 4.5vw, 54px) 24px clamp(16px, 2.5vw, 26px) 24px;
 }
 
 .holiday-header h2 {
@@ -2063,39 +2070,43 @@ body.drawer-open {
 }
 
 .holiday-marquee-container {
-    background: linear-gradient(90deg, #153D27 0%, #1E5638 15%, #276C47 45%, #358B5C 50%, #276C47 55%, #1E5638 85%, #153D27 100%);
-    background-color: #1E5638; /* Más vivo y festivo: verde pino navideño */
-    color: #FAF7F0;
-    padding: 12px 0;
+    background: transparent;
+    background-color: transparent;
+    color: var(--color-charcoal, #1C1917);
+    padding: 13px 0;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
-    border-top: 1.5px solid var(--color-mostaza); /* Borde mostaza más visible y nítido */
-    border-bottom: 1.5px solid var(--color-mostaza);
-    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.28), inset 0 -1px 3px rgba(0, 0, 0, 0.25), 0 0 14px rgba(226, 167, 39, 0.2);
+    border-top: 2.5px solid #169B4D;
+    border-bottom: 2.5px solid #169B4D;
+    box-shadow: inset 0 1.5px 0 0 #D4AF37, inset 0 -1.5px 0 0 #D4AF37;
 }
 
 .holiday-marquee-content {
     display: inline-block;
     white-space: nowrap;
-    animation: marquee-reverse 34s linear infinite;
-    font-family: var(--font-heading, 'Lora'), Georgia, serif; /* Editorial serif tipografía */
-    font-size: 1.05rem;
-    font-weight: 600;
-    text-transform: none;
-    letter-spacing: 0.8px;
+    animation: marquee-reverse 44s linear infinite;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.2px;
+    color: #26221D;
 }
 
 .holiday-marquee-content .festive-item {
-    padding: 0 35px;
+    padding: 0 34px;
     display: inline-flex;
     align-items: center;
 }
 
+.holiday-marquee-content .festive-symbol,
 .holiday-marquee-content .star-gold {
-    color: var(--color-mostaza);
-    margin-right: 10px;
-    font-size: 0.9rem;
+    color: #D32F2F;
+    margin-right: 12px;
+    font-size: 0.72rem;
+    display: inline-block;
+    transform: translateY(-0.5px);
 }
 
 @keyframes marquee-reverse {
@@ -2121,10 +2132,10 @@ body.drawer-open {
 
 .holiday-card {
     position: relative;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
     overflow: hidden;
     background-color: var(--color-crema);
-    box-shadow: none;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
 .holiday-img-wrap {
@@ -2132,21 +2143,22 @@ body.drawer-open {
     width: 100%;
     height: clamp(500px, 48vw, 680px);
     overflow: hidden;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
 }
 
 .holiday-img-wrap img {
     position: absolute;
-    top: -15%;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 130%;
+    height: 100%;
     object-fit: cover;
     object-position: center center;
     display: block;
-    will-change: transform;
-    border-radius: 0 !important;
-    transition: transform 0.1s linear, filter 0.3s ease;
+    will-change: auto;
+    border-radius: 8px !important;
+    transform: none !important;
+    transition: filter 0.3s ease;
 }
 
 .holiday-card:hover .holiday-img-wrap img {
@@ -2158,64 +2170,74 @@ body.drawer-open {
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(20, 20, 20, 0.15) 0%,
-        rgba(20, 20, 20, 0.25) 50%,
-        rgba(20, 20, 20, 0.60) 100%
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.02) 45%,
+        rgba(20, 16, 12, 0.16) 75%,
+        rgba(20, 16, 12, 0.36) 100%
     );
+    pointer-events: none;
     transition: background 0.4s ease;
 }
 
 .holiday-card:hover .holiday-overlay {
     background: linear-gradient(
         180deg,
-        rgba(20, 20, 20, 0.10) 0%,
-        rgba(20, 20, 20, 0.20) 50%,
-        rgba(20, 20, 20, 0.50) 100%
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.02) 40%,
+        rgba(20, 16, 12, 0.20) 75%,
+        rgba(20, 16, 12, 0.42) 100%
     );
 }
 
 .holiday-card-content {
     position: absolute;
-    inset: 0;
+    bottom: clamp(14px, 2.5vw, 24px);
+    left: clamp(14px, 2.5vw, 24px);
+    right: clamp(14px, 2.5vw, 24px);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 24px;
+    align-items: flex-start;
+    text-align: left;
+    padding: clamp(16px, 2.2vw, 22px) clamp(18px, 2.5vw, 26px);
     z-index: 2;
     pointer-events: none;
+    background: rgba(253, 251, 247, 0.94);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid rgba(226, 167, 39, 0.35);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(28, 24, 20, 0.12);
 }
 
 .holiday-tag {
-    font-family: var(--font-body);
-    font-size: 0.74rem;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--color-mostaza);
-    margin-bottom: 12px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    color: var(--color-mustard-dark, #C28B17);
+    margin-bottom: 6px;
+    text-shadow: none !important;
 }
 
 .holiday-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.85rem, 3.2vw, 2.6rem);
-    color: #FFFFFF;
-    font-weight: 500;
-    margin: 0 0 10px 0;
-    line-height: 1.2;
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+    font-family: var(--font-heading, 'Lora', Georgia, serif);
+    font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+    color: #1C1917;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    line-height: 1.25;
+    text-shadow: none !important;
 }
 
 .holiday-subtext {
-    font-family: var(--font-body);
-    font-size: 0.98rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: #FFFFFF;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #5C554B;
     margin: 0;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+    text-shadow: none !important;
 }
 
 @media (max-width: 768px) {
@@ -2392,7 +2414,7 @@ body.drawer-open {
 
 /* Encabezado del mini-carrusel */
 .holiday-mini-carousel-header {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .holiday-combo--left-carousel .holiday-mini-carousel-header,
@@ -2402,23 +2424,34 @@ body.drawer-open {
 }
 
 .holiday-pane-tag {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.76rem;
     font-weight: 700;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--color-mostaza);
+    color: var(--color-mustard-dark, #C28B17);
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .holiday-pane-title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.45rem, 2.3vw, 1.95rem);
-    font-style: italic;
-    color: #2D2721;
-    margin: 0;
+    font-family: var(--font-heading, 'Lora', Georgia, serif);
+    font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+    font-style: normal;
+    font-weight: 500;
+    color: #1C1917;
+    margin: 0 0 10px 0;
     line-height: 1.25;
+    letter-spacing: -0.01em;
+}
+
+.holiday-pane-subtext {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #5C554B;
+    line-height: 1.5;
+    margin: 0;
 }
 
 /* Foto editorial adaptada al combo */
@@ -2427,9 +2460,10 @@ body.drawer-open {
     width: 100%;
     height: 100%;
     min-height: 480px;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
     overflow: hidden;
     background-color: var(--color-crema);
+    border: 1px solid rgba(226, 167, 39, 0.22);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -2439,7 +2473,7 @@ body.drawer-open {
     height: 100%;
     min-height: 480px;
     overflow: hidden;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
 }
 
 .holiday-card--fused .holiday-img-wrap img {
@@ -2450,13 +2484,14 @@ body.drawer-open {
     object-fit: cover;
     object-position: center center;
     display: block;
-    border-radius: 0 !important;
-    transition: transform 0.4s ease, filter 0.3s ease;
+    border-radius: 8px !important;
+    transform: none !important;
+    transition: filter 0.3s ease;
 }
 
 .holiday-card--fused:hover .holiday-img-wrap img {
-    transform: scale(1.03);
-    filter: brightness(1.04);
+    transform: none !important;
+    filter: brightness(1.02);
 }
 
 /* Mini Carrusel Wrapper y Tarjetas de Productos */
@@ -2484,21 +2519,21 @@ body.drawer-open {
     width: calc((100% - 16px) / 2);
     min-width: 220px;
     max-width: 320px;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
 }
 
 .holiday-mini-carousel-wrapper .bw-product-card__figure {
     aspect-ratio: 1 / 1 !important;
-    border-radius: 0 !important;
+    border-radius: 8px 8px 0 0 !important;
 }
 
 .holiday-mini-carousel-wrapper .bw-product-card__media,
-.holiday-mini-carousel-wrapper .bw-product-card__image,
-.holiday-mini-carousel-wrapper .bw-product-card__info {
-    border-radius: 0 !important;
+.holiday-mini-carousel-wrapper .bw-product-card__image {
+    border-radius: 8px 8px 0 0 !important;
 }
 
 .holiday-mini-carousel-wrapper .bw-product-card__info {
+    border-radius: 0 0 8px 8px !important;
     align-items: center !important;
     text-align: center !important;
     justify-content: center !important;
@@ -2579,6 +2614,29 @@ body.drawer-open {
 
     .holiday-mini-carousel-wrapper .bw-nav-btn--next {
         right: 2px;
+    }
+
+    .holiday-card-content {
+        bottom: 12px !important;
+        left: 12px !important;
+        right: 12px !important;
+        padding: 12px 14px !important;
+    }
+
+    .holiday-tag {
+        font-size: 0.65rem !important;
+        letter-spacing: 1.8px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .holiday-title {
+        font-size: 1.1rem !important;
+        margin-bottom: 4px !important;
+    }
+
+    .holiday-subtext {
+        font-size: 0.8rem !important;
+        line-height: 1.35 !important;
     }
 }
 
@@ -4159,11 +4217,11 @@ body.drawer-open {
 
 /* --- Base Bento Card Styles --- */
 .bento-card {
-    background-color: #FFFFFF;
-    border: 1px solid rgba(194, 139, 23, 0.2);
-    border-radius: 0 !important; /* Puntas rectas sin redondez */
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(194, 139, 23, 0.22);
+    border-radius: 8px !important; /* Esquinas sutilmente suavizadas para calidez artesanal */
     padding: 0;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 18px rgba(35, 25, 15, 0.04);
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -4174,36 +4232,31 @@ body.drawer-open {
 
 .bento-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(58, 42, 24, 0.1);
+    box-shadow: 0 14px 34px rgba(45, 32, 16, 0.09);
     border-color: var(--color-mustard, #E2A727);
 }
 
-/* Colores de fondo de las tarjetas Bento en Desktop (1 y 3 Mostaza Brillante / 2 y 4 Crema) */
+/* Fondo unificado blanco marfil para destacar la fotografía de la vajilla */
 #bento-card-1,
-#bento-card-3,
-.bento-card--mustard {
-    background-color: #F0B832 !important; /* Tarjetas 1 y 3: Mostaza Brillante y Luminoso */
-    border-color: rgba(184, 126, 15, 0.35);
-}
-
 #bento-card-2,
+#bento-card-3,
 #bento-card-4,
+.bento-card--mustard,
 .bento-card--crema,
 .bento-card--wide {
-    background-color: #FAF8F5 !important; /* Tarjetas 2 y 4: Crema de Fondo */
-    border-color: rgba(194, 139, 23, 0.2);
+    background-color: #FFFFFF !important;
+    border-color: rgba(194, 139, 23, 0.22);
 }
 
-#bento-card-1 .bento-card-desc,
-#bento-card-3 .bento-card-desc,
-.bento-card--mustard .bento-card-desc {
-    color: #2E281F;
+.bento-card .bento-card-title {
+    color: #1A1815 !important;
 }
 
-#bento-card-2 .bento-card-desc,
-#bento-card-4 .bento-card-desc,
+.bento-card .bento-card-desc,
+.bento-card--mustard .bento-card-desc,
 .bento-card--crema .bento-card-desc {
-    color: #444444;
+    color: #55504A !important;
+    line-height: 1.6;
 }
 
 .bento-card--wide:hover {
@@ -4395,33 +4448,32 @@ body.drawer-open {
         box-sizing: border-box !important;
     }
 
-    /* Cada pilar: franja de color sólido 100vw con 2 columnas en zig-zag */
+    /* Franjas con colores unificados en lino noble */
     .casa-pillar-mobile {
         position: relative !important;
         width: 100% !important;
         box-sizing: border-box !important;
         display: grid !important;
-        column-gap: 18px !important;
-        padding: 30px 20px !important; /* Espacio perimetral holgado dentro de cada franja */
+        column-gap: 20px !important;
+        padding: 26px 20px !important;
         align-items: center !important;
+        background-color: #FAF8F5 !important;
+        border-bottom: 1px solid rgba(194, 139, 23, 0.16) !important;
     }
 
-    /* Franjas con colores sólidos alternados */
-    .casa-pillar--mustard {
-        background-color: #F0B832 !important; /* Bloques 1 y 3: Mostaza Brillante y Luminoso */
-    }
-
-    .casa-pillar--mustard .casa-pillar-desc {
-        color: #2E281F !important;
-    }
-
+    .casa-pillar--mustard,
     .casa-pillar--crema {
-        background-color: #FAF8F5 !important; /* Bloques 2 y 4: Crema de Fondo */
+        background-color: #FAF8F5 !important;
+    }
+
+    .casa-pillar--mustard .casa-pillar-desc,
+    .casa-pillar--crema .casa-pillar-desc {
+        color: #55504A !important;
     }
 
     /* Bloques impares (1 y 3): Foto a la IZQUIERDA / Textos a la DERECHA */
     .casa-pillar--left-img {
-        grid-template-columns: 46% 1fr !important;
+        grid-template-columns: 44% 1fr !important;
     }
 
     .casa-pillar--left-img .casa-pillar-image-wrap {
@@ -4434,7 +4486,7 @@ body.drawer-open {
 
     /* Bloques pares (2 y 4): Textos a la IZQUIERDA / Foto a la DERECHA (Zig-Zag) */
     .casa-pillar--right-img {
-        grid-template-columns: 1fr 46% !important;
+        grid-template-columns: 1fr 44% !important;
     }
 
     .casa-pillar--right-img .casa-pillar-text-wrap {
@@ -4445,14 +4497,14 @@ body.drawer-open {
         grid-column: 2 !important;
     }
 
-    /* Imagen cuadrada (aspect-square) contenida 100% en su franja */
+    /* Imagen cuadrada (aspect-square) contenida 100% en su franja con bordes suaves */
     .casa-pillar-image-wrap {
         position: relative !important;
         width: 100% !important;
         aspect-ratio: 1 / 1 !important; /* Cuadrado perfecto */
         overflow: hidden !important;
-        border-radius: 0 !important; /* Bordes limpios sin redondeo */
-        box-shadow: 0 4px 14px rgba(35, 25, 15, 0.08) !important;
+        border-radius: 8px !important; /* Bordes suaves acordes a la cerámica */
+        box-shadow: 0 4px 14px rgba(35, 25, 15, 0.06) !important;
         border: 1px solid rgba(194, 139, 23, 0.20) !important;
         background-color: #E5D5C5 !important;
     }
@@ -4463,7 +4515,7 @@ body.drawer-open {
         object-fit: cover !important;
         object-position: center !important;
         display: block !important;
-        border-radius: 0 !important;
+        border-radius: 8px !important;
     }
 
     /* Contenedor de textos (Título + Párrafo agrupados) centrados verticalmente junto a la imagen */
@@ -5129,7 +5181,7 @@ body.drawer-open {
         min-height: 535px !important;
         height: 76vh !important;
         max-height: 600px !important;
-        padding: clamp(165px, 28vh, 198px) 16px 20px 16px !important;
+        padding: clamp(108px, 16vh, 128px) 16px 20px 16px !important;
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
@@ -6926,22 +6978,27 @@ body.drawer-open {
 .nav-heart-btn:hover {
     background: #FFFFFF;
     border-color: #E2A727;
-    color: #E0485A;
-    transform: scale(1.08);
+    color: var(--color-mustard-dark, #C28B17);
+    transform: scale(1.06);
     box-shadow: 0 4px 12px rgba(226, 167, 39, 0.22);
 }
 
 .nav-heart-icon {
-    width: 19px;
-    height: 19px;
+    width: 20px;
+    height: 20px;
     stroke: currentColor;
-    stroke-width: 2;
-    transition: stroke 0.2s ease, fill 0.2s ease;
+    stroke-width: 1.8;
+    transition: stroke 0.2s ease, transform 0.2s ease;
+}
+
+.nav-heart-btn.has-items {
+    border-color: rgba(226, 167, 39, 0.65);
+    background: #FFFFFF;
 }
 
 .nav-heart-btn.has-items .nav-heart-icon {
-    fill: #E0485A;
-    stroke: #E0485A;
+    color: var(--color-mustard-dark, #C28B17);
+    stroke: var(--color-mustard-dark, #C28B17);
 }
 
 .nav-heart-badge {
@@ -7141,7 +7198,7 @@ body.drawer-open {
     background: rgba(22, 19, 16, 0.60);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    z-index: 1000;
+    z-index: 10000;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -7159,8 +7216,11 @@ body.drawer-open {
     bottom: 0;
     width: 100%;
     max-width: 440px;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
     background: #FAF8F5;
-    z-index: 1001;
+    z-index: 10001;
     box-shadow: -10px 0 40px rgba(0, 0, 0, 0.28);
     transform: translateX(100%);
     visibility: hidden;
@@ -7169,6 +7229,7 @@ body.drawer-open {
     display: flex;
     flex-direction: column;
     border-left: 1px solid rgba(194, 139, 23, 0.25);
+    box-sizing: border-box;
 }
 
 .wishlist-drawer.open {
@@ -7179,12 +7240,13 @@ body.drawer-open {
 
 /* Header del Drawer */
 .wishlist-drawer__header {
-    padding: 20px 24px;
+    padding: 18px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     background: #FFFFFF;
+    flex-shrink: 0;
 }
 
 .wishlist-drawer__tag {
@@ -7207,32 +7269,37 @@ body.drawer-open {
 }
 
 .wishlist-drawer__close {
-    background: none;
-    border: none;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     cursor: pointer;
-    color: #4A4640;
-    padding: 6px;
+    color: #2E2A24;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    padding: 0;
+    flex-shrink: 0;
 }
 
 .wishlist-drawer__close:hover {
     color: #181818;
-    background: rgba(0, 0, 0, 0.06);
+    background: rgba(226, 167, 39, 0.15);
+    border-color: rgba(226, 167, 39, 0.4);
     transform: rotate(90deg);
 }
 
 /* Balanza Simpática en Cabecera del Drawer */
 .wishlist-drawer__scale-stage {
-    background: linear-gradient(180deg, #F5EFE6 0%, #EFE8DC 100%);
-    border-bottom: 1px solid rgba(194, 139, 23, 0.22);
-    padding: 16px 20px;
+    background: #F6F1E8;
+    border-bottom: 1px solid rgba(194, 139, 23, 0.20);
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-shrink: 0;
 }
 
 .sympathetic-scale {
@@ -7307,91 +7374,110 @@ body.drawer-open {
 
 /* Cuerpo con Lista de Artículos */
 .wishlist-drawer__body {
-    flex: 1;
+    flex: 1 1 auto;
+    min-height: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Fila de Artículo en la Balanza */
 .wishlist-item-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: #FAF9F6;
-    border: 1px solid rgba(226, 167, 39, 0.18);
-    border-radius: 8px;
-    padding: 10px 12px;
-    box-shadow: 0 2px 8px rgba(58, 42, 24, 0.04);
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(226, 167, 39, 0.22) !important;
+    border-radius: 10px !important;
+    padding: 10px 12px !important;
+    box-shadow: 0 2px 8px rgba(58, 42, 24, 0.04) !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .wishlist-item-card:hover {
-    border-color: rgba(226, 167, 39, 0.5);
+    border-color: rgba(226, 167, 39, 0.55) !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(58, 42, 24, 0.08);
+    box-shadow: 0 4px 14px rgba(58, 42, 24, 0.08) !important;
 }
 
 .wishlist-item-thumb {
-    width: 64px;
-    height: 64px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
+    width: 68px !important;
+    height: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+    min-height: 68px !important;
+    max-height: 68px !important;
+    aspect-ratio: 1 / 1 !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    flex-shrink: 0 !important;
     background: #FAF9F6;
-    border: 1px solid rgba(226, 167, 39, 0.18);
-    filter: var(--img-filter-editorial);
-    transition: var(--img-transition);
+    border: 1px solid rgba(226, 167, 39, 0.20) !important;
 }
 
 .wishlist-item-details {
-    flex: 1;
-    min-width: 0;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
 }
 
 .wishlist-item-name {
-    font-family: var(--font-heading, 'Lora'), Georgia, serif;
-    font-size: 0.94rem;
-    font-weight: 600;
-    color: #1C1A17;
-    margin: 0 0 4px 0;
-    line-height: 1.25;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-family: var(--font-heading, 'Lora'), Georgia, serif !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    color: #1C1A17 !important;
+    margin: 0 0 3px 0 !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .wishlist-item-weight {
-    font-size: 0.78rem;
-    color: #6E685F;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 4px;
+    font-size: 0.76rem !important;
+    color: #6E685F !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-bottom: 3px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .wishlist-item-price {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #B57D0D;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: #B57D0D !important;
+    line-height: 1.2 !important;
 }
 
 .wishlist-item-actions {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 6px !important;
+    flex-shrink: 0 !important;
 }
 
 .wishlist-qty-group {
-    display: flex;
-    align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-    overflow: hidden;
-    background: #FAF8F5;
+    display: flex !important;
+    align-items: center !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    background: #FAF8F5 !important;
 }
 
 .wishlist-qty-btn {
@@ -7473,11 +7559,35 @@ body.drawer-open {
     margin: 0;
 }
 
+.btn-empty-explore {
+    background: #FFFFFF;
+    color: #1A1815;
+    border: 1px solid rgba(194, 139, 23, 0.45);
+    padding: 9px 20px;
+    border-radius: 999px;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.btn-empty-explore:hover {
+    background: #E2A727;
+    border-color: #E2A727;
+    color: #1A1815;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(226, 167, 39, 0.25);
+}
+
 /* Footer del Drawer */
 .wishlist-drawer__footer {
     padding: 18px 22px 22px 22px;
     background: #FFFFFF;
     border-top: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
 }
 
 .wishlist-drawer__hint {
@@ -7564,7 +7674,36 @@ body.drawer-open {
         right: -3px;
     }
     .wishlist-drawer {
-        max-width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        border-left: none !important;
+    }
+    .wishlist-drawer__header {
+        padding: 14px 18px !important;
+        padding-top: max(14px, env(safe-area-inset-top)) !important;
+    }
+    .wishlist-drawer__title {
+        font-size: 1.35rem !important;
+    }
+    .wishlist-drawer__scale-stage {
+        padding: 10px 14px !important;
+        gap: 12px !important;
+    }
+    .sympathetic-scale {
+        width: 52px !important;
+        height: 40px !important;
+    }
+    .readout-value {
+        font-size: 1.02rem !important;
+    }
+    .wishlist-drawer__body {
+        padding: 14px 16px !important;
+    }
+    .wishlist-drawer__footer {
+        padding: 14px 18px max(16px, env(safe-area-inset-bottom)) 18px !important;
     }
 }
 
@@ -8336,8 +8475,7 @@ body.drawer-open {
 /* 4. Tarjetas de Producto, Selección Festiva, Alacena y Tendencias (Luz limpia, sepia 0) */
 .gallery-photo,
 .bw-product-card__image,
-.trend-img-wrapper img,
-.wishlist-item-thumb {
+.trend-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -8348,8 +8486,7 @@ body.drawer-open {
 
 .shelf-piece-tile:hover .gallery-photo,
 .bw-product-card:hover .bw-product-card__image,
-.trend-card:hover .trend-img-wrapper img,
-.wishlist-item-card:hover .wishlist-item-thumb {
+.trend-card:hover .trend-img-wrapper img {
     transform: scale(var(--img-hover-scale));
     filter: var(--img-filter-editorial-hover);
 }

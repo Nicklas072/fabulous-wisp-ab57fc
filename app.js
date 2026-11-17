@@ -2163,36 +2163,7 @@ const initCasaCarousel = () => {
 };
 
 const initHolidayParallax = () => {
-    const cards = document.querySelectorAll('.holiday-card');
-    if (!cards.length) return;
-
-    let ticking = false;
-
-    const onScroll = () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const windowHeight = window.innerHeight;
-                cards.forEach((card) => {
-                    const rect = card.getBoundingClientRect();
-                    if (rect.bottom > -60 && rect.top < windowHeight + 60) {
-                        const img = card.querySelector('.holiday-parallax-img');
-                        if (img) {
-                            const centerOffset = (rect.top + rect.height / 2) - (windowHeight / 2);
-                            const ratio = centerOffset / (windowHeight / 2);
-                            const translateY = ratio * 48;
-                            img.style.transform = `translate3d(0, ${translateY.toFixed(1)}px, 0)`;
-                        }
-                    }
-                });
-                ticking = false;
-            });
-            ticking = true;
-        }
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    onScroll();
+    // Parallax removido: imágenes estáticas, naturales y nítidas
 };
 
 // --- Modal informativo B2B en preparación ---
@@ -2522,22 +2493,33 @@ const updateWishlistUI = () => {
             drawerBody.innerHTML = `
                 <div class="wishlist-empty-state">
                     <svg class="wishlist-empty-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor">
-                        <path d="M22 58h20 M26 58c0-3 3-5 6-5s6 2 6 5 M32 16v37" stroke-width="2.5" stroke-linecap="round"/>
-                        <circle cx="32" cy="14" r="3"/>
-                        <path d="M12 18h40" stroke-width="2.5" stroke-linecap="round"/>
-                        <line x1="14" y1="18" x2="8" y2="34" stroke-width="1.2"/>
-                        <line x1="14" y1="18" x2="20" y2="34" stroke-width="1.2"/>
-                        <path d="M6 34c1 4 7 6 8 6s7-2 8-6z" stroke-width="1"/>
-                        <line x1="50" y1="18" x2="44" y2="34" stroke-width="1.2"/>
-                        <line x1="50" y1="18" x2="56" y2="34" stroke-width="1.2"/>
-                        <path d="M42 34c1 4 7 6 8 6s7-2 8-6z" stroke-width="1"/>
+                        <path d="M22 58h20 M26 58c0-3 3-5 6-5s6 2 6 5 M32 16v37" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="32" cy="14" r="3" stroke-width="2"/>
+                        <path d="M12 18h40" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="14" y1="18" x2="8" y2="34" stroke-width="1.4"/>
+                        <line x1="14" y1="18" x2="20" y2="34" stroke-width="1.4"/>
+                        <path d="M6 34c1 4 7 6 8 6s7-2 8-6z" stroke-width="1.2"/>
+                        <line x1="50" y1="18" x2="44" y2="34" stroke-width="1.4"/>
+                        <line x1="50" y1="18" x2="56" y2="34" stroke-width="1.4"/>
+                        <path d="M42 34c1 4 7 6 8 6s7-2 8-6z" stroke-width="1.2"/>
                     </svg>
-                    <h4 class="wishlist-empty-title">Tu balanza está liviana</h4>
+                    <h4 class="wishlist-empty-title">Tu balanza está vacía</h4>
                     <p class="wishlist-empty-desc">
-                        Hacé clic en el corazón ♥ de tus cerámicas favoritas para colocarlas en la balanza, pesarlas y reservarlas.
+                        Elegí tus cerámicas favoritas para colocarlas en la balanza, conocer su peso acumulado y reservar tu pedido.
                     </p>
+                    <button type="button" class="btn-empty-explore" id="btnEmptyExplore">
+                        Explorar Colección
+                    </button>
                 </div>
             `;
+            const btnExplore = document.getElementById('btnEmptyExplore');
+            if (btnExplore) {
+                btnExplore.addEventListener('click', () => {
+                    closeWishlistDrawer();
+                    const galeria = document.getElementById('galeria');
+                    if (galeria) galeria.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
         } else {
             drawerBody.innerHTML = '';
             basket.forEach(item => {

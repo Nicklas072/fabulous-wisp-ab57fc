@@ -62,7 +62,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261110_b2b">
+    <link rel="stylesheet" href="styles.min.css?v=20261117_cleanphotos">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -163,27 +163,30 @@
                     <a href="#contacto" class="nav-item">Contacto</a>
                 </nav>
 
-                <!-- Botón Corazón Balanza en Nav -->
+                <!-- Botón Balanza en Nav -->
                 <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza"
-                    title="Piezas que me gustan / Mi Balanza">
-                    <svg viewBox="0 0 24 24" class="nav-heart-icon" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    title="Mi Balanza / Piezas pesadas">
+                    <svg viewBox="0 0 24 24" class="nav-heart-icon nav-scale-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Platillo izquierdo -->
+                        <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                        <!-- Platillo derecho -->
+                        <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+                        <!-- Eje central y brazo de balanza -->
+                        <path d="M7 21h10" />
+                        <path d="M12 3v18" />
+                        <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" />
                     </svg>
                     <span class="nav-heart-badge" id="navHeartBadge">0</span>
                 </button>
 
                 <div class="header-actions">
                     <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link"
-                        aria-label="Contacto WhatsApp">
+                        aria-label="Contacto WhatsApp" title="Escribinos por WhatsApp">
                         <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
                                 d="M12.012 2c-5.506 0-9.989 4.478-9.989 9.984a9.96 9.96 0 0 0 1.333 4.993L2 22l5.233-1.371a9.918 9.918 0 0 0 4.779 1.229h.004c5.505 0 9.988-4.478 9.989-9.984C22 6.478 17.517 2 12.012 2zm6.671 14.288c-.28.786-1.42 1.442-1.954 1.543-.51.096-1.176.173-3.393-.746-2.836-1.178-4.664-4.062-4.806-4.25-.14-.187-1.139-1.516-1.139-2.893 0-1.376.702-2.054.982-2.33.279-.276.613-.346.818-.346.205 0 .41.002.589.01.187.009.439-.071.688.529.255.613.867 2.112.942 2.262.075.15.125.326.025.524-.099.198-.149.317-.299.49-.15.174-.316.388-.451.52-.15.148-.307.309-.133.608.174.299.774 1.277 1.66 2.068.756.674 1.391.881 1.59.98.198.1.317.085.437-.053.118-.139.514-.6.653-.805.139-.204.278-.172.467-.101.19.071 1.205.568 1.413.673.208.104.347.155.397.243.05.088.05.509-.129 1.295z" />
                         </svg>
-                    </a>
-                    <a href="#servicios" class="action-icon-link" aria-label="Servicios Especiales">
-                        <i data-lucide="concierge-bell"></i>
                     </a>
                 </div>
 
@@ -277,31 +280,25 @@
             </div>
         </section>
 
-        <div class="section-divider section-divider--hero section-divider--star"></div>
-
-        <!-- Banner Marquee -->
-        <div class="marquee-container">
+        <!-- Banner Marquee (Minimalist Editorial) -->
+        <div class="marquee-container" aria-label="Valores de marca">
             <div class="marquee-content">
-                <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
-                <span><span class="star-gold">✦</span> Creá tu espacio</span>
-                <span><span class="star-gold">✦</span> Mesas con alma</span>
-                <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
-                <span><span class="star-gold">✦</span> Espacio Inspirador</span>
-                <span><span class="star-gold">✦</span> Piezas Únicas</span>
-                <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
-                <span><span class="star-gold">✦</span> Más que vajillas</span>
-                <span><span class="star-gold">✦</span> Cerámica por Kilo</span>
-                <span><span class="star-gold">✦</span> Creá tu espacio</span>
-                <span><span class="star-gold">✦</span> Mesas con alma</span>
-                <span><span class="star-gold">✦</span> Muebles con Personalidad</span>
-                <span><span class="star-gold">✦</span> Espacio Inspirador</span>
-                <span><span class="star-gold">✦</span> Piezas Únicas</span>
-                <span><span class="star-gold">✦</span> Diseñá tu mesa</span>
-                <span><span class="star-gold">✦</span> Más que vajillas</span>
+                <span><span class="star-gold">✦</span> Cerámica Artesanal por Kilo</span>
+                <span><span class="star-gold">✦</span> Tradición y Diseño Portugués</span>
+                <span><span class="star-gold">✦</span> Mesas con Alma</span>
+                <span><span class="star-gold">✦</span> Gres Cerámico de Alta Calidad</span>
+                <span><span class="star-gold">✦</span> Piezas Únicas de Autor</span>
+                <span><span class="star-gold">✦</span> Apto Lavavajillas y Microondas</span>
+                <span><span class="star-gold">✦</span> Punta Piedras · Uruguay</span>
+                <span><span class="star-gold">✦</span> Cerámica Artesanal por Kilo</span>
+                <span><span class="star-gold">✦</span> Tradición y Diseño Portugués</span>
+                <span><span class="star-gold">✦</span> Mesas con Alma</span>
+                <span><span class="star-gold">✦</span> Gres Cerámico de Alta Calidad</span>
+                <span><span class="star-gold">✦</span> Piezas Únicas de Autor</span>
+                <span><span class="star-gold">✦</span> Apto Lavavajillas y Microondas</span>
+                <span><span class="star-gold">✦</span> Punta Piedras · Uruguay</span>
             </div>
         </div>
-
-        <div class="section-divider"></div>
 
         <!-- Atmosphere & Gallery Section (Nuestra Casa - Mesas con Personalidad) -->
         <section id="galeria" class="gallery-section-wrapper bento-section-wrapper">
@@ -432,32 +429,28 @@
             <!-- Holiday Marquee Banner (Reverse Direction) -->
             <div class="holiday-marquee-container" aria-label="Temática navideña">
                 <div class="holiday-marquee-content">
-                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Navidad</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Regalos</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Familia</span>
-                    <span class="festive-item"><span class="star-gold">✦</span> Felicidades</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Navidad</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Regalos</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Familia</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Felicidades</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Navidad</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Regalos</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Familia</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Felicidades</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Navidad</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Regalos</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Familia</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Felicidades</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Navidad</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Regalos</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Familia</span>
+                    <span class="festive-item"><span class="festive-symbol">♦</span> Felicidades</span>
                 </div>
             </div>
-
-            <div class="section-divider section-divider--framed"></div>
 
             <div class="section-header text-center holiday-header">
                 <h2>Especial Fiestas</h2>
             </div>
-
-            <div class="section-divider section-divider--framed"></div>
 
             <!-- Bloques Fusionados de Fiestas: Carrusel + Editorial -->
             <div class="holiday-fused-container">
@@ -465,8 +458,9 @@
                 <div class="holiday-combo-block holiday-combo--left-carousel" id="festive-combo-1" data-aos="fade-up">
                     <div class="holiday-combo-carousel-pane">
                         <div class="holiday-mini-carousel-header">
-                            <span class="holiday-pane-tag">Vajilla Festiva</span>
-                            <h3 class="holiday-pane-title">Prepará tu Mesa</h3>
+                            <span class="holiday-pane-tag">Colección Fiestas</span>
+                            <h3 class="holiday-pane-title">PREPARÁ TU MESA NAVIDEÑA</h3>
+                            <p class="holiday-pane-subtext">Inspirate con nuestros artículos para estas fiestas.</p>
                         </div>
                         <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
                             <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-1" aria-label="Anterior">
@@ -493,13 +487,7 @@
                             <div class="holiday-img-wrap">
                                 <img src="images/navidad-banner-1.webp?v=2"
                                     alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="683"
-                                    height="716" loading="lazy" decoding="async" class="holiday-parallax-img">
-                                <div class="holiday-overlay"></div>
-                            </div>
-                            <div class="holiday-card-content">
-                                <span class="holiday-tag">Colección Fiestas</span>
-                                <h2 class="holiday-title">PREPARÁ TU MESA NAVIDEÑA</h2>
-                                <span class="holiday-subtext">Inspirate con nuestros artículos para estas fiestas.</span>
+                                    height="716" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -514,21 +502,16 @@
                             <div class="holiday-img-wrap">
                                 <img src="images/navidad-banner-2.webp?v=2"
                                     alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
-                                    height="1024" loading="lazy" decoding="async" class="holiday-parallax-img">
-                                <div class="holiday-overlay"></div>
-                            </div>
-                            <div class="holiday-card-content">
-                                <span class="holiday-tag">Espíritu Navideño</span>
-                                <h2 class="holiday-title">UNA NOCHE ESPECIAL</h2>
-                                <span class="holiday-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</span>
+                                    height="1024" loading="lazy" decoding="async">
                             </div>
                         </div>
                     </div>
 
                     <div class="holiday-combo-carousel-pane">
                         <div class="holiday-mini-carousel-header">
-                            <span class="holiday-pane-tag">Detalles Únicos</span>
-                            <h3 class="holiday-pane-title">Regalos & Momentos</h3>
+                            <span class="holiday-pane-tag">Espíritu Navideño</span>
+                            <h3 class="holiday-pane-title">UNA NOCHE ESPECIAL</h3>
+                            <p class="holiday-pane-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</p>
                         </div>
                         <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
                             <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-2" aria-label="Anterior">
@@ -836,7 +819,10 @@
                 <h3 class="wishlist-drawer__title">Tu Balanza</h3>
             </div>
             <button type="button" class="wishlist-drawer__close" id="wishlistCloseBtn" aria-label="Cerrar balanza">
-                <i data-lucide="x"></i>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
             </button>
         </div>
 
@@ -902,7 +888,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261110_b2b" defer></script>
+    <script src="app.min.js?v=20261117_noparallax" defer></script>
 
 
 </body>
