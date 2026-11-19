@@ -1642,7 +1642,54 @@ const FESTIVE_CAROUSEL_ITEMS = [
 ];
 
 const initFestiveCarousel = () => {
-    const setupMiniFestiveCarousel = (trackId, viewportId, prevBtnId, nextBtnId, dotsId, items) => {
+    function createFestiveProductCard(item) {
+        const card = document.createElement('article');
+        card.className = 'bw-product-card';
+        card.setAttribute('data-id', item.id);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Ver ${item.name} en Instagram`);
+
+        card.innerHTML = `
+            <div class="bw-product-card__figure">
+                <div class="bw-product-card__media">
+                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
+                        <svg viewBox="0 0 24 24" class="card-heart-svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                    <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
+                    <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
+                </div>
+            </div>
+            <div class="bw-product-card__info">
+                <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
+            </div>
+        `;
+
+        let wasDragging = false;
+        card.addEventListener('click', (e) => {
+            if (wasDragging) {
+                e.preventDefault();
+                return;
+            }
+            if (e.target.closest('.card-heart-btn')) return;
+            if (e.target.closest('.gallery-view-hint')) return;
+            openFestiveViewerModal(item);
+        });
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint')) return;
+                e.preventDefault();
+                openFestiveViewerModal(item);
+            }
+        });
+
+        return card;
+    }
+
+    function setupMiniFestiveCarousel(trackId, viewportId, prevBtnId, nextBtnId, dotsId, items) {
         const track = document.getElementById(trackId);
         const viewport = document.getElementById(viewportId);
         const prevBtn = document.getElementById(prevBtnId);
@@ -1657,50 +1704,7 @@ const initFestiveCarousel = () => {
         let wasDragging = false;
 
         items.forEach((item, idx) => {
-            const card = document.createElement('article');
-            card.className = 'bw-product-card';
-            card.setAttribute('data-id', item.id);
-            card.setAttribute('role', 'button');
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('aria-label', `Ver ${item.name} en Instagram`);
-
-            card.innerHTML = `
-                <div class="bw-product-card__figure">
-                    <div class="bw-product-card__media">
-                        <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                            <svg viewBox="0 0 24 24" class="card-heart-svg">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                        </button>
-                        <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
-                    </div>
-                </div>
-                <div class="bw-product-card__info">
-                    <span class="bw-product-title" style="cursor: pointer;">${item.name}</span>
-                </div>
-            `;
-
-            card.addEventListener('click', (e) => {
-                if (wasDragging) {
-                    e.preventDefault();
-                    return;
-                }
-                if (e.target.closest('.card-heart-btn')) return;
-                if (e.target.closest('.gallery-view-hint')) {
-                    return;
-                }
-                openFestiveViewerModal(item);
-            });
-
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    if (e.target.closest('.card-heart-btn') || e.target.closest('.gallery-view-hint')) return;
-                    e.preventDefault();
-                    openFestiveViewerModal(item);
-                }
-            });
-
+            const card = createFestiveProductCard(item);
             track.appendChild(card);
 
             if (dotsContainer) {
@@ -1798,15 +1802,61 @@ const initFestiveCarousel = () => {
         });
 
         setTimeout(updateNavButtons, 100);
-    };
+    }
 
-    // Bloque 1: Mesa Navideña (5 artículos)
-    const items1 = FESTIVE_CAROUSEL_ITEMS.slice(0, 5);
-    setupMiniFestiveCarousel('festive-track-1', 'festive-viewport-1', 'festive-prev-btn-1', 'festive-next-btn-1', 'festive-dots-1', items1);
+    // Bloque 1: Mesa Navideña (4 artículos en Grilla 2x2 en PC / Carrusel deslizable en Móvil)
+    const track1 = document.getElementById('festive-track-1');
+    const dots1 = document.getElementById('festive-dots-1');
+    const items1 = FESTIVE_CAROUSEL_ITEMS.slice(0, 4);
 
-    // Bloque 2: Regalos & Noche Especial (5 artículos)
-    const items2 = FESTIVE_CAROUSEL_ITEMS.slice(5);
-    setupMiniFestiveCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
+    if (track1) {
+        track1.innerHTML = '';
+        if (dots1) dots1.innerHTML = '';
+
+        items1.forEach((item, idx) => {
+            const card = createFestiveProductCard(item);
+            track1.appendChild(card);
+
+            if (dots1) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+                dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
+                dot.addEventListener('click', () => {
+                    const cardEl = track1.querySelectorAll('.bw-product-card')[idx];
+                    if (cardEl) {
+                        track1.scrollTo({
+                            left: cardEl.offsetLeft - track1.offsetLeft,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                dots1.appendChild(dot);
+            }
+        });
+
+        const updateDots1 = () => {
+            if (!dots1) return;
+            const dots = dots1.querySelectorAll('.bw-dot');
+            const cards = track1.querySelectorAll('.bw-product-card');
+            const scrollMiddle = track1.scrollLeft + (track1.clientWidth / 2);
+            cards.forEach((card, i) => {
+                const cLeft = card.offsetLeft - track1.offsetLeft;
+                const cRight = cLeft + card.offsetWidth;
+                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[i]) dots[i].classList.add('active');
+                }
+            });
+        };
+        track1.addEventListener('scroll', updateDots1, { passive: true });
+    }
+
+    // Bloque 2: Regalos & Noche Especial (6 artículos restantes)
+    const items2 = FESTIVE_CAROUSEL_ITEMS.slice(4);
+    if (document.getElementById('festive-track-2')) {
+        setupMiniFestiveCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
+    }
 
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
@@ -2256,16 +2306,16 @@ const initB2BInterception = () => {
     });
 };
 
-// Eventos de cierre del modal
-document.addEventListener('DOMContentLoaded', () => {
-    initAparador();
-    initProductosKiloCarousel();
-    initFestiveCarousel();
-    initCasaCarousel();
-    initHolidayParallax();
-    initTrendsModal();
-    initWishlistAndBalanzaSystem();
-    initB2BInterception();
+// Inicialización segura de módulos al cargar el DOM o si ya está listo
+const startApp = () => {
+    try { initAparador(); } catch (e) { console.error('Error en initAparador:', e); }
+    try { initProductosKiloCarousel(); } catch (e) { console.error('Error en initProductosKiloCarousel:', e); }
+    try { initFestiveCarousel(); } catch (e) { console.error('Error en initFestiveCarousel:', e); }
+    try { initCasaCarousel(); } catch (e) { console.error('Error en initCasaCarousel:', e); }
+    try { initHolidayParallax(); } catch (e) { console.error('Error en initHolidayParallax:', e); }
+    try { initTrendsModal(); } catch (e) { console.error('Error en initTrendsModal:', e); }
+    try { initWishlistAndBalanzaSystem(); } catch (e) { console.error('Error en initWishlistAndBalanzaSystem:', e); }
+    try { initB2BInterception(); } catch (e) { console.error('Error en initB2BInterception:', e); }
 
     const modal = document.getElementById('aparador-modal');
     const closeBtn = document.getElementById('aparador-modal-close');
@@ -2308,7 +2358,17 @@ document.addEventListener('DOMContentLoaded', () => {
             closeFestiveViewerModal();
         }
     });
-});
+
+    if (typeof lucide !== 'undefined' && lucide.createIcons) {
+        lucide.createIcons();
+    }
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+} else {
+    startApp();
+}
 
 // ==========================================================================
 // FEATURE: BALANZA FLOTANTE DE DOS PLATILLOS + CORAZONES + DRAWER DE RESERVA

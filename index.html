@@ -47,8 +47,10 @@
     <meta name="twitter:image" content="https://www.baskula.com/images/hero-single.jpg">
 
     <!-- Preload LCP Hero Image en formato WebP (Desktop & Mobile) -->
-    <link rel="preload" as="image" href="images/hero-single-desktop.webp?v=20261114_trim280" type="image/webp" media="(min-width: 992px)" fetchpriority="high">
-    <link rel="preload" as="image" href="images/hero-single.webp?v=20261114_crop" type="image/webp" media="(max-width: 991px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-desktop-hortensias.webp?v=20261118_newphoto" type="image/webp"
+        media="(min-width: 992px)" fetchpriority="high">
+    <link rel="preload" as="image" href="images/hero-single.webp?v=20261114_crop" type="image/webp"
+        media="(max-width: 991px)" fetchpriority="high">
 
     <!-- Preconnect a orígenes externos (mejora tiempo de carga) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +64,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261117_cleanphotos">
+    <link rel="stylesheet" href="styles.min.css?v=20261119_mobile_perfected">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -159,14 +161,15 @@
             <!-- Right: Navigation Menu & Actions -->
             <div class="header-right">
                 <nav class="nav-menu">
-                    <a href="b2b.html" class="nav-item nav-item--b2b" title="División Profesional B2B · Hoteles, Restaurantes e Interiorismo">B2B</a>
-                    <a href="#contacto" class="nav-item">Contacto</a>
+                    <a href="b2b.html" class="nav-item nav-item--b2b"
+                        title="División Profesional B2B · Hoteles, Restaurantes e Interiorismo">B2B</a>
                 </nav>
 
                 <!-- Botón Balanza en Nav -->
                 <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza"
                     title="Mi Balanza / Piezas pesadas">
-                    <svg viewBox="0 0 24 24" class="nav-heart-icon nav-scale-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" class="nav-heart-icon nav-scale-icon" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <!-- Platillo izquierdo -->
                         <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
                         <!-- Platillo derecho -->
@@ -266,14 +269,18 @@
                 <div class="storefront-content">
                     <div class="hero-editorial-frame">
                         <h1 class="hero-main-title">
-                            <span class="hero-title-prefix"><span class="word-ceramica">CERÁMICA</span> <span class="word-portuguesa">PORTUGUESA</span></span>
-                            <span class="hero-title-kilo text-mustard"><span class="hero-word-por">POR</span> <span class="hero-word-kilo">KILO</span></span>
+                            <span class="hero-title-prefix"><span class="word-ceramica">CERÁMICA</span> <span
+                                    class="word-portuguesa">PORTUGUESA</span></span>
+                            <span class="hero-title-kilo text-mustard"><span class="hero-word-por">POR</span> <span
+                                    class="hero-word-kilo">KILO</span></span>
                         </h1>
+                        <div class="hero-editorial-divider" aria-hidden="true"></div>
                         <p class="hero-subtitle">Descubrí una nueva forma de elegir y disfrutar la cerámica.</p>
                     </div>
                     <a href="#galeria" class="hero-scroll-arrow" aria-label="Ir a la siguiente sección">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M6 9l6 6 6-6"/>
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 9l6 6 6-6" />
                         </svg>
                     </a>
                 </div>
@@ -300,12 +307,15 @@
             </div>
         </div>
 
+        <div class="section-divider"></div>
+
         <!-- Atmosphere & Gallery Section (Nuestra Casa - Mesas con Personalidad) -->
         <section id="galeria" class="gallery-section-wrapper bento-section-wrapper">
             <div class="section-header text-center bento-main-header">
                 <span class="section-tag">Nuestra casa</span>
                 <h2>Mesas con personalidad</h2>
-                <p class="section-subtitle">Colores de inspiración mediterránea, texturas que sorprenden, formas diferentes y una enorme variedad de piezas para crear mesas con estilo propio.</p>
+                <p class="section-subtitle">Colores de inspiración mediterránea, texturas que sorprenden, formas
+                    diferentes y una enorme variedad de piezas para crear mesas con estilo propio.</p>
             </div>
 
             <!-- Bento Grid Modular (Asimetría Clásica en Desktop / Touch Slider en Móvil) -->
@@ -320,7 +330,8 @@
                         </div>
                         <div class="bento-card-content">
                             <h3 class="bento-card-title">Origen Portugués</h3>
-                            <p class="bento-card-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                            <p class="bento-card-desc">Traemos directamente de Portugal colecciones y novedades para
+                                vestir mesas con estilo.</p>
                         </div>
                     </article>
 
@@ -333,7 +344,8 @@
                         </div>
                         <div class="bento-card-content">
                             <h3 class="bento-card-title">Diseño Europeo</h3>
-                            <p class="bento-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                            <p class="bento-card-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de
+                                distintas colecciones.</p>
                         </div>
                     </article>
 
@@ -346,7 +358,8 @@
                         </div>
                         <div class="bento-card-content">
                             <h3 class="bento-card-title">Colecciones Exclusivas</h3>
-                            <p class="bento-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                            <p class="bento-card-desc">Marcas europeas reconocidas y colecciones seleccionadas, con
+                                diseños exclusivos para el mercado uruguayo.</p>
                         </div>
                     </article>
 
@@ -354,12 +367,13 @@
                     <article class="bento-card bento-card--wide bento-card--crema" id="bento-card-4">
                         <div class="bento-card-media">
                             <img src="images/casa-venta-kilo.webp"
-                                alt="Balanza tradicional de platillos dorada sobre mesa rústica"
-                                class="bento-card-img" width="800" height="600" loading="lazy" decoding="async" />
+                                alt="Balanza tradicional de platillos dorada sobre mesa rústica" class="bento-card-img"
+                                width="800" height="600" loading="lazy" decoding="async" />
                         </div>
                         <div class="bento-card-content">
                             <h3 class="bento-card-title">Venta por Kilo</h3>
-                            <p class="bento-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                            <p class="bento-card-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá
+                                una mesa que refleje tu estilo.</p>
                         </div>
                     </article>
                 </div>
@@ -379,7 +393,8 @@
                     </div>
                     <div class="casa-pillar-text-wrap">
                         <h3 class="casa-pillar-title">Origen Portugués</h3>
-                        <p class="casa-pillar-desc">Traemos directamente de Portugal colecciones y novedades para vestir mesas con estilo.</p>
+                        <p class="casa-pillar-desc">Traemos directamente de Portugal colecciones y novedades para vestir
+                            mesas con estilo.</p>
                     </div>
                 </article>
 
@@ -387,7 +402,8 @@
                 <article class="casa-pillar-mobile casa-pillar--right-img casa-pillar--crema" id="casa-mobile-2">
                     <div class="casa-pillar-text-wrap">
                         <h3 class="casa-pillar-title">Diseño Europeo</h3>
-                        <p class="casa-pillar-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de distintas colecciones.</p>
+                        <p class="casa-pillar-desc">Las tendencias y el diseño europeo llegan a Uruguay a través de
+                            distintas colecciones.</p>
                     </div>
                     <div class="casa-pillar-image-wrap">
                         <img src="images/casa-colecciones-exclusivas.webp"
@@ -405,7 +421,8 @@
                     </div>
                     <div class="casa-pillar-text-wrap">
                         <h3 class="casa-pillar-title">Colecciones Exclusivas</h3>
-                        <p class="casa-pillar-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños exclusivos para el mercado uruguayo.</p>
+                        <p class="casa-pillar-desc">Marcas europeas reconocidas y colecciones seleccionadas, con diseños
+                            exclusivos para el mercado uruguayo.</p>
                     </div>
                 </article>
 
@@ -413,12 +430,13 @@
                 <article class="casa-pillar-mobile casa-pillar--right-img casa-pillar--crema" id="casa-mobile-4">
                     <div class="casa-pillar-text-wrap">
                         <h3 class="casa-pillar-title">Venta por Kilo</h3>
-                        <p class="casa-pillar-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una mesa que refleje tu estilo.</p>
+                        <p class="casa-pillar-desc">Elegí las piezas que más te gustan, combiná a tu manera y creá una
+                            mesa que refleje tu estilo.</p>
                     </div>
                     <div class="casa-pillar-image-wrap">
                         <img src="images/casa-venta-kilo.webp"
-                            alt="Balanza tradicional de platillos dorada sobre mesa rústica"
-                            class="casa-pillar-img" width="400" height="400" loading="lazy" decoding="async" />
+                            alt="Balanza tradicional de platillos dorada sobre mesa rústica" class="casa-pillar-img"
+                            width="400" height="400" loading="lazy" decoding="async" />
                     </div>
                 </article>
             </div>
@@ -452,86 +470,78 @@
                 <h2>Especial Fiestas</h2>
             </div>
 
-            <!-- Bloques Fusionados de Fiestas: Carrusel + Editorial -->
-            <div class="holiday-fused-container">
-                <!-- Bloque 1: Carrusel 1 (Izq) + Foto 1 Mesa Navideña (Der) -->
-                <div class="holiday-combo-block holiday-combo--left-carousel" id="festive-combo-1" data-aos="fade-up">
-                    <div class="holiday-combo-carousel-pane">
-                        <div class="holiday-mini-carousel-header">
-                            <span class="holiday-pane-tag">Colección Fiestas</span>
-                            <h3 class="holiday-pane-title">PREPARÁ TU MESA NAVIDEÑA</h3>
-                            <p class="holiday-pane-subtext">Inspirate con nuestros artículos para estas fiestas.</p>
+            <!-- Estructura Fiestas: Bloque 1 Split 50/50 en PC + Bloque 2 Banner y Carrusel -->
+            <div class="holiday-unified-container">
+                <!-- =========================================================
+                     BLOQUE 1: MESA NAVIDEÑA (Split 50/50 en PC: Foto Lifestyle + Grilla 2x2 con formato Bloque 2)
+                     ========================================================= -->
+                <div class="holiday-lookbook-split" id="festive-block-1" data-aos="fade-up">
+                    <div class="holiday-lookbook-media">
+                        <div class="holiday-lookbook-img-wrap">
+                            <img src="images/fiestas-mesa-rubi.webp?v=20261118"
+                                alt="Mesa festiva con plato cerámico perlado color rubí y galletita de jengibre"
+                                width="731" height="1024" loading="lazy" decoding="async">
                         </div>
-                        <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
-                            <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-1" aria-label="Anterior">
-                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                                    <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                                </svg>
-                            </button>
-                            <div class="bw-scroll-carousel" id="festive-viewport-1">
-                                <div class="bw-product-list" id="festive-track-1">
-                                    <!-- Inyectado dinámicamente por initFestiveCarousel() -->
-                                </div>
-                            </div>
-                            <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-1" aria-label="Siguiente">
-                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                                    <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="bw-mobile-dots" id="festive-dots-1"></div>
                     </div>
 
-                    <div class="holiday-combo-photo-pane">
-                        <div class="holiday-card holiday-card--fused">
-                            <div class="holiday-img-wrap">
-                                <img src="images/navidad-banner-1.webp?v=2"
-                                    alt="Mesa navideña con vajilla en tono rubí, follaje festivo, velas y piñas" width="683"
-                                    height="716" loading="lazy" decoding="async">
-                            </div>
+                    <div class="holiday-lookbook-products">
+                        <div class="holiday-lookbook-header">
+                            <span class="holiday-pane-tag">Colección navidad</span>
+                            <h3 class="holiday-pane-title">Para resaltar la mesa </h3>
+                            <p class="holiday-pane-subtext">Detalles que suman a esa noche especial.</p>
                         </div>
+
+                        <!-- 4 Artículos: Grilla 2x2 en PC con el formato de tarjetas del Bloque 2 / Deslizable en Móvil -->
+                        <div class="holiday-grid-carousel-track" id="festive-track-1">
+                            <!-- Inyectado dinámicamente con los 4 productos usando .bw-product-card idéntico al bloque 2 -->
+                        </div>
+                        <div class="bw-mobile-dots holiday-mobile-dots-1" id="festive-dots-1"></div>
                     </div>
                 </div>
 
-                <div class="holiday-combo-divider"></div>
+                <div class="holiday-section-divider" aria-hidden="true"></div>
 
-                <!-- Bloque 2: Foto 2 Noche Especial (Izq) + Carrusel 2 (Der) -->
-                <div class="holiday-combo-block holiday-combo--left-photo" id="festive-combo-2" data-aos="fade-up">
-                    <div class="holiday-combo-photo-pane">
-                        <div class="holiday-card holiday-card--fused">
-                            <div class="holiday-img-wrap">
-                                <img src="images/navidad-banner-2.webp?v=2"
-                                    alt="Árbol de Navidad decorado junto a chimenea encendida y regalos" width="766"
-                                    height="1024" loading="lazy" decoding="async">
-                            </div>
+                <!-- =========================================================
+                     BLOQUE 2: REGALOS & NOCHE ESPECIAL (Banner Escénico + Carrusel)
+                     ========================================================= -->
+                <div class="holiday-section-block" id="festive-block-2" data-aos="fade-up">
+                    <div class="holiday-block-banner holiday-block-banner--regalos">
+                        <div class="holiday-block-banner__media">
+                            <img src="images/fiestas-regalos-banner.webp?v=20261118"
+                                alt="Cajas de regalo festivas sobre madera verde" width="1024" height="575"
+                                loading="lazy" decoding="async">
+                            <div class="holiday-block-banner__overlay"></div>
+                        </div>
+                        <div class="holiday-block-banner__content">
+                            <span class="holiday-pane-tag holiday-pane-tag--light">DICIEMBRE • FIESTAS </span>
+                            <h3 class="holiday-pane-title holiday-pane-title--light">UNA NOCHE ESPECIAL</h3>
+                            <p class="holiday-pane-subtext holiday-pane-subtext--light">¿Ya sabés qué
+                                regalar?<br>Sorprendé con piezas originales</p>
                         </div>
                     </div>
 
-                    <div class="holiday-combo-carousel-pane">
-                        <div class="holiday-mini-carousel-header">
-                            <span class="holiday-pane-tag">Espíritu Navideño</span>
-                            <h3 class="holiday-pane-title">UNA NOCHE ESPECIAL</h3>
-                            <p class="holiday-pane-subtext">¿Ya sabés qué regalar?<br>Sorprendé a los suyos con piezas originales</p>
-                        </div>
-                        <div class="bw-carousel-wrapper holiday-mini-carousel-wrapper">
-                            <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-2" aria-label="Anterior">
-                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                                    <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                                </svg>
-                            </button>
-                            <div class="bw-scroll-carousel" id="festive-viewport-2">
-                                <div class="bw-product-list" id="festive-track-2">
-                                    <!-- Inyectado dinámicamente por initFestiveCarousel() -->
-                                </div>
+                    <!-- Carrusel Bloque 2 (Con los 6 artículos restantes) -->
+                    <div class="bw-carousel-wrapper holiday-block-carousel-wrapper">
+                        <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-2"
+                            aria-label="Anterior">
+                            <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                <path d="M11 1 3 9l8 8" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="square" />
+                            </svg>
+                        </button>
+                        <div class="bw-scroll-carousel" id="festive-viewport-2">
+                            <div class="bw-product-list" id="festive-track-2">
+                                <!-- Inyectado dinámicamente con los 6 productos restantes -->
                             </div>
-                            <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-2" aria-label="Siguiente">
-                                <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
-                                    <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
-                                </svg>
-                            </button>
                         </div>
-                        <div class="bw-mobile-dots" id="festive-dots-2"></div>
+                        <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-2"
+                            aria-label="Siguiente">
+                            <svg viewBox="0 0 16 18" width="16" height="18" fill="none">
+                                <path d="M5 1l8 8-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
+                            </svg>
+                        </button>
                     </div>
+                    <div class="bw-mobile-dots" id="festive-dots-2"></div>
                 </div>
             </div>
         </section>
@@ -552,7 +562,8 @@
                     <div class="trend-img-wrapper">
                         <img src="images/trend1.webp?v=20261025" alt="Colección Perlas - Nueva Temporada BasKula"
                             width="800" height="800" loading="lazy" decoding="async" />
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Perlas en Instagram">
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer"
+                            class="trend-view-btn" aria-label="Ver más sobre Colección Perlas en Instagram">
                             <i data-lucide="eye"></i> Ver más
                         </a>
                     </div>
@@ -564,7 +575,8 @@
                     <div class="trend-img-wrapper">
                         <img src="images/trend2.webp?v=20261025" alt="Colección Rayas - Nueva Temporada BasKula"
                             width="800" height="800" loading="lazy" decoding="async" />
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Rayas en Instagram">
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer"
+                            class="trend-view-btn" aria-label="Ver más sobre Colección Rayas en Instagram">
                             <i data-lucide="eye"></i> Ver más
                         </a>
                     </div>
@@ -576,7 +588,8 @@
                     <div class="trend-img-wrapper">
                         <img src="images/trend3.webp?v=20261025" alt="Colección Handmade - Nueva Temporada BasKula"
                             width="800" height="800" loading="lazy" decoding="async" />
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Handmade en Instagram">
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer"
+                            class="trend-view-btn" aria-label="Ver más sobre Colección Handmade en Instagram">
                             <i data-lucide="eye"></i> Ver más
                         </a>
                     </div>
@@ -588,7 +601,8 @@
                     <div class="trend-img-wrapper">
                         <img src="images/trend4.webp?v=20261025" alt="Colección Vintage - Nueva Temporada BasKula"
                             width="800" height="800" loading="lazy" decoding="async" />
-                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="trend-view-btn" aria-label="Ver más sobre Colección Vintage en Instagram">
+                        <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer"
+                            class="trend-view-btn" aria-label="Ver más sobre Colección Vintage en Instagram">
                             <i data-lucide="eye"></i> Ver más
                         </a>
                     </div>
@@ -697,14 +711,16 @@
     </footer>
 
     <!-- Visor de Galería Limpio (Estilo Herramienta BasKula) -->
-    <div class="modal-overlay festive-viewer-overlay" id="festive-viewer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visor de producto">
+    <div class="modal-overlay festive-viewer-overlay" id="festive-viewer-modal" aria-hidden="true" role="dialog"
+        aria-modal="true" aria-label="Visor de producto">
         <div class="festive-viewer-card">
             <!-- Header con pastilla BasKula y botón cerrar -->
             <div class="festive-viewer-header">
                 <div class="festive-viewer-logo-pill">
                     <img src="images/logo.png" alt="BasKula" class="festive-viewer-logo" width="90" height="32">
                 </div>
-                <button type="button" class="festive-viewer-close-btn" id="festive-viewer-close" aria-label="Cerrar visor">
+                <button type="button" class="festive-viewer-close-btn" id="festive-viewer-close"
+                    aria-label="Cerrar visor">
                     <i data-lucide="x"></i>
                 </button>
             </div>
@@ -776,7 +792,8 @@
     </div>
 
     <!-- Floating Two-Pan Brass Scale Widget (Oculto temporalmente) -->
-    <aside class="floating-scale-widget" id="floatingScaleWidget" aria-label="Balanza de piezas" style="display: none !important;">
+    <aside class="floating-scale-widget" id="floatingScaleWidget" aria-label="Balanza de piezas"
+        style="display: none !important;">
         <button type="button" class="floating-scale-btn" id="floatingScaleBtn" aria-label="Abrir balanza de piezas"
             title="Ver mi balanza y reservar">
             <svg class="scale-pans-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -819,7 +836,8 @@
                 <h3 class="wishlist-drawer__title">Tu Balanza</h3>
             </div>
             <button type="button" class="wishlist-drawer__close" id="wishlistCloseBtn" aria-label="Cerrar balanza">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -888,7 +906,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261117_noparallax" defer></script>
+    <script src="app.min.js?v=20261118_fixedcarousels" defer></script>
 
 
 </body>
