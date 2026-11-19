@@ -2666,7 +2666,7 @@ const handleWhatsAppReservation = () => {
     window.open(url, '_blank');
 };
 
-const initWishlistAndBalanzaSystem = () => {
+function initWishlistAndBalanzaSystem() {
     // 1. Delegación de clics en corazones de cualquier tarjeta
     document.addEventListener('click', (e) => {
         const heartBtn = e.target.closest('.card-heart-btn');
