@@ -1232,17 +1232,17 @@ body.drawer-open {
         align-items: stretch !important;
         justify-content: stretch !important;
         margin-top: 76px !important; /* Despeja la barra del nav para que no tape la parte superior del Hero */
-        min-height: calc(80vh - 76px) !important;
-        height: clamp(530px, 76vh, 720px) !important;
-        max-height: 760px !important;
+        min-height: auto !important;
+        height: auto !important;
+        max-height: none !important;
         padding: 0 !important;
         background-color: var(--color-bg-cream, #FAF8F5) !important;
         overflow: hidden !important;
-        border-top: 1px solid rgba(26, 24, 21, 0.85) !important;
-        border-bottom: 1px solid rgba(26, 24, 21, 0.85) !important;
+        border-top: 1px solid rgba(34, 34, 34, 0.12) !important;
+        border-bottom: 1px solid rgba(34, 34, 34, 0.12) !important;
     }
     
-    /* Panel Izquierdo: Madera suavizada con calidez, micro-textura y sutil transparencia satinada (30% ancho) */
+    /* Panel Izquierdo: Estilo Revista Editorial con fotografía de acompañamiento suave */
     .hero-container {
         order: 1 !important;
         flex: 0 0 30% !important;
@@ -1254,35 +1254,36 @@ body.drawer-open {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        background-color: #FAF8F5 !important;
-        background-image: 
-            radial-gradient(rgba(244, 211, 129, 0.18) 1.2px, transparent 0),
-            linear-gradient(155deg, rgba(139, 90, 43, 0.88) 0%, rgba(108, 66, 30, 0.90) 55%, rgba(78, 44, 20, 0.93) 100%) !important;
-        background-size: 22px 22px, 100% 100% !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        padding: clamp(28px, 3.5vw, 48px) clamp(16px, 2.2vw, 32px) !important;
+        background-color: var(--color-bg-cream, #FAF8F5) !important;
+        background-image: url('images/hero-panel-bg.webp?v=20261119_panel_bg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: clamp(24px, 3.5vw, 48px) clamp(16px, 2.2vw, 32px) !important;
         margin: 0 !important;
         box-sizing: border-box !important;
         box-shadow: 
-            inset 0 0 50px rgba(226, 167, 39, 0.08),
-            6px 0 28px rgba(0, 0, 0, 0.18) !important;
-        border: 1px solid #222222 !important;
+            inset 0 0 30px rgba(226, 167, 39, 0.04),
+            4px 0 16px rgba(0, 0, 0, 0.06) !important;
+        border: 2px solid var(--color-charcoal, #222222) !important;
+        overflow: hidden !important;
     }
     
-    /* Recuadro fino dorado/mostaza claro bien pegado al margen (3px ~ 1mm) con esquinas rectas */
+    /* Recuadro editorial fino en Mostaza Oscuro (#C28B17) con sutil brillo */
     .hero-container::before {
         content: '' !important;
         display: block !important;
         position: absolute !important;
-        inset: 3px !important;
-        border: 1px solid #F4D381 !important;
-        border-radius: 0 !important;
+        inset: 10px !important;
+        border: 1px solid rgba(194, 139, 23, 0.35) !important;
+        border-radius: 2px !important;
         pointer-events: none !important;
         z-index: 1 !important;
         box-shadow: 
-            0 0 10px rgba(244, 211, 129, 0.35),
-            inset 0 0 8px rgba(244, 211, 129, 0.15) !important;
+            0 0 0 1px rgba(244, 211, 129, 0.15),
+            inset 0 0 12px rgba(226, 167, 39, 0.03) !important;
     }
     
     .hero-container::after {
@@ -1350,50 +1351,48 @@ body.drawer-open {
         text-align: center !important;
     }
 
-    /* 1. CERÁMICA PORTUGUESA: Grande, nítido y con presencia */
+    /* 1. CERÁMICA PORTUGUESA: En Carbón (#222222) editorial, limpio y distinguido */
     .word-ceramica,
     .word-portuguesa {
         display: inline !important;
-        color: #FAF8F5 !important;
+        color: var(--color-text-charcoal, #222222) !important;
     }
 
     .hero-title-prefix {
         display: block !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.35rem, 1.8vw, 2.1rem) !important;
+        font-size: clamp(1.15rem, 1.55vw, 1.85rem) !important;
         font-weight: 600 !important;
-        letter-spacing: 2.5px !important;
+        letter-spacing: 2.6px !important;
         text-transform: uppercase !important;
         line-height: 1.25 !important;
-        color: #FAF8F5 !important;
+        color: var(--color-text-charcoal, #222222) !important;
         margin-bottom: 8px !important;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
+        text-shadow: 0 1px 10px rgba(250, 248, 245, 0.95), 0 0 2px rgba(250, 248, 245, 0.9) !important;
         -webkit-text-stroke: 0 !important;
     }
 
-    /* 2. POR KILO: Protagónico, imponente y luminoso (#F4D381 / #E2A727) */
+    /* 2. POR KILO: Protagónico en Mostaza Oscuro & Mostaza BasKula */
     .hero-title-kilo {
         display: inline-flex !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 0.36em !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(2.8rem, 4vw, 4.4rem) !important;
+        font-size: clamp(2.4rem, 3.4vw, 3.8rem) !important;
         font-weight: 800 !important;
-        letter-spacing: 2.2px !important;
+        letter-spacing: 2px !important;
         text-transform: uppercase !important;
         line-height: 1.02 !important;
-        color: #F4D381 !important;
+        color: var(--color-mustard, #E2A727) !important;
         margin-top: 4px !important;
         -webkit-text-stroke: 0 !important;
-        text-shadow:
-            0 3px 16px rgba(0, 0, 0, 0.5),
-            0 0 28px rgba(244, 211, 129, 0.4) !important;
+        text-shadow: 0 1px 12px rgba(250, 248, 245, 0.95) !important;
     }
 
     .hero-word-por {
         letter-spacing: 2.5px !important;
-        color: #F4D381 !important;
+        color: var(--color-mustard-dark, #C28B17) !important;
         font-weight: 700 !important;
     }
 
@@ -1401,18 +1400,18 @@ body.drawer-open {
         display: inline-flex !important;
         align-items: center !important;
         letter-spacing: 2px !important;
-        color: #E2A727 !important;
+        color: var(--color-mustard, #E2A727) !important;
         font-weight: 800 !important;
     }
 
-    /* Micro-divisor editorial dorado fino entre POR KILO y el subtítulo */
+    /* Micro-divisor editorial fino en Mostaza Oscuro */
     .hero-editorial-divider {
         display: block !important;
-        width: 60px !important;
+        width: 50px !important;
         height: 1px !important;
-        background: linear-gradient(90deg, transparent, #F4D381, transparent) !important;
-        margin: 20px auto 16px auto !important;
-        opacity: 0.85 !important;
+        background: linear-gradient(90deg, transparent, #C28B17, transparent) !important;
+        margin: 18px auto 14px auto !important;
+        opacity: 0.75 !important;
     }
 
     /* Isologo de la marca reemplazando la K de KILO */
@@ -1427,20 +1426,20 @@ body.drawer-open {
         filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
     }
 
-    /* 3. Subtítulo: Más grande, legible y con calidez */
+    /* 3. Subtítulo: Gris Carbón Suave (#444444) */
     .hero-subtitle {
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.1rem, 1.3vw, 1.4rem) !important;
+        font-size: clamp(0.95rem, 1.15vw, 1.25rem) !important;
         font-style: italic !important;
         font-weight: 400 !important;
         letter-spacing: 0.2px !important;
         line-height: 1.55 !important;
-        color: rgba(250, 248, 245, 0.95) !important;
+        color: var(--color-text-charcoal, #222222) !important;
         margin: 0 auto !important;
         padding: 0 !important;
         text-align: center !important;
-        max-width: 380px !important;
-        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4) !important;
+        max-width: 320px !important;
+        text-shadow: 0 1px 8px rgba(250, 248, 245, 0.95) !important;
     }
 
     .storefront-content h1:not(.hero-main-title) {
@@ -1450,7 +1449,7 @@ body.drawer-open {
         letter-spacing: 1.2px !important;
         line-height: 1.25 !important;
         margin-bottom: 20px !important;
-        color: #FAF8F5 !important;
+        color: #222222 !important;
         width: auto !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
@@ -1462,7 +1461,7 @@ body.drawer-open {
         box-shadow: none !important;
     }
     
-    /* Flecha interactiva hacia abajo armonizada sobre fondo de madera */
+    /* Flecha interactiva hacia abajo sobre fondo Crema */
     .hero-scroll-arrow {
         display: inline-flex !important;
         align-items: center !important;
@@ -1470,27 +1469,27 @@ body.drawer-open {
         width: 42px !important;
         height: 42px !important;
         border-radius: 50% !important;
-        background: rgba(250, 248, 245, 0.12) !important;
-        backdrop-filter: blur(8px) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-        border: 1.5px solid rgba(244, 211, 129, 0.45) !important;
-        color: #F4D381 !important;
+        background: #FAF8F5 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: 1.5px solid var(--color-mustard, #E2A727) !important;
+        color: var(--color-mustard-dark, #C28B17) !important;
         text-decoration: none !important;
         cursor: pointer !important;
-        margin: 24px auto 0 auto !important;
+        margin: 20px auto 0 auto !important;
         align-self: center !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+        box-shadow: 0 4px 12px rgba(226, 167, 39, 0.16) !important;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         animation: heroArrowBounce 2.2s ease-in-out infinite !important;
     }
 
     .hero-scroll-arrow:hover {
         background: #E2A727 !important;
-        color: #222222 !important;
+        color: #FAF8F5 !important;
         border-color: #E2A727 !important;
-        box-shadow: 0 6px 22px rgba(226, 167, 39, 0.5) !important;
+        box-shadow: 0 6px 18px rgba(226, 167, 39, 0.35) !important;
         animation-play-state: paused !important;
-        transform: translateY(4px) !important;
+        transform: translateY(3px) !important;
     }
 
     .hero-scroll-arrow svg {
@@ -1513,16 +1512,17 @@ body.drawer-open {
         }
     }
 
-    /* Columna Derecha: Fotografía de ambiente (Hortensias & Estantería de Cerámicas - 70% ancho) */
+    /* Columna Derecha: Fotografía de ambiente (70% ancho, aspecto natural 4:3 sin recorte) */
     .slider-wrapper {
         order: 2 !important;
         position: relative !important;
         flex: 0 0 70% !important;
         width: 70% !important;
         max-width: 70% !important;
-        height: 100% !important;
-        min-height: 100% !important;
-        max-height: 100% !important;
+        aspect-ratio: 2464 / 1845 !important;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
         inset: auto !important;
         z-index: 1 !important;
         overflow: hidden !important;
@@ -1541,13 +1541,14 @@ body.drawer-open {
     }
 
     .hero-single-image {
-        background-image: url('images/hero-desktop-hortensias.webp?v=20261118_newphoto') !important;
+        background-image: url('images/hero-desktop-mesa.webp?v=20261119_mesa_full') !important;
         background-size: cover !important;
         background-position: center center !important;
+        background-repeat: no-repeat !important;
         width: 100% !important;
         height: 100% !important;
         transform-origin: center center !important;
-        filter: brightness(1.02) contrast(1.02) !important;
+        filter: brightness(1.01) contrast(1.02) !important;
     }
 
     .hero-bg-overlay {
@@ -4664,7 +4665,7 @@ body.drawer-open {
 /* --- Atmosphere Gallery Section & Bento Grid (Nuestra Casa / Mesas con Personalidad) --- */
 .bento-section-wrapper {
     background-color: var(--color-bg-cream, #FAF8F5);
-    padding: 70px 0 85px 0;
+    padding: 0 0 85px 0;
     margin: 0;
     width: 100%;
     position: relative;
@@ -4679,6 +4680,14 @@ body.drawer-open {
     max-width: 860px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.bento-main-header .section-tag {
+    margin-bottom: 6px;
+}
+
+.bento-main-header h2 {
+    margin-bottom: 0;
 }
 
 .bento-main-header .section-subtitle {
@@ -4957,13 +4966,13 @@ body.drawer-open {
     }
 
     .bento-section-wrapper {
-        padding: 44px 0 24px 0 !important;
+        padding: 0 0 24px 0 !important;
         overflow-x: hidden !important;
     }
 
     .bento-main-header {
         padding: 0 20px !important;
-        margin-bottom: 32px !important; /* Separación clara antes del primer bloque */
+        margin-bottom: 28px !important; /* Separación clara antes del primer bloque */
     }
 
     /* Pila vertical de pilares en móvil (Tarjetas con separación perimetral) */
@@ -7233,6 +7242,10 @@ body.drawer-open {
     .section-divider--hero {
         margin: 24px auto 16px auto;
     }
+
+    .section-divider--nuestra-casa {
+        margin: 34px auto 16px auto;
+    }
 }
 
 .section-divider--framed {
@@ -7241,6 +7254,10 @@ body.drawer-open {
 
 .section-divider--hero {
     margin: 32px auto 20px auto;
+}
+
+.section-divider--nuestra-casa {
+    margin: 48px auto 22px auto;
 }
 
 .section-divider--star::after {
