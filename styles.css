@@ -2959,17 +2959,15 @@ body.drawer-open {
         max-width: 100% !important;
     }
 
-    /* Foto Lifestyle Mesa Navideña en Móvil: Proporción 4:5 completa con recuadro interior */
+    /* Foto Lifestyle Mesa Navideña en Móvil: Formato banner horizontal apaisado idéntico al Bloque 2 */
     .holiday-lookbook-media {
         order: 1 !important;
         width: 100% !important;
-        max-width: 440px !important;
-        margin: 0 auto !important;
-        aspect-ratio: 824 / 1024 !important;
-        height: auto !important;
-        max-height: 480px !important;
-        min-height: auto !important;
-        justify-self: center !important;
+        max-width: 100% !important;
+        height: clamp(210px, 52vw, 260px) !important;
+        min-height: 200px !important;
+        max-height: 270px !important;
+        justify-self: stretch !important;
     }
 
     .holiday-lookbook-img-wrap img {
@@ -3096,8 +3094,10 @@ body.drawer-open {
 
     .holiday-lookbook-split .bw-product-title,
     .holiday-block-carousel-wrapper .bw-product-title {
-        font-size: 0.84rem !important;
-        line-height: 1.3 !important;
+        font-size: 0.82rem !important;
+        line-height: 1.25 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
     }
 
     .holiday-lookbook-split .card-heart-btn,

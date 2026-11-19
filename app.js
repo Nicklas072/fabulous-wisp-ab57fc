@@ -2463,7 +2463,7 @@ const toggleWishlistItem = (id, sourceEl) => {
     if (typeof renderAlacenaShelves === 'function') renderAlacenaShelves();
 };
 
-const openWishlistDrawer = () => {
+function openWishlistDrawer() {
     const drawer = document.getElementById('wishlistDrawer');
     const overlay = document.getElementById('wishlistOverlay');
     if (!drawer || !overlay) return;
@@ -2472,18 +2472,18 @@ const openWishlistDrawer = () => {
     document.body.style.overflow = 'hidden';
     updateWishlistUI();
     triggerScaleAnimation();
-};
+}
 
-const closeWishlistDrawer = () => {
+function closeWishlistDrawer() {
     const drawer = document.getElementById('wishlistDrawer');
     const overlay = document.getElementById('wishlistOverlay');
     if (!drawer || !overlay) return;
     drawer.classList.remove('open');
     overlay.classList.remove('open');
     document.body.style.overflow = '';
-};
+}
 
-const updateWishlistUI = () => {
+function updateWishlistUI() {
     let totalPieces = 0;
     let totalWeight = 0;
     let totalPrice = 0;
@@ -2625,7 +2625,7 @@ const updateWishlistUI = () => {
     }
 };
 
-const handleWhatsAppReservation = () => {
+function handleWhatsAppReservation() {
     if (basket.length === 0) return;
     let totalPieces = 0;
     let totalWeight = 0;
