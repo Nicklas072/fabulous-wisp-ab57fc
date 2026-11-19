@@ -4839,122 +4839,61 @@ body.drawer-open {
     display: none !important;
 }
 
-/* --- Layout Escritorio (>= 769px): Asimetría Vertical Clásica Full-Width --- */
+/* --- Layout Escritorio (>= 769px): Tarjetas Alineadas (Imagen arriba, Título y Texto debajo) --- */
 @media (min-width: 769px) {
     .bento-grid {
         display: grid;
-        grid-template-columns: 40% 1fr 1fr;
-        grid-template-rows: clamp(290px, 32vh, 325px) clamp(290px, 32vh, 325px);
-        grid-template-areas:
-            "tall compact1 compact2"
-            "tall wide     wide";
-        gap: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(16px, 1.8vw, 24px);
+        align-items: stretch;
+        max-width: 1440px;
+        margin: 0 auto;
     }
 
-    .bento-card--tall {
-        grid-area: tall;
-    }
-
-    .bento-card--compact:nth-of-type(2) {
-        grid-area: compact1;
-    }
-
-    .bento-card--compact:nth-of-type(3) {
-        grid-area: compact2;
-    }
-
-    .bento-card--wide {
-        grid-area: wide;
-    }
-
-    /* 1. Tarjeta Alta Protagonista */
-    .bento-card--tall .bento-card-media {
-        flex: 1 1 auto;
-        min-height: 0;
+    .bento-card {
+        display: flex;
+        flex-direction: column;
         height: 100%;
-        margin: 16px 16px 0 16px;
     }
 
-    .bento-card--tall .bento-card-content {
-        padding: 20px 22px 22px 22px;
-        flex-shrink: 0;
-    }
-
-    .bento-card--tall .bento-card-title {
-        font-size: 1.85rem;
-        line-height: 1.25;
-        margin-bottom: 10px;
-    }
-
-    .bento-card--tall .bento-card-desc {
-        font-size: 1.05rem;
-        line-height: 1.6;
-    }
-
-    /* 2 & 3. Tarjetas Compactas */
-    .bento-card--compact .bento-card-media {
-        height: 48%;
+    .bento-card .bento-card-media {
+        width: calc(100% - 28px);
+        aspect-ratio: 4 / 3;
+        height: auto;
         flex-shrink: 0;
         margin: 14px 14px 0 14px;
         border-radius: 12px;
     }
 
-    .bento-card--compact .bento-card-img {
+    .bento-card .bento-card-img {
         border-radius: 12px;
     }
 
-    .bento-card--compact .bento-card-content {
-        padding: 14px 18px 18px 18px;
+    .bento-card .bento-card-content {
+        padding: 18px 20px 22px 20px;
         flex: 1 1 auto;
+        justify-content: flex-start;
     }
 
-    .bento-card--compact .bento-card-title {
-        font-size: 1.5rem;
+    .bento-card .bento-card-title {
+        font-size: clamp(1.22rem, 1.45vw, 1.5rem);
         line-height: 1.25;
-        margin-bottom: 6px;
+        margin: 0 0 8px 0;
     }
 
-    .bento-card--compact .bento-card-desc {
-        font-size: 0.98rem;
+    .bento-card .bento-card-desc {
+        font-size: clamp(0.9rem, 0.98vw, 1rem);
         line-height: 1.55;
-    }
-
-    /* 4. Tarjeta Ancha Horizontal */
-    .bento-card--wide {
-        display: grid;
-        grid-template-columns: 46% 54%;
-        gap: 0;
-        align-items: center;
-    }
-
-    .bento-card--wide .bento-card-media {
-        height: calc(100% - 28px);
-        min-height: 230px;
-        margin: 14px 0 14px 14px;
-        border-radius: 14px;
-    }
-
-    .bento-card--wide .bento-card-img {
-        border-radius: 14px;
-    }
-
-    .bento-card--wide .bento-card-content {
-        padding: 24px 30px;
-    }
-
-    .bento-card--wide .bento-card-title {
-        font-size: 1.8rem;
-        line-height: 1.25;
-        margin-bottom: 10px;
-    }
-
-    .bento-card--wide .bento-card-desc {
-        font-size: 1.05rem;
-        line-height: 1.6;
     }
 
     .bento-mobile-dots {
         display: none !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 
