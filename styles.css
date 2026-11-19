@@ -1570,7 +1570,11 @@ body.drawer-open {
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
-        padding: clamp(108px, 16vh, 128px) 16px 20px 16px !important;
+        padding: clamp(125px, 18vh, 138px) 16px 20px 16px !important;
+    }
+
+    .hero-single-image {
+        background-position: center 20% !important;
     }
 
     .hero-editorial-badge {
@@ -4664,8 +4668,8 @@ body.drawer-open {
 /* --- Atmosphere Gallery Section --- */
 /* --- Atmosphere Gallery Section & Bento Grid (Nuestra Casa / Mesas con Personalidad) --- */
 .bento-section-wrapper {
-    background-color: var(--color-bg-cream, #FAF8F5);
-    padding: 0 0 85px 0;
+    background-color: #F0B832;
+    padding: 28px 0 85px 0;
     margin: 0;
     width: 100%;
     position: relative;
@@ -4683,6 +4687,7 @@ body.drawer-open {
 }
 
 .bento-main-header .section-tag {
+    color: #222222;
     margin-bottom: 6px;
 }
 
@@ -4738,45 +4743,34 @@ body.drawer-open {
     transition: border-color 0.4s ease !important;
 }
 
-/* Colores de fondo de las tarjetas Bento en Desktop (1 y 3 Mostaza Brillante / 2 y 4 Crema) */
+/* Todas las tarjetas Bento con fondo Crema sobre sección Mostaza */
 #bento-card-1,
-#bento-card-3,
-.bento-card--mustard {
-    background-color: #F0B832 !important; /* Tarjetas 1 y 3: Mostaza Brillante y Luminoso */
-    border: 1px solid #222222 !important;
-}
-
-/* Recuadro fino Crema sobre tarjetas Mostaza a 3px del borde negro */
-#bento-card-1::before,
-#bento-card-3::before,
-.bento-card--mustard::before {
-    border: 1px solid rgba(250, 248, 245, 0.85) !important;
-}
-
 #bento-card-2,
+#bento-card-3,
 #bento-card-4,
+.bento-card--mustard,
 .bento-card--crema,
 .bento-card--wide {
-    background-color: #FAF8F5 !important; /* Tarjetas 2 y 4: Crema de Fondo */
+    background-color: #FAF8F5 !important;
     border: 1px solid #222222 !important;
 }
 
 /* Recuadro fino Mostaza Claro sobre tarjetas Crema a 3px del borde negro */
+#bento-card-1::before,
 #bento-card-2::before,
+#bento-card-3::before,
 #bento-card-4::before,
+.bento-card--mustard::before,
 .bento-card--crema::before,
 .bento-card--wide::before {
     border: 1px solid rgba(226, 167, 39, 0.75) !important;
 }
 
 #bento-card-1 .bento-card-desc,
-#bento-card-3 .bento-card-desc,
-.bento-card--mustard .bento-card-desc {
-    color: #2E281F;
-}
-
 #bento-card-2 .bento-card-desc,
+#bento-card-3 .bento-card-desc,
 #bento-card-4 .bento-card-desc,
+.bento-card--mustard .bento-card-desc,
 .bento-card--crema .bento-card-desc {
     color: #444444;
 }
@@ -4905,7 +4899,7 @@ body.drawer-open {
     }
 
     .bento-section-wrapper {
-        padding: 0 0 24px 0 !important;
+        padding: 22px 0 32px 0 !important;
         overflow-x: hidden !important;
     }
 
@@ -4950,27 +4944,18 @@ body.drawer-open {
         z-index: 2 !important;
     }
 
-    /* Franjas con colores sólidos alternados */
-    .casa-pillar--mustard {
-        background-color: #F0B832 !important; /* Bloques 1 y 3: Mostaza Brillante y Luminoso */
-    }
-
-    .casa-pillar--mustard::before {
-        border: 1px solid rgba(250, 248, 245, 0.85) !important; /* Recuadro Crema sobre fondo Mostaza */
-    }
-
-    .casa-pillar--mustard .casa-pillar-desc {
-        color: #2E281F !important;
-    }
-
+    /* Todas las tarjetas en móvil con fondo Crema sobre sección Mostaza */
+    .casa-pillar--mustard,
     .casa-pillar--crema {
-        background-color: #FAF8F5 !important; /* Bloques 2 y 4: Crema de Fondo */
+        background-color: #FAF8F5 !important;
     }
 
+    .casa-pillar--mustard::before,
     .casa-pillar--crema::before {
-        border: 1px solid rgba(226, 167, 39, 0.75) !important; /* Recuadro Mostaza sobre fondo Crema */
+        border: 1px solid rgba(226, 167, 39, 0.75) !important;
     }
 
+    .casa-pillar--mustard .casa-pillar-desc,
     .casa-pillar--crema .casa-pillar-desc {
         color: #444444 !important;
     }
@@ -5687,7 +5672,7 @@ body.drawer-open {
         min-height: 535px !important;
         height: 76vh !important;
         max-height: 600px !important;
-        padding: clamp(108px, 16vh, 128px) 16px 20px 16px !important;
+        padding: clamp(125px, 18vh, 138px) 16px 20px 16px !important;
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
@@ -7183,7 +7168,7 @@ body.drawer-open {
     }
 
     .section-divider--nuestra-casa {
-        margin: 34px auto 16px auto;
+        margin: 30px auto 12px auto;
     }
 }
 
@@ -7196,7 +7181,7 @@ body.drawer-open {
 }
 
 .section-divider--nuestra-casa {
-    margin: 48px auto 22px auto;
+    margin: 44px auto 14px auto;
 }
 
 .section-divider--star::after {
