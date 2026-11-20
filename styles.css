@@ -1670,7 +1670,7 @@ body.drawer-open {
         text-transform: uppercase !important;
         line-height: 1.18 !important;
         color: #FFFFFF !important;
-        -webkit-text-stroke: 1px #12100E !important;
+        -webkit-text-stroke: 2.2px #12100E !important;
         paint-order: stroke fill !important;
         margin-bottom: 8px !important;
         text-align: right !important;
@@ -1690,7 +1690,7 @@ body.drawer-open {
         line-height: 1.02 !important;
         text-transform: uppercase !important;
         color: #E8A71D !important;
-        -webkit-text-stroke: 1.1px #12100E !important;
+        -webkit-text-stroke: 2.4px #12100E !important;
         paint-order: stroke fill !important;
         margin-top: 8px !important;
         margin-bottom: 10px !important;
@@ -1730,7 +1730,7 @@ body.drawer-open {
         font-weight: 600 !important;
         line-height: 1.44 !important;
         color: #FFFFFF !important;
-        -webkit-text-stroke: 0.85px #12100E !important;
+        -webkit-text-stroke: 1.6px #12100E !important;
         paint-order: stroke fill !important;
         margin: 10px 0 0 0 !important;
         padding: 0 !important;
