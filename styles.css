@@ -1725,20 +1725,20 @@ body.drawer-open {
 
     .hero-subtitle {
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.04rem, 3.85vw, 1.24rem) !important;
+        font-size: clamp(1.16rem, 4.35vw, 1.42rem) !important;
         font-style: italic !important;
-        font-weight: 600 !important;
-        line-height: 1.48 !important;
+        font-weight: 700 !important;
+        line-height: 1.42 !important;
         color: #FFFFFF !important;
-        -webkit-text-stroke: 0.85px #12100E !important;
+        -webkit-text-stroke: 1px #12100E !important;
         paint-order: stroke fill !important;
         margin: 16px 0 0 0 !important;
         padding: 0 !important;
         text-align: right !important;
         text-shadow:
-            0 1px 3px rgba(0, 0, 0, 0.52),
-            0 3px 10px rgba(0, 0, 0, 0.25) !important;
-        max-width: 74% !important;
+            0 2px 5px rgba(0, 0, 0, 0.42),
+            0 4px 12px rgba(0, 0, 0, 0.22) !important;
+        max-width: 80% !important;
     }
 
     .hero-scroll-arrow {
@@ -5869,7 +5869,7 @@ body.drawer-open {
     }
     
     .hero-subtitle {
-        font-size: clamp(1.04rem, 3.85vw, 1.24rem) !important;
+        font-size: clamp(1.16rem, 4.35vw, 1.42rem) !important;
         margin: 16px 0 0 0 !important;
         text-align: right !important;
     }
