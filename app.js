@@ -6,6 +6,27 @@ if (typeof window !== 'undefined' && !window.location.hash) {
     window.scrollTo(0, 0);
 }
 
+// Ícono vectorial de báscula de mostrador para tarjetas y animación de vuelo hacia el nav
+const CARD_BASCULA_SVG = `
+    <svg viewBox="0 0 24 24" class="card-heart-svg card-scale-svg" aria-hidden="true">
+        <path d="M4 4.5h16l-1.3 2H5.3L4 4.5Z" />
+        <path d="M12 6.5v2" />
+        <path d="M6.5 8.5h11a1.5 1.5 0 0 1 1.48 1.26l1.3 8.5A1.5 1.5 0 0 1 18.8 20H5.2a1.5 1.5 0 0 1-1.48-1.74l1.3-8.5A1.5 1.5 0 0 1 6.5 8.5Z" />
+        <circle cx="12" cy="14.5" r="3.4" />
+        <path d="M12 14.5l1.8-1.8" />
+        <circle cx="12" cy="14.5" r="0.65" fill="currentColor" stroke="none" />
+    </svg>
+`;
+
+// Helper para renderizar la pastilla minimalista con báscula "+ Pesar" / "✓ Pesado" en las tarjetas
+const createCardWeighButton = (item) => `
+    <button type="button" class="card-heart-btn card-weigh-pill" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
+        ${CARD_BASCULA_SVG}
+        <span class="weigh-pill-default">+ Pesar</span>
+        <span class="weigh-pill-active">✓ Pesado</span>
+    </button>
+`;
+
 // --- Scroll handler with requestAnimationFrame and passive listener ---
 let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
 let ticking = false;
@@ -330,11 +351,7 @@ const renderAlacenaShelves = () => {
             slot.innerHTML = `
                 <div class="gallery-piece-frame" data-action="open-ficha" data-id="${item.id}">
                     <div class="passepartout-container">
-                        <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Guardar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                            <svg viewBox="0 0 24 24" class="card-heart-svg">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                        </button>
+                        ${createCardWeighButton(item)}
                         ${qtyInBasket > 0 ? `<span class="piece-qty-badge" title="En tu balanza">×${qtyInBasket}</span>` : ''}
                         <img src="${item.img}" alt="${item.name} — Cerámica artesanal portuguesa por kilo en BasKula" class="gallery-photo" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                         <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
@@ -1038,11 +1055,7 @@ const initAparador = () => {
         card.innerHTML = `
             <div class="bw-product-card__figure">
                 <div class="bw-product-card__media">
-                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Guardar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                        <svg viewBox="0 0 24 24" class="card-heart-svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </button>
+                    ${createCardWeighButton(item)}
                     <img src="${item.img}" alt="${item.name} — Pieza de autor cerámica portuguesa BasKula" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                     <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
                 </div>
@@ -1653,11 +1666,7 @@ const initFestiveCarousel = () => {
         card.innerHTML = `
             <div class="bw-product-card__figure">
                 <div class="bw-product-card__media">
-                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                        <svg viewBox="0 0 24 24" class="card-heart-svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </button>
+                    ${createCardWeighButton(item)}
                     <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                     <a href="https://www.instagram.com/baskula.uy/" target="_blank" rel="noopener noreferrer" class="gallery-view-hint" aria-label="Saber más sobre ${item.name} en Instagram" onclick="event.stopPropagation();"><i data-lucide="instagram"></i> Saber más</a>
                 </div>
@@ -1689,31 +1698,51 @@ const initFestiveCarousel = () => {
         return card;
     }
 
-    function setupMiniFestiveCarousel(trackId, viewportId, prevBtnId, nextBtnId, dotsId, items) {
+    function setupMiniFestiveCarousel(trackId, viewportId, prevBtnId, nextBtnId, dotsId, items, options = {}) {
         const track = document.getElementById(trackId);
         const viewport = document.getElementById(viewportId);
         const prevBtn = document.getElementById(prevBtnId);
         const nextBtn = document.getElementById(nextBtnId);
         const dotsContainer = document.getElementById(dotsId);
+        const counterEl = options.counterId ? document.getElementById(options.counterId) : null;
 
         if (!track || !viewport) return;
 
         track.innerHTML = '';
         if (dotsContainer) dotsContainer.innerHTML = '';
+        if (counterEl && items.length) {
+            const initStep = options.stepByCards || 1;
+            counterEl.textContent = initStep > 1 && items.length >= initStep
+                ? `1–${initStep} / ${items.length}`
+                : `1 / ${items.length}`;
+        }
 
         let wasDragging = false;
 
-        items.forEach((item, idx) => {
+        const stepCards = options.stepByCards || 0;
+        const pageStarts = [];
+        if (stepCards > 1 && items.length > 0) {
+            const totalPages = Math.ceil(items.length / stepCards);
+            const maxStartIdx = Math.max(0, items.length - stepCards);
+            for (let p = 0; p < totalPages; p++) {
+                pageStarts.push(Math.min(p * stepCards, maxStartIdx));
+            }
+        }
+
+        items.forEach((item) => {
             const card = createFestiveProductCard(item);
             track.appendChild(card);
+        });
 
-            if (dotsContainer) {
+        if (dotsContainer) {
+            const dotTargets = pageStarts.length > 0 ? pageStarts : items.map((_, i) => i);
+            dotTargets.forEach((cardIdx, dotIdx) => {
                 const dot = document.createElement('button');
                 dot.type = 'button';
-                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
-                dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
+                dot.className = `bw-dot${dotIdx === 0 ? ' active' : ''}`;
+                dot.setAttribute('aria-label', pageStarts.length > 0 ? `Ver grupo ${dotIdx + 1}` : `Ver producto ${dotIdx + 1}`);
                 dot.addEventListener('click', () => {
-                    const cardEl = track.querySelectorAll('.bw-product-card')[idx];
+                    const cardEl = track.querySelectorAll('.bw-product-card')[cardIdx];
                     if (cardEl) {
                         viewport.scrollTo({
                             left: cardEl.offsetLeft - track.offsetLeft,
@@ -1722,8 +1751,8 @@ const initFestiveCarousel = () => {
                     }
                 });
                 dotsContainer.appendChild(dot);
-            }
-        });
+            });
+        }
 
         const updateNavButtons = () => {
             if (!prevBtn || !nextBtn) return;
@@ -1739,32 +1768,101 @@ const initFestiveCarousel = () => {
                 nextBtn.disabled = viewport.scrollLeft >= maxScroll;
             }
 
-            if (dotsContainer) {
-                const dots = dotsContainer.querySelectorAll('.bw-dot');
-                const cards = track.querySelectorAll('.bw-product-card');
-                const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
-                cards.forEach((card, i) => {
-                    const cLeft = card.offsetLeft - track.offsetLeft;
-                    const cRight = cLeft + card.offsetWidth;
-                    if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
-                        dots.forEach(d => d.classList.remove('active'));
-                        if (dots[i]) dots[i].classList.add('active');
+            if (dotsContainer || counterEl) {
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.bw-dot') : [];
+                const cards = Array.from(track.querySelectorAll('.bw-product-card'));
+                const step = options.stepByCards || 1;
+
+                let activeIdx = 0;
+                let activeDotIdx = 0;
+                if (step > 1 && pageStarts.length > 0) {
+                    let minDiff = Infinity;
+                    pageStarts.forEach((cardIdx, pIdx) => {
+                        const card = cards[cardIdx];
+                        if (!card) return;
+                        const cLeft = card.offsetLeft - track.offsetLeft;
+                        const diff = Math.abs(viewport.scrollLeft - cLeft);
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            activeIdx = cardIdx;
+                            activeDotIdx = pIdx;
+                        }
+                    });
+                } else {
+                    const scrollMiddle = viewport.scrollLeft + (viewport.clientWidth / 2);
+                    cards.forEach((card, i) => {
+                        const cLeft = card.offsetLeft - track.offsetLeft;
+                        const cRight = cLeft + card.offsetWidth;
+                        if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
+                            activeIdx = i;
+                            activeDotIdx = i;
+                        }
+                    });
+                }
+
+                if (dots.length) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[activeDotIdx]) dots[activeDotIdx].classList.add('active');
+                }
+                if (counterEl && cards.length) {
+                    if (step > 1 && cards.length >= step) {
+                        const endIdx = Math.min(activeIdx + step, cards.length);
+                        counterEl.textContent = `${activeIdx + 1}–${endIdx} / ${cards.length}`;
+                    } else {
+                        counterEl.textContent = `${activeIdx + 1} / ${cards.length}`;
                     }
+                }
+            }
+        };
+
+        const scrollByCards = (direction) => {
+            const cards = Array.from(track.querySelectorAll('.bw-product-card'));
+            if (!cards.length) return;
+
+            let firstVisibleIdx = 0;
+            let minDiff = Infinity;
+            cards.forEach((card, i) => {
+                const cLeft = card.offsetLeft - track.offsetLeft;
+                const diff = Math.abs(viewport.scrollLeft - cLeft);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    firstVisibleIdx = i;
+                }
+            });
+
+            const maxStartIdx = Math.max(0, cards.length - stepCards);
+            const targetIdx = direction > 0
+                ? Math.min(firstVisibleIdx + stepCards, maxStartIdx)
+                : Math.max(firstVisibleIdx - stepCards, 0);
+
+            const targetCard = cards[targetIdx];
+            if (targetCard) {
+                viewport.scrollTo({
+                    left: targetCard.offsetLeft - track.offsetLeft,
+                    behavior: 'smooth'
                 });
             }
         };
 
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                const scrollDistance = viewport.clientWidth * 0.75;
-                viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
+                if (stepCards > 0) {
+                    scrollByCards(-1);
+                } else {
+                    const scrollDistance = viewport.clientWidth * 0.75;
+                    viewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
+                }
             });
         }
 
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                const scrollDistance = viewport.clientWidth * 0.75;
-                viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+                if (stepCards > 0) {
+                    scrollByCards(1);
+                } else {
+                    const scrollDistance = viewport.clientWidth * 0.75;
+                    viewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+                }
             });
         }
 
@@ -1804,55 +1902,16 @@ const initFestiveCarousel = () => {
         setTimeout(updateNavButtons, 100);
     }
 
-    // Bloque 1: Mesa Navideña (4 artículos en Grilla 2x2 en PC / Carrusel deslizable en Móvil)
-    const track1 = document.getElementById('festive-track-1');
-    const dots1 = document.getElementById('festive-dots-1');
+    // Bloque 1: Mesa Navideña (Carrusel de 2 piezas por vista y avance de a 2)
     const items1 = FESTIVE_CAROUSEL_ITEMS.slice(0, 4);
-
-    if (track1) {
-        track1.innerHTML = '';
-        if (dots1) dots1.innerHTML = '';
-
-        items1.forEach((item, idx) => {
-            const card = createFestiveProductCard(item);
-            track1.appendChild(card);
-
-            if (dots1) {
-                const dot = document.createElement('button');
-                dot.type = 'button';
-                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
-                dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
-                dot.addEventListener('click', () => {
-                    const cardEl = track1.querySelectorAll('.bw-product-card')[idx];
-                    if (cardEl) {
-                        track1.scrollTo({
-                            left: cardEl.offsetLeft - track1.offsetLeft,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-                dots1.appendChild(dot);
-            }
+    if (document.getElementById('festive-track-1')) {
+        setupMiniFestiveCarousel('festive-track-1', 'festive-viewport-1', 'festive-prev-btn-1', 'festive-next-btn-1', 'festive-dots-1', items1, {
+            stepByCards: 2,
+            counterId: 'festive-counter-1'
         });
-
-        const updateDots1 = () => {
-            if (!dots1) return;
-            const dots = dots1.querySelectorAll('.bw-dot');
-            const cards = track1.querySelectorAll('.bw-product-card');
-            const scrollMiddle = track1.scrollLeft + (track1.clientWidth / 2);
-            cards.forEach((card, i) => {
-                const cLeft = card.offsetLeft - track1.offsetLeft;
-                const cRight = cLeft + card.offsetWidth;
-                if (scrollMiddle >= cLeft && scrollMiddle < cRight) {
-                    dots.forEach(d => d.classList.remove('active'));
-                    if (dots[i]) dots[i].classList.add('active');
-                }
-            });
-        };
-        track1.addEventListener('scroll', updateDots1, { passive: true });
     }
 
-    // Bloque 2: Regalos & Noche Especial (6 artículos restantes)
+    // Bloque 2: Regalos & Noche Especial (Carrusel con los 6 artículos restantes)
     const items2 = FESTIVE_CAROUSEL_ITEMS.slice(4);
     if (document.getElementById('festive-track-2')) {
         setupMiniFestiveCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
@@ -1888,11 +1947,7 @@ const initProductosKiloCarousel = () => {
         card.innerHTML = `
             <div class="bw-product-card__figure">
                 <div class="bw-product-card__media">
-                    <button type="button" class="card-heart-btn" data-id="${item.id}" aria-label="Pesar ${item.name} en mi balanza" title="Agregar a mi balanza">
-                        <svg viewBox="0 0 24 24" class="card-heart-svg">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                    </button>
+                    ${createCardWeighButton(item)}
                     <img src="${item.img}" alt="${item.name} — Cerámica portuguesa por kilo en BasKula Punta Piedras" class="bw-product-card__image" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                     <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
                 </div>
@@ -2408,25 +2463,38 @@ const createHeartParticle = (sourceEl) => {
     const rect = sourceEl.getBoundingClientRect();
     const particle = document.createElement('div');
     particle.className = 'floating-heart-particle';
-    particle.innerHTML = `<svg viewBox="0 0 24 24" fill="#E0485A" stroke="#E0485A" width="22" height="22"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+    particle.innerHTML = CARD_BASCULA_SVG;
+    const svgEl = particle.querySelector('svg');
+    if (svgEl) {
+        svgEl.style.width = '22px';
+        svgEl.style.height = '22px';
+        svgEl.style.fill = 'none';
+        svgEl.style.stroke = '#C28B17';
+        svgEl.style.strokeWidth = '1.8';
+        svgEl.style.strokeLinecap = 'round';
+        svgEl.style.strokeLinejoin = 'round';
+    }
     particle.style.left = `${rect.left + rect.width / 2 - 11}px`;
     particle.style.top = `${rect.top + rect.height / 2 - 11}px`;
     particle.style.opacity = '1';
-    particle.style.transform = 'scale(0.8)';
+    particle.style.transform = 'scale(0.9)';
     document.body.appendChild(particle);
 
+    const navBtn = document.getElementById('navHeartBtn');
+    const navRect = navBtn ? navBtn.getBoundingClientRect() : null;
+    const destX = navRect && navRect.width > 0 ? navRect.left + navRect.width / 2 - 11 : window.innerWidth - 90;
+    const destY = navRect && navRect.height > 0 ? navRect.top + navRect.height / 2 - 11 : 28;
+
     requestAnimationFrame(() => {
-        const destX = window.innerWidth - 60;
-        const destY = window.innerHeight - 60;
         particle.style.left = `${destX}px`;
         particle.style.top = `${destY}px`;
-        particle.style.transform = 'scale(1.4)';
+        particle.style.transform = 'scale(1.15)';
         particle.style.opacity = '0';
     });
 
     setTimeout(() => {
         if (particle.parentNode) particle.parentNode.removeChild(particle);
-    }, 800);
+    }, 700);
 };
 
 const toggleWishlistItem = (id, sourceEl) => {
@@ -2506,9 +2574,13 @@ function updateWishlistUI() {
         btn.classList.toggle('liked', inBasket);
     });
 
-    // 2. Contador en el Nav
+    // 2. Contador en el Nav (piezas y kilos)
     const navHeartBtn = document.getElementById('navHeartBtn');
     const navHeartBadge = document.getElementById('navHeartBadge');
+    const navScaleWeight = document.getElementById('navScaleWeight');
+    if (navScaleWeight) {
+        navScaleWeight.textContent = `${totalWeight.toFixed(2)} kg`;
+    }
     if (navHeartBadge) {
         navHeartBadge.textContent = String(totalPieces);
         navHeartBadge.style.display = totalPieces > 0 ? 'inline-flex' : 'none';

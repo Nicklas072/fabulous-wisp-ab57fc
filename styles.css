@@ -7634,7 +7634,8 @@ body.drawer-open {
     width: auto !important;
     min-width: auto !important;
     height: 28px !important;
-    padding: 0 11px !important;
+    padding: 0 10px !important;
+    gap: 5px !important;
     border-radius: 999px !important;
     background: rgba(250, 248, 245, 0.94);
     backdrop-filter: blur(6px);
@@ -7647,6 +7648,14 @@ body.drawer-open {
     letter-spacing: 0.03em;
     white-space: nowrap;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-heart-btn.card-weigh-pill .card-heart-svg {
+    width: 14px !important;
+    height: 14px !important;
+    stroke: currentColor !important;
+    fill: none !important;
+    flex-shrink: 0;
 }
 
 .card-heart-btn.card-weigh-pill:hover {
@@ -7668,6 +7677,11 @@ body.drawer-open {
     box-shadow: 0 4px 14px rgba(226, 167, 39, 0.35);
 }
 
+.card-heart-btn.card-weigh-pill.liked .card-heart-svg {
+    stroke: #222222 !important;
+    fill: none !important;
+}
+
 .card-heart-btn.card-weigh-pill.liked .weigh-pill-default {
     display: none;
 }
@@ -7679,10 +7693,16 @@ body.drawer-open {
 @media (max-width: 600px) {
     .card-heart-btn.card-weigh-pill {
         height: 25px !important;
-        padding: 0 9px !important;
+        padding: 0 8px !important;
+        gap: 4px !important;
         font-size: 0.66rem !important;
         top: 7px !important;
         left: 7px !important;
+    }
+
+    .card-heart-btn.card-weigh-pill .card-heart-svg {
+        width: 12px !important;
+        height: 12px !important;
     }
 }
 
