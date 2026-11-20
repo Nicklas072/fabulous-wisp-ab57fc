@@ -66,7 +66,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261119_nuestra_casa_sin_sombra">
+    <link rel="stylesheet" href="styles.min.css?v=20261120_fiestas_b2_height10">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -470,37 +470,8 @@
                 <h2>Especial Fiestas</h2>
             </div>
 
-            <!-- Estructura Fiestas: Bloque 1 Split 50/50 en PC + Bloque 2 Banner y Carrusel -->
+            <!-- Estructura Fiestas: Bloque 2 (Banner y Carrusel) arriba + Bloque 1 (Lookbook y 2 piezas) abajo -->
             <div class="holiday-unified-container">
-                <!-- =========================================================
-                     BLOQUE 1: MESA NAVIDEÑA (Split 50/50 en PC: Foto Lifestyle + Grilla 2x2 con formato Bloque 2)
-                     ========================================================= -->
-                <div class="holiday-lookbook-split" id="festive-block-1" data-aos="fade-up">
-                    <div class="holiday-lookbook-media">
-                        <div class="holiday-lookbook-img-wrap">
-                            <img src="images/fiestas-mesa-rubi.webp?v=20261119_rubi4x5"
-                                alt="Mesa festiva con plato cerámico perlado color rubí y galletita de jengibre"
-                                width="824" height="1024" loading="lazy" decoding="async">
-                        </div>
-                    </div>
-
-                    <div class="holiday-lookbook-products">
-                        <div class="holiday-lookbook-header">
-                            <span class="holiday-pane-tag">Colección navidad</span>
-                            <h3 class="holiday-pane-title">Para resaltar la mesa </h3>
-                            <p class="holiday-pane-subtext">Detalles que suman a esa noche especial.</p>
-                        </div>
-
-                        <!-- 4 Artículos: Grilla 2x2 en PC con el formato de tarjetas del Bloque 2 / Deslizable en Móvil -->
-                        <div class="holiday-grid-carousel-track" id="festive-track-1">
-                            <!-- Inyectado dinámicamente con los 4 productos usando .bw-product-card idéntico al bloque 2 -->
-                        </div>
-                        <div class="bw-mobile-dots holiday-mobile-dots-1" id="festive-dots-1"></div>
-                    </div>
-                </div>
-
-                <div class="holiday-section-divider" aria-hidden="true"></div>
-
                 <!-- =========================================================
                      BLOQUE 2: REGALOS & NOCHE ESPECIAL (Banner Escénico + Carrusel)
                      ========================================================= -->
@@ -514,7 +485,7 @@
                         </div>
                         <div class="holiday-block-banner__content">
                             <span class="holiday-pane-tag holiday-pane-tag--light">DICIEMBRE • FIESTAS </span>
-                            <h3 class="holiday-pane-title holiday-pane-title--light">UNA NOCHE ESPECIAL</h3>
+                            <h3 class="holiday-pane-title holiday-pane-title--light">Tu mesa festiva</h3>
                             <p class="holiday-pane-subtext holiday-pane-subtext--light">¿Ya sabés qué
                                 regalar?<br>Sorprendé con piezas originales</p>
                         </div>
@@ -542,6 +513,57 @@
                         </button>
                     </div>
                     <div class="bw-mobile-dots" id="festive-dots-2"></div>
+                </div>
+
+                <div class="holiday-section-divider" aria-hidden="true"></div>
+
+                <!-- =========================================================
+                     BLOQUE 1: MESA NAVIDEÑA (Lookbook + Carrusel de 2 piezas por vista)
+                     ========================================================= -->
+                <div class="holiday-lookbook-split" id="festive-block-1" data-aos="fade-up">
+                    <div class="holiday-lookbook-media">
+                        <div class="holiday-lookbook-img-wrap">
+                            <img src="images/fiestas-mesa-rubi.webp?v=20261119_rubi4x5"
+                                alt="Mesa festiva con plato cerámico perlado color rubí y galletita de jengibre"
+                                width="824" height="1024" loading="lazy" decoding="async">
+                            <div class="holiday-lookbook-overlay"></div>
+                        </div>
+                        <div class="holiday-lookbook-content">
+                            <span class="holiday-pane-tag holiday-pane-tag--light">Colección navidad</span>
+                            <h3 class="holiday-pane-title holiday-pane-title--light">Para resaltar la mesa</h3>
+                            <p class="holiday-pane-subtext holiday-pane-subtext--light">Detalles que suman a esa noche especial.</p>
+                        </div>
+                    </div>
+
+                    <div class="holiday-lookbook-products">
+                        <!-- Carrusel Bloque 1 (2 artículos por vista, 4 en total) -->
+                        <div class="holiday-spotlight-header">
+                            <span class="holiday-spotlight-label">Piezas de la mesa</span>
+                            <span class="holiday-spotlight-counter" id="festive-counter-1">1–2 / 4</span>
+                        </div>
+                        <div class="bw-carousel-wrapper holiday-block-carousel-wrapper holiday-block-carousel-wrapper--spotlight">
+                            <button type="button" class="bw-nav-btn bw-nav-btn--prev" id="festive-prev-btn-1"
+                                aria-label="Anterior">
+                                <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+                                    <path d="M15.5 10H4.5M4.5 10l4.5-4.5M4.5 10l4.5 4.5" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <div class="bw-scroll-carousel" id="festive-viewport-1">
+                                <div class="bw-product-list" id="festive-track-1">
+                                    <!-- Inyectado dinámicamente con los 4 productos -->
+                                </div>
+                            </div>
+                            <button type="button" class="bw-nav-btn bw-nav-btn--next" id="festive-next-btn-1"
+                                aria-label="Siguiente">
+                                <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+                                    <path d="M4.5 10h11M15.5 10L11 5.5M15.5 10L11 14.5" stroke="currentColor"
+                                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="bw-mobile-dots holiday-spotlight-dots" id="festive-dots-1"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -906,7 +928,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261119_hoisting_fix_v2" defer></script>
+    <script src="app.min.js?v=20261120_fiestas_b1_dots_sync" defer></script>
 
 
 </body>

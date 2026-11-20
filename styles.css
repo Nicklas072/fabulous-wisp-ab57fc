@@ -1574,9 +1574,7 @@ body.drawer-open {
     }
 
     .hero-single-image {
-        background-size: auto 145% !important;
-        background-position: 45% top !important;
-        transform-origin: center top !important;
+        background-position: center 20% !important;
     }
 
     .hero-editorial-badge {
@@ -2443,31 +2441,33 @@ body.drawer-open {
 }
 
 /* ======================================================================
-   BLOQUE 1: SPLIT EN PC (Foto Lifestyle Amplia + Grilla 2x2 Expansiva con Máximo Aire)
+   BLOQUE 1: LOOKBOOK + CARRUSEL DE 2 PIEZAS (Desktop y Móvil Calibrado)
    ====================================================================== */
 .holiday-lookbook-split {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.25fr);
-    gap: clamp(32px, 4vw, 56px);
-    align-items: stretch;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(28px, 3.8vw, 52px);
+    align-items: center;
     width: 100%;
     max-width: 1320px;
     margin: 0 auto;
     box-sizing: border-box;
 }
 
-/* Columna Izquierda: Foto Lifestyle Plato Rubí (Grande, imponente y a sangre con recuadro interior) */
+/* Columna Izquierda: Foto Lifestyle Plato Rubí con Texto Editorial y Overlay */
 .holiday-lookbook-media {
     position: relative;
     width: 100%;
-    min-height: 580px;
+    min-height: clamp(540px, 42vw, 620px);
     height: 100%;
     background-color: #222222;
     border: 1px solid #222222 !important;
     border-radius: 0 !important;
     overflow: hidden;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     display: flex;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
 }
 
@@ -2499,76 +2499,193 @@ body.drawer-open {
     object-position: center center;
     display: block;
     border-radius: 0 !important;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .holiday-lookbook-media:hover .holiday-lookbook-img-wrap img {
-    transform: scale(1.025);
+    transform: scale(1.03);
 }
 
-/* Columna Derecha: Encabezado + Grilla 2x2 ocupando todo el ancho con generoso aire */
+/* Sombra sutil / Overlay degradé oscuro idéntico al Bloque 2 */
+.holiday-lookbook-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(18, 16, 14, 0.44) 0%, rgba(18, 16, 14, 0.68) 100%);
+    z-index: 2;
+    transition: background 0.4s ease;
+}
+
+.holiday-lookbook-media:hover .holiday-lookbook-overlay {
+    background: linear-gradient(180deg, rgba(18, 16, 14, 0.38) 0%, rgba(18, 16, 14, 0.64) 100%);
+}
+
+/* Contenido de texto montado sobre la imagen */
+.holiday-lookbook-content {
+    position: relative;
+    z-index: 4;
+    padding: clamp(24px, 3.5vw, 44px) clamp(20px, 3vw, 36px);
+    width: 100%;
+    max-width: 440px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.holiday-lookbook-content .holiday-pane-tag {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.72rem, 0.95vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: #F4D381;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.holiday-lookbook-content .holiday-pane-title {
+    font-family: var(--font-heading, 'Lora', Georgia, serif);
+    font-size: clamp(1.6rem, 2.6vw, 2.35rem);
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 1.22;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.01em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+.holiday-lookbook-content .holiday-pane-subtext {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: clamp(0.92rem, 1.2vw, 1.08rem);
+    color: rgba(255, 255, 255, 0.94);
+    line-height: 1.45;
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+/* Columna Derecha: Carrusel Bloque 1 (2 artículos por vista, con mayor separación) */
 .holiday-lookbook-products {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    gap: 18px;
     width: 100%;
+    min-width: 0;
     box-sizing: border-box;
 }
 
-.holiday-lookbook-header {
-    text-align: left;
-    margin-bottom: 4px;
-    padding-left: 2px;
-}
-
-.holiday-lookbook-header .holiday-pane-tag {
-    font-family: var(--font-body, 'Outfit', sans-serif);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--color-mustard-dark, #C28B17);
-    display: block;
-    margin-bottom: 6px;
-}
-
-.holiday-lookbook-header .holiday-pane-title {
-    font-family: var(--font-heading, 'Lora', Georgia, serif);
-    font-size: clamp(1.6rem, 2.3vw, 2.25rem);
-    font-weight: 600;
-    color: #222222;
-    margin: 0 0 6px 0;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-}
-
-.holiday-lookbook-header .holiday-pane-subtext {
-    font-family: var(--font-body, 'Outfit', sans-serif);
-    font-size: 0.98rem;
-    color: #5C554B;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Grilla 2x2 de Artículos en PC (Aprovecha el 100% del espacio con máximo aire entre piezas) */
-.holiday-grid-carousel-track {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(20px, 2.8vw, 34px);
+.holiday-spotlight-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     max-width: 100%;
+    margin: 0 0 12px 0;
+    padding: 0 2px;
     box-sizing: border-box;
 }
 
-.holiday-grid-carousel-track .bw-product-card {
+.holiday-spotlight-label {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--color-mustard-dark, #C28B17);
+}
+
+.holiday-spotlight-counter {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #5C554B;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 !important;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-scroll-carousel {
+    padding: 6px 0 14px 0;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-list {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: calc((100% - 28px) / 2) !important;
+    gap: 28px !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-card {
+    flex: none !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
-    min-height: auto !important;
-    flex: none !important;
-    box-sizing: border-box !important;
+    scroll-snap-align: start !important;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-card__figure {
+    margin-bottom: 12px;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-card__info {
+    text-align: center;
+    align-items: center;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-title {
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: #222222;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn {
+    top: 41%;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background-color: rgba(250, 248, 245, 0.96);
+    border: 1px solid rgba(194, 139, 23, 0.45);
+    color: #222222;
+    box-shadow: 0 4px 14px rgba(34, 34, 34, 0.1);
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn:hover:not(:disabled) {
+    background-color: #222222;
+    color: #F4D381;
+    border-color: #222222;
+    transform: translateY(-50%) scale(1.06);
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn--prev {
+    left: -18px;
+}
+
+#festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn--next {
+    right: -18px;
+}
+
+.holiday-unified-container .holiday-spotlight-dots {
+    display: flex !important;
+    margin-top: 4px;
 }
 
 /* Divisor sutil entre bloques */
@@ -2594,8 +2711,8 @@ body.drawer-open {
 .holiday-block-banner {
     position: relative;
     width: 100%;
-    height: clamp(240px, 24vw, 360px);
-    min-height: 230px;
+    height: clamp(264px, 26.4vw, 396px);
+    min-height: 255px;
     border: 1px solid #222222 !important;
     border-radius: 0 !important;
     overflow: hidden;
@@ -2987,25 +3104,24 @@ body.drawer-open {
         gap: 12px !important;
     }
 
-    .holiday-lookbook-header {
+    .holiday-lookbook-content {
+        padding: clamp(16px, 3.5vw, 24px) clamp(16px, 3.5vw, 24px) !important;
         text-align: center !important;
-        margin-bottom: 6px !important;
-        padding: 0 8px !important;
     }
 
-    .holiday-lookbook-header .holiday-pane-tag {
+    .holiday-lookbook-content .holiday-pane-tag {
         font-size: 0.72rem !important;
         letter-spacing: 2.2px !important;
         margin-bottom: 4px !important;
     }
 
-    .holiday-lookbook-header .holiday-pane-title {
+    .holiday-lookbook-content .holiday-pane-title {
         font-size: clamp(1.35rem, 5vw, 1.6rem) !important;
         line-height: 1.2 !important;
         margin-bottom: 4px !important;
     }
 
-    .holiday-lookbook-header .holiday-pane-subtext {
+    .holiday-lookbook-content .holiday-pane-subtext {
         font-size: 0.88rem !important;
         line-height: 1.4 !important;
     }
@@ -3074,8 +3190,28 @@ body.drawer-open {
         line-height: 1.38 !important;
     }
 
-    .holiday-block-carousel-wrapper .bw-nav-btn {
+    .holiday-block-carousel-wrapper .bw-nav-btn,
+    #festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-nav-btn {
         display: none !important;
+    }
+
+    .holiday-spotlight-header {
+        max-width: 100% !important;
+        margin: 0 0 4px 0 !important;
+    }
+
+    #festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-list {
+        display: flex !important;
+        width: max-content !important;
+        gap: 14px !important;
+    }
+
+    #festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-card {
+        flex: 0 0 190px !important;
+        width: 190px !important;
+        min-width: 160px !important;
+        max-width: 220px !important;
+        scroll-snap-align: start !important;
     }
 
     .holiday-block-carousel-wrapper .bw-mobile-dots {
@@ -3086,7 +3222,8 @@ body.drawer-open {
 @media (max-width: 600px) {
     /* En teléfonos: 2 tarjetas por vista (~46% cada una) con deslizamiento natural y proporcionado */
     .holiday-grid-carousel-track .bw-product-card,
-    .holiday-block-carousel-wrapper .bw-product-card {
+    .holiday-block-carousel-wrapper .bw-product-card,
+    #festive-block-1 .holiday-block-carousel-wrapper--spotlight .bw-product-card {
         flex: 0 0 46% !important;
         width: 46% !important;
         min-width: 145px !important;
@@ -4671,7 +4808,7 @@ body.drawer-open {
 /* --- Atmosphere Gallery Section & Bento Grid (Nuestra Casa / Mesas con Personalidad) --- */
 .bento-section-wrapper {
     background-color: #F0B832;
-    padding: 28px 0 85px 0;
+    padding: 24px 0 38px 0;
     margin: 0;
     width: 100%;
     position: relative;
@@ -4682,7 +4819,7 @@ body.drawer-open {
 
 .bento-main-header {
     padding: 0 24px;
-    margin-bottom: 42px;
+    margin-bottom: 28px;
     max-width: 860px;
     margin-left: auto;
     margin-right: auto;
@@ -4709,7 +4846,7 @@ body.drawer-open {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 0 clamp(16px, 2.5vw, 36px);
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
@@ -4835,14 +4972,14 @@ body.drawer-open {
     display: none !important;
 }
 
-/* --- Layout Escritorio (>= 769px): Tarjetas Alineadas Más Largas y Menos Anchas (Imagen arriba, Título y Texto debajo) --- */
+/* --- Layout Escritorio (>= 769px): Opción 1 — 4 Tarjetas a Ancho Completo en 4:5 Vertical --- */
 @media (min-width: 769px) {
     .bento-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(18px, 2.2vw, 28px);
+        gap: 18px;
         align-items: stretch;
-        max-width: 1080px;
+        max-width: 100%;
         margin: 0 auto;
     }
 
@@ -4850,15 +4987,14 @@ body.drawer-open {
         display: flex;
         flex-direction: column;
         height: 100%;
-        min-height: 450px;
     }
 
     .bento-card .bento-card-media {
-        width: calc(100% - 26px);
-        aspect-ratio: 1 / 1.06;
+        width: calc(100% - 28px);
+        aspect-ratio: 4 / 5;
         height: auto;
         flex-shrink: 0;
-        margin: 13px 13px 0 13px;
+        margin: 14px 14px 0 14px;
         border-radius: 12px;
     }
 
@@ -4867,20 +5003,20 @@ body.drawer-open {
     }
 
     .bento-card .bento-card-content {
-        padding: 20px 18px 28px 18px;
+        padding: 20px 22px 26px 22px;
         flex: 1 1 auto;
         justify-content: flex-start;
     }
 
     .bento-card .bento-card-title {
-        font-size: clamp(1.18rem, 1.35vw, 1.42rem);
+        font-size: clamp(1.28rem, 1.5vw, 1.6rem);
         line-height: 1.25;
         margin: 0 0 10px 0;
     }
 
     .bento-card .bento-card-desc {
-        font-size: clamp(0.88rem, 0.94vw, 0.96rem);
-        line-height: 1.58;
+        font-size: clamp(0.94rem, 1.02vw, 1.06rem);
+        line-height: 1.6;
     }
 
     .bento-mobile-dots {
