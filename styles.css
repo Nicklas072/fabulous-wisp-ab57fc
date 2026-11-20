@@ -1599,20 +1599,20 @@ body.drawer-open {
         box-sizing: border-box !important;
     }
 
-    /* Bloque pegado a la derecha sobre la pared mostaza */
+    /* Bloque pegado a la derecha sobre la pared mostaza con halo cálido orgánico */
     .storefront-content {
         position: relative !important;
         z-index: 3 !important;
-        width: 44% !important;
-        max-width: 44% !important;
+        width: 45% !important;
+        max-width: 45% !important;
         margin: 0 0 0 auto !important;
-        padding: 4px 2px !important;
+        padding: 12px 6px 10px 14px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-end !important;
         justify-content: flex-start !important;
         text-align: right !important;
-        background: transparent !important;
+        background: radial-gradient(closest-side, rgba(255, 249, 230, 0.54) 0%, rgba(255, 249, 230, 0.24) 55%, transparent 100%) !important;
         border: none !important;
         box-shadow: none !important;
         box-sizing: border-box !important;
@@ -1664,15 +1664,15 @@ body.drawer-open {
     .hero-title-prefix {
         display: block !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.02rem, 4.1vw, 1.32rem) !important;
-        font-weight: 700 !important;
+        font-size: clamp(1.06rem, 4.25vw, 1.36rem) !important;
+        font-weight: 800 !important;
         letter-spacing: 0.9px !important;
         text-transform: uppercase !important;
         line-height: 1.14 !important;
-        color: #1A1815 !important;
+        color: #12100D !important;
         margin-bottom: 4px !important;
         text-align: right !important;
-        text-shadow: 0 1px 4px rgba(255, 246, 218, 0.55) !important;
+        text-shadow: 0 1px 6px rgba(255, 248, 226, 0.85) !important;
     }
 
     .hero-title-kilo {
@@ -1681,19 +1681,16 @@ body.drawer-open {
         justify-content: flex-end !important;
         gap: 0.32em !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.38rem, 5.8vw, 1.85rem) !important;
+        font-size: clamp(1.42rem, 6vw, 1.9rem) !important;
         font-weight: 800 !important;
         letter-spacing: 1.2px !important;
         text-transform: uppercase !important;
-        color: #E8A71D !important;
-        -webkit-text-stroke: 1.1px #12100E !important;
-        paint-order: stroke fill !important;
+        color: #12100D !important;
+        -webkit-text-stroke: 0 !important;
         margin-top: 5px !important;
-        margin-bottom: 4px !important;
+        margin-bottom: 5px !important;
         text-align: right !important;
-        text-shadow:
-            0 2px 5px rgba(0, 0, 0, 0.40),
-            0 4px 12px rgba(0, 0, 0, 0.20) !important;
+        text-shadow: 0 1px 8px rgba(255, 248, 226, 0.92) !important;
     }
 
     .hero-title-kilo .hero-word-por {
@@ -1719,23 +1716,32 @@ body.drawer-open {
 
     .hero-subtitle {
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(0.82rem, 3vw, 1rem) !important;
+        font-size: clamp(0.86rem, 3.15vw, 1.04rem) !important;
         font-style: italic !important;
-        font-weight: 500 !important;
-        line-height: 1.36 !important;
-        color: #1A1815 !important;
-        margin: 5px 0 0 0 !important;
+        font-weight: 600 !important;
+        line-height: 1.38 !important;
+        color: #12100D !important;
+        margin: 6px 0 0 0 !important;
         padding: 0 !important;
         text-align: right !important;
-        text-shadow: 0 1px 4px rgba(255, 246, 218, 0.5) !important;
-        max-width: 86% !important;
+        text-shadow: 0 1px 6px rgba(255, 248, 226, 0.85) !important;
+        max-width: 88% !important;
     }
 
     .hero-scroll-arrow {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
         align-self: flex-end !important;
-        margin: 10px 0 0 0 !important;
+        margin: 12px 0 0 0 !important;
         width: 44px !important;
         height: 44px !important;
+        color: #12100D !important;
+        background: rgba(255, 248, 228, 0.78) !important;
+        border: 1px solid rgba(18, 16, 13, 0.22) !important;
+        border-radius: 50% !important;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14) !important;
     }
 
     .hero-scroll-arrow svg {
@@ -3469,9 +3475,9 @@ body.drawer-open {
 }
 
 .nav-scale-icon {
-    width: 17px;
-    height: 17px;
-    color: var(--color-mustard);
+    width: 21px;
+    height: 21px;
+    color: inherit;
 }
 
 .nav-scale-count {
@@ -5845,8 +5851,8 @@ body.drawer-open {
     }
     
     .hero-subtitle {
-        font-size: clamp(0.84rem, 3.1vw, 1.02rem) !important;
-        margin: 5px 0 0 0 !important;
+        font-size: clamp(0.86rem, 3.15vw, 1.04rem) !important;
+        margin: 6px 0 0 0 !important;
         text-align: right !important;
     }
     
