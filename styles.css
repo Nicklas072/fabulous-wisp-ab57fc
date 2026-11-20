@@ -1574,7 +1574,7 @@ body.drawer-open {
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-end !important;
-        padding: clamp(92px, 12.5vh, 106px) 12px 20px 12px !important;
+        padding: clamp(86px, 11.5vh, 98px) 12px 20px 12px !important;
     }
 
     .hero-single-image {
@@ -1668,11 +1668,11 @@ body.drawer-open {
         font-weight: 700 !important;
         letter-spacing: 0.9px !important;
         text-transform: uppercase !important;
-        line-height: 1.18 !important;
+        line-height: 1.22 !important;
         color: #FFFFFF !important;
         -webkit-text-stroke: 1px #12100E !important;
         paint-order: stroke fill !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 14px !important;
         text-align: right !important;
         text-shadow:
             0 2px 5px rgba(0, 0, 0, 0.42),
@@ -1684,7 +1684,7 @@ body.drawer-open {
         flex-direction: column !important;
         align-items: flex-end !important;
         justify-content: flex-start !important;
-        gap: 2px !important;
+        gap: 5px !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
         font-weight: 800 !important;
         line-height: 1.02 !important;
@@ -1692,8 +1692,8 @@ body.drawer-open {
         color: #E8A71D !important;
         -webkit-text-stroke: 2.4px #12100E !important;
         paint-order: stroke fill !important;
-        margin-top: 8px !important;
-        margin-bottom: 10px !important;
+        margin-top: 10px !important;
+        margin-bottom: 16px !important;
         text-align: right !important;
         text-shadow:
             0 2px 5px rgba(0, 0, 0, 0.40),
@@ -1728,11 +1728,11 @@ body.drawer-open {
         font-size: clamp(1.04rem, 3.85vw, 1.24rem) !important;
         font-style: italic !important;
         font-weight: 600 !important;
-        line-height: 1.44 !important;
+        line-height: 1.48 !important;
         color: #FFFFFF !important;
         -webkit-text-stroke: 0.85px #12100E !important;
         paint-order: stroke fill !important;
-        margin: 10px 0 0 0 !important;
+        margin: 16px 0 0 0 !important;
         padding: 0 !important;
         text-align: right !important;
         text-shadow:
@@ -1743,7 +1743,7 @@ body.drawer-open {
 
     .hero-scroll-arrow {
         align-self: flex-end !important;
-        margin: 16px 0 0 0 !important;
+        margin: 22px 0 0 0 !important;
         width: 44px !important;
         height: 44px !important;
         color: #FFFFFF !important;
@@ -5841,7 +5841,7 @@ body.drawer-open {
         min-height: 535px !important;
         height: 76vh !important;
         max-height: 600px !important;
-        padding: clamp(92px, 12.5vh, 106px) 12px 20px 12px !important;
+        padding: clamp(86px, 11.5vh, 98px) 12px 20px 12px !important;
         display: flex !important;
         align-items: flex-start !important;
         justify-content: flex-end !important;
@@ -5870,7 +5870,7 @@ body.drawer-open {
     
     .hero-subtitle {
         font-size: clamp(1.04rem, 3.85vw, 1.24rem) !important;
-        margin: 10px 0 0 0 !important;
+        margin: 16px 0 0 0 !important;
         text-align: right !important;
     }
     
