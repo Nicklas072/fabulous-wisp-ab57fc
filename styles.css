@@ -1670,7 +1670,7 @@ body.drawer-open {
         text-transform: uppercase !important;
         line-height: 1.18 !important;
         color: #FFFFFF !important;
-        -webkit-text-stroke: 2.2px #12100E !important;
+        -webkit-text-stroke: 1px #12100E !important;
         paint-order: stroke fill !important;
         margin-bottom: 8px !important;
         text-align: right !important;
@@ -1730,7 +1730,7 @@ body.drawer-open {
         font-weight: 600 !important;
         line-height: 1.44 !important;
         color: #FFFFFF !important;
-        -webkit-text-stroke: 1.6px #12100E !important;
+        -webkit-text-stroke: 0.85px #12100E !important;
         paint-order: stroke fill !important;
         margin: 10px 0 0 0 !important;
         padding: 0 !important;
@@ -3015,11 +3015,12 @@ body.drawer-open {
     color: #FFE5A3 !important;
 }
 
-/* Botón de corazón en tarjetas festivas */
-.holiday-lookbook-split .card-heart-btn,
-.holiday-block-carousel-wrapper .card-heart-btn {
-    width: 34px !important;
-    height: 34px !important;
+/* Botón pastilla "+ Pesar" en tarjetas festivas */
+.holiday-lookbook-split .card-heart-btn.card-weigh-pill,
+.holiday-block-carousel-wrapper .card-heart-btn.card-weigh-pill {
+    width: auto !important;
+    height: 28px !important;
+    padding: 0 11px !important;
     top: 9px !important;
     left: 9px !important;
 }
@@ -3271,10 +3272,12 @@ body.drawer-open {
         overflow-wrap: break-word !important;
     }
 
-    .holiday-lookbook-split .card-heart-btn,
-    .holiday-block-carousel-wrapper .card-heart-btn {
-        width: 30px !important;
-        height: 30px !important;
+    .holiday-lookbook-split .card-heart-btn.card-weigh-pill,
+    .holiday-block-carousel-wrapper .card-heart-btn.card-weigh-pill {
+        width: auto !important;
+        height: 25px !important;
+        padding: 0 9px !important;
+        font-size: 0.66rem !important;
         top: 7px !important;
         left: 7px !important;
     }
@@ -7624,6 +7627,63 @@ body.drawer-open {
     height: 22px;
     color: #C28B17;
     transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1), top 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s ease, opacity 0.65s ease;
+}
+
+/* Pastilla minimalista "+ Pesar" / "✓ Pesado" en tarjetas de producto */
+.card-heart-btn.card-weigh-pill {
+    width: auto !important;
+    min-width: auto !important;
+    height: 28px !important;
+    padding: 0 11px !important;
+    border-radius: 999px !important;
+    background: rgba(250, 248, 245, 0.94);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(34, 34, 34, 0.16);
+    color: #222222;
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card-heart-btn.card-weigh-pill:hover {
+    background: #FFFFFF;
+    border-color: #C28B17;
+    color: #C28B17;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(226, 167, 39, 0.25);
+}
+
+.card-heart-btn.card-weigh-pill .weigh-pill-active {
+    display: none;
+}
+
+.card-heart-btn.card-weigh-pill.liked {
+    background: #E2A727;
+    border-color: #C28B17;
+    color: #222222;
+    box-shadow: 0 4px 14px rgba(226, 167, 39, 0.35);
+}
+
+.card-heart-btn.card-weigh-pill.liked .weigh-pill-default {
+    display: none;
+}
+
+.card-heart-btn.card-weigh-pill.liked .weigh-pill-active {
+    display: inline;
+}
+
+@media (max-width: 600px) {
+    .card-heart-btn.card-weigh-pill {
+        height: 25px !important;
+        padding: 0 9px !important;
+        font-size: 0.66rem !important;
+        top: 7px !important;
+        left: 7px !important;
+    }
 }
 
 /* --- 2. Ícono de Corazón en el Nav --- */
