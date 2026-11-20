@@ -1599,20 +1599,20 @@ body.drawer-open {
         box-sizing: border-box !important;
     }
 
-    /* Bloque pegado a la derecha sobre la pared mostaza con halo cálido orgánico */
+    /* Bloque pegado a la derecha sobre la pared mostaza aprovechando el alto vertical */
     .storefront-content {
         position: relative !important;
         z-index: 3 !important;
-        width: 45% !important;
-        max-width: 45% !important;
+        width: 47% !important;
+        max-width: 47% !important;
         margin: 0 0 0 auto !important;
-        padding: 12px 6px 10px 14px !important;
+        padding: 4px 2px !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-end !important;
         justify-content: flex-start !important;
         text-align: right !important;
-        background: radial-gradient(closest-side, rgba(255, 249, 230, 0.54) 0%, rgba(255, 249, 230, 0.24) 55%, transparent 100%) !important;
+        background: transparent !important;
         border: none !important;
         box-shadow: none !important;
         box-sizing: border-box !important;
@@ -1664,43 +1664,48 @@ body.drawer-open {
     .hero-title-prefix {
         display: block !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.06rem, 4.25vw, 1.36rem) !important;
-        font-weight: 800 !important;
+        font-size: clamp(1.1rem, 4.4vw, 1.46rem) !important;
+        font-weight: 700 !important;
         letter-spacing: 0.9px !important;
         text-transform: uppercase !important;
-        line-height: 1.14 !important;
-        color: #12100D !important;
-        margin-bottom: 4px !important;
+        line-height: 1.2 !important;
+        color: #1A1815 !important;
+        margin-bottom: 8px !important;
         text-align: right !important;
-        text-shadow: 0 1px 6px rgba(255, 248, 226, 0.85) !important;
+        text-shadow: 0 1px 4px rgba(255, 246, 218, 0.55) !important;
     }
 
     .hero-title-kilo {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 0.32em !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        justify-content: flex-start !important;
+        gap: 2px !important;
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(1.42rem, 6vw, 1.9rem) !important;
         font-weight: 800 !important;
-        letter-spacing: 1.2px !important;
+        line-height: 1.02 !important;
         text-transform: uppercase !important;
-        color: #12100D !important;
-        -webkit-text-stroke: 0 !important;
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
+        color: #E8A71D !important;
+        -webkit-text-stroke: 1.1px #12100E !important;
+        paint-order: stroke fill !important;
+        margin-top: 8px !important;
+        margin-bottom: 10px !important;
         text-align: right !important;
-        text-shadow: 0 1px 8px rgba(255, 248, 226, 0.92) !important;
+        text-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.40),
+            0 4px 12px rgba(0, 0, 0, 0.20) !important;
     }
 
     .hero-title-kilo .hero-word-por {
-        letter-spacing: 1.4px !important;
+        font-size: clamp(1.48rem, 6.2vw, 1.98rem) !important;
+        letter-spacing: 2px !important;
     }
 
     .hero-title-kilo .hero-word-kilo {
         display: inline-flex !important;
         align-items: center !important;
-        letter-spacing: 1.2px !important;
+        font-size: clamp(2.08rem, 9vw, 2.8rem) !important;
+        letter-spacing: 2.2px !important;
     }
 
     .hero-isologo-k {
@@ -1716,32 +1721,23 @@ body.drawer-open {
 
     .hero-subtitle {
         font-family: var(--font-heading, 'Lora', serif) !important;
-        font-size: clamp(0.86rem, 3.15vw, 1.04rem) !important;
+        font-size: clamp(0.95rem, 3.55vw, 1.15rem) !important;
         font-style: italic !important;
-        font-weight: 600 !important;
-        line-height: 1.38 !important;
-        color: #12100D !important;
-        margin: 6px 0 0 0 !important;
+        font-weight: 500 !important;
+        line-height: 1.48 !important;
+        color: #1A1815 !important;
+        margin: 10px 0 0 0 !important;
         padding: 0 !important;
         text-align: right !important;
-        text-shadow: 0 1px 6px rgba(255, 248, 226, 0.85) !important;
-        max-width: 88% !important;
+        text-shadow: 0 1px 4px rgba(255, 246, 218, 0.5) !important;
+        max-width: 78% !important;
     }
 
     .hero-scroll-arrow {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
         align-self: flex-end !important;
-        margin: 12px 0 0 0 !important;
+        margin: 18px 0 0 0 !important;
         width: 44px !important;
         height: 44px !important;
-        color: #12100D !important;
-        background: rgba(255, 248, 228, 0.78) !important;
-        border: 1px solid rgba(18, 16, 13, 0.22) !important;
-        border-radius: 50% !important;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14) !important;
     }
 
     .hero-scroll-arrow svg {
@@ -5851,8 +5847,8 @@ body.drawer-open {
     }
     
     .hero-subtitle {
-        font-size: clamp(0.86rem, 3.15vw, 1.04rem) !important;
-        margin: 6px 0 0 0 !important;
+        font-size: clamp(0.95rem, 3.55vw, 1.15rem) !important;
+        margin: 10px 0 0 0 !important;
         text-align: right !important;
     }
     
@@ -7570,41 +7566,45 @@ body.drawer-open {
 }
 
 .card-heart-svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
     fill: none;
     stroke: #2E2A24;
-    stroke-width: 2;
-    transition: fill 0.25s ease, stroke 0.25s ease, transform 0.25s ease;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    color: #2E2A24;
+    transition: fill 0.25s ease, stroke 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
 .card-heart-btn.liked {
-    background: #FFFFFF;
-    border-color: #E0485A;
-    box-shadow: 0 4px 14px rgba(224, 72, 90, 0.35);
+    background: #E2A727;
+    border-color: #C28B17;
+    box-shadow: 0 4px 14px rgba(226, 167, 39, 0.38);
     animation: heartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card-heart-btn.liked .card-heart-svg {
-    fill: #E0485A;
-    stroke: #E0485A;
+    fill: none;
+    stroke: #222222;
+    color: #222222;
 }
 
 @keyframes heartPop {
     0% { transform: scale(0.8); }
-    50% { transform: scale(1.3); }
+    50% { transform: scale(1.22); }
     100% { transform: scale(1); }
 }
 
-/* Partícula volante al clickear corazón */
+/* Partícula volante al clickear báscula (vuela hacia el nav arriba a la derecha) */
 .floating-heart-particle {
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    width: 20px;
-    height: 20px;
-    color: #E0485A;
-    transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    width: 22px;
+    height: 22px;
+    color: #C28B17;
+    transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1), top 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s ease, opacity 0.65s ease;
 }
 
 /* --- 2. Ícono de Corazón en el Nav --- */
@@ -7612,17 +7612,47 @@ body.drawer-open {
     position: relative;
     background: rgba(255, 255, 255, 0.75);
     border: 1px solid rgba(194, 139, 23, 0.28);
-    width: 38px;
+    width: auto;
+    min-width: 38px;
     height: 38px;
     border-radius: var(--border-radius-sm, 6px); /* Sin redondear en exceso, consistente con los botones del nav */
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 7px;
     cursor: pointer;
     color: var(--color-charcoal);
-    padding: 0;
+    padding: 0 11px;
     transition: all 0.25s ease;
     flex-shrink: 0;
+}
+
+.nav-scale-weight {
+    font-family: var(--font-body, 'Outfit', sans-serif);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: inherit;
+    white-space: nowrap;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+}
+
+.nav-heart-btn.has-items .nav-scale-weight {
+    color: var(--color-mustard-dark, #C28B17);
+}
+
+@media (max-width: 480px) {
+    .nav-heart-btn {
+        height: 36px;
+        padding: 0 8px;
+        gap: 5px;
+    }
+
+    .nav-scale-weight {
+        font-size: 0.68rem;
+    }
 }
 
 .nav-heart-btn:hover {
