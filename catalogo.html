@@ -55,7 +55,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261024_nav">
+    <link rel="stylesheet" href="styles.min.css?v=20261122_catalogo_mobile_fix">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons -->
@@ -81,19 +81,8 @@
             <div class="header-right">
                 <nav class="nav-menu">
                     <a href="index.html" class="nav-item">Inicio</a>
-                    <a href="index.html#concepto" class="nav-item">La Tienda</a>
-                    <a href="catalogo.html" class="nav-item active">Catálogo</a>
                     <a href="b2b.html" class="nav-item nav-item--b2b" title="División Profesional B2B · Hoteles, Restaurantes e Interiorismo">B2B</a>
-                    <a href="index.html#contacto" class="nav-item">Contacto</a>
                 </nav>
-
-                <!-- Botón Corazón Balanza en Nav -->
-                <button type="button" class="nav-heart-btn" id="navHeartBtn" aria-label="Ver piezas en mi balanza" title="Piezas que me gustan / Mi Balanza">
-                    <svg viewBox="0 0 24 24" class="nav-heart-icon" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    </svg>
-                    <span class="nav-heart-badge" id="navHeartBadge">0</span>
-                </button>
 
                 <div class="header-actions">
                     <a href="https://wa.me/59893658477" target="_blank" rel="noopener" class="action-icon-link"
@@ -133,10 +122,7 @@
         <div class="drawer-body">
             <nav class="drawer-nav">
                 <a href="index.html" class="drawer-link">Inicio</a>
-                <a href="index.html#concepto" class="drawer-link">La Tienda</a>
-                <a href="catalogo.html" class="drawer-link">Catálogo</a>
                 <a href="b2b.html" class="drawer-link">B2B</a>
-                <a href="index.html#contacto" class="drawer-link">Contacto</a>
                 <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin: 10px 0;">
                 <a href="b2b.html" class="drawer-link-secondary" style="font-weight:600; color:var(--color-mustard-dark, #C28B17); display:flex; align-items:center; justify-content:space-between;">
                     <span>División Profesional B2B</span>
@@ -168,8 +154,8 @@
     <section id="simulador" class="section-container simulator-section-wrapper">
         <div class="section-header simulator-compact-header">
             <span class="section-tag">Estantería web</span>
-            <h2>Elegí y pesá tus favoritos</h2>
-            <p class="section-subtitle">Conocé los artículos de nuestra nueva colección.
+            <h2>Probá nuestra báscula online!</h2>
+            <p class="section-subtitle">Jugá a armar tus favoritos en nuestra báscula web.<br>
                 <strong>¡Hablá con nuestro equipo para reservar tus piezas preferidas y retirarlas en nuestra tienda de Punta Piedras!</strong>
             </p>
         </div>
@@ -195,32 +181,26 @@
                         <button type="button" class="alacena-filter-tab" data-category="platos" role="tab"
                             aria-selected="false">
                             <span>Platos</span>
-                            <small>$16.50/kg</small>
                         </button>
                         <button type="button" class="alacena-filter-tab" data-category="tazas" role="tab"
                             aria-selected="false">
                             <span>Tazas</span>
-                            <small>$29.50/kg</small>
                         </button>
                         <button type="button" class="alacena-filter-tab" data-category="vasos" role="tab"
                             aria-selected="false">
                             <span>Vasos</span>
-                            <small>$29.50/kg</small>
                         </button>
                         <button type="button" class="alacena-filter-tab" data-category="bowls" role="tab"
                             aria-selected="false">
                             <span>Bowls</span>
-                            <small>$29.50/kg</small>
                         </button>
                         <button type="button" class="alacena-filter-tab" data-category="ensaladeras" role="tab"
                             aria-selected="false">
                             <span>Ensaladeras</span>
-                            <small>$29.50/kg</small>
                         </button>
                         <button type="button" class="alacena-filter-tab" data-category="fuentes" role="tab"
                             aria-selected="false">
                             <span>Fuentes</span>
-                            <small>$16.50/kg</small>
                         </button>
                     </div>
                 </div>
@@ -240,27 +220,49 @@
             <!-- Right / Bottom Fixed Dock on Mobile: Báscula Viva + Visor Integrado -->
             <div class="scale-dashboard-container" id="scale-dashboard">
                 <div class="scale-console-card">
-                    <!-- Columna / Bloque Izquierdo: La Báscula Física -->
+                    <!-- Columna / Bloque Izquierdo: La Báscula Física + Selector de Épocas -->
                     <div class="scale-visual-stage">
-                        <div class="analog-scale" id="analog-scale-widget">
-                            <!-- Platillo superior móvil que baja con rebote y apila las cerámicas -->
-                            <div class="scale-tray-assembly" id="scale-tray-assembly">
-                                <div class="scale-stacked-items" id="scale-stacked-items" aria-hidden="true"></div>
-                                <img src="images/scale-tray.webp" alt="Platillo de la báscula" class="scale-tray-img"
-                                    width="1024" height="898" draggable="false">
-                            </div>
+                        <div class="scale-carousel-row">
+                            <button type="button" class="scale-nav-arrow scale-nav-arrow--prev" id="scale-prev-btn"
+                                aria-label="Báscula anterior" title="Cambiar modelo de báscula">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
 
-                            <!-- Cuerpo negro de la báscula -->
-                            <div class="scale-body-wrap">
-                                <img src="images/scale-body.webp" alt="Báscula analógica BasKula" class="scale-body-img"
-                                    width="1024" height="898" draggable="false">
-                                <!-- Esfera del reloj y aguja con inercia -->
-                                <div class="scale-dial">
-                                    <div class="dial-needle" id="scale-needle"></div>
-                                    <div class="dial-center"></div>
-                                    <div class="dial-glass-glare"></div>
+                            <div class="analog-scale" id="analog-scale-widget" data-scale-style="classic">
+                                <!-- Platillo superior móvil que baja con rebote y apila las cerámicas -->
+                                <div class="scale-tray-assembly" id="scale-tray-assembly">
+                                    <div class="scale-stacked-items" id="scale-stacked-items" aria-hidden="true"></div>
+                                    <img src="images/scale-tray.webp" alt="Platillo de la báscula" class="scale-tray-img"
+                                        id="scale-tray-img" width="1024" height="898" draggable="false">
+                                </div>
+
+                                <!-- Cuerpo de la báscula -->
+                                <div class="scale-body-wrap">
+                                    <img src="images/scale-body.webp" alt="Báscula analógica BasKula" class="scale-body-img"
+                                        id="scale-body-img" width="1024" height="898" draggable="false">
+                                    <!-- Esfera del reloj y aguja con inercia -->
+                                    <div class="scale-dial" id="scale-dial">
+                                        <div class="dial-needle" id="scale-needle"></div>
+                                        <div class="dial-center"></div>
+                                        <div class="dial-glass-glare"></div>
+                                    </div>
+                                    <!-- Visor LED vivo para báscula digital moderna -->
+                                    <div class="scale-digital-screen" id="scale-digital-screen" aria-hidden="true">
+                                        <span class="digital-screen-val" id="scale-digital-val">0.00</span>
+                                        <span class="digital-screen-unit">kg</span>
+                                    </div>
                                 </div>
                             </div>
+
+                            <button type="button" class="scale-nav-arrow scale-nav-arrow--next" id="scale-next-btn"
+                                aria-label="Siguiente báscula" title="Cambiar modelo de báscula">
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="scale-era-caption" id="scale-era-caption">
+                            <span class="scale-era-name" id="scale-era-name">Almacén Clásica · Atemporal</span>
+                            <div class="scale-era-dots" id="scale-era-dots" role="tablist" aria-label="Modelos de báscula"></div>
                         </div>
                     </div>
 
@@ -517,7 +519,7 @@
 
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261024" defer></script>
+    <script src="app.min.js?v=20261122_catalogo_mobile_fix" defer></script>
 </body>
 
 </html>

@@ -212,6 +212,7 @@ const saveBasket = () => {
 const scaleNeedle = document.getElementById('scale-needle');
 const scaleTrayAssembly = document.getElementById('scale-tray-assembly');
 const scaleStackedItems = document.getElementById('scale-stacked-items');
+const scaleDigitalVal = document.getElementById('scale-digital-val');
 const basketItemsList = document.getElementById('basket-items-list');
 const totalWeightDisplay = document.getElementById('total-weight-display');
 const totalPriceDisplay = document.getElementById('total-price-display');
@@ -351,7 +352,6 @@ const renderAlacenaShelves = () => {
             slot.innerHTML = `
                 <div class="gallery-piece-frame" data-action="open-ficha" data-id="${item.id}">
                     <div class="passepartout-container">
-                        ${createCardWeighButton(item)}
                         ${qtyInBasket > 0 ? `<span class="piece-qty-badge" title="En tu balanza">×${qtyInBasket}</span>` : ''}
                         <img src="${item.img}" alt="${item.name} — Cerámica artesanal portuguesa por kilo en BasKula" class="gallery-photo" loading="lazy" decoding="async" draggable="false" width="320" height="320">
                         <span class="gallery-view-hint"><i data-lucide="eye"></i> Saber más</span>
@@ -359,7 +359,7 @@ const renderAlacenaShelves = () => {
                     <div class="gallery-caption">
                         <div class="gallery-caption-meta">
                             <span class="gallery-item-name">${item.shortName}</span>
-                            <span class="gallery-item-price">${Math.round(item.weight * 1000)}g · ${formatCurrency(unitPrice)}</span>
+                            <span class="gallery-item-price">${Math.round(item.weight * 1000)}g</span>
                         </div>
                         <button type="button" class="gallery-quick-add-btn" data-action="quick-add" data-id="${item.id}" aria-label="Agregar ${item.name} directo a la báscula" title="Poner en la báscula">
                             <i data-lucide="plus"></i>
@@ -711,6 +711,29 @@ const renderStackedTrayItems = () => {
     }
 };
 
+const DIAL_ANCHORS = {
+    classic: [0, 60, 120, 180, 240, 300],
+    retro: [0, 36, 114, 180, 246, 284],
+    antique: [0, 72, 116, 180, 234, 284],
+    rustic: [0, 72, 110, 180, 242, 284],
+};
+
+let lastKnownScaleWeight = 0;
+
+const getNeedleAngleForWeight = (weight, modelId) => {
+    const anchors = DIAL_ANCHORS[modelId] || DIAL_ANCHORS.classic;
+    const safeWeight = Math.max(0, weight);
+    if (safeWeight === 0) return anchors[0];
+
+    const laps = Math.floor((safeWeight - 0.0001) / 5);
+    const modWeight = safeWeight - laps * 5;
+    const lower = Math.min(4, Math.floor(modWeight));
+    const frac = modWeight - lower;
+    const segmentAngle = anchors[lower] + frac * (anchors[lower + 1] - anchors[lower]);
+
+    return laps * 360 + segmentAngle;
+};
+
 // Update all scale readouts, needle, tray stack, and Nav Mini-Báscula
 const updateScale = () => {
     let totalWeight = 0;
@@ -794,13 +817,17 @@ const updateScale = () => {
         });
     }
 
+    lastKnownScaleWeight = totalWeight;
+
     if (totalWeightDisplay) totalWeightDisplay.textContent = `${totalWeight.toFixed(2)} kg`;
     if (totalPriceDisplay) totalPriceDisplay.textContent = formatCurrency(totalPrice);
+    if (scaleDigitalVal) scaleDigitalVal.textContent = totalWeight.toFixed(2);
 
-    // Rotate Scale Needle (5kg = 300deg rotation, capped at 5.2kg)
+    // Rotate Scale Needle calibrated to each dial's 0-5kg tick positions (continuous multi-lap above 5kg)
     if (scaleNeedle) {
-        const cappedWeight = Math.min(totalWeight, 5.2);
-        const rotationAngle = (cappedWeight / 5) * 300;
+        const widget = document.getElementById('analog-scale-widget');
+        const activeModelId = widget ? (widget.getAttribute('data-scale-style') || 'classic') : 'classic';
+        const rotationAngle = getNeedleAngleForWeight(totalWeight, activeModelId);
         scaleNeedle.style.transform = `rotate(${rotationAngle}deg)`;
     }
 
@@ -810,6 +837,86 @@ const updateScale = () => {
 // Initialize Alacena & Scale on load
 renderAlacenaShelves();
 updateScale();
+
+// --- Selector de Básculas por Época ---
+const initScaleModelSwitcher = () => {
+    const widget = document.getElementById('analog-scale-widget');
+    const bodyImg = document.getElementById('scale-body-img');
+    const prevBtn = document.getElementById('scale-prev-btn');
+    const nextBtn = document.getElementById('scale-next-btn');
+    const eraNameEl = document.getElementById('scale-era-name');
+    const dotsContainer = document.getElementById('scale-era-dots');
+    if (!widget || !bodyImg) return;
+
+    const SCALE_MODELS = [
+        { id: 'classic', label: 'Almacén Clásica · Atemporal', img: 'images/scale-body.webp' },
+        { id: 'retro', label: 'Cocina Retro · Años 50', img: 'images/scale-retro-50s.webp' },
+        { id: 'antique', label: 'Botica de Bronce · Siglo XIX', img: 'images/scale-antique-brass.webp' },
+        { id: 'rustic', label: 'Feria & Campo · Rústica', img: 'images/scale-rustic-market.webp' },
+        { id: 'digital', label: 'Digital Boutique · Moderna', img: 'images/scale-digital-modern.webp' },
+    ];
+
+    const SCALE_PREF_KEY = 'baskula_scale_model';
+    let currentIdx = 0;
+    try {
+        const savedId = localStorage.getItem(SCALE_PREF_KEY);
+        const found = SCALE_MODELS.findIndex(m => m.id === savedId);
+        if (found >= 0) currentIdx = found;
+    } catch (err) {
+        // ignore storage errors
+    }
+
+    const renderDots = () => {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        SCALE_MODELS.forEach((m, idx) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = `scale-era-dot${idx === currentIdx ? ' active' : ''}`;
+            dot.setAttribute('aria-label', m.label);
+            dot.setAttribute('aria-selected', idx === currentIdx ? 'true' : 'false');
+            dot.addEventListener('click', () => applyModel(idx, true));
+            dotsContainer.appendChild(dot);
+        });
+    };
+
+    const applyModel = (idx, animate = false) => {
+        currentIdx = (idx + SCALE_MODELS.length) % SCALE_MODELS.length;
+        const model = SCALE_MODELS[currentIdx];
+
+        const swap = () => {
+            widget.setAttribute('data-scale-style', model.id);
+            bodyImg.src = model.img;
+            bodyImg.alt = `Báscula ${model.label}`;
+            if (eraNameEl) eraNameEl.textContent = model.label;
+            if (scaleNeedle && !model.isDigital) {
+                scaleNeedle.style.transform = `rotate(${getNeedleAngleForWeight(lastKnownScaleWeight, model.id)}deg)`;
+            }
+            renderDots();
+            try {
+                localStorage.setItem(SCALE_PREF_KEY, model.id);
+            } catch (err) {
+                // ignore storage errors
+            }
+        };
+
+        if (animate) {
+            widget.classList.add('scale-switching');
+            setTimeout(() => {
+                swap();
+                widget.classList.remove('scale-switching');
+            }, 150);
+        } else {
+            swap();
+        }
+    };
+
+    if (prevBtn) prevBtn.addEventListener('click', () => applyModel(currentIdx - 1, true));
+    if (nextBtn) nextBtn.addEventListener('click', () => applyModel(currentIdx + 1, true));
+
+    applyModel(currentIdx, false);
+};
+initScaleModelSwitcher();
 
 // --- Checkout / Store Visit Modal Logic ---
 if (btnCheckout) {
@@ -2444,6 +2551,9 @@ const getProductById = (id) => {
 const triggerScaleAnimation = () => {
     const floatingScaleBtn = document.getElementById('floatingScaleBtn');
     const sympatheticScale = document.querySelector('.sympathetic-scale');
+    const catalogScale = document.getElementById('floatingCatalogScale');
+    const catalogLabel = document.getElementById('floatingCatalogLabel');
+
     if (floatingScaleBtn) {
         floatingScaleBtn.classList.remove('scale-weighing-active');
         void floatingScaleBtn.offsetWidth;
@@ -2455,6 +2565,26 @@ const triggerScaleAnimation = () => {
         void sympatheticScale.offsetWidth;
         sympatheticScale.classList.add('animating');
         setTimeout(() => sympatheticScale.classList.remove('animating'), 1400);
+    }
+    if (catalogScale) {
+        catalogScale.classList.remove('is-weighing');
+        void catalogScale.offsetWidth;
+        catalogScale.classList.add('is-weighing');
+        clearTimeout(window._catalogScaleAnimTimer);
+        window._catalogScaleAnimTimer = setTimeout(() => {
+            catalogScale.classList.remove('is-weighing');
+        }, 1350);
+
+        if (catalogLabel) {
+            const totalWeight = basket.reduce((sum, item) => sum + ((item.weight || 0.8) * (item.qty || 1)), 0);
+            catalogLabel.textContent = `${totalWeight.toFixed(2)} kg · Ir a la Estantería →`;
+            catalogScale.classList.add('show-toast');
+            clearTimeout(window._catalogScaleToastTimer);
+            window._catalogScaleToastTimer = setTimeout(() => {
+                catalogScale.classList.remove('show-toast');
+                catalogLabel.textContent = 'Estantería & Báscula';
+            }, 2200);
+        }
     }
 };
 
@@ -2480,10 +2610,12 @@ const createHeartParticle = (sourceEl) => {
     particle.style.transform = 'scale(0.9)';
     document.body.appendChild(particle);
 
+    const catalogBtn = document.querySelector('#floatingCatalogScale .floating-catalog-scale__btn');
     const navBtn = document.getElementById('navHeartBtn');
-    const navRect = navBtn ? navBtn.getBoundingClientRect() : null;
-    const destX = navRect && navRect.width > 0 ? navRect.left + navRect.width / 2 - 11 : window.innerWidth - 90;
-    const destY = navRect && navRect.height > 0 ? navRect.top + navRect.height / 2 - 11 : 28;
+    const targetEl = (catalogBtn && catalogBtn.getBoundingClientRect().width > 0) ? catalogBtn : navBtn;
+    const targetRect = targetEl ? targetEl.getBoundingClientRect() : null;
+    const destX = targetRect && targetRect.width > 0 ? targetRect.left + targetRect.width / 2 - 11 : window.innerWidth - 60;
+    const destY = targetRect && targetRect.height > 0 ? targetRect.top + targetRect.height / 2 - 11 : window.innerHeight - 60;
 
     requestAnimationFrame(() => {
         particle.style.left = `${destX}px`;
@@ -2608,6 +2740,21 @@ function updateWishlistUI() {
     if (floatingScalePill) {
         // En desktop muestra la píldora; en móvil el botón se mantiene fijo y compacto con su badge
         floatingScalePill.style.display = (totalWeight > 0 && !isMobile) ? 'block' : 'none';
+    }
+
+    // 3b. Botón flotante de acceso a Estantería & Báscula (index.html)
+    const catalogScale = document.getElementById('floatingCatalogScale');
+    const catalogBadge = document.getElementById('floatingCatalogBadge');
+    if (catalogScale) {
+        catalogScale.classList.toggle('has-items', totalPieces > 0);
+    }
+    if (catalogBadge) {
+        catalogBadge.textContent = String(totalPieces);
+        if (totalPieces > 0) {
+            catalogBadge.classList.remove('bump');
+            void catalogBadge.offsetWidth;
+            catalogBadge.classList.add('bump');
+        }
     }
 
     // 4. Contenido del Drawer

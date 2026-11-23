@@ -66,7 +66,7 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.min.css?v=20261120_mobile_hero_subtitle_bright">
+    <link rel="stylesheet" href="styles.min.css?v=20261122_fiestas_b2_items_compact">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     <!-- Lucide Icons (versión fijada + SRI hash para validar integridad del CDN + defer) -->
@@ -481,16 +481,13 @@
                 <div class="holiday-section-block" id="festive-block-2" data-aos="fade-up">
                     <div class="holiday-block-banner holiday-block-banner--regalos">
                         <div class="holiday-block-banner__media">
-                            <img src="images/fiestas-regalos-banner.webp?v=20261118"
-                                alt="Cajas de regalo festivas sobre madera verde" width="1024" height="575"
+                            <img src="images/fiestas-regalos-banner-panoramico.webp?v=20261122"
+                                alt="Cajas de regalo festivas sobre madera verde" width="1386" height="347"
                                 loading="lazy" decoding="async">
                             <div class="holiday-block-banner__overlay"></div>
                         </div>
                         <div class="holiday-block-banner__content">
-                            <span class="holiday-pane-tag holiday-pane-tag--light">DICIEMBRE • FIESTAS </span>
-                            <h3 class="holiday-pane-title holiday-pane-title--light">Tu mesa festiva</h3>
-                            <p class="holiday-pane-subtext holiday-pane-subtext--light">¿Ya sabés qué
-                                regalar?<br>Sorprendé con piezas originales</p>
+                            <h3 class="holiday-pane-title holiday-pane-title--light">Para regalar</h3>
                         </div>
                     </div>
 
@@ -525,16 +522,9 @@
                      ========================================================= -->
                 <div class="holiday-lookbook-split" id="festive-block-1" data-aos="fade-up">
                     <div class="holiday-lookbook-media">
-                        <div class="holiday-lookbook-img-wrap">
-                            <img src="images/fiestas-mesa-rubi.webp?v=20261119_rubi4x5"
-                                alt="Mesa festiva con plato cerámico perlado color rubí y galletita de jengibre"
-                                width="824" height="1024" loading="lazy" decoding="async">
-                            <div class="holiday-lookbook-overlay"></div>
-                        </div>
                         <div class="holiday-lookbook-content">
-                            <span class="holiday-pane-tag holiday-pane-tag--light">Colección navidad</span>
-                            <h3 class="holiday-pane-title holiday-pane-title--light">Para resaltar la mesa</h3>
-                            <p class="holiday-pane-subtext holiday-pane-subtext--light">Detalles que suman a esa noche especial.</p>
+                            <span class="holiday-pane-tag">Colección navidad</span>
+                            <h3 class="holiday-pane-title">Prepara tu mesa</h3>
                         </div>
                     </div>
 
@@ -929,9 +919,34 @@
         </div>
     </aside>
 
+    <!-- Botón Flotante: Acceso directo a la Estantería y Báscula (catalogo.html) -->
+    <a href="catalogo.html" class="floating-catalog-scale" id="floatingCatalogScale"
+        aria-label="Ir a la estantería web y báscula interactiva"
+        title="Ir a la Estantería Web · Elegí y pesá tus piezas">
+        <span class="floating-catalog-scale__label" id="floatingCatalogLabel" aria-hidden="true">Estantería &amp; Báscula</span>
+        <span class="floating-catalog-scale__btn">
+            <span class="floating-catalog-scale__pulse" aria-hidden="true"></span>
+            <svg viewBox="0 0 24 24" class="floating-catalog-scale__icon" fill="none" stroke="currentColor"
+                stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <!-- Plato superior ancho + cuello -->
+                <g class="floating-catalog-scale__pan">
+                    <path d="M4 4.5h16l-1.3 2H5.3L4 4.5Z" />
+                    <path d="M12 6.5v2" />
+                </g>
+                <!-- Cuerpo de la báscula -->
+                <path d="M6.5 8.5h11a1.5 1.5 0 0 1 1.48 1.26l1.3 8.5A1.5 1.5 0 0 1 18.8 20H5.2a1.5 1.5 0 0 1-1.48-1.74l1.3-8.5A1.5 1.5 0 0 1 6.5 8.5Z" />
+                <!-- Dial circular y aguja -->
+                <circle cx="12" cy="14.5" r="3.6" />
+                <path d="M12 14.5v-2.7" stroke-width="1.95" class="floating-catalog-scale__needle" />
+                <circle cx="12" cy="14.5" r="0.75" fill="currentColor" stroke="none" />
+            </svg>
+            <span class="floating-catalog-scale__badge" id="floatingCatalogBadge" aria-hidden="true">0</span>
+        </span>
+    </a>
+
     <!-- JS Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
-    <script src="app.min.js?v=20261120_weigh_pill_with_icon" defer></script>
+    <script src="app.min.js?v=20261122_floating_scale_v3" defer></script>
 
 
 </body>
