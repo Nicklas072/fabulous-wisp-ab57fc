@@ -114,76 +114,88 @@ const getRateForCategory = (cat) => CATEGORY_RATES[cat] || 16.50;
 // --- Catálogo de Piezas Oficial BasKula ---
 const CATALOG_ITEMS = [
     {
-        id: 'plato-rayas-navy',
-        name: 'Plato Playo Rayas Navy',
-        shortName: 'Plato Rayas Navy',
-        category: 'platos',
-        weight: 0.975,
-        img: 'images/ceramics/plato-rayas-navy.webp',
-        images: ['images/ceramics/plato-rayas-navy.webp'],
-        dimensions: 'Ø 28 cm · Alto 2.2 cm',
-        finish: 'Esmaltado Brillante Vítreo',
-        story: 'Plato playo de inspiración mediterránea y estética marinera. Su composición de franjas azul índigo de trazo orgánico sobre fondo blanco puro viste cualquier mesa con frescura, elegancia y calidez artesanal.'
-    },
-    {
-        id: 'bowl-rayas-navy',
-        name: 'Bowl Cerealero Rayas Navy',
-        shortName: 'Bowl Rayas Navy',
-        category: 'bowls',
-        weight: 0.480,
-        img: 'images/ceramics/bowl-rayas-navy.webp',
-        images: ['images/ceramics/bowl-rayas-navy.webp'],
-        dimensions: 'Ø 14.5 cm · Alto 8 cm (550 ml)',
-        finish: 'Esmaltado Brillante Vítreo',
-        story: 'Bowl cónico con fileteado vertical en azul profundo sobre base cerámica blanca. Cómodo y versátil, ideal para desayunos, cereales, sopas, yogurt o dips en el centro de la mesa.'
-    },
-    {
-        id: 'taza-rayas-navy',
-        name: 'Taza Mug Rayas Navy',
-        shortName: 'Taza Rayas Navy',
-        category: 'tazas',
-        weight: 0.360,
-        img: 'images/ceramics/taza-rayas-navy.webp',
-        images: ['images/ceramics/taza-rayas-navy.webp'],
-        dimensions: 'Ø 9 cm · Alto 11 cm (350 ml)',
-        finish: 'Esmaltado Brillante Vítreo',
-        story: 'Mug cerámico con asa ergonómica modelada y franjas verticales azul marino. De tacto cálido y cómodo agarre, perfecto para café filtrado, té en hebras o infusiones matutinas.'
-    },
-    {
-        id: 'ensaladera-rayas-navy',
-        name: 'Ensaladera Honda Rayas Navy',
-        shortName: 'Ensaladera Rayas Navy',
+        id: 'ensaladera-nautica',
+        name: 'Ensaladera Náutica',
+        shortName: 'Ensaladera Náutica',
         category: 'ensaladeras',
-        weight: 0.975,
-        img: 'images/ceramics/ensaladera-rayas-navy.webp',
-        images: ['images/ceramics/ensaladera-rayas-navy.webp'],
+        weight: 0.945,
+        img: 'images/cutouts/ensaladera-nautica.webp?v=20261125',
+        images: ['images/cutouts/ensaladera-nautica.webp?v=20261125'],
         dimensions: 'Ø 25 cm · Alto 9.5 cm',
         finish: 'Esmaltado Brillante Vítreo',
-        story: 'Pieza central de generosa capacidad con perfil abierto y líneas que convergen hacia la base. Diseñada para lucir ensaladas frescas, pastas para compartir o como frutero de autor en la cocina.'
+        story: 'Ensaladera artesanal portuguesa de perfil abierto con franjas azul marino pintadas a mano sobre base blanca.'
     },
     {
-        id: 'plato-corona-floral',
-        name: 'Plato Playo Corona Floral Terracota',
-        shortName: 'Plato Corona Floral',
+        id: 'plato-principal-coral',
+        name: 'Plato Principal Coral',
+        shortName: 'Plato Principal Coral',
         category: 'platos',
-        weight: 0.875,
-        img: 'images/ceramics/plato-corona-floral.webp',
-        images: ['images/ceramics/plato-corona-floral.webp'],
+        weight: 0.830,
+        img: 'images/cutouts/plato-principal-coral.webp?v=20261125',
+        images: ['images/cutouts/plato-principal-coral.webp?v=20261125'],
         dimensions: 'Ø 27 cm · Alto 2.2 cm',
         finish: 'Esmaltado Satinado Suave',
-        story: 'Una pieza de inspiración campestre y calidez mediterránea. Su diseño presenta una corona circular de hojas y flores pinceladas en tonos terracota y rosa empolvado, enmarcando el centro del plato para destacar los colores vivos de cualquier creación culinaria.'
+        story: 'Plato playo de inspiración mediterránea con corona floral pincelada a mano en tonos coral y terracota.'
     },
     {
-        id: 'plato-sol-botanico',
-        name: 'Plato Entrada Sol Botánico Terracota',
-        shortName: 'Plato Sol Botánico',
-        category: 'platos',
-        weight: 0.522,
-        img: 'images/ceramics/plato-sol-botanico.webp',
-        images: ['images/ceramics/plato-sol-botanico.webp'],
-        dimensions: 'Ø 21 cm · Alto 2.0 cm',
+        id: 'taza-nautica',
+        name: 'Taza Náutica',
+        shortName: 'Taza Náutica',
+        category: 'tazas',
+        weight: 0.330,
+        img: 'images/cutouts/taza-nautica.webp?v=20261125',
+        images: ['images/cutouts/taza-nautica.webp?v=20261125'],
+        dimensions: 'Ø 9 cm · Alto 11 cm',
         finish: 'Esmaltado Brillante Vítreo',
-        story: 'El complemento ideal para entradas, desayunos o postres. Destaca por su flor central y una delicada guarda radial en tonos arcilla tostada y rubor que irradia frescura, complementando a la perfección la vajilla principal de la colección.'
+        story: 'Mug cerámico con asa ergonómica y franjas verticales azul marino, ideal para café, té o infusiones.'
+    },
+    {
+        id: 'bowl-galleta',
+        name: 'Bowl Galleta',
+        shortName: 'Bowl Galleta',
+        category: 'bowls',
+        weight: 0.440,
+        img: 'images/cutouts/bowl-galleta.webp?v=20261125',
+        images: ['images/cutouts/bowl-galleta.webp?v=20261125'],
+        dimensions: 'Ø 15 cm · Alto 7.5 cm',
+        finish: 'Esmaltado Satinado Bicolor',
+        story: 'Bowl artesanal en tono rosa terracota con franjas crema verticales, cálido y versátil para servir o disfrutar en la mesa.'
+    },
+    {
+        id: 'panera-verde-perlada',
+        name: 'Panera Verde Perlada',
+        shortName: 'Panera Verde Perlada',
+        category: 'bowls',
+        weight: 0.695,
+        img: 'images/cutouts/panera-verde-perlada.webp?v=20261125',
+        images: ['images/cutouts/panera-verde-perlada.webp?v=20261125'],
+        dimensions: 'Ø 19 cm · Alto 8.5 cm',
+        finish: 'Esmaltado Verde Salvia Perlado',
+        story: 'Panera y fuente honda en tono verde oliva suave con delicado borde perlado en relieve, ideal para panificados o servir en la mesa.'
+    },
+    {
+        id: 'plato-postre-coral',
+        name: 'Plato Postre Coral',
+        shortName: 'Plato Postre Coral',
+        category: 'platos',
+        weight: 0.530,
+        img: 'images/cutouts/plato-postre-coral.webp?v=20261125',
+        images: ['images/cutouts/plato-postre-coral.webp?v=20261125'],
+        dimensions: 'Ø 21 cm · Alto 2 cm',
+        finish: 'Esmaltado Satinado Suave',
+        story: 'Plato de postre de inspiración mediterránea con flor central y trazos radiales pincelados a mano en tonos coral y terracota.'
+    },
+    {
+        id: 'bowl-tiramisu',
+        name: 'Bowl Tiramisú',
+        shortName: 'Bowl Tiramisú',
+        category: 'bowls',
+        weight: 0.380,
+        img: 'images/cutouts/bowl-tiramisu.webp?v=20261125',
+        images: ['images/cutouts/bowl-tiramisu.webp?v=20261125'],
+        dimensions: 'Ø 14.5 cm · Alto 7 cm',
+        finish: 'Esmaltado Brillante Vítreo',
+        story: 'Bowl cerámico de tonos cacao y crema con trazo ondulado artesanal en contraste, cálido y acogedor para desayunos o postres.'
     }
 ];
 
@@ -317,8 +329,8 @@ const renderAlacenaShelves = () => {
         ? CATALOG_ITEMS
         : CATALOG_ITEMS.filter(item => item.category === activeCategory);
 
-    // Exactamente 3 artículos por fila
-    const ITEMS_PER_ROW = 3;
+    // 4 artículos por fila en escritorio para mayor distancia y aire; 3 en móvil
+    const ITEMS_PER_ROW = (typeof window !== 'undefined' && window.innerWidth <= 768) ? 3 : 4;
     const shelves = [];
     for (let i = 0; i < filtered.length; i += ITEMS_PER_ROW) {
         shelves.push(filtered.slice(i, i + ITEMS_PER_ROW));
@@ -711,27 +723,12 @@ const renderStackedTrayItems = () => {
     }
 };
 
-const DIAL_ANCHORS = {
-    classic: [0, 60, 120, 180, 240, 300],
-    retro: [0, 36, 114, 180, 246, 284],
-    antique: [0, 72, 116, 180, 234, 284],
-    rustic: [0, 72, 110, 180, 242, 284],
-};
-
 let lastKnownScaleWeight = 0;
 
-const getNeedleAngleForWeight = (weight, modelId) => {
-    const anchors = DIAL_ANCHORS[modelId] || DIAL_ANCHORS.classic;
+const getNeedleAngleForWeight = (weight) => {
     const safeWeight = Math.max(0, weight);
-    if (safeWeight === 0) return anchors[0];
-
-    const laps = Math.floor((safeWeight - 0.0001) / 5);
-    const modWeight = safeWeight - laps * 5;
-    const lower = Math.min(4, Math.floor(modWeight));
-    const frac = modWeight - lower;
-    const segmentAngle = anchors[lower] + frac * (anchors[lower + 1] - anchors[lower]);
-
-    return laps * 360 + segmentAngle;
+    // Todos los diales analógicos están calibrados a 60° por kg (6 kg = 360° vuelta completa)
+    return safeWeight * 60;
 };
 
 // Update all scale readouts, needle, tray stack, and Nav Mini-Báscula
@@ -849,10 +846,10 @@ const initScaleModelSwitcher = () => {
     if (!widget || !bodyImg) return;
 
     const SCALE_MODELS = [
-        { id: 'classic', label: 'Almacén Clásica · Atemporal', img: 'images/scale-body.webp' },
-        { id: 'retro', label: 'Cocina Retro · Años 50', img: 'images/scale-retro-50s.webp' },
-        { id: 'antique', label: 'Botica de Bronce · Siglo XIX', img: 'images/scale-antique-brass.webp' },
-        { id: 'rustic', label: 'Feria & Campo · Rústica', img: 'images/scale-rustic-market.webp' },
+        { id: 'classic', label: 'Almacén Clásica · Atemporal', img: 'images/scale-body.webp?v=20261125_dial6kg' },
+        { id: 'retro', label: 'Cocina Retro · Años 50', img: 'images/scale-retro-50s.webp?v=20261125_dial6kg' },
+        { id: 'antique', label: 'Botica de Bronce · Siglo XIX', img: 'images/scale-antique-brass.webp?v=20261125_dial6kg' },
+        { id: 'rustic', label: 'Feria & Campo · Rústica', img: 'images/scale-rustic-market.webp?v=20261125_dial6kg' },
         { id: 'digital', label: 'Digital Boutique · Moderna', img: 'images/scale-digital-modern.webp' },
     ];
 
@@ -1662,102 +1659,94 @@ const FESTIVE_CAROUSEL_ITEMS = [
         story: 'Fuente rectangular de cerámica portuguesa con detalle de perlas en relieve y cómodas asas laterales. Ideal para horno, pastas, asados o para servir al centro de la mesa con elegancia.'
     },
     {
-        id: 'set-vajilla-rojo-puntille',
-        name: 'Set de Vajilla Rojo Puntillé',
-        shortName: 'Set Vajilla Rojo Puntillé',
-        category: 'platos',
-        weight: 1.450,
-        weightFormatted: '1.450 kg (aprox.)',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
-        pricingType: 'weight',
-        img: 'images/festive/set-vajilla-rojo-puntille-1.webp',
-        images: [
-            'images/festive/set-vajilla-rojo-puntille-1.webp',
-            'images/festive/set-vajilla-rojo-puntille-2.webp'
-        ],
-        dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
-        finish: 'Esmalte Carmín con Relieve Ondulado y Acabado Puntillé',
-        story: 'Set artesanal portugués en tono carmín festivo con textura acanalada y efecto puntillé. Calidez, carácter y sofisticación para celebrar en la mesa.'
-    },
-    {
-        id: 'set-vajilla-verde-puntille',
-        name: 'Set de Vajilla Verde Puntillé',
-        shortName: 'Set Vajilla Verde Puntillé',
-        category: 'platos',
-        weight: 1.450,
-        weightFormatted: '1.450 kg (aprox.)',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
-        pricingType: 'weight',
-        img: 'images/festive/set-vajilla-verde-puntille-1.webp',
-        images: [
-            'images/festive/set-vajilla-verde-puntille-1.webp',
-            'images/festive/set-vajilla-verde-puntille-2.webp'
-        ],
-        dimensions: 'Plato llano Ø 27 cm · Plato postre Ø 21 cm · Bowl Ø 15 cm',
-        finish: 'Esmalte Verde Pino con Relieve Ondulado y Acabado Puntillé',
-        story: 'Set artesanal portugués en profundo verde pino con textura acanalada y efecto puntillé. Elegancia natural y espíritu festivo en cada pieza.'
-    },
-    {
-        id: 'taza-plato-rojo-puntille',
-        name: 'Juego de Café Rojo Vintage',
-        shortName: 'Juego de Café Rojo Vintage',
-        category: 'tazas',
-        weight: 0.420,
-        weightFormatted: '0.420 kg',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
-        pricingType: 'weight',
-        img: 'images/festive/taza-plato-rojo-puntille.webp',
-        dimensions: 'Taza 80 ml · Plato Ø 12 cm',
-        finish: 'Esmalte Carmín Vintage con Relieve',
-        story: 'Juego de café con taza facetada y platillo acanalado en esmalte rojo festivo estilo vintage. Calidez y encanto europeo para las sobremesas.'
-    },
-    {
-        id: 'taza-plato-verde-puntille',
-        name: 'Juego de Café verde Vintage',
-        shortName: 'Juego de Café verde Vintage',
-        category: 'tazas',
-        weight: 0.420,
-        weightFormatted: '0.420 kg',
-        rate: 16.50,
-        priceFormatted: '$16.50 / kg',
-        pricingType: 'weight',
-        img: 'images/festive/taza-plato-verde-puntille.webp',
-        dimensions: 'Taza 80 ml · Plato Ø 12 cm',
-        finish: 'Esmalte Verde Vintage con Relieve',
-        story: 'Juego de taza y plato de café en gres portugués verde muérdago estilo vintage. Sofisticación artesanal para regalar o compartir.'
-    },
-    {
-        id: 'portavela-rojo-puntille',
-        name: 'Portavelas Rojo Nevado',
-        shortName: 'Portavelas Rojo Nevado',
+        id: 'jarra-bicolor-azul',
+        name: 'Jarra Bicolor Blanca & Azul',
+        shortName: 'Jarra Bicolor Blanca & Azul',
         category: 'especial',
-        weight: 0.280,
-        weightFormatted: '0.280 kg',
-        price: 6,
-        priceFormatted: '6 USD c/u',
+        weight: 0.750,
+        weightFormatted: 'Pieza única',
+        price: 35,
+        priceFormatted: 'U$35',
         pricingType: 'fixed',
-        img: 'images/festive/portavela-rojo-puntille.webp',
-        dimensions: 'Ø 10 cm aprox.',
-        finish: 'Esmalte Carmín Nevado Festivo',
-        story: 'Portavela artesanal en esmalte reactivo rojo nevado. Diseñado para iluminar y dar calidez a las mesas de Nochebuena o como detalle para el amigo invisible.'
+        img: 'images/festive/jarra-bicolor-azul.webp?v=20261125_hd2',
+        dimensions: 'Pieza artesanal de cerámica',
+        finish: 'Esmalte Bicolor Blanco & Azul Cobalto',
+        story: 'Jarra artesanal en dos tonos: blanco luminoso y azul cobalto profundo. Ideal para servir agua, jugos o como florero protagonista en la mesa.'
     },
     {
-        id: 'portavela-verde-puntille',
-        name: 'Portavelas Verde Nevado',
-        shortName: 'Portavelas Verde Nevado',
+        id: 'ensaladera-pintada-mano',
+        name: 'Ensaladera Pintada a mano',
+        shortName: 'Ensaladera Pintada a mano',
         category: 'especial',
-        weight: 0.280,
-        weightFormatted: '0.280 kg',
-        price: 6,
-        priceFormatted: '6 USD c/u',
+        weight: 1.150,
+        weightFormatted: 'Pieza única',
+        price: 58,
+        priceFormatted: 'U$58',
         pricingType: 'fixed',
-        img: 'images/festive/portavela-verde-puntille.webp',
-        dimensions: 'Ø 10 cm aprox.',
-        finish: 'Esmalte Verde Nevado Festivo',
-        story: 'Portavela en tono verde pino con acabado nevado. Una pieza delicada y versátil para crear ambiente o regalar en estas fiestas.'
+        img: 'images/festive/ensaladera-pintada-mano.webp?v=20261125_hd',
+        dimensions: 'Pieza artesanal de cerámica',
+        finish: 'Esmalte Blanco Pintado a Mano',
+        story: 'Ensaladera amplia pintada a mano con motivos botánicos en verde oliva, mostaza y azul. Una pieza única con alma artesanal para regalar o lucir al centro.'
+    },
+    {
+        id: 'sopera-blanca-ingles',
+        name: 'Sopera Blanca estilo inglés',
+        shortName: 'Sopera Blanca estilo inglés',
+        category: 'especial',
+        weight: 1.600,
+        weightFormatted: 'Pieza única',
+        price: 48,
+        priceFormatted: 'U$48',
+        pricingType: 'fixed',
+        img: 'images/festive/sopera-blanca-ingles.webp?v=20261125_hd2',
+        dimensions: 'Con tapa y asas laterales',
+        finish: 'Porcelana Blanca Brillante con Relieve Clásico',
+        story: 'Sopera clásica de inspiración inglesa con tapa y asas moldeadas. Atemporal, cálida y perfecta para servir guisos, sopas o como pieza decorativa.'
+    },
+    {
+        id: 'jarrita-coral-floreada',
+        name: 'Jarrita Coral floreada',
+        shortName: 'Jarrita Coral floreada',
+        category: 'especial',
+        weight: 0.550,
+        weightFormatted: 'Pieza única',
+        price: 35,
+        priceFormatted: 'U$35',
+        pricingType: 'fixed',
+        img: 'images/festive/jarrita-coral-floreada.webp?v=20261125_hd2',
+        dimensions: 'Pieza artesanal de cerámica',
+        finish: 'Esmalte Blanco con Flores Coral Pintadas',
+        story: 'Jarrita delicada con trazo floral en tono coral suave y guarda oscura en el borde. Encantadora para leche, salsas o pequeños ramos.'
+    },
+    {
+        id: 'ensaladera-lechuga',
+        name: 'Ensaladera lechuga',
+        shortName: 'Ensaladera lechuga',
+        category: 'especial',
+        weight: 0.950,
+        weightFormatted: 'Pieza única',
+        price: 42,
+        priceFormatted: 'U$42',
+        pricingType: 'fixed',
+        img: 'images/festive/ensaladera-lechuga.webp?v=20261125_hd',
+        dimensions: 'Pieza artesanal con relieve orgánico',
+        finish: 'Esmalte Verde Hoja Brillante',
+        story: 'Ensaladera orgánica inspirada en hojas de lechuga con nervaduras en relieve y esmalte verde brillante. Un clásico portugués lleno de frescura.'
+    },
+    {
+        id: 'frutera-coral-base',
+        name: 'Frutera Coral con base',
+        shortName: 'Frutera Coral con base',
+        category: 'especial',
+        weight: 1.100,
+        weightFormatted: 'Pieza única',
+        price: 38,
+        priceFormatted: 'U$38',
+        pricingType: 'fixed',
+        img: 'images/festive/frutera-coral-base.webp?v=20261125_hd',
+        dimensions: 'Con pie pedestal',
+        finish: 'Esmalte Blanco con Rayas Coral & Terracota',
+        story: 'Frutera elevada con pedestal y franjas verticales en tonos coral y terracota. Pensada para lucir frutas, tortas o mesas festivas con altura.'
     }
 ];
 
@@ -1868,9 +1857,13 @@ const initFestiveCarousel = () => {
             if (viewport.scrollWidth <= viewport.clientWidth + 4) {
                 prevBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
+                if (dotsContainer) dotsContainer.style.display = 'none';
+                if (counterEl && items.length) counterEl.textContent = `1–${items.length} / ${items.length}`;
+                return;
             } else {
                 prevBtn.style.display = '';
                 nextBtn.style.display = '';
+                if (dotsContainer) dotsContainer.style.display = '';
                 prevBtn.disabled = viewport.scrollLeft <= 4;
                 nextBtn.disabled = viewport.scrollLeft >= maxScroll;
             }
@@ -2009,19 +2002,264 @@ const initFestiveCarousel = () => {
         setTimeout(updateNavButtons, 100);
     }
 
-    // Bloque 1: Mesa Navideña (Carrusel de 2 piezas por vista y avance de a 2)
-    const items1 = FESTIVE_CAROUSEL_ITEMS.slice(0, 4);
-    if (document.getElementById('festive-track-1')) {
-        setupMiniFestiveCarousel('festive-track-1', 'festive-viewport-1', 'festive-prev-btn-1', 'festive-next-btn-1', 'festive-dots-1', items1, {
-            stepByCards: 2,
-            counterId: 'festive-counter-1'
+    function setupPolaroidCoverflowCarousel(trackId, viewportId, prevBtnId, nextBtnId, dotsId, items) {
+        const track = document.getElementById(trackId);
+        const viewport = document.getElementById(viewportId);
+        const prevBtn = document.getElementById(prevBtnId);
+        const nextBtn = document.getElementById(nextBtnId);
+        const dotsContainer = document.getElementById(dotsId);
+
+        if (!track || !viewport || !items.length) return;
+
+        track.innerHTML = '';
+        if (dotsContainer) dotsContainer.innerHTML = '';
+
+        let activeIdx = 0;
+        const n = items.length;
+        const cards = [];
+
+        items.forEach((item, idx) => {
+            const card = document.createElement('article');
+            card.className = 'polaroid-card';
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-label', `${item.name}`);
+
+            card.innerHTML = `
+                <div class="polaroid-frame">
+                    <div class="polaroid-photo-wrap">
+                        ${item.pricingType === 'fixed'
+                            ? `<span class="polaroid-price-pill" aria-label="Precio ${item.priceFormatted || `U$${item.price}`}">${item.priceFormatted || `U$${item.price}`}</span>`
+                            : createCardWeighButton(item)}
+                        <img src="${item.img}" alt="${item.name} — BasKula Fiestas" class="polaroid-photo" loading="lazy" decoding="async" draggable="false" width="320" height="320">
+                    </div>
+                    <div class="polaroid-caption">${item.shortName || item.name}</div>
+                </div>
+            `;
+
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.card-heart-btn')) return;
+                if (idx !== activeIdx) {
+                    activeIdx = idx;
+                    layout();
+                } else {
+                    openFestiveViewerModal(item);
+                }
+            });
+
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.target.closest('.card-heart-btn')) return;
+                    e.preventDefault();
+                    if (idx !== activeIdx) {
+                        activeIdx = idx;
+                        layout();
+                    } else {
+                        openFestiveViewerModal(item);
+                    }
+                }
+            });
+
+            track.appendChild(card);
+            cards.push(card);
+
+            if (dotsContainer) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+                dot.setAttribute('aria-label', `Ver producto ${idx + 1}`);
+                dot.addEventListener('click', () => {
+                    activeIdx = idx;
+                    layout();
+                });
+                dotsContainer.appendChild(dot);
+            }
         });
+
+        const layout = () => {
+            const isMobile = window.innerWidth <= 600;
+            const step1 = isMobile ? 90 : 145;
+
+            cards.forEach((card, idx) => {
+                let rel = idx - activeIdx;
+                if (rel > n / 2) rel -= n;
+                if (rel < -n / 2) rel += n;
+
+                const absRel = Math.abs(rel);
+                card.classList.toggle('is-center', rel === 0);
+
+                if (rel === 0) {
+                    card.style.transform = 'translate(-50%, -50%) translateX(0px) scale(1)';
+                    card.style.zIndex = '20';
+                    card.style.opacity = '1';
+                    card.style.filter = 'none';
+                    card.style.pointerEvents = 'auto';
+                } else if (absRel === 1) {
+                    card.style.transform = `translate(-50%, -50%) translateX(${rel * step1}px) scale(0.72)`;
+                    card.style.zIndex = '10';
+                    card.style.opacity = '0.32';
+                    card.style.filter = 'blur(0.5px)';
+                    card.style.pointerEvents = 'auto';
+                } else {
+                    card.style.transform = 'translate(-50%, -50%) translateX(0px) scale(0.52)';
+                    card.style.zIndex = '1';
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.bw-dot');
+                dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+            }
+        };
+
+        const go = (dir) => {
+            activeIdx = (activeIdx + dir + n) % n;
+            layout();
+        };
+
+        if (prevBtn) prevBtn.addEventListener('click', () => go(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => go(1));
+
+        let touchStartX = 0;
+        viewport.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches.length) touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        viewport.addEventListener('touchend', (e) => {
+            if (!e.changedTouches || !e.changedTouches.length) return;
+            const dx = e.changedTouches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 36) go(dx < 0 ? 1 : -1);
+        }, { passive: true });
+
+        window.addEventListener('resize', layout, { passive: true });
+        layout();
     }
 
-    // Bloque 2: Regalos & Noche Especial (Carrusel con los 6 artículos restantes)
+    // Bloque 2: Lookbook Editorial de Mesas Puestas (2 vistas en PC / 1 en móvil + Lightbox)
+    const LOOKBOOK_MESAS = [
+        { img: 'images/festive/mesa-1-verde.webp?v=20261125', title: 'Verde perlado', sub: 'Blancos' },
+        { img: 'images/festive/mesa-2-borgona.webp?v=20261125', title: 'Nochebuena Borgoña', sub: 'Bordes Perlados' },
+        { img: 'images/festive/mesa-3-chocolate.webp?v=20261125', title: 'Tiramisú', sub: 'Ideal postres' },
+        { img: 'images/festive/mesa-4-mediterranea.webp?v=20261125', title: 'Mediterraneo', sub: 'Mix & Match' },
+        { img: 'images/festive/mesa-5-coral.webp?v=20261125', title: 'Sol & Coral', sub: 'Aires de Verano' },
+    ];
+
+    const setupLookbookCarousel = () => {
+        const track = document.getElementById('festive-track-1');
+        const viewport = document.getElementById('festive-viewport-1');
+        const dotsContainer = document.getElementById('festive-dots-1');
+        const counterEl = document.getElementById('festive-counter-1');
+        if (!track || !viewport) return;
+
+        track.classList.add('lookbook-track');
+        track.innerHTML = '';
+        if (dotsContainer) dotsContainer.innerHTML = '';
+
+        const lightbox = document.getElementById('lookbook-lightbox');
+        const lbImg = document.getElementById('lookbook-lightbox-img');
+        const lbCaption = document.getElementById('lookbook-lightbox-caption');
+        const lbClose = document.getElementById('lookbook-lightbox-close');
+        const lbPrev = document.getElementById('lookbook-lightbox-prev');
+        const lbNext = document.getElementById('lookbook-lightbox-next');
+        let lbIdx = 0;
+
+        const openLightbox = (idx) => {
+            if (!lightbox || !lbImg) return;
+            lbIdx = (idx + LOOKBOOK_MESAS.length) % LOOKBOOK_MESAS.length;
+            const m = LOOKBOOK_MESAS[lbIdx];
+            lbImg.src = m.img;
+            lbImg.alt = `${m.title} — ${m.sub}`;
+            if (lbCaption) lbCaption.textContent = `${m.title} · ${m.sub}`;
+            lightbox.classList.add('is-open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeLightbox = () => {
+            if (!lightbox) return;
+            lightbox.classList.remove('is-open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        if (lbClose && !lbClose.dataset.bound) {
+            lbClose.dataset.bound = '1';
+            lbClose.addEventListener('click', closeLightbox);
+            if (lbPrev) lbPrev.addEventListener('click', () => openLightbox(lbIdx - 1));
+            if (lbNext) lbNext.addEventListener('click', () => openLightbox(lbIdx + 1));
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) closeLightbox();
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox || !lightbox.classList.contains('is-open')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') openLightbox(lbIdx - 1);
+                if (e.key === 'ArrowRight') openLightbox(lbIdx + 1);
+            });
+        }
+
+        LOOKBOOK_MESAS.forEach((mesa, idx) => {
+            const card = document.createElement('article');
+            card.className = 'lookbook-mesa-card';
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `Ampliar ${mesa.title}`);
+            card.innerHTML = `
+                <div class="lookbook-mesa-media">
+                    <img src="${mesa.img}" alt="${mesa.title} — BasKula" class="lookbook-mesa-img" loading="lazy" decoding="async" draggable="false" width="800" height="820">
+                    <span class="lookbook-mesa-zoom" aria-hidden="true"><i data-lucide="maximize-2"></i> Ampliar</span>
+                </div>
+                <div class="lookbook-mesa-caption">
+                    <span class="lookbook-mesa-title">${mesa.title}</span>
+                    <span class="lookbook-mesa-sub">${mesa.sub}</span>
+                </div>
+            `;
+            card.addEventListener('click', () => openLightbox(idx));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLightbox(idx);
+                }
+            });
+            track.appendChild(card);
+
+            if (dotsContainer) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = `bw-dot${idx === 0 ? ' active' : ''}`;
+                dot.setAttribute('aria-label', `Ver ${mesa.title}`);
+                dot.addEventListener('click', () => {
+                    const cardEl = track.children[idx];
+                    if (cardEl) {
+                        viewport.scrollTo({ left: cardEl.offsetLeft - 12, behavior: 'smooth' });
+                    }
+                });
+                dotsContainer.appendChild(dot);
+            }
+        });
+
+        const syncScrollIndicators = () => {
+            const cards = track.querySelectorAll('.lookbook-mesa-card');
+            if (!cards.length) return;
+            const step = cards[0].getBoundingClientRect().width + 12;
+            const idx = Math.max(0, Math.min(LOOKBOOK_MESAS.length - 1, Math.round(viewport.scrollLeft / step)));
+            if (counterEl) counterEl.textContent = `${idx + 1} / ${LOOKBOOK_MESAS.length}`;
+            if (dotsContainer) {
+                dotsContainer.querySelectorAll('.bw-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+            }
+        };
+
+        viewport.addEventListener('scroll', syncScrollIndicators, { passive: true });
+        syncScrollIndicators();
+    };
+    setupLookbookCarousel();
+
+    // Bloque 1 (Superior): Para regalar — Carrusel Polaroid Apilado de a 1
     const items2 = FESTIVE_CAROUSEL_ITEMS.slice(4);
     if (document.getElementById('festive-track-2')) {
-        setupMiniFestiveCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
+        setupPolaroidCoverflowCarousel('festive-track-2', 'festive-viewport-2', 'festive-prev-btn-2', 'festive-next-btn-2', 'festive-dots-2', items2);
     }
 
     if (typeof lucide !== 'undefined') {
@@ -2576,14 +2814,13 @@ const triggerScaleAnimation = () => {
         }, 1350);
 
         if (catalogLabel) {
-            const totalWeight = basket.reduce((sum, item) => sum + ((item.weight || 0.8) * (item.qty || 1)), 0);
-            catalogLabel.textContent = `${totalWeight.toFixed(2)} kg · Ir a la Estantería →`;
+            catalogLabel.textContent = 'Has agregado un artículo, ¡simulá tu compra en nuestra báscula!';
             catalogScale.classList.add('show-toast');
             clearTimeout(window._catalogScaleToastTimer);
             window._catalogScaleToastTimer = setTimeout(() => {
                 catalogScale.classList.remove('show-toast');
                 catalogLabel.textContent = 'Estantería & Báscula';
-            }, 2200);
+            }, 3400);
         }
     }
 };
@@ -2745,8 +2982,12 @@ function updateWishlistUI() {
     // 3b. Botón flotante de acceso a Estantería & Báscula (index.html)
     const catalogScale = document.getElementById('floatingCatalogScale');
     const catalogBadge = document.getElementById('floatingCatalogBadge');
+    const catalogNeedle = document.getElementById('floatingCatalogNeedle');
     if (catalogScale) {
         catalogScale.classList.toggle('has-items', totalPieces > 0);
+    }
+    if (catalogNeedle) {
+        catalogNeedle.style.transform = `rotate(${getNeedleAngleForWeight(totalWeight)}deg)`;
     }
     if (catalogBadge) {
         catalogBadge.textContent = String(totalPieces);
